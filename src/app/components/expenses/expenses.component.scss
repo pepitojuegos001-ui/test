@@ -238,13 +238,19 @@
   .category-input-group {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: 16px;
 
     .add-category-btn {
       margin-bottom: 0;
       align-self: flex-start;
       width: 48px;
       height: 48px;
+
+      .mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
     }
   }
   
