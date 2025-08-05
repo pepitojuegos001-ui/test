@@ -257,6 +257,26 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
     return /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
   }
 
+  hasUpperCase(): boolean {
+    const password = this.passwordForm.get('newPassword')?.value || '';
+    return /[A-Z]/.test(password);
+  }
+
+  hasLowerCase(): boolean {
+    const password = this.passwordForm.get('newPassword')?.value || '';
+    return /[a-z]/.test(password);
+  }
+
+  hasNumber(): boolean {
+    const password = this.passwordForm.get('newPassword')?.value || '';
+    return /\d/.test(password);
+  }
+
+  hasMinLength(): boolean {
+    const password = this.passwordForm.get('newPassword')?.value || '';
+    return password.length >= 8;
+  }
+
   private markFormGroupTouched(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);
