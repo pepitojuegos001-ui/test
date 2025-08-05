@@ -39,12 +39,13 @@
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-primary);
-  transition: opacity 0.3s ease;
-  
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
   &.hidden {
     opacity: 0;
     width: 0;
     overflow: hidden;
+    transform: translateX(-10px);
   }
 }
 
