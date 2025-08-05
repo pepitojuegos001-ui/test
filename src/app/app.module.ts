@@ -83,7 +83,8 @@ import { ChartService } from './services/chart.service';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgChartsModule
   ],
   providers: [
     FinancialDataService,
