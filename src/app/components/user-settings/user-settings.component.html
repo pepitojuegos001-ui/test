@@ -307,9 +307,9 @@
                     </mat-icon>
                     One number
                   </li>
-                  <li [class.met]="/[!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?]/.test(passwordForm.get('newPassword')?.value || '')">
+                  <li [class.met]="hasSpecialChar()">
                     <mat-icon class="requirement-icon">
-                      {{ /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(passwordForm.get('newPassword')?.value || '') ? 'check_circle' : 'radio_button_unchecked' }}
+                      {{ hasSpecialChar() ? 'check_circle' : 'radio_button_unchecked' }}
                     </mat-icon>
                     One special character
                   </li>
