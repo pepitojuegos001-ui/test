@@ -11,13 +11,28 @@ export interface Transaction {
   icon: string;
 }
 
+export interface IncomeEntry {
+  id: string;
+  date: string;
+  amount: number;
+  source: string;
+  notes: string;
+  createdAt: Date;
+}
+
+export interface ExpenseEntry {
+  id: string;
+  date: string;
+  amount: number;
+  category: string;
+  notes: string;
+  createdAt: Date;
+}
+
 export interface MonthlySummary {
   income: number;
   expenses: number;
   netBalance: number;
-  savingsRate: number;
-  transactionCount: number;
-  topCategory: string;
 }
 
 export interface DateFilter {
@@ -25,55 +40,69 @@ export interface DateFilter {
   year: number;
 }
 
+export interface CategoryData {
+  category: string;
+  amount: number;
+  percentage: number;
+  color: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class FinancialDataService {
   private transactionsSubject = new BehaviorSubject<Transaction[]>([]);
+  private incomeEntriesSubject = new BehaviorSubject<IncomeEntry[]>([]);
+  private expenseEntriesSubject = new BehaviorSubject<ExpenseEntry[]>([]);
+  private customCategoriesSubject = new BehaviorSubject<string[]>([]);
   private currentFilterSubject = new BehaviorSubject<DateFilter>({
     month: new Date().getMonth(),
     year: new Date().getFullYear()
   });
 
   public transactions$ = this.transactionsSubject.asObservable();
+  public incomeEntries$ = this.incomeEntriesSubject.asObservable();
+  public expenseEntries$ = this.expenseEntriesSubject.asObservable();
+  public customCategories$ = this.customCategoriesSubject.asObservable();
   public currentFilter$ = this.currentFilterSubject.asObservable();
 
   private allTransactions: Transaction[] = [];
+  private incomeEntries: IncomeEntry[] = [];
+  private expenseEntries: ExpenseEntry[] = [];
+  private customCategories: string[] = [];
 
   constructor() {
-    this.generateTransactionData();
+    this.loadStoredData();
+    this.generateSampleTransactions();
     this.applyFilter(this.currentFilterSubject.value);
   }
 
-  /**
-   * Generate 12 months of realistic transaction data
-   * Each month contains: 1 salary + 6 expense categories with realistic variance
-   */
-  private generateTransactionData(): void {
+  // Transaction Data Generation
+  private generateSampleTransactions(): void {
     const transactions: Transaction[] = [];
     
     const categories = {
       income: [
-        { name: 'Salary', icon: '💰', baseAmount: 4500 }
+        { name: 'Salary', icon: 'attach_money', baseAmount: 4500 }
       ],
       expenses: [
-        { name: 'Groceries', icon: '🛒', baseAmount: 350, variance: 100 },
-        { name: 'Transportation', icon: '🚗', baseAmount: 280, variance: 80 },
-        { name: 'Healthcare', icon: '🏥', baseAmount: 150, variance: 200 },
-        { name: 'Entertainment', icon: '🎬', baseAmount: 200, variance: 120 },
-        { name: 'Housing', icon: '🏠', baseAmount: 1200, variance: 50 },
-        { name: 'Education', icon: '📚', baseAmount: 180, variance: 100 }
+        { name: 'Groceries', icon: 'shopping_cart', baseAmount: 350, variance: 100 },
+        { name: 'Transportation', icon: 'directions_car', baseAmount: 280, variance: 80 },
+        { name: 'Healthcare', icon: 'local_hospital', baseAmount: 150, variance: 200 },
+        { name: 'Entertainment', icon: 'movie', baseAmount: 200, variance: 120 },
+        { name: 'Housing', icon: 'home', baseAmount: 1200, variance: 50 },
+        { name: 'Education', icon: 'school', baseAmount: 180, variance: 100 }
       ]
     };
 
-    // Generate data for last 12 months
-    for (let i = 11; i >= 0; i--) {
+    // Generate data for last 24 months
+    for (let i = 23; i >= 0; i--) {
       const date = new Date();
       date.setMonth(date.getMonth() - i);
       const month = date.getMonth();
       const year = date.getFullYear();
 
-      // Generate salary (income) - fixed on 1st of month
+      // Generate salary
       const salaryVariance = (Math.random() - 0.5) * 200;
       transactions.push({
         id: `${year}-${month}-salary`,
@@ -82,10 +111,10 @@ export class FinancialDataService {
         type: 'income',
         amount: categories.income[0].baseAmount + salaryVariance,
         description: 'Monthly Salary Payment',
-        icon: '💰'
+        icon: 'attach_money'
       });
 
-      // Generate expense transactions - random days throughout month
+      // Generate expenses
       categories.expenses.forEach((category) => {
         const variance = (Math.random() - 0.5) * category.variance;
         const day = Math.floor(Math.random() * 28) + 1;
@@ -103,26 +132,19 @@ export class FinancialDataService {
     }
 
     this.allTransactions = transactions.sort((a, b) => b.date.getTime() - a.date.getTime());
+    this.transactionsSubject.next(this.allTransactions);
   }
 
-  /**
-   * Set the current date filter and update filtered transactions
-   */
+  // Filter Management
   setDateFilter(filter: DateFilter): void {
     this.currentFilterSubject.next(filter);
     this.applyFilter(filter);
   }
 
-  /**
-   * Get current date filter
-   */
   getCurrentFilter(): DateFilter {
     return this.currentFilterSubject.value;
   }
 
-  /**
-   * Apply date filter to transactions
-   */
   private applyFilter(filter: DateFilter): void {
     const filtered = this.allTransactions.filter(t => 
       t.date.getMonth() === filter.month && 
@@ -131,9 +153,90 @@ export class FinancialDataService {
     this.transactionsSubject.next(filtered);
   }
 
-  /**
-   * Get transactions for a specific month/year
-   */
+  // Income Management
+  getIncomeEntries(): IncomeEntry[] {
+    return this.incomeEntries;
+  }
+
+  addIncomeEntry(entry: Omit<IncomeEntry, 'id' | 'createdAt'>): void {
+    const newEntry: IncomeEntry = {
+      ...entry,
+      id: Date.now().toString(),
+      createdAt: new Date()
+    };
+    this.incomeEntries.push(newEntry);
+    this.incomeEntriesSubject.next([...this.incomeEntries]);
+    this.saveToLocalStorage();
+  }
+
+  updateIncomeEntry(id: string, entry: Partial<IncomeEntry>): void {
+    const index = this.incomeEntries.findIndex(e => e.id === id);
+    if (index !== -1) {
+      this.incomeEntries[index] = { ...this.incomeEntries[index], ...entry };
+      this.incomeEntriesSubject.next([...this.incomeEntries]);
+      this.saveToLocalStorage();
+    }
+  }
+
+  deleteIncomeEntry(id: string): void {
+    this.incomeEntries = this.incomeEntries.filter(e => e.id !== id);
+    this.incomeEntriesSubject.next([...this.incomeEntries]);
+    this.saveToLocalStorage();
+  }
+
+  // Expense Management
+  getExpenseEntries(): ExpenseEntry[] {
+    return this.expenseEntries;
+  }
+
+  addExpenseEntry(entry: Omit<ExpenseEntry, 'id' | 'createdAt'>): void {
+    const newEntry: ExpenseEntry = {
+      ...entry,
+      id: Date.now().toString(),
+      createdAt: new Date()
+    };
+    this.expenseEntries.push(newEntry);
+    this.expenseEntriesSubject.next([...this.expenseEntries]);
+    this.saveToLocalStorage();
+  }
+
+  updateExpenseEntry(id: string, entry: Partial<ExpenseEntry>): void {
+    const index = this.expenseEntries.findIndex(e => e.id === id);
+    if (index !== -1) {
+      this.expenseEntries[index] = { ...this.expenseEntries[index], ...entry };
+      this.expenseEntriesSubject.next([...this.expenseEntries]);
+      this.saveToLocalStorage();
+    }
+  }
+
+  deleteExpenseEntry(id: string): void {
+    this.expenseEntries = this.expenseEntries.filter(e => e.id !== id);
+    this.expenseEntriesSubject.next([...this.expenseEntries]);
+    this.saveToLocalStorage();
+  }
+
+  // Category Management
+  getDefaultCategories(): string[] {
+    return ['Groceries', 'Transportation', 'Healthcare', 'Entertainment', 'Housing', 'Education'];
+  }
+
+  getCustomCategories(): string[] {
+    return this.customCategories;
+  }
+
+  getAllCategories(): string[] {
+    return [...this.getDefaultCategories(), ...this.customCategories];
+  }
+
+  addCustomCategory(category: string): void {
+    if (!this.getAllCategories().includes(category)) {
+      this.customCategories.push(category);
+      this.customCategoriesSubject.next([...this.customCategories]);
+      this.saveToLocalStorage();
+    }
+  }
+
+  // Data Analysis
   getTransactionsForPeriod(month: number, year: number): Transaction[] {
     return this.allTransactions.filter(t => 
       t.date.getMonth() === month && 
@@ -141,9 +244,6 @@ export class FinancialDataService {
     );
   }
 
-  /**
-   * Calculate monthly summary for given transactions
-   */
   calculateMonthlySummary(transactions: Transaction[]): MonthlySummary {
     const income = transactions
       .filter(t => t.type === 'income')
@@ -153,54 +253,32 @@ export class FinancialDataService {
       .filter(t => t.type === 'expense')
       .reduce((sum, t) => sum + t.amount, 0);
 
-    const netBalance = income - expenses;
-    const savingsRate = income > 0 ? (netBalance / income * 100) : 0;
-
-    // Find top expense category
-    const expensesByCategory: { [key: string]: number } = {};
-    transactions.filter(t => t.type === 'expense').forEach(t => {
-      expensesByCategory[t.category] = (expensesByCategory[t.category] || 0) + t.amount;
-    });
-
-    const topCategory = Object.keys(expensesByCategory).length > 0 
-      ? Object.keys(expensesByCategory).reduce((a, b) => 
-          expensesByCategory[a] > expensesByCategory[b] ? a : b)
-      : 'None';
-
     return {
       income,
       expenses,
-      netBalance,
-      savingsRate,
-      transactionCount: transactions.length,
-      topCategory
+      netBalance: income - expenses
     };
   }
 
-  /**
-   * Calculate trend compared to previous month
-   */
   calculateTrend(current: number, previous: number): number {
     if (previous === 0) return 0;
     return ((current - previous) / previous * 100);
   }
 
-  /**
-   * Get monthly data for chart visualization (last 6 months)
-   */
-  getMonthlyChartData(): Array<{month: string, income: number, expenses: number, netBalance: number}> {
+  getMonthlyChartData(months: number = 6): Array<{month: string, income: number, expenses: number, netBalance: number}> {
     const chartData = [];
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    for (let i = 5; i >= 0; i--) {
-      const date = new Date();
-      date.setMonth(date.getMonth() - i);
-      const transactions = this.getTransactionsForPeriod(date.getMonth(), date.getFullYear());
+    const currentFilter = this.currentFilterSubject.value;
+    
+    for (let i = months - 1; i >= 0; i--) {
+      const targetDate = new Date(currentFilter.year, currentFilter.month - i, 1);
+      const transactions = this.getTransactionsForPeriod(targetDate.getMonth(), targetDate.getFullYear());
       const summary = this.calculateMonthlySummary(transactions);
       
       chartData.push({
-        month: monthNames[date.getMonth()],
+        month: monthNames[targetDate.getMonth()],
         income: summary.income,
         expenses: summary.expenses,
         netBalance: summary.netBalance
@@ -210,10 +288,7 @@ export class FinancialDataService {
     return chartData;
   }
 
-  /**
-   * Get category distribution data for pie chart
-   */
-  getCategoryDistribution(transactions: Transaction[]): Array<{category: string, amount: number, percentage: number, color: string}> {
+  getCategoryDistribution(transactions: Transaction[]): CategoryData[] {
     const expensesByCategory: { [key: string]: number } = {};
     const totalExpenses = transactions
       .filter(t => t.type === 'expense')
@@ -234,38 +309,7 @@ export class FinancialDataService {
       .sort((a, b) => b.amount - a.amount);
   }
 
-  /**
-   * Export transactions to CSV format
-   */
-  exportToCSV(transactions: Transaction[]): string {
-    const headers = ['Date', 'Category', 'Type', 'Amount', 'Description'];
-    const csvRows = [headers.join(',')];
-
-    transactions.forEach(t => {
-      const row = [
-        t.date.toISOString().split('T')[0],
-        t.category,
-        t.type,
-        t.amount.toFixed(2),
-        `"${t.description}"`
-      ];
-      csvRows.push(row.join(','));
-    });
-
-    return csvRows.join('\n');
-  }
-
-  /**
-   * Get all available years in dataset
-   */
-  getAvailableYears(): number[] {
-    const years = new Set(this.allTransactions.map(t => t.date.getFullYear()));
-    return Array.from(years).sort((a, b) => b - a);
-  }
-
-  /**
-   * Format currency amount
-   */
+  // Utility Functions
   formatCurrency(amount: number): string {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -275,11 +319,34 @@ export class FinancialDataService {
     }).format(Math.abs(amount));
   }
 
-  /**
-   * Format trend percentage
-   */
   formatTrend(trend: number): string {
     const arrow = trend >= 0 ? '↗' : '↘';
     return `${arrow} ${trend >= 0 ? '+' : ''}${trend.toFixed(1)}%`;
+  }
+
+  // Local Storage
+  private saveToLocalStorage(): void {
+    localStorage.setItem('financialApp_income', JSON.stringify(this.incomeEntries));
+    localStorage.setItem('financialApp_expenses', JSON.stringify(this.expenseEntries));
+    localStorage.setItem('financialApp_customCategories', JSON.stringify(this.customCategories));
+  }
+
+  private loadStoredData(): void {
+    const storedIncome = localStorage.getItem('financialApp_income');
+    const storedExpenses = localStorage.getItem('financialApp_expenses');
+    const storedCategories = localStorage.getItem('financialApp_customCategories');
+
+    if (storedIncome) {
+      this.incomeEntries = JSON.parse(storedIncome);
+      this.incomeEntriesSubject.next([...this.incomeEntries]);
+    }
+    if (storedExpenses) {
+      this.expenseEntries = JSON.parse(storedExpenses);
+      this.expenseEntriesSubject.next([...this.expenseEntries]);
+    }
+    if (storedCategories) {
+      this.customCategories = JSON.parse(storedCategories);
+      this.customCategoriesSubject.next([...this.customCategories]);
+    }
   }
 }
