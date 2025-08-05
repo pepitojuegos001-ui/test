@@ -1,5 +1,20 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
+/**
+ * NavbarComponent - Enhanced top navigation bar
+ *
+ * Features:
+ * - Fixed position at top of viewport
+ * - Responsive design (adapts to mobile/desktop)
+ * - Sidebar toggle functionality
+ * - Notification bell with badge counter
+ * - Chat/feedback button
+ * - User profile section with dropdown menu
+ * - Configuration and logout options
+ *
+ * Usage:
+ * <app-navbar (sidebarToggle)="onSidebarToggle()"></app-navbar>
+ */
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
