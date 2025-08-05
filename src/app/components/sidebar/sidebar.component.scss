@@ -1,5 +1,8 @@
 :host {
-  transition: width 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: block;
+  height: 100%;
+  overflow: hidden;
 }
 
 .sidebar-header {
