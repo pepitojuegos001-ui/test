@@ -1,104 +1,98 @@
 <div class="dashboard-container">
   <!-- Dashboard Header -->
   <div class="dashboard-header">
-    <h1>Financial Dashboard</h1>
-    <p>Track your monthly income, expenses, and financial trends</p>
+    <div class="header-content">
+      <h1>Financial Dashboard</h1>
+      <p>Track your monthly income, expenses, and financial trends</p>
+    </div>
+    
+    <!-- Date Filter Section -->
+    <mat-card class="date-filter-card">
+      <mat-card-content>
+        <div class="date-filters">
+          <mat-form-field appearance="outline">
+            <mat-label>Month</mat-label>
+            <mat-select [value]="currentFilter.month" (selectionChange)="onMonthChanged($event.value)">
+              <mat-option *ngFor="let month of months; let i = index" [value]="i">
+                {{ month }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Year</mat-label>
+            <mat-select [value]="currentFilter.year" (selectionChange)="onYearChanged($event.value)">
+              <mat-option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <div class="current-period">
+            <mat-icon>date_range</mat-icon>
+            <span>{{ selectedPeriod }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
-  <!-- Filters Section -->
-  <app-filters 
-    class="filters-section"
-    (filtersChanged)="onFiltersChanged($event)">
-  </app-filters>
-
   <!-- Summary Cards -->
-  <div class="card-grid">
+  <div class="summary-cards-grid">
     <app-summary-card
-      class="income-card"
       title="Total Income"
-      [value]="currentMonthSummary.income"
+      [value]="summaryData.income"
       icon="trending_up"
       type="income"
-      subtitle="This month">
+      [subtitle]="currentMonthSubtitle"
+      [trend]="trends.income">
     </app-summary-card>
 
     <app-summary-card
-      class="expense-card"
       title="Total Expenses"
-      [value]="currentMonthSummary.expenses"
+      [value]="summaryData.expenses"
       icon="trending_down"
       type="expense"
-      subtitle="This month">
+      [subtitle]="currentMonthSubtitle"
+      [trend]="trends.expenses">
     </app-summary-card>
 
     <app-summary-card
-      class="balance-card"
       title="Net Balance"
-      [value]="currentMonthSummary.netBalance"
+      [value]="summaryData.netBalance"
       icon="account_balance_wallet"
       type="balance"
-      subtitle="This month">
+      [subtitle]="currentMonthSubtitle"
+      [trend]="trends.balance">
     </app-summary-card>
   </div>
 
   <!-- Charts Section -->
-  <div class="dashboard-grid">
-    <!-- Monthly Comparison Chart -->
-    <div class="chart-container monthly-chart">
-      <div class="chart-header">
-        <h3 class="chart-title">Monthly Comparison</h3>
-        <p class="chart-subtitle">Income vs Expenses over the last 6 months</p>
-      </div>
-      <app-bar-chart [data]="monthlyData"></app-bar-chart>
-    </div>
+  <div class="charts-grid">
+    <!-- Bar Chart -->
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>Monthly Comparison</mat-card-title>
+        <mat-card-subtitle>Income vs Expenses - Last 6 months from {{ selectedPeriod }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-container">
+          <canvas #barChart></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
-    <!-- Category Distribution Chart -->
-    <div class="chart-container category-chart">
-      <div class="chart-header">
-        <h3 class="chart-title">Expense Categories</h3>
-        <p class="chart-subtitle">Distribution of expenses by category</p>
-      </div>
-      <app-pie-chart [data]="categoryData"></app-pie-chart>
-    </div>
-  </div>
-
-  <!-- Key Metrics for Current Month -->
-  <div class="metrics-section">
-    <div class="metrics-header">
-      <h3>Key Metrics - December 2024</h3>
-    </div>
-    <div class="metrics-grid">
-      <div class="metric-item">
-        <mat-icon class="metric-icon">savings</mat-icon>
-        <div class="metric-content">
-          <span class="metric-label">Savings Rate</span>
-          <span class="metric-value">33.2%</span>
+    <!-- Pie Chart -->
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>Expense Distribution</mat-card-title>
+        <mat-card-subtitle>Category breakdown for {{ selectedPeriod }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chart-container pie-chart">
+          <canvas #pieChart></canvas>
         </div>
-      </div>
-      
-      <div class="metric-item">
-        <mat-icon class="metric-icon">show_chart</mat-icon>
-        <div class="metric-content">
-          <span class="metric-label">Monthly Growth</span>
-          <span class="metric-value positive">+5.8%</span>
-        </div>
-      </div>
-      
-      <div class="metric-item">
-        <mat-icon class="metric-icon">category</mat-icon>
-        <div class="metric-content">
-          <span class="metric-label">Top Category</span>
-          <span class="metric-value">Food & Dining</span>
-        </div>
-      </div>
-      
-      <div class="metric-item">
-        <mat-icon class="metric-icon">calendar_today</mat-icon>
-        <div class="metric-content">
-          <span class="metric-label">Days Tracked</span>
-          <span class="metric-value">31/31</span>
-        </div>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

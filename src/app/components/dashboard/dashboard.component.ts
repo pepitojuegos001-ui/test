@@ -1,73 +1,164 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface FinancialMovement {
-  id: string;
-  amount: number;
-  category: string;
-  type: 'income' | 'expense';
-  date: Date;
-  description: string;
-}
-
-export interface MonthlySummary {
-  month: string;
-  income: number;
-  expenses: number;
-  netBalance: number;
-}
-
-export interface CategoryData {
-  category: string;
-  amount: number;
-  percentage: number;
-  color: string;
-}
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Subject, takeUntil, combineLatest } from 'rxjs';
+import { FinancialDataService, DateFilter, Transaction } from '../../services/financial-data.service';
+import { ChartService } from '../../services/chart.service';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
-  currentMonthSummary = {
-    income: 4850.00,
-    expenses: 3240.00,
-    netBalance: 1610.00
+export class DashboardComponent implements OnInit, OnDestroy {
+  @ViewChild('barChart', { static: false }) barChartRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('pieChart', { static: false }) pieChartRef!: ElementRef<HTMLCanvasElement>;
+
+  private destroy$ = new Subject<void>();
+  private barChart: Chart | null = null;
+  private pieChart: Chart | null = null;
+
+  currentFilter: DateFilter = { month: new Date().getMonth(), year: new Date().getFullYear() };
+  currentTransactions: Transaction[] = [];
+  previousTransactions: Transaction[] = [];
+  
+  summaryData = {
+    income: 0,
+    expenses: 0,
+    netBalance: 0
   };
 
-  monthlyData: MonthlySummary[] = [
-    { month: 'Jul', income: 4200, expenses: 3100, netBalance: 1100 },
-    { month: 'Aug', income: 4800, expenses: 3400, netBalance: 1400 },
-    { month: 'Sep', income: 4350, expenses: 2900, netBalance: 1450 },
-    { month: 'Oct', income: 5100, expenses: 3600, netBalance: 1500 },
-    { month: 'Nov', income: 4900, expenses: 3300, netBalance: 1600 },
-    { month: 'Dec', income: 4850, expenses: 3240, netBalance: 1610 }
+  trends = {
+    income: 0,
+    expenses: 0,
+    balance: 0
+  };
+
+  months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  categoryData: CategoryData[] = [
-    { category: 'Food & Dining', amount: 890, percentage: 27.5, color: '#FF6384' },
-    { category: 'Transportation', amount: 650, percentage: 20.1, color: '#36A2EB' },
-    { category: 'Healthcare', amount: 420, percentage: 13.0, color: '#FFCE56' },
-    { category: 'Entertainment', amount: 380, percentage: 11.7, color: '#4BC0C0' },
-    { category: 'Utilities', amount: 320, percentage: 9.9, color: '#9966FF' },
-    { category: 'Shopping', amount: 290, percentage: 9.0, color: '#FF9F40' },
-    { category: 'Others', amount: 290, percentage: 8.8, color: '#FF6384' }
-  ];
+  years = [2023, 2024];
 
-  selectedPeriod = 'current';
-  selectedCategory = 'all';
-  selectedYear = new Date().getFullYear();
+  constructor(
+    private financialDataService: FinancialDataService,
+    private chartService: ChartService
+  ) { }
 
   ngOnInit(): void {
-    // Component initialization
+    this.subscribeToData();
+    this.loadInitialData();
   }
 
-  onFiltersChanged(filters: any): void {
-    this.selectedPeriod = filters.period;
-    this.selectedCategory = filters.category;
-    this.selectedYear = filters.year;
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.destroyCharts();
+  }
+
+  private subscribeToData(): void {
+    combineLatest([
+      this.financialDataService.transactions$,
+      this.financialDataService.currentFilter$
+    ]).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(([transactions, filter]) => {
+      this.currentFilter = filter;
+      this.currentTransactions = transactions;
+      this.loadPreviousMonthData();
+      this.calculateSummaryData();
+      this.calculateTrends();
+      this.updateCharts();
+    });
+  }
+
+  private loadInitialData(): void {
+    this.financialDataService.setDateFilter(this.currentFilter);
+  }
+
+  private loadPreviousMonthData(): void {
+    const prevMonth = this.currentFilter.month === 0 ? 11 : this.currentFilter.month - 1;
+    const prevYear = this.currentFilter.month === 0 ? this.currentFilter.year - 1 : this.currentFilter.year;
     
-    // Here you would typically call a service to fetch filtered data
-    console.log('Filters changed:', filters);
+    this.previousTransactions = this.financialDataService.getTransactionsForPeriod(prevMonth, prevYear);
+  }
+
+  private calculateSummaryData(): void {
+    const currentSummary = this.financialDataService.calculateMonthlySummary(this.currentTransactions);
+    this.summaryData = currentSummary;
+  }
+
+  private calculateTrends(): void {
+    const previousSummary = this.financialDataService.calculateMonthlySummary(this.previousTransactions);
+    
+    this.trends.income = this.financialDataService.calculateTrend(this.summaryData.income, previousSummary.income);
+    this.trends.expenses = this.financialDataService.calculateTrend(this.summaryData.expenses, previousSummary.expenses);
+    this.trends.balance = this.financialDataService.calculateTrend(this.summaryData.netBalance, previousSummary.netBalance);
+  }
+
+  private updateCharts(): void {
+    setTimeout(() => {
+      this.createBarChart();
+      this.createPieChart();
+    });
+  }
+
+  private createBarChart(): void {
+    if (this.barChartRef?.nativeElement) {
+      if (this.barChart) {
+        this.chartService.destroyChart(this.barChart);
+      }
+
+      const monthlyData = this.financialDataService.getMonthlyChartData(6);
+      
+      this.barChart = this.chartService.createBarChart(
+        this.barChartRef.nativeElement,
+        monthlyData.map(d => d.month),
+        monthlyData.map(d => d.income),
+        monthlyData.map(d => d.expenses)
+      );
+    }
+  }
+
+  private createPieChart(): void {
+    if (this.pieChartRef?.nativeElement) {
+      if (this.pieChart) {
+        this.chartService.destroyChart(this.pieChart);
+      }
+
+      const categoryData = this.financialDataService.getCategoryDistribution(this.currentTransactions);
+      
+      if (categoryData.length > 0) {
+        this.pieChart = this.chartService.createPieChart(
+          this.pieChartRef.nativeElement,
+          categoryData.map(d => d.category),
+          categoryData.map(d => d.amount),
+          categoryData.map(d => d.color)
+        );
+      }
+    }
+  }
+
+  private destroyCharts(): void {
+    this.chartService.destroyChart(this.barChart);
+    this.chartService.destroyChart(this.pieChart);
+  }
+
+  onMonthChanged(month: number): void {
+    this.currentFilter.month = month;
+    this.financialDataService.setDateFilter(this.currentFilter);
+  }
+
+  onYearChanged(year: number): void {
+    this.currentFilter.year = year;
+    this.financialDataService.setDateFilter(this.currentFilter);
+  }
+
+  get selectedPeriod(): string {
+    return `${this.months[this.currentFilter.month]} ${this.currentFilter.year}`;
+  }
+
+  get currentMonthSubtitle(): string {
+    return `${this.months[this.currentFilter.month]} ${this.currentFilter.year}`;
   }
 }
