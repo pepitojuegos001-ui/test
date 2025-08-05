@@ -44,21 +44,19 @@ export class AppComponent implements OnInit {
   }
 
   onSidebarToggle(): void {
-    // Get current handset state synchronously
     this.isHandset$.pipe(
-      map(isHandset => {
-        if (isHandset) {
-          // On mobile, toggle the drawer open/close
-          if (this.drawer) {
-            this.drawer.toggle();
-          }
-        } else {
-          // On desktop, toggle collapse state
-          this.isSidebarCollapsed = !this.isSidebarCollapsed;
+      take(1) // Take only one value and automatically unsubscribe
+    ).subscribe(isHandset => {
+      if (isHandset) {
+        // On mobile, toggle the drawer open/close
+        if (this.drawer) {
+          this.drawer.toggle();
         }
-        return isHandset;
-      })
-    ).subscribe().unsubscribe();
+      } else {
+        // On desktop, toggle collapse state
+        this.isSidebarCollapsed = !this.isSidebarCollapsed;
+      }
+    });
   }
 
   get currentDateTime(): string {
