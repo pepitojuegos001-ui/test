@@ -70,7 +70,7 @@ export class AddCategoryDialogComponent {
   }
 
   onSave(): void {
-    if (this.categoryControl.valid) {
+    if (this.categoryControl.valid && this.categoryControl.value) {
       this.dialogRef.close(this.categoryControl.value.trim());
     }
   }
