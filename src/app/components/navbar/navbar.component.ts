@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-// import { MatDialog } from '@angular/material/dialog';
-// import { UserSettingsComponent } from '../user-settings/user-settings.component';
+import { MatDialog } from '@angular/material/dialog';
+import { UserSettingsComponent } from '../user-settings/user-settings.component';
 
 /**
  * NavbarComponent - Enhanced top navigation bar
@@ -29,7 +29,7 @@ export class NavbarComponent {
   isUserMenuOpen = false;
   notifications = 3; // Sample notification count
 
-  // constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {}
 
   onSidebarToggle(): void {
     this.sidebarToggle.emit();
@@ -41,23 +41,22 @@ export class NavbarComponent {
 
   onConfiguration(): void {
     this.isUserMenuOpen = false;
-    console.log('Configuration clicked - dialog temporarily disabled for debugging');
 
-    // const dialogRef = this.dialog.open(UserSettingsComponent, {
-    //   width: '650px',
-    //   maxWidth: '95vw',
-    //   maxHeight: '90vh',
-    //   panelClass: 'user-settings-dialog',
-    //   disableClose: false,
-    //   autoFocus: true,
-    //   restoreFocus: true
-    // });
+    const dialogRef = this.dialog.open(UserSettingsComponent, {
+      width: '650px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      panelClass: 'user-settings-dialog',
+      disableClose: false,
+      autoFocus: true,
+      restoreFocus: true
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     console.log('Settings updated:', result);
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Settings updated:', result);
+      }
+    });
   }
 
   onLogout(): void {

@@ -26,8 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
-// import { MatTabsModule } from '@angular/material/tabs';
-// import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,7 +40,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddCategoryDialogComponent } from './components/expenses/add-category-dialog.component';
-// import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 // Shared Components
 import { SummaryCardComponent } from './shared/components/summary-card/summary-card.component';
@@ -60,8 +60,8 @@ import { ChartService } from './services/chart.service';
     SidebarComponent,
     NavbarComponent,
     SummaryCardComponent,
-    AddCategoryDialogComponent
-    // UserSettingsComponent
+    AddCategoryDialogComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -93,9 +93,9 @@ import { ChartService } from './services/chart.service';
     MatProgressSpinnerModule,
     MatMenuModule,
     MatBadgeModule,
-    MatDividerModule
-    // MatTabsModule,
-    // MatSlideToggleModule
+    MatDividerModule,
+    MatTabsModule,
+    MatSlideToggleModule
   ],
   providers: [
     FinancialDataService,
