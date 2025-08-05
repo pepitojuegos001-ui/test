@@ -41,8 +41,22 @@ export class NavbarComponent {
 
   onConfiguration(): void {
     this.isUserMenuOpen = false;
-    // TODO: Implement configuration logic
-    console.log('Configuration clicked');
+
+    const dialogRef = this.dialog.open(UserSettingsComponent, {
+      width: '650px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      panelClass: 'user-settings-dialog',
+      disableClose: false,
+      autoFocus: true,
+      restoreFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Settings updated:', result);
+      }
+    });
   }
 
   onLogout(): void {
