@@ -41,16 +41,26 @@
   mat-form-field {
     width: 100%;
 
-    .mat-form-field-prefix {
-      color: var(--text-secondary);
-      font-weight: 500;
-      margin-right: 8px;
-      display: flex;
-      align-items: center;
-    }
+    &.mat-form-field-appearance-outline {
+      .mat-form-field-prefix {
+        color: var(--text-secondary);
+        font-weight: 500;
+        margin-right: 12px;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        line-height: 1;
+        padding-top: 2px;
+      }
 
-    .mat-input-element {
-      margin-left: 0;
+      .mat-input-element {
+        margin-left: 0;
+        padding-left: 0;
+      }
+
+      .mat-form-field-infix {
+        padding-left: 0;
+      }
     }
   }
 }
