@@ -31,7 +31,8 @@ export class SidebarComponent {
 
   navigateTo(path: string): void {
     this.router.navigate([path]);
-    this.sidenavToggle.emit();
+    // Only emit toggle on mobile to close drawer after navigation
+    // Desktop collapse state is handled by the navbar toggle
   }
 
   onToggleSidenav(): void {
