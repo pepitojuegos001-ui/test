@@ -74,6 +74,7 @@ import { ChartService } from './services/chart.service';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatOptionModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
