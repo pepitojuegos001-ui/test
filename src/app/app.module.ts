@@ -59,12 +59,14 @@ import { ChartService } from './services/chart.service';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     LayoutModule,
     AppRoutingModule,
-    
+    BaseChartDirective,
+
     // Angular Material
     MatSidenavModule,
     MatToolbarModule,
