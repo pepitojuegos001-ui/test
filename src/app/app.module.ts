@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LayoutModule } from '@angular/cdk/layout';
 
 // Angular Material Modules
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -31,6 +32,7 @@ import { IncomeComponent } from './components/income/income.component';
 import { ExpensesComponent } from './components/expenses/expenses.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AddCategoryDialogComponent } from './components/expenses/add-category-dialog.component';
 
 // Shared Components
 import { SummaryCardComponent } from './shared/components/summary-card/summary-card.component';
@@ -48,13 +50,15 @@ import { ChartService } from './services/chart.service';
     ExpensesComponent,
     ReportsComponent,
     SidebarComponent,
-    SummaryCardComponent
+    SummaryCardComponent,
+    AddCategoryDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    LayoutModule,
     AppRoutingModule,
     
     // Angular Material
