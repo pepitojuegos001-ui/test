@@ -67,16 +67,30 @@
 
 .category-input-group {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   align-items: flex-end;
-  
+
   .category-select {
     flex: 1;
   }
-  
+
   .add-category-btn {
     flex-shrink: 0;
-    margin-bottom: 1.25em; // Align with form field
+    margin-bottom: 4px; // Fine-tune alignment with form field bottom
+    width: 40px;
+    height: 40px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 
