@@ -29,6 +29,8 @@ export class NavbarComponent {
   isUserMenuOpen = false;
   notifications = 3; // Sample notification count
 
+  constructor(private dialog: MatDialog) {}
+
   onSidebarToggle(): void {
     this.sidebarToggle.emit();
   }
