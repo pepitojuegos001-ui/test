@@ -59,6 +59,18 @@ export class AppComponent implements OnInit {
     });
   }
 
+  onNavigationCollapse(): void {
+    // Auto-collapse sidebar when navigation occurs on desktop
+    this.isHandset$.pipe(
+      take(1)
+    ).subscribe(isHandset => {
+      if (!isHandset) {
+        // Only collapse on desktop
+        this.isSidebarCollapsed = true;
+      }
+    });
+  }
+
   get currentDateTime(): string {
     const now = new Date();
     return now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
