@@ -63,28 +63,46 @@
   color: var(--text-secondary);
   text-align: left;
   border-radius: 0;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   white-space: nowrap;
   overflow: hidden;
   min-height: 48px;
-  
+  position: relative;
+
   &:hover {
     background: var(--background-light);
     color: var(--text-primary);
+    transform: translateX(2px);
   }
-  
+
   &.active {
     background: rgba(33, 150, 243, 0.1);
     color: var(--primary-blue);
     border-right: 3px solid var(--primary-blue);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--primary-blue);
+      transition: all 0.3s ease;
+    }
   }
-  
+
   &.collapsed {
     padding: 12px;
     justify-content: center;
-    
+
     .nav-icon {
       margin-right: 0;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      border-radius: 8px;
     }
   }
 }
