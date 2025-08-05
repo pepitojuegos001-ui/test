@@ -14,7 +14,9 @@
       [opened]="(isHandset$ | async) === false"
       [disableClose]="(isHandset$ | async) === false">
       <app-sidebar
-        [isCollapsed]="(isHandset$ | async) ? false : isSidebarCollapsed">
+        [isCollapsed]="(isHandset$ | async) ? false : isSidebarCollapsed"
+        [isHandset]="(isHandset$ | async) || false"
+        (navigationOccurred)="onNavigationCollapse()">
       </app-sidebar>
     </mat-sidenav>
 
