@@ -1,0 +1,104 @@
+<div class="dashboard-container">
+  <!-- Dashboard Header -->
+  <div class="dashboard-header">
+    <h1>Financial Dashboard</h1>
+    <p>Track your monthly income, expenses, and financial trends</p>
+  </div>
+
+  <!-- Filters Section -->
+  <app-filters 
+    class="filters-section"
+    (filtersChanged)="onFiltersChanged($event)">
+  </app-filters>
+
+  <!-- Summary Cards -->
+  <div class="card-grid">
+    <app-summary-card
+      class="income-card"
+      title="Total Income"
+      [value]="currentMonthSummary.income"
+      icon="trending_up"
+      type="income"
+      subtitle="This month">
+    </app-summary-card>
+
+    <app-summary-card
+      class="expense-card"
+      title="Total Expenses"
+      [value]="currentMonthSummary.expenses"
+      icon="trending_down"
+      type="expense"
+      subtitle="This month">
+    </app-summary-card>
+
+    <app-summary-card
+      class="balance-card"
+      title="Net Balance"
+      [value]="currentMonthSummary.netBalance"
+      icon="account_balance_wallet"
+      type="balance"
+      subtitle="This month">
+    </app-summary-card>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="dashboard-grid">
+    <!-- Monthly Comparison Chart -->
+    <div class="chart-container monthly-chart">
+      <div class="chart-header">
+        <h3 class="chart-title">Monthly Comparison</h3>
+        <p class="chart-subtitle">Income vs Expenses over the last 6 months</p>
+      </div>
+      <app-bar-chart [data]="monthlyData"></app-bar-chart>
+    </div>
+
+    <!-- Category Distribution Chart -->
+    <div class="chart-container category-chart">
+      <div class="chart-header">
+        <h3 class="chart-title">Expense Categories</h3>
+        <p class="chart-subtitle">Distribution of expenses by category</p>
+      </div>
+      <app-pie-chart [data]="categoryData"></app-pie-chart>
+    </div>
+  </div>
+
+  <!-- Key Metrics for Current Month -->
+  <div class="metrics-section">
+    <div class="metrics-header">
+      <h3>Key Metrics - December 2024</h3>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <mat-icon class="metric-icon">savings</mat-icon>
+        <div class="metric-content">
+          <span class="metric-label">Savings Rate</span>
+          <span class="metric-value">33.2%</span>
+        </div>
+      </div>
+      
+      <div class="metric-item">
+        <mat-icon class="metric-icon">show_chart</mat-icon>
+        <div class="metric-content">
+          <span class="metric-label">Monthly Growth</span>
+          <span class="metric-value positive">+5.8%</span>
+        </div>
+      </div>
+      
+      <div class="metric-item">
+        <mat-icon class="metric-icon">category</mat-icon>
+        <div class="metric-content">
+          <span class="metric-label">Top Category</span>
+          <span class="metric-value">Food & Dining</span>
+        </div>
+      </div>
+      
+      <div class="metric-item">
+        <mat-icon class="metric-icon">calendar_today</mat-icon>
+        <div class="metric-content">
+          <span class="metric-label">Days Tracked</span>
+          <span class="metric-value">31/31</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
