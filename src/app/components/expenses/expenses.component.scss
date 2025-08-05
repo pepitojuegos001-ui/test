@@ -66,18 +66,18 @@
 }
 
 .category-input-group {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 16px;
-  align-items: stretch;
+  align-items: end;
 
   .category-select {
-    flex: 1;
+    grid-column: 1;
   }
 
   .add-category-btn {
-    flex-shrink: 0;
-    align-self: flex-end;
-    margin-bottom: 0.25rem; // Precise alignment with form field visual center
+    grid-column: 2;
+    margin-bottom: 0.25rem; // Fine-tune vertical alignment with form field
     width: 40px;
     height: 40px;
     transition: all 0.2s ease;
