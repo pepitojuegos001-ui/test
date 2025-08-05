@@ -118,12 +118,13 @@
 .nav-text {
   font-size: 0.875rem;
   font-weight: 500;
-  transition: opacity 0.3s ease;
-  
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
   &.hidden {
     opacity: 0;
     width: 0;
     overflow: hidden;
+    transform: translateX(-10px);
   }
 }
 
