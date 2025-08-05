@@ -252,6 +252,11 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
     return 'primary';
   }
 
+  hasSpecialChar(): boolean {
+    const password = this.passwordForm.get('newPassword')?.value || '';
+    return /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+  }
+
   private markFormGroupTouched(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);
