@@ -103,9 +103,12 @@
   .mat-column-actions {
     width: 120px;
     text-align: center;
+  }
 
-    .mat-cell {
-      padding: 8px 16px;
+  .actions-cell {
+    padding: 8px 16px !important;
+
+    .action-buttons {
       display: flex;
       align-items: center;
       justify-content: center;
