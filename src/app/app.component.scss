@@ -1,0 +1,45 @@
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.toolbar-icon {
+  margin-right: 12px;
+}
+
+.toolbar-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.main-content {
+  margin-top: 64px;
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--background-light);
+}
+
+@media (max-width: 768px) {
+  .toolbar-title {
+    font-size: 18px;
+  }
+  
+  .toolbar-icon {
+    margin-right: 8px;
+  }
+}
