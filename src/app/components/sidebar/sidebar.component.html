@@ -1,7 +1,7 @@
-<div class="sidebar-header">
+<div class="sidebar-header" [class.collapsed]="isCollapsed">
   <div class="sidebar-logo">
     <mat-icon class="logo-icon">account_balance_wallet</mat-icon>
-    <span class="logo-text">FinanceDash</span>
+    <span class="logo-text" [class.hidden]="isCollapsed">FinanceDash</span>
   </div>
 </div>
 
@@ -10,9 +10,13 @@
     mat-button
     class="nav-item"
     [class.active]="isActive(item.path)"
+    [class.collapsed]="isCollapsed"
+    [matTooltip]="isCollapsed ? item.label : ''"
+    [matTooltipPosition]="'right'"
+    [matTooltipDisabled]="!isCollapsed"
     *ngFor="let item of navItems"
     (click)="navigateTo(item.path)">
     <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
-    <span class="nav-text">{{ item.label }}</span>
+    <span class="nav-text" [class.hidden]="isCollapsed">{{ item.label }}</span>
   </button>
 </nav>
