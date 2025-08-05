@@ -1,0 +1,28 @@
+<mat-card [class]="cardClass">
+  <mat-card-content class="card-content">
+    <div class="card-header">
+      <div class="icon-container" [class]="iconColorClass">
+        <mat-icon class="card-icon">{{ icon }}</mat-icon>
+      </div>
+      <div class="card-info">
+        <h3 class="card-title">{{ title }}</h3>
+        <p class="card-subtitle">{{ subtitle }}</p>
+      </div>
+    </div>
+    
+    <div class="card-value">
+      <span class="value-amount">{{ formattedValue }}</span>
+      <div class="trend-container" *ngIf="trend">
+        <mat-icon class="trend-icon" [class]="trendClass">{{ trendIcon }}</mat-icon>
+        <span class="trend-text" [class]="trendClass">{{ trendText }}</span>
+      </div>
+    </div>
+    
+    <div class="card-progress" *ngIf="type !== 'balance'">
+      <div class="progress-bar">
+        <div class="progress-fill" [class]="type + '-progress'"></div>
+      </div>
+      <span class="progress-text">vs last month</span>
+    </div>
+  </mat-card-content>
+</mat-card>
