@@ -15,12 +15,19 @@
   background: #ffffff;
   border-right: 1px solid #e0e0e0;
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
-  transition: width 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   z-index: 99;
-  
+  overflow: hidden;
+
   // Remove default material sidenav styles
   .mat-drawer-inner-container {
     overflow: visible;
+    transition: inherit;
+  }
+
+  // Ensure proper width behavior during transitions
+  &.mat-drawer-side {
+    border-right: 1px solid var(--border-color);
   }
 }
 
