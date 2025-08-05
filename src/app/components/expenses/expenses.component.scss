@@ -37,9 +37,21 @@
 
 .form-row {
   margin-bottom: 16px;
-  
+
   mat-form-field {
     width: 100%;
+
+    .mat-form-field-prefix {
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-right: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .mat-input-element {
+      margin-left: 0;
+    }
   }
 }
 
