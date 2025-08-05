@@ -1,0 +1,18 @@
+<div class="sidebar-header">
+  <div class="sidebar-logo">
+    <mat-icon class="logo-icon">account_balance_wallet</mat-icon>
+    <span class="logo-text">FinanceDash</span>
+  </div>
+</div>
+
+<nav class="sidebar-nav">
+  <button
+    mat-button
+    class="nav-item"
+    [class.active]="isActive(item.path)"
+    *ngFor="let item of navItems"
+    (click)="navigateTo(item.path)">
+    <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+    <span class="nav-text">{{ item.label }}</span>
+  </button>
+</nav>

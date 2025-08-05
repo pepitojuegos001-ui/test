@@ -1,0 +1,21 @@
+<mat-card [class]="cardClass">
+  <mat-card-content>
+    <div class="card-header">
+      <div class="icon-container" [class]="iconColorClass">
+        <mat-icon>{{ icon }}</mat-icon>
+      </div>
+      <div class="card-info">
+        <h3>{{ title }}</h3>
+        <p>{{ subtitle }}</p>
+      </div>
+    </div>
+    
+    <div class="card-value">
+      <div class="value-amount">{{ formattedValue }}</div>
+      <div class="trend-indicator" [class]="trendClass" *ngIf="trend">
+        <mat-icon>{{ trendIcon }}</mat-icon>
+        <span>{{ trendText }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
