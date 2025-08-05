@@ -14,7 +14,9 @@ interface NavItem {
 })
 export class SidebarComponent {
   @Input() isCollapsed = false;
+  @Input() isHandset = false;
   @Output() sidenavToggle = new EventEmitter<void>();
+  @Output() navigationOccurred = new EventEmitter<void>();
 
   navItems: NavItem[] = [
     { path: '/dashboard', icon: 'dashboard', label: 'Dashboard' },
@@ -31,8 +33,14 @@ export class SidebarComponent {
 
   navigateTo(path: string): void {
     this.router.navigate([path]);
-    // Only emit toggle on mobile to close drawer after navigation
-    // Desktop collapse state is handled by the navbar toggle
+
+    // Emit navigation event to trigger auto-collapse on desktop
+    // On mobile, just close the drawer
+    if (this.isHandset) {
+      this.sidenavToggle.emit();
+    } else {
+      this.navigationOccurred.emit();
+    }
   }
 
   onToggleSidenav(): void {
