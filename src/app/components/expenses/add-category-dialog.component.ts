@@ -57,7 +57,7 @@ export class AddCategoryDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
-  private duplicateValidator(control: FormControl) {
+  private duplicateValidator(control: any) {
     const value = control.value?.trim();
     if (value && this.data.existingCategories.includes(value)) {
       return { duplicate: true };
