@@ -1,6 +1,11 @@
 <div class="sidebar-header" [class.collapsed]="isCollapsed">
   <div class="sidebar-logo">
-    <mat-icon class="logo-icon">account_balance_wallet</mat-icon>
+    <mat-icon
+      class="logo-icon"
+      [matTooltip]="isCollapsed ? 'FinanceDash - Click menu icon to expand' : ''"
+      [matTooltipPosition]="'right'">
+      account_balance_wallet
+    </mat-icon>
     <span class="logo-text" [class.hidden]="isCollapsed">FinanceDash</span>
   </div>
 </div>
