@@ -236,13 +236,18 @@
   }
   
   .category-input-group {
-    flex-direction: column;
-    align-items: stretch;
+    grid-template-columns: 1fr;
     gap: 16px;
+    align-items: stretch;
+
+    .category-select {
+      grid-column: 1;
+    }
 
     .add-category-btn {
+      grid-column: 1;
+      justify-self: start;
       margin-bottom: 0;
-      align-self: flex-start;
       width: 48px;
       height: 48px;
 
