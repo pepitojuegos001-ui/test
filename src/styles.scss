@@ -180,6 +180,20 @@ body {
   color: var(--primary-blue-light) !important;
 }
 
+/* Enhanced matPrefix styling */
+.mat-form-field-prefix {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-prefix {
+  margin-right: 12px;
+}
+
 /* Enhanced Material Design card overrides */
 .mat-card.summary-card {
   padding: 24px !important;
