@@ -13,9 +13,8 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false"
       [disableClose]="(isHandset$ | async) === false">
-      <app-sidebar 
-        [isCollapsed]="(isHandset$ | async) ? false : isSidebarCollapsed"
-        (sidenavToggle)="drawer.toggle()">
+      <app-sidebar
+        [isCollapsed]="(isHandset$ | async) ? false : isSidebarCollapsed">
       </app-sidebar>
     </mat-sidenav>
 
