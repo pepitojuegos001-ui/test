@@ -55,7 +55,8 @@ import { ChartService } from './services/chart.service';
     ReportsComponent,
     SidebarComponent,
     SummaryCardComponent,
-    AddCategoryDialogComponent
+    AddCategoryDialogComponent,
+    BaseChartDirective
   ],
   imports: [
     BrowserModule,
