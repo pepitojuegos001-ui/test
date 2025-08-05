@@ -1,0 +1,374 @@
+<div class="user-settings-modal">
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <h2 mat-dialog-title class="modal-title">
+      <mat-icon class="title-icon">settings</mat-icon>
+      User Settings
+    </h2>
+    <button 
+      mat-icon-button 
+      class="close-button"
+      (click)="onCancel()"
+      aria-label="Close settings"
+      matTooltip="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Tab Navigation -->
+  <mat-tab-group 
+    [(selectedIndex)]="selectedTabIndex" 
+    class="settings-tabs"
+    animationDuration="300ms">
+    
+    <!-- Profile Tab -->
+    <mat-tab label="Profile">
+      <ng-template matTabContent>
+        <div class="tab-content">
+          <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()" class="profile-form">
+            
+            <!-- Avatar Section -->
+            <div class="avatar-section">
+              <h3 class="section-title">
+                <mat-icon>account_circle</mat-icon>
+                Profile Picture
+              </h3>
+              
+              <div class="avatar-container">
+                <div class="avatar-display">
+                  <img 
+                    *ngIf="imagePreview" 
+                    [src]="imagePreview" 
+                    alt="Profile picture"
+                    class="avatar-image">
+                  <div *ngIf="!imagePreview" class="avatar-placeholder">
+                    <mat-icon class="placeholder-icon">account_circle</mat-icon>
+                  </div>
+                </div>
+                
+                <div class="avatar-actions">
+                  <input 
+                    #fileInput 
+                    type="file" 
+                    accept=".jpg,.jpeg,.png" 
+                    (change)="onFileSelected($event)"
+                    class="file-input">
+                  
+                  <button 
+                    type="button"
+                    mat-raised-button 
+                    color="primary"
+                    (click)="fileInput.click()"
+                    class="upload-button"
+                    matTooltip="Upload new profile picture">
+                    <mat-icon>upload</mat-icon>
+                    Upload Image
+                  </button>
+                  
+                  <button 
+                    *ngIf="imagePreview"
+                    type="button"
+                    mat-button 
+                    color="warn"
+                    (click)="onRemoveAvatar()"
+                    class="remove-button"
+                    matTooltip="Remove profile picture">
+                    <mat-icon>delete</mat-icon>
+                    Remove
+                  </button>
+                </div>
+              </div>
+              
+              <div class="upload-help">
+                <mat-icon class="help-icon">info</mat-icon>
+                <span>JPEG or PNG files only. Maximum size: 2MB</span>
+              </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="personal-info-section">
+              <h3 class="section-title">
+                <mat-icon>person</mat-icon>
+                Personal Information
+              </h3>
+              
+              <div class="form-row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Full Name</mat-label>
+                  <input 
+                    matInput 
+                    formControlName="fullName"
+                    placeholder="Enter your full name"
+                    maxlength="100">
+                  <mat-icon matSuffix>person</mat-icon>
+                  <mat-error *ngIf="profileForm.get('fullName')?.hasError('required')">
+                    Full name is required
+                  </mat-error>
+                  <mat-error *ngIf="profileForm.get('fullName')?.hasError('minlength')">
+                    Name must be at least 2 characters long
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="form-row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Email Address</mat-label>
+                  <input 
+                    matInput 
+                    type="email"
+                    formControlName="email"
+                    placeholder="Enter your email address">
+                  <mat-icon matSuffix>email</mat-icon>
+                  <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+                    Email is required
+                  </mat-error>
+                  <mat-error *ngIf="profileForm.get('email')?.hasError('email')">
+                    Please enter a valid email address
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- Preferences -->
+            <div class="preferences-section">
+              <h3 class="section-title">
+                <mat-icon>tune</mat-icon>
+                Preferences
+              </h3>
+              
+              <div class="preference-item">
+                <mat-slide-toggle 
+                  formControlName="notificationsEnabled"
+                  color="primary">
+                  Enable Notifications
+                </mat-slide-toggle>
+                <span class="preference-description">
+                  Receive email notifications about account activity
+                </span>
+              </div>
+              
+              <div class="preference-item">
+                <mat-slide-toggle 
+                  formControlName="twoFactorEnabled"
+                  color="primary">
+                  Two-Factor Authentication
+                </mat-slide-toggle>
+                <span class="preference-description">
+                  Add an extra layer of security to your account
+                </span>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+              <button 
+                type="submit"
+                mat-raised-button 
+                color="primary"
+                [disabled]="profileForm.invalid || isLoading"
+                class="save-button">
+                <mat-icon *ngIf="!isLoading">save</mat-icon>
+                <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+                {{ isLoading ? 'Saving...' : 'Save Changes' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <!-- Security Tab -->
+    <mat-tab label="Security">
+      <ng-template matTabContent>
+        <div class="tab-content">
+          
+          <!-- Password Change Section -->
+          <div class="password-section">
+            <h3 class="section-title">
+              <mat-icon>lock</mat-icon>
+              Change Password
+            </h3>
+            
+            <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" class="password-form">
+              
+              <div class="form-row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Current Password</mat-label>
+                  <input 
+                    matInput 
+                    [type]="showCurrentPassword ? 'text' : 'password'"
+                    formControlName="currentPassword"
+                    placeholder="Enter your current password">
+                  <button 
+                    type="button"
+                    mat-icon-button 
+                    matSuffix
+                    (click)="showCurrentPassword = !showCurrentPassword"
+                    [attr.aria-label]="'Toggle password visibility'"
+                    matTooltip="Toggle visibility">
+                    <mat-icon>{{ showCurrentPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="passwordForm.get('currentPassword')?.hasError('required')">
+                    Current password is required
+                  </mat-error>
+                  <mat-error *ngIf="passwordForm.get('currentPassword')?.hasError('incorrect')">
+                    Current password is incorrect
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="form-row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>New Password</mat-label>
+                  <input 
+                    matInput 
+                    [type]="showNewPassword ? 'text' : 'password'"
+                    formControlName="newPassword"
+                    placeholder="Enter your new password">
+                  <button 
+                    type="button"
+                    mat-icon-button 
+                    matSuffix
+                    (click)="showNewPassword = !showNewPassword"
+                    [attr.aria-label]="'Toggle password visibility'"
+                    matTooltip="Toggle visibility">
+                    <mat-icon>{{ showNewPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="passwordForm.get('newPassword')?.hasError('required')">
+                    New password is required
+                  </mat-error>
+                  <mat-error *ngIf="passwordForm.get('newPassword')?.hasError('strongPassword')">
+                    {{ getPasswordStrengthText() }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <!-- Password Strength Indicator -->
+              <div *ngIf="passwordForm.get('newPassword')?.value" class="password-strength">
+                <div class="strength-label">Password Strength:</div>
+                <div 
+                  class="strength-text"
+                  [class]="'strength-' + getPasswordStrengthColor()">
+                  {{ getPasswordStrengthText() }}
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Confirm New Password</mat-label>
+                  <input 
+                    matInput 
+                    [type]="showConfirmPassword ? 'text' : 'password'"
+                    formControlName="confirmPassword"
+                    placeholder="Confirm your new password">
+                  <button 
+                    type="button"
+                    mat-icon-button 
+                    matSuffix
+                    (click)="showConfirmPassword = !showConfirmPassword"
+                    [attr.aria-label]="'Toggle password visibility'"
+                    matTooltip="Toggle visibility">
+                    <mat-icon>{{ showConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="passwordForm.get('confirmPassword')?.hasError('required')">
+                    Please confirm your new password
+                  </mat-error>
+                  <mat-error *ngIf="passwordForm.hasError('passwordMismatch')">
+                    Passwords do not match
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Password Requirements -->
+              <div class="password-requirements">
+                <h4 class="requirements-title">Password Requirements:</h4>
+                <ul class="requirements-list">
+                  <li [class.met]="passwordForm.get('newPassword')?.value?.length >= 8">
+                    <mat-icon class="requirement-icon">
+                      {{ passwordForm.get('newPassword')?.value?.length >= 8 ? 'check_circle' : 'radio_button_unchecked' }}
+                    </mat-icon>
+                    At least 8 characters
+                  </li>
+                  <li [class.met]="/[A-Z]/.test(passwordForm.get('newPassword')?.value || '')">
+                    <mat-icon class="requirement-icon">
+                      {{ /[A-Z]/.test(passwordForm.get('newPassword')?.value || '') ? 'check_circle' : 'radio_button_unchecked' }}
+                    </mat-icon>
+                    One uppercase letter
+                  </li>
+                  <li [class.met]="/[a-z]/.test(passwordForm.get('newPassword')?.value || '')">
+                    <mat-icon class="requirement-icon">
+                      {{ /[a-z]/.test(passwordForm.get('newPassword')?.value || '') ? 'check_circle' : 'radio_button_unchecked' }}
+                    </mat-icon>
+                    One lowercase letter
+                  </li>
+                  <li [class.met]="/\d/.test(passwordForm.get('newPassword')?.value || '')">
+                    <mat-icon class="requirement-icon">
+                      {{ /\d/.test(passwordForm.get('newPassword')?.value || '') ? 'check_circle' : 'radio_button_unchecked' }}
+                    </mat-icon>
+                    One number
+                  </li>
+                  <li [class.met]="/[!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?]/.test(passwordForm.get('newPassword')?.value || '')">
+                    <mat-icon class="requirement-icon">
+                      {{ /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(passwordForm.get('newPassword')?.value || '') ? 'check_circle' : 'radio_button_unchecked' }}
+                    </mat-icon>
+                    One special character
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Form Actions -->
+              <div class="form-actions">
+                <button 
+                  type="submit"
+                  mat-raised-button 
+                  color="primary"
+                  [disabled]="passwordForm.invalid || isLoading"
+                  class="save-button">
+                  <mat-icon *ngIf="!isLoading">lock</mat-icon>
+                  <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+                  {{ isLoading ? 'Updating...' : 'Change Password' }}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Danger Zone -->
+          <div class="danger-zone">
+            <h3 class="section-title danger-title">
+              <mat-icon>warning</mat-icon>
+              Danger Zone
+            </h3>
+            
+            <div class="danger-item">
+              <div class="danger-content">
+                <h4>Delete Account</h4>
+                <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+              </div>
+              <button 
+                type="button"
+                mat-raised-button 
+                color="warn"
+                disabled
+                (click)="onDeleteAccount()"
+                class="delete-button"
+                matTooltip="Account deletion is currently disabled">
+                <mat-icon>delete_forever</mat-icon>
+                Delete Account
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
+  <!-- Dialog Actions -->
+  <div class="dialog-actions">
+    <button 
+      mat-button 
+      (click)="onCancel()"
+      class="cancel-button">
+      Cancel
+    </button>
+  </div>
+</div>
