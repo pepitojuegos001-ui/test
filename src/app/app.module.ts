@@ -24,8 +24,7 @@ import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-// Chart.js integration
-import { BaseChartDirective } from 'ng2-charts';
+// Chart.js integration is handled directly in components
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
