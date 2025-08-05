@@ -50,28 +50,17 @@ import { ChartService } from './services/chart.service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    LayoutModule,
     AppRoutingModule,
 
     // Angular Material
-    MatSidenavModule,
-    MatToolbarModule,
     MatButtonModule,
-    MatIconModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatOptionModule,
+    MatIconModule,
     MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule
+    MatOptionModule
   ],
   providers: [
     FinancialDataService,
