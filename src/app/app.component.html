@@ -1,26 +1,29 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
+<!-- Top Navbar -->
+<app-navbar (sidebarToggle)="onSidebarToggle()"></app-navbar>
+
+<!-- Main Layout Container -->
+<div class="main-layout">
+  <mat-sidenav-container class="sidenav-container">
+    <!-- Sidebar Navigation -->
+    <mat-sidenav 
+      #drawer 
+      class="sidenav" 
+      [style.width]="(isHandset$ | async) ? '280px' : sidebarWidth"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <app-sidebar></app-sidebar>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary" class="toolbar">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>{{title}}</span>
-      <span class="spacer"></span>
-      <span class="current-time">{{ currentDateTime }}</span>
-    </mat-toolbar>
-    <main class="main-content">
-      <router-outlet></router-outlet>
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+      [opened]="(isHandset$ | async) === false"
+      [disableClose]="(isHandset$ | async) === false">
+      <app-sidebar 
+        [isCollapsed]="(isHandset$ | async) ? false : isSidebarCollapsed"
+        (sidenavToggle)="drawer.toggle()">
+      </app-sidebar>
+    </mat-sidenav>
+
+    <!-- Main Content Area -->
+    <mat-sidenav-content class="main-content-container">
+      <main class="main-content">
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
