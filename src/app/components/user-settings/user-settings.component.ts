@@ -27,8 +27,8 @@ interface PasswordChangeData {
 export class UserSettingsComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   
-  profileForm: FormGroup;
-  passwordForm: FormGroup;
+  profileForm!: FormGroup;
+  passwordForm!: FormGroup;
   selectedTabIndex = 0;
   isLoading = false;
   
