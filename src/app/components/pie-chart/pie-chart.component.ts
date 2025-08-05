@@ -100,8 +100,12 @@ export class PieChartComponent implements OnInit {
 
   getTopCategory(): CategoryData | null {
     if (!this.data || this.data.length === 0) return null;
-    return this.data.reduce((prev, current) => 
+    return this.data.reduce((prev, current) =>
       prev.amount > current.amount ? prev : current
     );
+  }
+
+  trackByCategory(index: number, item: CategoryData): string {
+    return item.category;
   }
 }
