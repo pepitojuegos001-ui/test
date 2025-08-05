@@ -93,9 +93,9 @@ import { ChartService } from './services/chart.service';
     MatProgressSpinnerModule,
     MatMenuModule,
     MatBadgeModule,
-    MatDividerModule,
-    MatTabsModule,
-    MatSlideToggleModule
+    MatDividerModule
+    // MatTabsModule,
+    // MatSlideToggleModule
   ],
   providers: [
     FinancialDataService,
