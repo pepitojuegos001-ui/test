@@ -163,13 +163,15 @@
             <!-- Actions Column -->
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
-              <td mat-cell *matCellDef="let entry">
-                <button mat-icon-button color="primary" (click)="onEdit(entry)" matTooltip="Edit">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button color="warn" (click)="onDelete(entry)" matTooltip="Delete">
-                  <mat-icon>delete</mat-icon>
-                </button>
+              <td mat-cell *matCellDef="let entry" class="actions-cell">
+                <div class="action-buttons">
+                  <button mat-icon-button color="primary" (click)="onEdit(entry)" matTooltip="Edit">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" (click)="onDelete(entry)" matTooltip="Delete">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
               </td>
             </ng-container>
 
