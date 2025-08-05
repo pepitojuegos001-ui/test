@@ -1,0 +1,189 @@
+<div class="expenses-container">
+  <div class="page-header">
+    <h1>Expense Management</h1>
+    <p>Add, edit, and manage your expense entries</p>
+  </div>
+
+  <div class="crud-layout">
+    <!-- Form Section -->
+    <mat-card class="form-card">
+      <mat-card-header>
+        <mat-card-title>{{ formTitle }}</mat-card-title>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Date</mat-label>
+              <input matInput type="date" formControlName="date">
+              <mat-error *ngIf="expenseForm.get('date')?.hasError('required')">
+                Date is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Amount</mat-label>
+              <input matInput type="number" step="0.01" min="0" formControlName="amount" placeholder="0.00">
+              <span matPrefix>$</span>
+              <mat-error *ngIf="expenseForm.get('amount')?.hasError('required')">
+                Amount is required
+              </mat-error>
+              <mat-error *ngIf="expenseForm.get('amount')?.hasError('min')">
+                Amount must be greater than 0
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <div class="category-input-group">
+              <mat-form-field appearance="outline" class="category-select">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category">
+                  <mat-option *ngFor="let category of allCategories" [value]="category">
+                    {{ category }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="expenseForm.get('category')?.hasError('required')">
+                  Category is required
+                </mat-error>
+              </mat-form-field>
+              <button type="button" mat-mini-fab color="primary" 
+                      (click)="openAddCategoryDialog()" 
+                      matTooltip="Add custom category"
+                      class="add-category-btn">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Notes</mat-label>
+              <textarea matInput formControlName="notes" placeholder="Additional notes (optional)" rows="3"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="expenseForm.invalid">
+              <mat-icon>save</mat-icon>
+              {{ submitButtonText }}
+            </button>
+            <button mat-button type="button" (click)="resetForm()">
+              <mat-icon>clear</mat-icon>
+              Clear
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Table Section -->
+    <mat-card class="table-card">
+      <mat-card-header>
+        <mat-card-title>Expense Entries</mat-card-title>
+        <div class="header-actions">
+          <button mat-raised-button color="accent" (click)="exportToExcel()">
+            <mat-icon>download</mat-icon>
+            Export Excel
+          </button>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <!-- Filters -->
+        <div class="table-filters">
+          <mat-form-field appearance="outline">
+            <mat-label>Filter by Month</mat-label>
+            <mat-select [(value)]="selectedMonth" (selectionChange)="onFilterChange()">
+              <mat-option value="">All Months</mat-option>
+              <mat-option *ngFor="let month of months; let i = index" [value]="i">
+                {{ month }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Filter by Year</mat-label>
+            <mat-select [(value)]="selectedYear" (selectionChange)="onFilterChange()">
+              <mat-option value="">All Years</mat-option>
+              <mat-option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Filter by Category</mat-label>
+            <mat-select [(value)]="selectedCategory" (selectionChange)="onFilterChange()">
+              <mat-option value="">All Categories</mat-option>
+              <mat-option *ngFor="let category of allCategories" [value]="category">
+                {{ category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-button (click)="clearFilters()">
+            <mat-icon>clear</mat-icon>
+            Clear Filters
+          </button>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-container">
+          <table mat-table [dataSource]="dataSource" class="expenses-table">
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef>Date</th>
+              <td mat-cell *matCellDef="let entry">{{ entry.date | date:'shortDate' }}</td>
+            </ng-container>
+
+            <!-- Amount Column -->
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef>Amount</th>
+              <td mat-cell *matCellDef="let entry" class="amount-cell expense">
+                {{ formatCurrency(entry.amount) }}
+              </td>
+            </ng-container>
+
+            <!-- Category Column -->
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef>Category</th>
+              <td mat-cell *matCellDef="let entry">{{ entry.category }}</td>
+            </ng-container>
+
+            <!-- Notes Column -->
+            <ng-container matColumnDef="notes">
+              <th mat-header-cell *matHeaderCellDef>Notes</th>
+              <td mat-cell *matCellDef="let entry">{{ entry.notes || '-' }}</td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let entry">
+                <button mat-icon-button color="primary" (click)="onEdit(entry)" matTooltip="Edit">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="onDelete(entry)" matTooltip="Delete">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <!-- No Data Message -->
+          <div *ngIf="dataSource.data.length === 0" class="no-data-message">
+            <mat-icon>info</mat-icon>
+            <p>No expense entries found</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
