@@ -536,6 +536,15 @@ body {
   outline-offset: 2px;
 }
 
+/* Enhanced transition utilities */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.layout-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
 /* Animation utilities */
 .fade-in {
   animation: fadeIn 0.3s ease-in-out;
@@ -562,4 +571,16 @@ body {
 @keyframes scaleIn {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+/* Layout stability during transitions */
+.mat-sidenav-container,
+.mat-sidenav-content,
+.mat-sidenav {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Prevent layout shifts during sidebar transitions */
+.sidenav-container {
+  contain: layout style paint;
 }
