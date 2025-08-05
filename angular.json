@@ -75,7 +75,10 @@
               ".preview.app.github.dev",
               ".app.github.dev",
               ".codespaces.dev"
-            ]
+            ],
+            "liveReload": true,
+            "hmr": false,
+            "poll": 2000
           },
           "configurations": {
             "production": {
