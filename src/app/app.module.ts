@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
+import { CommonModule, DatePipe } from '@angular/common';
 
 // Angular Material Modules
 import { MatSidenavModule } from '@angular/material/sidenav';
