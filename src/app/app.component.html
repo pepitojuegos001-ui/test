@@ -19,7 +19,9 @@
     </mat-sidenav>
 
     <!-- Main Content Area -->
-    <mat-sidenav-content class="main-content-container">
+    <mat-sidenav-content
+      class="main-content-container"
+      [class.sidebar-collapsed]="isSidebarCollapsed && !(isHandset$ | async)">
       <main class="main-content">
         <router-outlet></router-outlet>
       </main>
