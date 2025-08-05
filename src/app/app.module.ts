@@ -90,7 +90,8 @@ import { ChartService } from './services/chart.service';
   providers: [
     FinancialDataService,
     ExportService,
-    ChartService
+    ChartService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
