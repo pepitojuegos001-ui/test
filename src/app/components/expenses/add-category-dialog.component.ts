@@ -48,10 +48,9 @@ export interface DialogData {
   `]
 })
 export class AddCategoryDialogComponent {
-  categoryControl = new FormControl('', [
-    Validators.required,
-    this.duplicateValidator.bind(this)
-  ]);
+  categoryControl = new FormControl('', {
+    validators: [Validators.required, this.duplicateValidator.bind(this)]
+  });
 
   constructor(
     public dialogRef: MatDialogRef<AddCategoryDialogComponent>,
