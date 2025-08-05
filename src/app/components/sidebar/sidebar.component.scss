@@ -154,7 +154,12 @@
   margin-right: 16px;
   font-size: 24px;
   min-width: 24px;
-  transition: all 0.3s ease;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color: inherit;
 }
 
 .nav-text {
