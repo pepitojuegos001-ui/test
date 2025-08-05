@@ -114,22 +114,41 @@
 
 .expenses-table {
   width: 100%;
-  
+
   .mat-column-actions {
-    width: 100px;
+    width: 120px;
     text-align: center;
   }
-  
+
+  .actions-cell {
+    padding: 8px 16px !important;
+
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+  }
+
   .amount-cell {
     font-weight: 600;
-    
+
     &.expense {
       color: var(--error-color);
     }
   }
-  
-  button {
-    margin: 0 4px;
+
+  .mat-icon-button {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+
+    .mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
   }
 }
 
