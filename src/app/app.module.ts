@@ -3,8 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
+import { LayoutModule } from '@angular/cdk/layout';
 
-// Angular Material Modules - Import all at once
+// Angular Material Modules
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
