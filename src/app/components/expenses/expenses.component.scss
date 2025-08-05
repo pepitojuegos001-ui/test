@@ -68,7 +68,7 @@
 .category-input-group {
   display: flex;
   gap: 16px;
-  align-items: flex-end;
+  align-items: stretch;
 
   .category-select {
     flex: 1;
@@ -76,7 +76,8 @@
 
   .add-category-btn {
     flex-shrink: 0;
-    margin-bottom: 1.34375em; // Align with form field baseline (same as Material form field)
+    align-self: flex-end;
+    margin-bottom: 0.25rem; // Precise alignment with form field visual center
     width: 40px;
     height: 40px;
     transition: all 0.2s ease;
