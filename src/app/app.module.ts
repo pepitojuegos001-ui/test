@@ -89,8 +89,7 @@ import { ChartService } from './services/chart.service';
   providers: [
     FinancialDataService,
     ExportService,
-    ChartService,
-    provideCharts(withDefaultRegisterables())
+    ChartService
   ],
   bootstrap: [AppComponent]
 })
