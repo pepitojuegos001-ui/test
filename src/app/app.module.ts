@@ -64,7 +64,6 @@ import { ChartService } from './services/chart.service';
     FormsModule,
     LayoutModule,
     AppRoutingModule,
-    BaseChartDirective,
 
     // Angular Material
     MatSidenavModule,
