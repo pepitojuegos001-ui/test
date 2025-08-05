@@ -55,6 +55,7 @@ export class AppComponent implements OnInit {
       } else {
         // On desktop, toggle collapse state
         this.isSidebarCollapsed = !this.isSidebarCollapsed;
+        this.saveSidebarState();
       }
     });
   }
@@ -67,8 +68,29 @@ export class AppComponent implements OnInit {
       if (!isHandset) {
         // Only collapse on desktop
         this.isSidebarCollapsed = true;
+        this.saveSidebarState();
       }
     });
+  }
+
+  private saveSidebarState(): void {
+    try {
+      localStorage.setItem('financialDashboard_sidebarCollapsed', JSON.stringify(this.isSidebarCollapsed));
+    } catch (error) {
+      // Handle localStorage errors (e.g., private browsing mode)
+      console.warn('Could not save sidebar state to localStorage:', error);
+    }
+  }
+
+  private loadSidebarState(): boolean {
+    try {
+      const saved = localStorage.getItem('financialDashboard_sidebarCollapsed');
+      return saved ? JSON.parse(saved) : false;
+    } catch (error) {
+      // Handle localStorage errors
+      console.warn('Could not load sidebar state from localStorage:', error);
+      return false;
+    }
   }
 
   get currentDateTime(): string {
