@@ -164,4 +164,19 @@ export class BarChartComponent implements OnInit {
       this.chart.update();
     }
   }
+
+  getAverageIncome(): number {
+    if (!this.data || this.data.length === 0) return 0;
+    return this.data.reduce((sum, item) => sum + item.income, 0) / this.data.length;
+  }
+
+  getAverageExpenses(): number {
+    if (!this.data || this.data.length === 0) return 0;
+    return this.data.reduce((sum, item) => sum + item.expenses, 0) / this.data.length;
+  }
+
+  getAverageBalance(): number {
+    if (!this.data || this.data.length === 0) return 0;
+    return this.data.reduce((sum, item) => sum + item.netBalance, 0) / this.data.length;
+  }
 }
