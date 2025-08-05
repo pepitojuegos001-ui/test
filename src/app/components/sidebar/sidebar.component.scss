@@ -120,16 +120,23 @@
     justify-content: center;
     border-radius: 8px;
     margin: 4px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
 
     .nav-icon {
       margin-right: 0;
-      font-size: 22px;
-      width: 22px;
-      height: 22px;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
       background: rgba(33, 150, 243, 0.08);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
     }
@@ -145,6 +152,7 @@
 
       .nav-icon {
         color: var(--primary-blue);
+        font-weight: 500;
       }
     }
   }
