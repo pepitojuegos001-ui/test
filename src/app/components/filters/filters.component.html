@@ -1,0 +1,94 @@
+<form [formGroup]="filterForm" class="filters-container">
+  <div class="filters-header">
+    <h3 class="filters-title">
+      <mat-icon class="filter-icon">filter_list</mat-icon>
+      Filters
+    </h3>
+    <button 
+      mat-button 
+      color="primary" 
+      class="reset-button"
+      type="button"
+      (click)="resetFilters()">
+      <mat-icon>refresh</mat-icon>
+      Reset
+    </button>
+  </div>
+
+  <div class="filters-content">
+    <!-- Period Filter -->
+    <div class="filter-group">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Time Period</mat-label>
+        <mat-select formControlName="period">
+          <mat-option *ngFor="let option of periodOptions" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>date_range</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Year Filter -->
+    <div class="filter-group" *ngIf="!isCustomPeriod">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Year</mat-label>
+        <mat-select formControlName="year">
+          <mat-option *ngFor="let year of yearOptions" [value]="year">
+            {{ year }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>calendar_today</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Custom Date Range -->
+    <div class="filter-group date-range-group" *ngIf="isCustomPeriod">
+      <mat-form-field appearance="outline" class="filter-field date-field">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="startPicker" formControlName="startDate" readonly>
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field date-field">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="endPicker" formControlName="endDate" readonly>
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="filter-group">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let option of categoryOptions" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>category</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Active Filters Display -->
+  <div class="active-filters" *ngIf="selectedPeriodLabel !== 'Current Month' || selectedCategoryLabel !== 'All Categories'">
+    <div class="active-filters-header">
+      <span class="active-filters-label">Active Filters:</span>
+    </div>
+    <div class="filter-chips">
+      <mat-chip-listbox class="chip-list">
+        <mat-chip-option *ngIf="selectedPeriodLabel !== 'Current Month'" class="filter-chip">
+          <mat-icon matChipRemove (click)="filterForm.patchValue({period: 'current'})">cancel</mat-icon>
+          Period: {{ selectedPeriodLabel }}
+        </mat-chip-option>
+        <mat-chip-option *ngIf="selectedCategoryLabel !== 'All Categories'" class="filter-chip">
+          <mat-icon matChipRemove (click)="filterForm.patchValue({category: 'all'})">cancel</mat-icon>
+          Category: {{ selectedCategoryLabel }}
+        </mat-chip-option>
+      </mat-chip-listbox>
+    </div>
+  </div>
+</form>
