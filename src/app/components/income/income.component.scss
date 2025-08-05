@@ -208,12 +208,28 @@
   .page-header h1 {
     font-size: 1.5rem;
   }
-  
+
   .income-table {
     font-size: 0.875rem;
-    
+
     .mat-column-notes {
       display: none;
+    }
+
+    .mat-column-actions {
+      width: 80px;
+    }
+
+    .mat-icon-button {
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+
+      .mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 }
