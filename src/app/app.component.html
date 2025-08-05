@@ -1,17 +1,31 @@
-<div class="app-container">
-  <mat-toolbar class="app-toolbar" color="primary">
-    <mat-icon class="toolbar-icon">dashboard</mat-icon>
-    <span class="toolbar-title">{{ title }}</span>
-    <span class="toolbar-spacer"></span>
-    <button mat-icon-button>
-      <mat-icon>notifications</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>account_circle</mat-icon>
-    </button>
-  </mat-toolbar>
-
-  <main class="main-content">
-    <app-dashboard></app-dashboard>
-  </main>
-</div>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <app-sidebar (sidenavToggle)="drawer.toggle()"></app-sidebar>
+  </mat-sidenav>
+  
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="app-toolbar">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      
+      <span class="toolbar-title">{{ title }}</span>
+      
+      <span class="toolbar-spacer"></span>
+      
+      <span class="current-time">{{ currentDateTime }}</span>
+    </mat-toolbar>
+    
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

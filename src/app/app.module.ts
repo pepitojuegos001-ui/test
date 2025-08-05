@@ -1,59 +1,86 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Angular Material Modules
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-// Chart.js
-import { NgChartsModule } from 'ng2-charts';
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+// Components
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { SummaryCardComponent } from './components/summary-card/summary-card.component';
-import { BarChartComponent } from './components/bar-chart/bar-chart.component';
-import { PieChartComponent } from './components/pie-chart/pie-chart.component';
-import { FiltersComponent } from './components/filters/filters.component';
+import { IncomeComponent } from './components/income/income.component';
+import { ExpensesComponent } from './components/expenses/expenses.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+
+// Shared Components
+import { SummaryCardComponent } from './shared/components/summary-card/summary-card.component';
+
+// Services
+import { FinancialDataService } from './services/financial-data.service';
+import { ExportService } from './services/export.service';
+import { ChartService } from './services/chart.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    SummaryCardComponent,
-    BarChartComponent,
-    PieChartComponent,
-    FiltersComponent
+    IncomeComponent,
+    ExpensesComponent,
+    ReportsComponent,
+    SidebarComponent,
+    SummaryCardComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule,
+    AppRoutingModule,
+    
+    // Angular Material
+    MatSidenavModule,
     MatToolbarModule,
-    MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatSelectModule,
+    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatGridListModule,
-    MatChipsModule,
-    NgChartsModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    FinancialDataService,
+    ExportService,
+    ChartService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
