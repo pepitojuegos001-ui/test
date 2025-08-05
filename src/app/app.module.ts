@@ -23,6 +23,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +36,7 @@ import { IncomeComponent } from './components/income/income.component';
 import { ExpensesComponent } from './components/expenses/expenses.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddCategoryDialogComponent } from './components/expenses/add-category-dialog.component';
 
 // Shared Components
@@ -51,6 +55,7 @@ import { ChartService } from './services/chart.service';
     ExpensesComponent,
     ReportsComponent,
     SidebarComponent,
+    NavbarComponent,
     SummaryCardComponent,
     AddCategoryDialogComponent
   ],
@@ -81,7 +86,10 @@ import { ChartService } from './services/chart.service';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatBadgeModule,
+    MatDividerModule
   ],
   providers: [
     FinancialDataService,
