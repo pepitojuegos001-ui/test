@@ -110,14 +110,34 @@
   &.collapsed {
     padding: 12px;
     justify-content: center;
+    border-radius: 8px;
+    margin: 4px;
 
     .nav-icon {
       margin-right: 0;
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
     }
 
     &:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
+      background: rgba(33, 150, 243, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    &.active {
+      background: rgba(33, 150, 243, 0.15);
+      border-right: none;
       border-radius: 8px;
+
+      &::before {
+        display: none;
+      }
+
+      .nav-icon {
+        color: var(--primary-blue);
+      }
     }
   }
 }
