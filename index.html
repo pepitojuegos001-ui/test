@@ -41,12 +41,24 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             display: flex;
             align-items: center;
+            justify-content: space-between;
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
             gap: 12px;
         }
 
         .toolbar-title {
             font-size: 20px;
             font-weight: 500;
+        }
+
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
 
         .dashboard-container {
@@ -57,16 +69,78 @@
 
         .dashboard-header {
             margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .dashboard-header h1 {
+        .header-content h1 {
             font-size: 2rem;
             font-weight: 500;
             margin-bottom: 8px;
         }
 
-        .dashboard-header p {
+        .header-content p {
             color: var(--text-secondary);
+        }
+
+        .date-filter-section {
+            background: var(--surface-color);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-select {
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            background: var(--surface-color);
+            color: var(--text-primary);
+            min-width: 120px;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+
+        .filter-select:hover {
+            border-color: var(--primary-blue-light);
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .current-period {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .card-grid {
@@ -147,10 +221,32 @@
             font-size: 0.75rem;
         }
 
+        .card-value {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .value-amount {
             font-size: 1.75rem;
             font-weight: 600;
             color: var(--text-primary);
+        }
+
+        .trend-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .trend-positive {
+            color: var(--success-color);
+        }
+
+        .trend-negative {
+            color: var(--error-color);
         }
 
         .dashboard-grid {
@@ -168,6 +264,10 @@
             border: 1px solid var(--border-color);
         }
 
+        .chart-header {
+            margin-bottom: 24px;
+        }
+
         .chart-header h3 {
             font-size: 1.25rem;
             font-weight: 500;
@@ -179,12 +279,101 @@
             font-size: 0.875rem;
         }
 
-        .coming-soon {
+        .chart-placeholder {
             text-align: center;
-            padding: 40px;
+            padding: 60px 20px;
             color: var(--text-secondary);
-            font-style: italic;
+            background: var(--background-light);
+            border-radius: 12px;
+            border: 2px dashed var(--border-color);
         }
+
+        .transactions-section {
+            background: var(--surface-color);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .transactions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .transactions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: var(--background-light);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.2s ease;
+        }
+
+        .transaction-item:hover {
+            background: #F5F5F5;
+        }
+
+        .transaction-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .transaction-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .transaction-details h4 {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .transaction-details p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .transaction-amount {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .amount-income {
+            color: var(--success-color);
+        }
+
+        .amount-expense {
+            color: var(--error-color);
+        }
+
+        .category-groceries { background: rgba(255, 152, 0, 0.1); color: #FF9800; }
+        .category-transportation { background: rgba(33, 150, 243, 0.1); color: #2196F3; }
+        .category-healthcare { background: rgba(233, 30, 99, 0.1); color: #E91E63; }
+        .category-entertainment { background: rgba(156, 39, 176, 0.1); color: #9C27B0; }
+        .category-housing { background: rgba(121, 85, 72, 0.1); color: #795548; }
+        .category-education { background: rgba(0, 150, 136, 0.1); color: #009688; }
+        .category-salary { background: rgba(76, 175, 80, 0.1); color: #4CAF50; }
 
         .metrics-section {
             background: var(--surface-color);
@@ -211,7 +400,6 @@
         }
 
         .metric-icon {
-            color: var(--primary-blue);
             margin-right: 16px;
             font-size: 24px;
         }
@@ -236,6 +424,25 @@
             color: var(--success-color);
         }
 
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-blue-dark);
+        }
+
         @media (max-width: 1024px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
@@ -245,6 +452,16 @@
         @media (max-width: 768px) {
             .dashboard-container {
                 padding: 16px;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .date-filter-section {
+                flex-direction: column;
+                align-items: stretch;
             }
             
             .card-grid {
@@ -261,14 +478,53 @@
 <body>
     <div class="app-container">
         <div class="app-toolbar">
-            <span>📊</span>
-            <span class="toolbar-title">Financial Dashboard</span>
+            <div class="toolbar-left">
+                <span>📊</span>
+                <span class="toolbar-title">Financial Dashboard</span>
+            </div>
+            <div class="toolbar-right">
+                <span id="currentDateTime"></span>
+            </div>
         </div>
 
         <main class="dashboard-container">
             <div class="dashboard-header">
-                <h1>Financial Dashboard</h1>
-                <p>Track your monthly income, expenses, and financial trends</p>
+                <div class="header-content">
+                    <h1>Financial Dashboard</h1>
+                    <p>Track your monthly income, expenses, and financial trends</p>
+                </div>
+                
+                <div class="date-filter-section">
+                    <div class="filter-group">
+                        <label class="filter-label">Month</label>
+                        <select id="monthSelector" class="filter-select">
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Year</label>
+                        <select id="yearSelector" class="filter-select">
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+                    
+                    <div class="current-period">
+                        📅 <span id="selectedPeriod">December 2024</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Summary Cards -->
@@ -280,10 +536,15 @@
                         </div>
                         <div class="card-info">
                             <h3>Total Income</h3>
-                            <p>This month</p>
+                            <p id="incomeSubtitle">This month</p>
                         </div>
                     </div>
-                    <div class="value-amount">$4,850</div>
+                    <div class="card-value">
+                        <div class="value-amount" id="totalIncome">$0</div>
+                        <div class="trend-indicator trend-positive" id="incomeTrend">
+                            ↗ +0%
+                        </div>
+                    </div>
                 </div>
 
                 <div class="summary-card expense-card">
@@ -293,10 +554,15 @@
                         </div>
                         <div class="card-info">
                             <h3>Total Expenses</h3>
-                            <p>This month</p>
+                            <p id="expenseSubtitle">This month</p>
                         </div>
                     </div>
-                    <div class="value-amount">$3,240</div>
+                    <div class="card-value">
+                        <div class="value-amount" id="totalExpenses">$0</div>
+                        <div class="trend-indicator" id="expenseTrend">
+                            ↘ +0%
+                        </div>
+                    </div>
                 </div>
 
                 <div class="summary-card balance-card">
@@ -306,10 +572,26 @@
                         </div>
                         <div class="card-info">
                             <h3>Net Balance</h3>
-                            <p>This month</p>
+                            <p id="balanceSubtitle">This month</p>
                         </div>
                     </div>
-                    <div class="value-amount">$1,610</div>
+                    <div class="card-value">
+                        <div class="value-amount" id="netBalance">$0</div>
+                        <div class="trend-indicator" id="balanceTrend">
+                            ↗ +0%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div class="transactions-section">
+                <div class="transactions-header">
+                    <h3>Recent Transactions</h3>
+                    <button class="btn btn-primary" onclick="exportTransactions()">Export CSV</button>
+                </div>
+                <div class="transactions-list" id="transactionsList">
+                    <!-- Transactions will be populated by JavaScript -->
                 </div>
             </div>
 
@@ -320,31 +602,33 @@
                         <h3>Monthly Comparison</h3>
                         <p>Income vs Expenses over the last 6 months</p>
                     </div>
-                    <div class="coming-soon">
-                        📊 Interactive chart will load here with Chart.js integration
+                    <div class="chart-placeholder">
+                        📊 Interactive chart showing monthly trends
+                        <br><small>Chart.js integration ready</small>
                     </div>
                 </div>
 
                 <div class="chart-container">
                     <div class="chart-header">
                         <h3>Expense Categories</h3>
-                        <p>Distribution of expenses by category</p>
+                        <p>Distribution for <span id="categoryChartPeriod">selected month</span></p>
                     </div>
-                    <div class="coming-soon">
-                        🥧 Pie chart will load here showing category breakdown
+                    <div class="chart-placeholder">
+                        🥧 Pie chart showing expense breakdown
+                        <br><small>Category distribution ready</small>
                     </div>
                 </div>
             </div>
 
             <!-- Key Metrics -->
             <div class="metrics-section">
-                <h3>Key Metrics - December 2024</h3>
+                <h3>Key Metrics - <span id="metricsTitle">December 2024</span></h3>
                 <div class="metrics-grid">
                     <div class="metric-item">
                         <div class="metric-icon">💾</div>
                         <div class="metric-content">
                             <span class="metric-label">Savings Rate</span>
-                            <span class="metric-value">33.2%</span>
+                            <span class="metric-value" id="savingsRate">0%</span>
                         </div>
                     </div>
                     
@@ -352,7 +636,7 @@
                         <div class="metric-icon">📊</div>
                         <div class="metric-content">
                             <span class="metric-label">Monthly Growth</span>
-                            <span class="metric-value positive">+5.8%</span>
+                            <span class="metric-value positive" id="monthlyGrowth">+0%</span>
                         </div>
                     </div>
                     
@@ -360,20 +644,268 @@
                         <div class="metric-icon">🏷️</div>
                         <div class="metric-content">
                             <span class="metric-label">Top Category</span>
-                            <span class="metric-value">Food & Dining</span>
+                            <span class="metric-value" id="topCategory">-</span>
                         </div>
                     </div>
                     
                     <div class="metric-item">
                         <div class="metric-icon">📅</div>
                         <div class="metric-content">
-                            <span class="metric-label">Days Tracked</span>
-                            <span class="metric-value">31/31</span>
+                            <span class="metric-label">Transaction Count</span>
+                            <span class="metric-value" id="transactionCount">0</span>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <script>
+        // Financial Data Generator and Dashboard Controller
+        class FinancialDashboard {
+            constructor() {
+                this.currentMonth = new Date().getMonth();
+                this.currentYear = new Date().getFullYear();
+                this.transactions = this.generateTransactionData();
+                this.initializeEventListeners();
+                this.updateDashboard();
+                this.updateDateTime();
+            }
+
+            // Generate 12 months of realistic transaction data
+            generateTransactionData() {
+                const transactions = [];
+                const categories = {
+                    income: [
+                        { name: 'Salary', icon: '💰', baseAmount: 4500 }
+                    ],
+                    expenses: [
+                        { name: 'Groceries', icon: '🛒', baseAmount: 350, variance: 100 },
+                        { name: 'Transportation', icon: '🚗', baseAmount: 280, variance: 80 },
+                        { name: 'Healthcare', icon: '🏥', baseAmount: 150, variance: 200 },
+                        { name: 'Entertainment', icon: '🎬', baseAmount: 200, variance: 120 },
+                        { name: 'Housing', icon: '🏠', baseAmount: 1200, variance: 50 },
+                        { name: 'Education', icon: '📚', baseAmount: 180, variance: 100 }
+                    ]
+                };
+
+                // Generate data for last 12 months
+                for (let i = 11; i >= 0; i--) {
+                    const date = new Date();
+                    date.setMonth(date.getMonth() - i);
+                    const month = date.getMonth();
+                    const year = date.getFullYear();
+
+                    // Generate salary (income)
+                    const salaryVariance = (Math.random() - 0.5) * 200;
+                    transactions.push({
+                        id: `${year}-${month}-salary`,
+                        date: new Date(year, month, 1),
+                        category: 'Salary',
+                        type: 'income',
+                        amount: categories.income[0].baseAmount + salaryVariance,
+                        description: 'Monthly Salary',
+                        icon: '💰'
+                    });
+
+                    // Generate expenses
+                    categories.expenses.forEach((category, index) => {
+                        const variance = (Math.random() - 0.5) * category.variance;
+                        const day = Math.floor(Math.random() * 28) + 1;
+                        transactions.push({
+                            id: `${year}-${month}-${category.name.toLowerCase()}`,
+                            date: new Date(year, month, day),
+                            category: category.name,
+                            type: 'expense',
+                            amount: Math.abs(category.baseAmount + variance),
+                            description: `${category.name} expenses`,
+                            icon: category.icon
+                        });
+                    });
+                }
+
+                return transactions.sort((a, b) => b.date - a.date);
+            }
+
+            initializeEventListeners() {
+                document.getElementById('monthSelector').addEventListener('change', () => {
+                    this.currentMonth = parseInt(document.getElementById('monthSelector').value);
+                    this.updateDashboard();
+                });
+
+                document.getElementById('yearSelector').addEventListener('change', () => {
+                    this.currentYear = parseInt(document.getElementById('yearSelector').value);
+                    this.updateDashboard();
+                });
+
+                // Set current month/year as default
+                document.getElementById('monthSelector').value = this.currentMonth;
+                document.getElementById('yearSelector').value = this.currentYear;
+            }
+
+            getFilteredTransactions() {
+                return this.transactions.filter(t => 
+                    t.date.getMonth() === this.currentMonth && 
+                    t.date.getFullYear() === this.currentYear
+                );
+            }
+
+            getPreviousMonthTransactions() {
+                const prevMonth = this.currentMonth === 0 ? 11 : this.currentMonth - 1;
+                const prevYear = this.currentMonth === 0 ? this.currentYear - 1 : this.currentYear;
+                
+                return this.transactions.filter(t => 
+                    t.date.getMonth() === prevMonth && 
+                    t.date.getFullYear() === prevYear
+                );
+            }
+
+            calculateSummary(transactions) {
+                const income = transactions
+                    .filter(t => t.type === 'income')
+                    .reduce((sum, t) => sum + t.amount, 0);
+                
+                const expenses = transactions
+                    .filter(t => t.type === 'expense')
+                    .reduce((sum, t) => sum + t.amount, 0);
+
+                return {
+                    income: income,
+                    expenses: expenses,
+                    netBalance: income - expenses
+                };
+            }
+
+            calculateTrend(current, previous) {
+                if (previous === 0) return 0;
+                return ((current - previous) / previous * 100);
+            }
+
+            updateDashboard() {
+                const currentTransactions = this.getFilteredTransactions();
+                const previousTransactions = this.getPreviousMonthTransactions();
+                
+                const currentSummary = this.calculateSummary(currentTransactions);
+                const previousSummary = this.calculateSummary(previousTransactions);
+
+                // Update selected period display
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+                const selectedPeriod = `${monthNames[this.currentMonth]} ${this.currentYear}`;
+                
+                document.getElementById('selectedPeriod').textContent = selectedPeriod;
+                document.getElementById('metricsTitle').textContent = selectedPeriod;
+                document.getElementById('categoryChartPeriod').textContent = selectedPeriod.toLowerCase();
+
+                // Update summary cards
+                document.getElementById('totalIncome').textContent = this.formatCurrency(currentSummary.income);
+                document.getElementById('totalExpenses').textContent = this.formatCurrency(currentSummary.expenses);
+                document.getElementById('netBalance').textContent = this.formatCurrency(currentSummary.netBalance);
+
+                // Update trends
+                const incomeTrend = this.calculateTrend(currentSummary.income, previousSummary.income);
+                const expenseTrend = this.calculateTrend(currentSummary.expenses, previousSummary.expenses);
+                const balanceTrend = this.calculateTrend(currentSummary.netBalance, previousSummary.netBalance);
+
+                document.getElementById('incomeTrend').textContent = this.formatTrend(incomeTrend);
+                document.getElementById('expenseTrend').textContent = this.formatTrend(expenseTrend);
+                document.getElementById('balanceTrend').textContent = this.formatTrend(balanceTrend);
+
+                // Update trend classes
+                document.getElementById('incomeTrend').className = `trend-indicator ${incomeTrend >= 0 ? 'trend-positive' : 'trend-negative'}`;
+                document.getElementById('expenseTrend').className = `trend-indicator ${expenseTrend <= 0 ? 'trend-positive' : 'trend-negative'}`;
+                document.getElementById('balanceTrend').className = `trend-indicator ${balanceTrend >= 0 ? 'trend-positive' : 'trend-negative'}`;
+
+                // Update metrics
+                const savingsRate = currentSummary.income > 0 ? (currentSummary.netBalance / currentSummary.income * 100) : 0;
+                document.getElementById('savingsRate').textContent = `${savingsRate.toFixed(1)}%`;
+                document.getElementById('monthlyGrowth').textContent = this.formatTrend(balanceTrend);
+                document.getElementById('transactionCount').textContent = currentTransactions.length;
+
+                // Find top expense category
+                const expenseCategories = {};
+                currentTransactions.filter(t => t.type === 'expense').forEach(t => {
+                    expenseCategories[t.category] = (expenseCategories[t.category] || 0) + t.amount;
+                });
+                const topCategory = Object.keys(expenseCategories).reduce((a, b) => 
+                    expenseCategories[a] > expenseCategories[b] ? a : b, 'None');
+                document.getElementById('topCategory').textContent = topCategory;
+
+                // Update transactions list
+                this.updateTransactionsList(currentTransactions);
+            }
+
+            updateTransactionsList(transactions) {
+                const container = document.getElementById('transactionsList');
+                container.innerHTML = '';
+
+                transactions.forEach(transaction => {
+                    const item = document.createElement('div');
+                    item.className = 'transaction-item';
+                    item.innerHTML = `
+                        <div class="transaction-info">
+                            <div class="transaction-icon category-${transaction.category.toLowerCase()}">
+                                ${transaction.icon}
+                            </div>
+                            <div class="transaction-details">
+                                <h4>${transaction.category}</h4>
+                                <p>${transaction.date.toLocaleDateString()}</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount amount-${transaction.type}">
+                            ${transaction.type === 'income' ? '+' : '-'}${this.formatCurrency(transaction.amount)}
+                        </div>
+                    `;
+                    container.appendChild(item);
+                });
+            }
+
+            formatCurrency(amount) {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                }).format(Math.abs(amount));
+            }
+
+            formatTrend(trend) {
+                const arrow = trend >= 0 ? '↗' : '↘';
+                return `${arrow} ${trend >= 0 ? '+' : ''}${trend.toFixed(1)}%`;
+            }
+
+            updateDateTime() {
+                const now = new Date();
+                document.getElementById('currentDateTime').textContent = 
+                    now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                
+                setTimeout(() => this.updateDateTime(), 60000); // Update every minute
+            }
+        }
+
+        // Export functionality
+        function exportTransactions() {
+            const dashboard = window.dashboard;
+            const transactions = dashboard.getFilteredTransactions();
+            
+            let csv = 'Date,Category,Type,Amount,Description\n';
+            transactions.forEach(t => {
+                csv += `${t.date.toISOString().split('T')[0]},${t.category},${t.type},${t.amount},"${t.description}"\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `transactions-${dashboard.currentYear}-${dashboard.currentMonth + 1}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            window.dashboard = new FinancialDashboard();
+        });
+    </script>
 </body>
 </html>
