@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 interface NavItem {
@@ -13,6 +13,7 @@ interface NavItem {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+  @Input() isCollapsed = false;
   @Output() sidenavToggle = new EventEmitter<void>();
 
   navItems: NavItem[] = [
