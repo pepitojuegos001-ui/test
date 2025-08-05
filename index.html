@@ -517,6 +517,36 @@
             min-height: 80px;
         }
 
+        .category-input-group {
+            display: flex;
+            gap: 8px;
+            align-items: end;
+        }
+
+        .category-select {
+            flex: 1;
+        }
+
+        .add-category-btn {
+            padding: 12px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            background: var(--primary-blue);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 48px;
+            height: 48px;
+        }
+
+        .add-category-btn:hover {
+            background: var(--primary-blue-dark);
+            border-color: var(--primary-blue-dark);
+        }
+
         .form-buttons {
             display: flex;
             gap: 12px;
@@ -594,6 +624,36 @@
             color: var(--text-primary);
         }
 
+        .table-filters {
+            background: var(--background-light);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .table-filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            align-items: end;
+        }
+
+        .filter-input {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            background: var(--surface-color);
+            color: var(--text-primary);
+            transition: border-color 0.2s ease;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
         .table-container {
             overflow-x: auto;
         }
@@ -668,6 +728,77 @@
         .pagination-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: var(--surface-color);
+            border-radius: 16px;
+            padding: 28px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.show .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--background-light);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            justify-content: flex-end;
         }
 
         /* Reports Page Styles */
@@ -787,6 +918,21 @@
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
+            }
+
+            .table-filters-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .category-input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .add-category-btn {
+                height: 48px;
+                min-width: auto;
             }
         }
 
@@ -1076,6 +1222,51 @@
                                 </button>
                             </div>
                             
+                            <!-- Table Filters -->
+                            <div class="table-filters">
+                                <div class="table-filters-grid">
+                                    <div class="filter-group">
+                                        <label class="filter-label">Filter by Month</label>
+                                        <select class="filter-input" id="incomeFilterMonth" onchange="app.filterIncomeTable()">
+                                            <option value="">All Months</option>
+                                            <option value="0">January</option>
+                                            <option value="1">February</option>
+                                            <option value="2">March</option>
+                                            <option value="3">April</option>
+                                            <option value="4">May</option>
+                                            <option value="5">June</option>
+                                            <option value="6">July</option>
+                                            <option value="7">August</option>
+                                            <option value="8">September</option>
+                                            <option value="9">October</option>
+                                            <option value="10">November</option>
+                                            <option value="11">December</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="filter-group">
+                                        <label class="filter-label">Filter by Year</label>
+                                        <select class="filter-input" id="incomeFilterYear" onchange="app.filterIncomeTable()">
+                                            <option value="">All Years</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="filter-group">
+                                        <label class="filter-label">Filter by Source</label>
+                                        <select class="filter-input" id="incomeFilterSource" onchange="app.filterIncomeTable()">
+                                            <option value="">All Sources</option>
+                                            <option value="Salary">Salary</option>
+                                            <option value="Freelance">Freelance</option>
+                                            <option value="Investment">Investment</option>
+                                            <option value="Business">Business</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="table-container">
                                 <table class="data-table">
                                     <thead>
@@ -1123,16 +1314,20 @@
                                 
                                 <div class="form-group">
                                     <label class="form-label">Category</label>
-                                    <select class="form-input" id="expenseCategory" required>
-                                        <option value="">Select category</option>
-                                        <option value="Groceries">Groceries</option>
-                                        <option value="Transportation">Transportation</option>
-                                        <option value="Healthcare">Healthcare</option>
-                                        <option value="Entertainment">Entertainment</option>
-                                        <option value="Housing">Housing</option>
-                                        <option value="Education">Education</option>
-                                        <option value="Other">Other</option>
-                                    </select>
+                                    <div class="category-input-group">
+                                        <select class="form-input category-select" id="expenseCategory" required>
+                                            <option value="">Select category</option>
+                                            <option value="Groceries">Groceries</option>
+                                            <option value="Transportation">Transportation</option>
+                                            <option value="Healthcare">Healthcare</option>
+                                            <option value="Entertainment">Entertainment</option>
+                                            <option value="Housing">Housing</option>
+                                            <option value="Education">Education</option>
+                                        </select>
+                                        <button type="button" class="add-category-btn" onclick="showAddCategoryModal()" title="Add custom category">
+                                            <span class="material-icons">add</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 
                                 <div class="form-group">
@@ -1160,6 +1355,47 @@
                                     <span class="material-icons">download</span>
                                     Export Excel
                                 </button>
+                            </div>
+                            
+                            <!-- Table Filters -->
+                            <div class="table-filters">
+                                <div class="table-filters-grid">
+                                    <div class="filter-group">
+                                        <label class="filter-label">Filter by Month</label>
+                                        <select class="filter-input" id="expenseFilterMonth" onchange="app.filterExpenseTable()">
+                                            <option value="">All Months</option>
+                                            <option value="0">January</option>
+                                            <option value="1">February</option>
+                                            <option value="2">March</option>
+                                            <option value="3">April</option>
+                                            <option value="4">May</option>
+                                            <option value="5">June</option>
+                                            <option value="6">July</option>
+                                            <option value="7">August</option>
+                                            <option value="8">September</option>
+                                            <option value="9">October</option>
+                                            <option value="10">November</option>
+                                            <option value="11">December</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="filter-group">
+                                        <label class="filter-label">Filter by Year</label>
+                                        <select class="filter-input" id="expenseFilterYear" onchange="app.filterExpenseTable()">
+                                            <option value="">All Years</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="filter-group">
+                                        <label class="filter-label">Filter by Category</label>
+                                        <select class="filter-input" id="expenseFilterCategory" onchange="app.filterExpenseTable()">
+                                            <option value="">All Categories</option>
+                                            <!-- Categories will be populated dynamically -->
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="table-container">
@@ -1302,6 +1538,31 @@
         </main>
     </div>
 
+    <!-- Add Category Modal -->
+    <div class="modal-overlay" id="addCategoryModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Custom Category</h3>
+                <button class="modal-close" onclick="hideAddCategoryModal()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Category Name</label>
+                <input type="text" class="form-input" id="newCategoryName" placeholder="Enter category name">
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="hideAddCategoryModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="addCustomCategory()">
+                    <span class="material-icons">add</span>
+                    Add Category
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Application State Management
         class FinancialApp {
@@ -1312,6 +1573,7 @@
                 this.transactions = this.generateTransactionData();
                 this.incomeEntries = [];
                 this.expenseEntries = [];
+                this.customCategories = [];
                 this.barChart = null;
                 this.pieChart = null;
                 this.editingIncomeId = null;
@@ -1319,6 +1581,8 @@
                 this.currentIncomePage = 1;
                 this.currentExpensePage = 1;
                 this.itemsPerPage = 10;
+                this.filteredIncomeEntries = [];
+                this.filteredExpenseEntries = [];
                 
                 this.initializeApp();
             }
@@ -1332,6 +1596,7 @@
                 this.populateIncomeTable();
                 this.populateExpenseTable();
                 this.setDefaultDates();
+                this.updateCategoryFilters();
             }
 
             // Generate 24 months of realistic transaction data
@@ -1643,11 +1908,63 @@
                 this.updateCharts();
             }
 
+            // Table Filtering Functions
+            filterIncomeTable() {
+                const monthFilter = document.getElementById('incomeFilterMonth').value;
+                const yearFilter = document.getElementById('incomeFilterYear').value;
+                const sourceFilter = document.getElementById('incomeFilterSource').value;
+
+                this.filteredIncomeEntries = this.incomeEntries.filter(income => {
+                    const incomeDate = new Date(income.date);
+                    
+                    if (monthFilter && incomeDate.getMonth() !== parseInt(monthFilter)) {
+                        return false;
+                    }
+                    
+                    if (yearFilter && incomeDate.getFullYear() !== parseInt(yearFilter)) {
+                        return false;
+                    }
+                    
+                    if (sourceFilter && income.source !== sourceFilter) {
+                        return false;
+                    }
+                    
+                    return true;
+                });
+
+                this.currentIncomePage = 1;
+                this.populateIncomeTable();
+            }
+
+            filterExpenseTable() {
+                const monthFilter = document.getElementById('expenseFilterMonth').value;
+                const yearFilter = document.getElementById('expenseFilterYear').value;
+                const categoryFilter = document.getElementById('expenseFilterCategory').value;
+
+                this.filteredExpenseEntries = this.expenseEntries.filter(expense => {
+                    const expenseDate = new Date(expense.date);
+                    
+                    if (monthFilter && expenseDate.getMonth() !== parseInt(monthFilter)) {
+                        return false;
+                    }
+                    
+                    if (yearFilter && expenseDate.getFullYear() !== parseInt(yearFilter)) {
+                        return false;
+                    }
+                    
+                    if (categoryFilter && expense.category !== categoryFilter) {
+                        return false;
+                    }
+                    
+                    return true;
+                });
+
+                this.currentExpensePage = 1;
+                this.populateExpenseTable();
+            }
+
             // Income Management
             saveIncome() {
-                const form = document.getElementById('incomeForm');
-                const formData = new FormData(form);
-                
                 const income = {
                     id: this.editingIncomeId || Date.now().toString(),
                     date: document.getElementById('incomeDate').value,
@@ -1658,18 +1975,16 @@
                 };
 
                 if (this.editingIncomeId) {
-                    // Update existing
                     const index = this.incomeEntries.findIndex(i => i.id === this.editingIncomeId);
                     this.incomeEntries[index] = income;
                     this.editingIncomeId = null;
                     document.getElementById('incomeFormTitle').textContent = 'Add New Income';
                 } else {
-                    // Add new
                     this.incomeEntries.push(income);
                 }
 
                 this.saveToLocalStorage();
-                this.populateIncomeTable();
+                this.filterIncomeTable();
                 this.resetIncomeForm();
                 this.updateDashboard();
             }
@@ -1691,7 +2006,7 @@
                 if (confirm('Are you sure you want to delete this income entry?')) {
                     this.incomeEntries = this.incomeEntries.filter(i => i.id !== id);
                     this.saveToLocalStorage();
-                    this.populateIncomeTable();
+                    this.filterIncomeTable();
                     this.updateDashboard();
                 }
             }
@@ -1700,16 +2015,15 @@
                 document.getElementById('incomeForm').reset();
                 this.editingIncomeId = null;
                 document.getElementById('incomeFormTitle').textContent = 'Add New Income';
-                
-                // Set default date to today
                 document.getElementById('incomeDate').value = new Date().toISOString().split('T')[0];
             }
 
             populateIncomeTable() {
                 const tbody = document.getElementById('incomeTableBody');
+                const dataToShow = this.filteredIncomeEntries.length > 0 ? this.filteredIncomeEntries : this.incomeEntries;
                 const startIndex = (this.currentIncomePage - 1) * this.itemsPerPage;
                 const endIndex = startIndex + this.itemsPerPage;
-                const pageItems = this.incomeEntries.slice(startIndex, endIndex);
+                const pageItems = dataToShow.slice(startIndex, endIndex);
 
                 tbody.innerHTML = '';
 
@@ -1742,7 +2056,8 @@
 
             updateIncomePagination() {
                 const pagination = document.getElementById('incomePagination');
-                const totalPages = Math.ceil(this.incomeEntries.length / this.itemsPerPage);
+                const dataToShow = this.filteredIncomeEntries.length > 0 ? this.filteredIncomeEntries : this.incomeEntries;
+                const totalPages = Math.ceil(dataToShow.length / this.itemsPerPage);
                 
                 pagination.innerHTML = '';
 
@@ -1787,6 +2102,104 @@
                 pagination.appendChild(nextBtn);
             }
 
+            // Custom Category Management
+            addCustomCategory() {
+                const categoryName = document.getElementById('newCategoryName').value.trim();
+                
+                if (!categoryName) {
+                    alert('Please enter a category name');
+                    return;
+                }
+                
+                // Check if category already exists
+                const existingCategories = [...this.getDefaultCategories(), ...this.customCategories];
+                if (existingCategories.includes(categoryName)) {
+                    alert('Category already exists');
+                    return;
+                }
+                
+                this.customCategories.push(categoryName);
+                this.saveToLocalStorage();
+                this.updateExpenseCategoryOptions();
+                this.updateCategoryFilters();
+                this.hideAddCategoryModal();
+                
+                // Select the new category
+                document.getElementById('expenseCategory').value = categoryName;
+                document.getElementById('newCategoryName').value = '';
+            }
+
+            getDefaultCategories() {
+                return ['Groceries', 'Transportation', 'Healthcare', 'Entertainment', 'Housing', 'Education'];
+            }
+
+            updateExpenseCategoryOptions() {
+                const select = document.getElementById('expenseCategory');
+                const currentValue = select.value;
+                
+                // Clear existing options except the first one
+                select.innerHTML = '<option value="">Select category</option>';
+                
+                // Add default categories
+                this.getDefaultCategories().forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    select.appendChild(option);
+                });
+                
+                // Add custom categories
+                this.customCategories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    select.appendChild(option);
+                });
+                
+                // Restore selected value if it still exists
+                if (currentValue) {
+                    select.value = currentValue;
+                }
+            }
+
+            updateCategoryFilters() {
+                const expenseFilter = document.getElementById('expenseFilterCategory');
+                const reportFilter = document.getElementById('reportCategory');
+                
+                // Get all unique categories from entries and defaults
+                const allCategories = [...new Set([
+                    ...this.getDefaultCategories(),
+                    ...this.customCategories,
+                    ...this.expenseEntries.map(e => e.category)
+                ])].sort();
+
+                // Update expense filter
+                const expenseCurrentValue = expenseFilter.value;
+                expenseFilter.innerHTML = '<option value="">All Categories</option>';
+                allCategories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    expenseFilter.appendChild(option);
+                });
+                expenseFilter.value = expenseCurrentValue;
+
+                // Update report filter (keep income sources too)
+                const reportCurrentValue = reportFilter.value;
+                reportFilter.innerHTML = `
+                    <option value="all">All Categories</option>
+                    <option value="Salary">Salary</option>
+                    <option value="Freelance">Freelance</option>
+                `;
+                allCategories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    reportFilter.appendChild(option);
+                });
+                reportFilter.value = reportCurrentValue;
+            }
+
             // Expense Management
             saveExpense() {
                 const expense = {
@@ -1808,9 +2221,10 @@
                 }
 
                 this.saveToLocalStorage();
-                this.populateExpenseTable();
+                this.filterExpenseTable();
                 this.resetExpenseForm();
                 this.updateDashboard();
+                this.updateCategoryFilters();
             }
 
             editExpense(id) {
@@ -1830,7 +2244,7 @@
                 if (confirm('Are you sure you want to delete this expense entry?')) {
                     this.expenseEntries = this.expenseEntries.filter(e => e.id !== id);
                     this.saveToLocalStorage();
-                    this.populateExpenseTable();
+                    this.filterExpenseTable();
                     this.updateDashboard();
                 }
             }
@@ -1839,16 +2253,15 @@
                 document.getElementById('expenseForm').reset();
                 this.editingExpenseId = null;
                 document.getElementById('expenseFormTitle').textContent = 'Add New Expense';
-                
-                // Set default date to today
                 document.getElementById('expenseDate').value = new Date().toISOString().split('T')[0];
             }
 
             populateExpenseTable() {
                 const tbody = document.getElementById('expenseTableBody');
+                const dataToShow = this.filteredExpenseEntries.length > 0 ? this.filteredExpenseEntries : this.expenseEntries;
                 const startIndex = (this.currentExpensePage - 1) * this.itemsPerPage;
                 const endIndex = startIndex + this.itemsPerPage;
-                const pageItems = this.expenseEntries.slice(startIndex, endIndex);
+                const pageItems = dataToShow.slice(startIndex, endIndex);
 
                 tbody.innerHTML = '';
 
@@ -1881,7 +2294,8 @@
 
             updateExpensePagination() {
                 const pagination = document.getElementById('expensePagination');
-                const totalPages = Math.ceil(this.expenseEntries.length / this.itemsPerPage);
+                const dataToShow = this.filteredExpenseEntries.length > 0 ? this.filteredExpenseEntries : this.expenseEntries;
+                const totalPages = Math.ceil(dataToShow.length / this.itemsPerPage);
                 
                 pagination.innerHTML = '';
 
@@ -2010,29 +2424,37 @@
                 tbody.innerHTML = '<tr><td colspan="5" class="text-center">Click "Generate Report" to view results</td></tr>';
             }
 
-            // Export functionality
+            // Export functionality with filtering
             exportIncomeToExcel() {
-                if (this.incomeEntries.length === 0) {
+                const dataToExport = this.filteredIncomeEntries.length > 0 ? this.filteredIncomeEntries : this.incomeEntries;
+                
+                if (dataToExport.length === 0) {
                     alert('No income data to export');
                     return;
                 }
 
-                const ws = XLSX.utils.json_to_sheet(this.incomeEntries);
+                const ws = XLSX.utils.json_to_sheet(dataToExport);
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, 'Income');
-                XLSX.writeFile(wb, 'income_entries.xlsx');
+                
+                const filename = this.filteredIncomeEntries.length > 0 ? 'filtered_income_entries.xlsx' : 'income_entries.xlsx';
+                XLSX.writeFile(wb, filename);
             }
 
             exportExpensesToExcel() {
-                if (this.expenseEntries.length === 0) {
+                const dataToExport = this.filteredExpenseEntries.length > 0 ? this.filteredExpenseEntries : this.expenseEntries;
+                
+                if (dataToExport.length === 0) {
                     alert('No expense data to export');
                     return;
                 }
 
-                const ws = XLSX.utils.json_to_sheet(this.expenseEntries);
+                const ws = XLSX.utils.json_to_sheet(dataToExport);
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, 'Expenses');
-                XLSX.writeFile(wb, 'expense_entries.xlsx');
+                
+                const filename = this.filteredExpenseEntries.length > 0 ? 'filtered_expense_entries.xlsx' : 'expense_entries.xlsx';
+                XLSX.writeFile(wb, filename);
             }
 
             exportReportToExcel() {
@@ -2115,11 +2537,13 @@
             saveToLocalStorage() {
                 localStorage.setItem('financialApp_income', JSON.stringify(this.incomeEntries));
                 localStorage.setItem('financialApp_expenses', JSON.stringify(this.expenseEntries));
+                localStorage.setItem('financialApp_customCategories', JSON.stringify(this.customCategories));
             }
 
             loadStoredData() {
                 const storedIncome = localStorage.getItem('financialApp_income');
                 const storedExpenses = localStorage.getItem('financialApp_expenses');
+                const storedCategories = localStorage.getItem('financialApp_customCategories');
 
                 if (storedIncome) {
                     this.incomeEntries = JSON.parse(storedIncome);
@@ -2127,6 +2551,14 @@
                 if (storedExpenses) {
                     this.expenseEntries = JSON.parse(storedExpenses);
                 }
+                if (storedCategories) {
+                    this.customCategories = JSON.parse(storedCategories);
+                    this.updateExpenseCategoryOptions();
+                }
+                
+                // Initialize filtered entries
+                this.filteredIncomeEntries = [...this.incomeEntries];
+                this.filteredExpenseEntries = [...this.expenseEntries];
             }
         }
 
@@ -2185,6 +2617,21 @@
             app.currentPage = pageId;
         }
 
+        // Modal functions
+        function showAddCategoryModal() {
+            document.getElementById('addCategoryModal').classList.add('show');
+        }
+
+        function hideAddCategoryModal() {
+            document.getElementById('addCategoryModal').classList.remove('show');
+            document.getElementById('newCategoryName').value = '';
+        }
+
+        function addCustomCategory() {
+            app.addCustomCategory();
+        }
+
+        // Form functions
         function resetIncomeForm() {
             app.resetIncomeForm();
         }
@@ -2193,6 +2640,7 @@
             app.resetExpenseForm();
         }
 
+        // Export functions
         function exportIncomeToExcel() {
             app.exportIncomeToExcel();
         }
@@ -2224,6 +2672,13 @@
             if (window.innerWidth > 768) {
                 document.getElementById('sidebar').classList.remove('open');
                 document.getElementById('mobileOverlay').classList.remove('show');
+            }
+        });
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                hideAddCategoryModal();
             }
         });
     </script>
