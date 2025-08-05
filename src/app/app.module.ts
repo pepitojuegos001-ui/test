@@ -62,6 +62,7 @@ import { ChartService } from './services/chart.service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    CommonModule,
     LayoutModule,
     AppRoutingModule,
     
