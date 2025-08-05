@@ -40,7 +40,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddCategoryDialogComponent } from './components/expenses/add-category-dialog.component';
-import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+// import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 // Shared Components
 import { SummaryCardComponent } from './shared/components/summary-card/summary-card.component';
