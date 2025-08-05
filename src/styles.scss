@@ -167,6 +167,123 @@ body {
   width: 100%;
 }
 
+/* Enhanced form styles for Angular Material */
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: var(--primary-blue) !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: var(--border-color) !important;
+}
+
+.mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline {
+  color: var(--primary-blue-light) !important;
+}
+
+/* Enhanced Material Design card overrides */
+.mat-card.summary-card {
+  padding: 24px !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* Enhanced button styles */
+.mat-raised-button, .mat-flat-button {
+  border-radius: 8px;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.mat-icon-button {
+  &.btn-icon {
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}
+
+/* Enhanced table styles */
+.mat-table {
+  background: transparent;
+
+  .mat-header-cell {
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+  }
+
+  .mat-row {
+    &:hover {
+      background: var(--background-light);
+    }
+  }
+
+  .mat-cell {
+    color: var(--text-primary);
+  }
+}
+
+/* Enhanced sidenav styles */
+.mat-sidenav-container {
+  background-color: var(--background-light) !important;
+}
+
+.mat-sidenav {
+  width: 280px;
+  background: var(--surface-color) !important;
+  border-right: 1px solid var(--border-color);
+}
+
+/* Enhanced toolbar styles */
+.mat-toolbar {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%) !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  .mat-icon-button {
+    color: white;
+  }
+}
+
+/* Enhanced select styles */
+.mat-select-panel {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Enhanced dialog styles */
+.mat-dialog-container {
+  border-radius: 16px !important;
+  padding: 28px !important;
+}
+
+/* Utility classes */
+.mat-elevation-z0 { box-shadow: none !important; }
+.mat-elevation-z1 { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; }
+.mat-elevation-z2 { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12) !important; }
+.mat-elevation-z3 { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important; }
+
+.full-width {
+  width: 100%;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Responsive utilities */
 @media (max-width: 768px) {
   .mat-sidenav {
