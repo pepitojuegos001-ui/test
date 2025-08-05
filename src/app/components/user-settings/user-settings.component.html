@@ -283,27 +283,27 @@
               <div class="password-requirements">
                 <h4 class="requirements-title">Password Requirements:</h4>
                 <ul class="requirements-list">
-                  <li [class.met]="passwordForm.get('newPassword')?.value?.length >= 8">
+                  <li [class.met]="hasMinLength()">
                     <mat-icon class="requirement-icon">
-                      {{ passwordForm.get('newPassword')?.value?.length >= 8 ? 'check_circle' : 'radio_button_unchecked' }}
+                      {{ hasMinLength() ? 'check_circle' : 'radio_button_unchecked' }}
                     </mat-icon>
                     At least 8 characters
                   </li>
-                  <li [class.met]="/[A-Z]/.test(passwordForm.get('newPassword')?.value || '')">
+                  <li [class.met]="hasUpperCase()">
                     <mat-icon class="requirement-icon">
-                      {{ /[A-Z]/.test(passwordForm.get('newPassword')?.value || '') ? 'check_circle' : 'radio_button_unchecked' }}
+                      {{ hasUpperCase() ? 'check_circle' : 'radio_button_unchecked' }}
                     </mat-icon>
                     One uppercase letter
                   </li>
-                  <li [class.met]="/[a-z]/.test(passwordForm.get('newPassword')?.value || '')">
+                  <li [class.met]="hasLowerCase()">
                     <mat-icon class="requirement-icon">
-                      {{ /[a-z]/.test(passwordForm.get('newPassword')?.value || '') ? 'check_circle' : 'radio_button_unchecked' }}
+                      {{ hasLowerCase() ? 'check_circle' : 'radio_button_unchecked' }}
                     </mat-icon>
                     One lowercase letter
                   </li>
-                  <li [class.met]="/\d/.test(passwordForm.get('newPassword')?.value || '')">
+                  <li [class.met]="hasNumber()">
                     <mat-icon class="requirement-icon">
-                      {{ /\d/.test(passwordForm.get('newPassword')?.value || '') ? 'check_circle' : 'radio_button_unchecked' }}
+                      {{ hasNumber() ? 'check_circle' : 'radio_button_unchecked' }}
                     </mat-icon>
                     One number
                   </li>
