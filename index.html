@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary-blue: #2196F3;
@@ -279,13 +280,92 @@
             font-size: 0.875rem;
         }
 
-        .chart-placeholder {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
-            background: var(--background-light);
+        .chart-canvas-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .pie-chart-canvas-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+
+        .category-cards-section {
+            margin-bottom: 30px;
+        }
+
+        .category-cards-header {
+            margin-bottom: 20px;
+        }
+
+        .category-cards-header h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .category-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .category-card {
+            background: var(--surface-color);
             border-radius: 12px;
-            border: 2px dashed var(--border-color);
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .category-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 16px;
+        }
+
+        .category-groceries { background: rgba(255, 152, 0, 0.1); color: #FF9800; }
+        .category-transportation { background: rgba(33, 150, 243, 0.1); color: #2196F3; }
+        .category-healthcare { background: rgba(233, 30, 99, 0.1); color: #E91E63; }
+        .category-entertainment { background: rgba(156, 39, 176, 0.1); color: #9C27B0; }
+        .category-housing { background: rgba(121, 85, 72, 0.1); color: #795548; }
+        .category-education { background: rgba(0, 150, 136, 0.1); color: #009688; }
+
+        .category-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .category-amount {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .category-percentage {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
         }
 
         .transactions-section {
@@ -367,12 +447,6 @@
             color: var(--error-color);
         }
 
-        .category-groceries { background: rgba(255, 152, 0, 0.1); color: #FF9800; }
-        .category-transportation { background: rgba(33, 150, 243, 0.1); color: #2196F3; }
-        .category-healthcare { background: rgba(233, 30, 99, 0.1); color: #E91E63; }
-        .category-entertainment { background: rgba(156, 39, 176, 0.1); color: #9C27B0; }
-        .category-housing { background: rgba(121, 85, 72, 0.1); color: #795548; }
-        .category-education { background: rgba(0, 150, 136, 0.1); color: #009688; }
         .category-salary { background: rgba(76, 175, 80, 0.1); color: #4CAF50; }
 
         .metrics-section {
@@ -467,6 +541,10 @@
             .card-grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
+            }
+            
+            .category-cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
             
             .metrics-grid {
@@ -584,14 +662,14 @@
                 </div>
             </div>
 
-            <!-- Transactions Section -->
-            <div class="transactions-section">
-                <div class="transactions-header">
-                    <h3>Recent Transactions</h3>
-                    <button class="btn btn-primary" onclick="exportTransactions()">Export CSV</button>
+            <!-- Category Cards -->
+            <div class="category-cards-section">
+                <div class="category-cards-header">
+                    <h3>Expense Categories - <span id="categoryCardsTitle">December 2024</span></h3>
+                    <p>Breakdown of expenses by category for the selected month</p>
                 </div>
-                <div class="transactions-list" id="transactionsList">
-                    <!-- Transactions will be populated by JavaScript -->
+                <div class="category-cards-grid" id="categoryCardsGrid">
+                    <!-- Category cards will be populated by JavaScript -->
                 </div>
             </div>
 
@@ -600,23 +678,32 @@
                 <div class="chart-container">
                     <div class="chart-header">
                         <h3>Monthly Comparison</h3>
-                        <p>Income vs Expenses over the last 6 months</p>
+                        <p id="barChartSubtitle">Income vs Expenses - Last 6 months from December 2024</p>
                     </div>
-                    <div class="chart-placeholder">
-                        📊 Interactive chart showing monthly trends
-                        <br><small>Chart.js integration ready</small>
+                    <div class="chart-canvas-container">
+                        <canvas id="barChart"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-container">
                     <div class="chart-header">
-                        <h3>Expense Categories</h3>
-                        <p>Distribution for <span id="categoryChartPeriod">selected month</span></p>
+                        <h3>Expense Distribution</h3>
+                        <p id="pieChartSubtitle">Category breakdown for December 2024</p>
                     </div>
-                    <div class="chart-placeholder">
-                        🥧 Pie chart showing expense breakdown
-                        <br><small>Category distribution ready</small>
+                    <div class="pie-chart-canvas-container">
+                        <canvas id="pieChart"></canvas>
                     </div>
+                </div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div class="transactions-section">
+                <div class="transactions-header">
+                    <h3>Recent Transactions</h3>
+                    <button class="btn btn-primary" onclick="exportTransactions()">Export CSV</button>
+                </div>
+                <div class="transactions-list" id="transactionsList">
+                    <!-- Transactions will be populated by JavaScript -->
                 </div>
             </div>
 
@@ -667,7 +754,10 @@
                 this.currentMonth = new Date().getMonth();
                 this.currentYear = new Date().getFullYear();
                 this.transactions = this.generateTransactionData();
+                this.barChart = null;
+                this.pieChart = null;
                 this.initializeEventListeners();
+                this.initializeCharts();
                 this.updateDashboard();
                 this.updateDateTime();
             }
@@ -689,8 +779,8 @@
                     ]
                 };
 
-                // Generate data for last 12 months
-                for (let i = 11; i >= 0; i--) {
+                // Generate data for last 24 months to have enough history
+                for (let i = 23; i >= 0; i--) {
                     const date = new Date();
                     date.setMonth(date.getMonth() - i);
                     const month = date.getMonth();
@@ -743,6 +833,106 @@
                 document.getElementById('yearSelector').value = this.currentYear;
             }
 
+            initializeCharts() {
+                // Initialize Bar Chart
+                const barCtx = document.getElementById('barChart').getContext('2d');
+                this.barChart = new Chart(barCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Income',
+                            data: [],
+                            backgroundColor: 'rgba(76, 175, 80, 0.8)',
+                            borderColor: '#4CAF50',
+                            borderWidth: 2,
+                            borderRadius: 6
+                        }, {
+                            label: 'Expenses',
+                            data: [],
+                            backgroundColor: 'rgba(244, 67, 54, 0.8)',
+                            borderColor: '#F44336',
+                            borderWidth: 2,
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 20
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': $' + context.parsed.y.toLocaleString();
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { display: false }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value.toLocaleString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Initialize Pie Chart
+                const pieCtx = document.getElementById('pieChart').getContext('2d');
+                this.pieChart = new Chart(pieCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            data: [],
+                            backgroundColor: [
+                                '#FF9800', '#2196F3', '#E91E63', 
+                                '#9C27B0', '#795548', '#009688'
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '60%',
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    usePointStyle: true
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = ((context.parsed / total) * 100).toFixed(1);
+                                        return context.label + ': $' + context.parsed.toLocaleString() + ' (' + percentage + '%)';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
             getFilteredTransactions() {
                 return this.transactions.filter(t => 
                     t.date.getMonth() === this.currentMonth && 
@@ -758,6 +948,34 @@
                     t.date.getMonth() === prevMonth && 
                     t.date.getFullYear() === prevYear
                 );
+            }
+
+            // Get last 6 months of data relative to selected month
+            getLast6MonthsData() {
+                const monthlyData = [];
+                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+                for (let i = 5; i >= 0; i--) {
+                    const targetDate = new Date(this.currentYear, this.currentMonth - i, 1);
+                    const month = targetDate.getMonth();
+                    const year = targetDate.getFullYear();
+
+                    const monthTransactions = this.transactions.filter(t => 
+                        t.date.getMonth() === month && 
+                        t.date.getFullYear() === year
+                    );
+
+                    const summary = this.calculateSummary(monthTransactions);
+                    monthlyData.push({
+                        month: monthNames[month],
+                        income: summary.income,
+                        expenses: summary.expenses,
+                        netBalance: summary.netBalance
+                    });
+                }
+
+                return monthlyData;
             }
 
             calculateSummary(transactions) {
@@ -781,6 +999,74 @@
                 return ((current - previous) / previous * 100);
             }
 
+            getCategoryBreakdown(transactions) {
+                const expensesByCategory = {};
+                const totalExpenses = transactions
+                    .filter(t => t.type === 'expense')
+                    .reduce((sum, t) => {
+                        expensesByCategory[t.category] = (expensesByCategory[t.category] || 0) + t.amount;
+                        return sum + t.amount;
+                    }, 0);
+
+                return Object.entries(expensesByCategory).map(([category, amount]) => ({
+                    category,
+                    amount,
+                    percentage: totalExpenses > 0 ? (amount / totalExpenses * 100) : 0
+                })).sort((a, b) => b.amount - a.amount);
+            }
+
+            updateCharts() {
+                // Update Bar Chart with last 6 months data
+                const monthlyData = this.getLast6MonthsData();
+                this.barChart.data.labels = monthlyData.map(d => d.month);
+                this.barChart.data.datasets[0].data = monthlyData.map(d => d.income);
+                this.barChart.data.datasets[1].data = monthlyData.map(d => d.expenses);
+                this.barChart.update();
+
+                // Update Pie Chart with current month category breakdown
+                const currentTransactions = this.getFilteredTransactions();
+                const categoryBreakdown = this.getCategoryBreakdown(currentTransactions);
+                
+                this.pieChart.data.labels = categoryBreakdown.map(c => c.category);
+                this.pieChart.data.datasets[0].data = categoryBreakdown.map(c => c.amount);
+                this.pieChart.update();
+            }
+
+            updateCategoryCards() {
+                const currentTransactions = this.getFilteredTransactions();
+                const categoryBreakdown = this.getCategoryBreakdown(currentTransactions);
+                const container = document.getElementById('categoryCardsGrid');
+                
+                container.innerHTML = '';
+
+                categoryBreakdown.forEach(category => {
+                    const card = document.createElement('div');
+                    card.className = 'category-card';
+                    
+                    const iconMap = {
+                        'Groceries': '🛒',
+                        'Transportation': '🚗',
+                        'Healthcare': '🏥',
+                        'Entertainment': '🎬',
+                        'Housing': '🏠',
+                        'Education': '📚'
+                    };
+
+                    card.innerHTML = `
+                        <div class="category-card-header">
+                            <div class="category-icon category-${category.category.toLowerCase()}">
+                                ${iconMap[category.category] || '💳'}
+                            </div>
+                            <div class="category-name">${category.category}</div>
+                        </div>
+                        <div class="category-amount">${this.formatCurrency(category.amount)}</div>
+                        <div class="category-percentage">${category.percentage.toFixed(1)}% of expenses</div>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+            }
+
             updateDashboard() {
                 const currentTransactions = this.getFilteredTransactions();
                 const previousTransactions = this.getPreviousMonthTransactions();
@@ -795,7 +1081,9 @@
                 
                 document.getElementById('selectedPeriod').textContent = selectedPeriod;
                 document.getElementById('metricsTitle').textContent = selectedPeriod;
-                document.getElementById('categoryChartPeriod').textContent = selectedPeriod.toLowerCase();
+                document.getElementById('categoryCardsTitle').textContent = selectedPeriod;
+                document.getElementById('pieChartSubtitle').textContent = `Category breakdown for ${selectedPeriod}`;
+                document.getElementById('barChartSubtitle').textContent = `Income vs Expenses - Last 6 months from ${selectedPeriod}`;
 
                 // Update summary cards
                 document.getElementById('totalIncome').textContent = this.formatCurrency(currentSummary.income);
@@ -831,7 +1119,9 @@
                     expenseCategories[a] > expenseCategories[b] ? a : b, 'None');
                 document.getElementById('topCategory').textContent = topCategory;
 
-                // Update transactions list
+                // Update visualizations
+                this.updateCharts();
+                this.updateCategoryCards();
                 this.updateTransactionsList(currentTransactions);
             }
 
