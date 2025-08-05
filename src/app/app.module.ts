@@ -51,6 +51,7 @@ import { ChartService } from './services/chart.service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    LayoutModule,
     AppRoutingModule,
 
     // Angular Material
