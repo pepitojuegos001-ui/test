@@ -183,14 +183,25 @@ body {
 .mat-form-field-prefix {
   color: var(--text-secondary) !important;
   font-weight: 500;
-  margin-right: 8px;
   display: flex;
   align-items: center;
   font-size: 1rem;
+  line-height: 1;
+  margin-right: 8px;
+  padding-top: 1px;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-prefix {
   margin-right: 12px;
+  padding-left: 12px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding-left: 0;
+}
+
+.mat-form-field-appearance-outline .mat-input-element {
+  padding-left: 0;
 }
 
 /* Enhanced Material Design card overrides */
