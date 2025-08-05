@@ -584,3 +584,27 @@ body {
 .sidenav-container {
   contain: layout style paint;
 }
+
+/* User Settings Dialog Styles */
+.user-settings-dialog {
+  .mat-mdc-dialog-container {
+    padding: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 24px 38px rgba(0, 0, 0, 0.14), 0 9px 46px rgba(0, 0, 0, 0.12), 0 11px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .mat-mdc-dialog-content {
+    padding: 0;
+    margin: 0;
+    max-height: none;
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .mat-mdc-dialog-container {
+      margin: 16px;
+      border-radius: 8px;
+    }
+  }
+}
