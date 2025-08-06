@@ -56,7 +56,9 @@
     "NET_BALANCE": "Balance Neto",
     "INCOME_VS_EXPENSES": "Ingresos vs Gastos",
     "EXPENSE_CATEGORIES": "Categorías de Gastos",
-    "RECENT_TRANSACTIONS": "Transacciones Recientes"
+    "RECENT_TRANSACTIONS": "Transacciones Recientes",
+    "MONTHLY_COMPARISON_SUBTITLE": "Últimos 6 meses desde {{period}}",
+    "CATEGORY_BREAKDOWN_SUBTITLE": "Desglose por categoría para {{period}}"
   },
   "INCOME": {
     "TITLE": "Gestión de Ingresos",
