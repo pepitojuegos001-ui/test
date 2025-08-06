@@ -53,9 +53,22 @@ export class ExpensesComponent implements OnInit, OnDestroy {
     // Ensure language is properly loaded on route navigation
     this.translationService.ensureLanguageLoaded();
 
-    this.subscribeToData();
-    this.setDefaultDate();
-    this.loadCategories();
+    // Initialize with loading delay
+    this.initializeWithLoading();
+  }
+
+  private initializeWithLoading(): void {
+    this.isLoading = true;
+
+    // Simulate 5-second loading delay
+    timer(5000).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.isLoading = false;
+      this.subscribeToData();
+      this.setDefaultDate();
+      this.loadCategories();
+    });
   }
 
   ngOnDestroy(): void {
