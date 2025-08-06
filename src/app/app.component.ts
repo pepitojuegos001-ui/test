@@ -4,7 +4,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { map, shareReplay, take } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
-// import { TranslationService } from './services/translation.service';
+import { TranslationService } from './services/translation.service';
 
 @Component({
   selector: 'app-root',
