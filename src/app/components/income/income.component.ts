@@ -179,7 +179,9 @@ export class IncomeComponent implements OnInit, OnDestroy {
   }
 
   get submitButtonText(): string {
-    return this.isEditing ? 'Update Income' : 'Save Income';
+    return this.isEditing ?
+      this.translationService.instant('INCOME.EDIT_INCOME') :
+      this.translationService.instant('COMMON.SAVE');
   }
 
   formatCurrency(amount: number): string {
