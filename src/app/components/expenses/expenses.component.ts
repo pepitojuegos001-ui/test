@@ -6,6 +6,7 @@ import { Subject, takeUntil, timer } from 'rxjs';
 import { FinancialDataService, ExpenseEntry } from '../../services/financial-data.service';
 import { ExportService } from '../../services/export.service';
 import { TranslationService } from '../../services/translation.service';
+import { LoadingService } from '../../services/loading.service';
 import { AddCategoryDialogComponent } from './add-category-dialog.component';
 
 @Component({
@@ -44,7 +45,8 @@ export class ExpensesComponent implements OnInit, OnDestroy {
     private financialDataService: FinancialDataService,
     private exportService: ExportService,
     private dialog: MatDialog,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private loadingService: LoadingService
   ) {
     this.expenseForm = this.createForm();
   }
@@ -59,16 +61,17 @@ export class ExpensesComponent implements OnInit, OnDestroy {
 
   private initializeWithLoading(): void {
     this.isLoading = true;
+    const loadingMessage = this.translationService.translate('EXPENSES.LOADING_DATA');
 
-    // Simulate 5-second loading delay
-    timer(5000).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.isLoading = false;
-      this.subscribeToData();
-      this.setDefaultDate();
-      this.loadCategories();
-    });
+    // Show global loading overlay with expenses loading message
+    this.loadingService.showWithDelay(loadingMessage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.isLoading = false;
+        this.subscribeToData();
+        this.setDefaultDate();
+        this.loadCategories();
+      });
   }
 
   ngOnDestroy(): void {
@@ -112,14 +115,25 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.expenseForm.valid) {
       const formValue = this.expenseForm.value;
-      
+      let loadingMessage: string;
+
       if (this.isEditing && this.editingId) {
-        this.financialDataService.updateExpenseEntry(this.editingId, formValue);
+        loadingMessage = this.translationService.translate('LOADING.UPDATING_EXPENSE');
+        this.loadingService.showWithDelay(loadingMessage)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(() => {
+            this.financialDataService.updateExpenseEntry(this.editingId!, formValue);
+            this.resetForm();
+          });
       } else {
-        this.financialDataService.addExpenseEntry(formValue);
+        loadingMessage = this.translationService.translate('LOADING.SAVING_EXPENSE');
+        this.loadingService.showWithDelay(loadingMessage)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(() => {
+            this.financialDataService.addExpenseEntry(formValue);
+            this.resetForm();
+          });
       }
-      
-      this.resetForm();
     }
   }
 
@@ -138,7 +152,12 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   onDelete(entry: ExpenseEntry): void {
     const confirmMessage = this.translationService.instant('EXPENSES.DELETE_EXPENSE') + '?';
     if (confirm(confirmMessage)) {
-      this.financialDataService.deleteExpenseEntry(entry.id);
+      const loadingMessage = this.translationService.translate('LOADING.DELETING_EXPENSE');
+      this.loadingService.showWithDelay(loadingMessage)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          this.financialDataService.deleteExpenseEntry(entry.id);
+        });
     }
   }
 
@@ -190,7 +209,12 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   }
 
   onFilterChange(): void {
-    this.applyFilters();
+    const loadingMessage = this.translationService.translate('LOADING.APPLYING_FILTERS');
+    this.loadingService.showWithDelay(loadingMessage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.applyFilters();
+      });
   }
 
   clearFilters(): void {
