@@ -69,6 +69,7 @@
     "CATEGORY": "Categoría",
     "SOURCE": "Fuente",
     "NOTES": "Notas",
+    "NOTES_PLACEHOLDER": "Notas adicionales (opcional)",
     "ADD_INCOME": "Agregar Ingreso",
     "EDIT_INCOME": "Editar Ingreso",
     "DELETE_INCOME": "Eliminar Ingreso",
@@ -139,7 +140,7 @@
     "NO_RESULTS_FILTERS": "No se encontraron transacciones para los criterios seleccionados"
   },
   "USER_SETTINGS": {
-    "TITLE": "Configuraci��n de Usuario",
+    "TITLE": "Configuración de Usuario",
     "PROFILE": "Perfil",
     "SECURITY": "Seguridad",
     "PROFILE_PICTURE": "Foto de Perfil",
