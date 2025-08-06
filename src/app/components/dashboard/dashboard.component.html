@@ -24,7 +24,7 @@
           </mat-form-field>
           
           <mat-form-field appearance="outline">
-            <mat-label>Year</mat-label>
+            <mat-label>{{ 'DASHBOARD.YEAR' | translate }}</mat-label>
             <mat-select [value]="currentFilter.year" (selectionChange)="onYearChanged($event.value)">
               <mat-option *ngFor="let year of years" [value]="year">
                 {{ year }}
