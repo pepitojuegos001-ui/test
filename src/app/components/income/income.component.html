@@ -4,7 +4,20 @@
     <p>{{ 'INCOME.SUBTITLE' | translate }}</p>
   </div>
 
-  <div class="crud-layout">
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-card class="loading-card">
+      <mat-card-content>
+        <div class="loading-content">
+          <mat-spinner diameter="50"></mat-spinner>
+          <h3>{{ 'COMMON.LOADING' | translate }}</h3>
+          <p>{{ 'INCOME.LOADING_DATA' | translate }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="crud-layout" *ngIf="!isLoading">
     <!-- Form Section -->
     <mat-card class="form-card">
       <mat-card-header>
