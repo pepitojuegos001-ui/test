@@ -51,6 +51,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(user => {
         this.username = user?.username || '';
+
+        // Load user's language preference when user logs in
+        if (user && user.isAuthenticated && user.username) {
+          this.translationService.loadUserLanguagePreference(user.username);
+        }
       });
 
     // Initialize language data
