@@ -27,7 +27,6 @@ export class ExpensesComponent implements OnInit, OnDestroy {
 
   isEditing = false;
   editingId: string | null = null;
-  isLoading = true;
   
   // Filter options
   get months(): string[] {
@@ -60,14 +59,12 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   }
 
   private initializeWithLoading(): void {
-    this.isLoading = true;
     const loadingMessage = this.translationService.instant('EXPENSES.LOADING_DATA');
 
     // Show global loading overlay with expenses loading message
     this.loadingService.showWithDelay(loadingMessage)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.isLoading = false;
         this.subscribeToData();
         this.setDefaultDate();
         this.loadCategories();
