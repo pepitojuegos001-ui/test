@@ -48,7 +48,8 @@ export class IncomeComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private financialDataService: FinancialDataService,
     private exportService: ExportService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private translationService: TranslationService
   ) {
     this.incomeForm = this.createForm();
   }
