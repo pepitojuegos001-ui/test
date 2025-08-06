@@ -199,7 +199,9 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   }
 
   get submitButtonText(): string {
-    return this.isEditing ? 'Update Expense' : 'Save Expense';
+    return this.isEditing ?
+      this.translationService.instant('EXPENSES.EDIT_EXPENSE') :
+      this.translationService.instant('COMMON.SAVE');
   }
 
   formatCurrency(amount: number): string {
