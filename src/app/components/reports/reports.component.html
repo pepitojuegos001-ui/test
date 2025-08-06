@@ -4,21 +4,9 @@
     <p>{{ 'REPORTS.SUBTITLE' | translate }}</p>
   </div>
 
-  <!-- Loading Spinner -->
-  <div class="loading-container" *ngIf="isLoading">
-    <mat-card class="loading-card">
-      <mat-card-content>
-        <div class="loading-content">
-          <mat-spinner diameter="50"></mat-spinner>
-          <h3>{{ 'COMMON.LOADING' | translate }}</h3>
-          <p>{{ 'REPORTS.LOADING_DATA' | translate }}</p>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
 
   <!-- Main Content -->
-  <div *ngIf="!isLoading">
+  <div>
   <!-- Filters Section -->
   <mat-card class="filters-card">
     <mat-card-header>
