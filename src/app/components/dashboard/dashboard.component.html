@@ -42,9 +42,9 @@
   </div>
 
   <!-- Summary Cards -->
-  <div class="summary-cards-grid">
+  <div class="summary-cards-grid" *ngIf="!isLoading">
     <app-summary-card
-      title="Total Income"
+      [title]="'DASHBOARD.INCOME' | translate"
       [value]="summaryData.income"
       icon="trending_up"
       type="income"
@@ -53,7 +53,7 @@
     </app-summary-card>
 
     <app-summary-card
-      title="Total Expenses"
+      [title]="'DASHBOARD.EXPENSES' | translate"
       [value]="summaryData.expenses"
       icon="trending_down"
       type="expense"
@@ -62,13 +62,26 @@
     </app-summary-card>
 
     <app-summary-card
-      title="Net Balance"
+      [title]="'DASHBOARD.NET_BALANCE' | translate"
       [value]="summaryData.netBalance"
       icon="account_balance_wallet"
       type="balance"
       [subtitle]="currentMonthSubtitle"
       [trend]="trends.balance">
     </app-summary-card>
+  </div>
+
+  <!-- Loading Spinner for Summary Cards -->
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-card class="loading-card">
+      <mat-card-content>
+        <div class="loading-content">
+          <mat-spinner diameter="50"></mat-spinner>
+          <h3>{{ 'COMMON.LOADING' | translate }}</h3>
+          <p>{{ 'DASHBOARD.LOADING_DATA' | translate }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
   <!-- Charts Section -->
