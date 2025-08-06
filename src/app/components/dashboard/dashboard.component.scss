@@ -1,9 +1,19 @@
 .dashboard-container {
-  @extend .container-fluid;
-  @extend .typography-responsive;
-  @extend .spacing-responsive;
-
+  width: 100%;
+  margin: 0 auto;
   padding: clamp(16px, 3vw, 48px);
+
+  @media (min-width: 1440px) {
+    padding: 0 5%;
+  }
+
+  @media (min-width: 1920px) {
+    padding: 0 8%;
+  }
+
+  @media (min-width: 2560px) {
+    padding: 0 10%;
+  }
 }
 
 
@@ -54,39 +64,58 @@
 }
 
 .date-filter-card {
-  @extend .card-responsive;
+  border-radius: clamp(8px, 1vw, 20px);
+  padding: clamp(16px, 2.5vw, 32px);
   min-width: clamp(320px, 40vw, 500px);
+  min-height: clamp(120px, 15vw, 180px);
 
   .mat-card-content {
     padding: clamp(12px, 2vw, 24px) !important;
   }
 
+  @media (min-width: 1440px) {
+    min-height: 120px;
+  }
+
   @media (min-width: 1920px) {
     min-width: 600px;
+    min-height: clamp(160px, 18vw, 220px);
+  }
+
+  @media (min-width: 2560px) {
+    min-height: 160px;
   }
 }
 
 .date-filters {
-  @extend .form-responsive;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: clamp(8px, 1vw, 16px);
   flex-wrap: wrap;
 
   mat-form-field {
     min-width: clamp(120px, 15vw, 180px);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
+
+    .mat-form-field-label {
+      font-size: clamp(0.875rem, 1.2vw, 1rem);
+    }
+
+    .mat-input-element {
+      font-size: clamp(0.875rem, 1.2vw, 1rem);
+      padding: clamp(8px, 1vw, 14px) clamp(12px, 1.5vw, 16px);
+    }
   }
 
   @media (min-width: 1920px) {
-    gap: var(--spacing-md);
+    gap: clamp(16px, 2vw, 32px);
   }
 }
 
 .current-period {
-  @extend .icon-responsive;
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: clamp(4px, 0.5vw, 8px);
   font-size: clamp(1rem, 1.8vw, 1.5rem);
   font-weight: 600;
   color: var(--primary-blue);
@@ -99,21 +128,32 @@
 }
 
 .summary-cards-grid {
-  @extend .grid-responsive;
-  @extend .grid-auto-fit;
-  margin-bottom: var(--spacing-lg);
+  display: grid;
+  gap: clamp(16px, 2vw, 32px);
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  margin-bottom: clamp(24px, 3vw, 48px);
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
 
   @media (min-width: 1920px) {
-    margin-bottom: var(--spacing-xl);
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    margin-bottom: clamp(32px, 4vw, 64px);
+  }
+
+  @media (min-width: 2560px) {
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   }
 }
 
 .charts-grid {
-  @extend .grid-responsive;
+  display: grid;
+  gap: clamp(16px, 2vw, 32px);
   grid-template-columns: 2fr 1fr;
 
   @media (min-width: 1920px) {
-    gap: var(--spacing-xl);
+    gap: clamp(32px, 4vw, 64px);
   }
 
   @media (min-width: 2560px) {
@@ -122,10 +162,24 @@
 }
 
 .chart-card {
-  @extend .card-responsive;
+  border-radius: clamp(8px, 1vw, 20px);
+  padding: clamp(16px, 2.5vw, 32px);
+  min-height: clamp(120px, 15vw, 180px);
+
+  @media (min-width: 1440px) {
+    min-height: 120px;
+  }
+
+  @media (min-width: 1920px) {
+    min-height: clamp(160px, 18vw, 220px);
+  }
+
+  @media (min-width: 2560px) {
+    min-height: 160px;
+  }
 
   .mat-card-header {
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: clamp(8px, 1vw, 16px);
 
     .mat-card-title {
       font-size: clamp(1.125rem, 2vw, 1.75rem);
@@ -136,7 +190,7 @@
     .mat-card-subtitle {
       color: var(--text-secondary);
       font-size: clamp(0.8125rem, 1.3vw, 1.125rem);
-      margin-top: var(--spacing-xs);
+      margin-top: clamp(3px, 0.5vw, 8px);
       line-height: 1.4;
     }
   }
