@@ -56,7 +56,9 @@
     "NET_BALANCE": "Net Balance",
     "INCOME_VS_EXPENSES": "Income vs Expenses",
     "EXPENSE_CATEGORIES": "Expense Categories",
-    "RECENT_TRANSACTIONS": "Recent Transactions"
+    "RECENT_TRANSACTIONS": "Recent Transactions",
+    "MONTHLY_COMPARISON_SUBTITLE": "Last 6 months from {{period}}",
+    "CATEGORY_BREAKDOWN_SUBTITLE": "Category breakdown for {{period}}"
   },
   "INCOME": {
     "TITLE": "Income Management",
