@@ -16,12 +16,14 @@ export class TranslationService {
   public currentLanguage$ = this.currentLanguageSubject.asObservable();
 
   private readonly LANGUAGE_KEY = 'financial_dashboard_language';
-  
+  private readonly USER_LANGUAGE_KEY = 'financial_dashboard_user_language';
+
   private readonly availableLanguages: Language[] = [
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'es', name: 'Español', flag: '🇪🇸' },
     { code: 'pt', name: 'Português', flag: '🇵🇹' },
-    { code: 'it', name: 'Italiano', flag: '🇮🇹' }
+    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+    { code: 'fr', name: 'Français', flag: '🇫🇷' }
   ];
 
   constructor(private translateService: TranslateService) {
