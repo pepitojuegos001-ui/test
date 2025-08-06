@@ -218,7 +218,15 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
 
       // Handle language change
       if (formData.selectedLanguage !== previousLanguage) {
-        this.translationService.setLanguage(formData.selectedLanguage);
+        const currentUser = this.authService.getCurrentUser();
+        if (currentUser && currentUser.username) {
+          this.translationService.saveUserLanguagePreference(
+            currentUser.username,
+            formData.selectedLanguage
+          );
+        } else {
+          this.translationService.setLanguage(formData.selectedLanguage);
+        }
       }
 
       this.isLoading = false;
