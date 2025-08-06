@@ -32,7 +32,7 @@
                 {{ 'VALIDATION.REQUIRED' | translate }}
               </mat-error>
               <mat-error *ngIf="expenseForm.get('amount')?.hasError('min')">
-                Amount must be greater than 0
+                {{ 'VALIDATION.AMOUNT_POSITIVE' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
