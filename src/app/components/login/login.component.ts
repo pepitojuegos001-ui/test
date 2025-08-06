@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.loginError = '';
 
     const { username, password, rememberMe } = this.loginForm.value;
-    const loadingMessage = this.translationService.translate('LOADING.LOGGING_IN');
+    const loadingMessage = this.translationService.instant('LOADING.LOGGING_IN');
 
     // Show global loading overlay with authentication message
     this.loadingService.withDelayedLoading(() => {
