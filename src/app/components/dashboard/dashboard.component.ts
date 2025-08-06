@@ -65,14 +65,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private initializeWithLoading(): void {
-    this.isLoading = true;
     const loadingMessage = this.translationService.instant('LOADING.LOADING_DASHBOARD');
 
     // Show global loading overlay with dashboard loading message
     this.loadingService.showWithDelay(loadingMessage)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.isLoading = false;
         this.subscribeToData();
         this.loadInitialData();
       });
