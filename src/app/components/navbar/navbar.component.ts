@@ -100,6 +100,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 
+  toggleLanguageMenu(): void {
+    this.isLanguageMenuOpen = !this.isLanguageMenuOpen;
+  }
+
+  onLanguageChange(languageCode: string): void {
+    this.isLanguageMenuOpen = false;
+    this.translationService.setLanguage(languageCode);
+  }
+
+  getCurrentLanguageFlag(): string {
+    return this.translationService.getLanguageFlag(this.currentLanguage);
+  }
+
   onNotifications(): void {
     // TODO: Implement notifications logic
     console.log('Notifications clicked');
