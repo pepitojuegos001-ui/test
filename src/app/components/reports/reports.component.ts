@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subject, takeUntil, combineLatest } from 'rxjs';
 import { FinancialDataService, IncomeEntry, ExpenseEntry } from '../../services/financial-data.service';
 import { ExportService } from '../../services/export.service';
+import { TranslationService } from '../../services/translation.service';
 
 interface ReportEntry {
   date: string;
