@@ -105,8 +105,8 @@
 </mat-toolbar>
 
 <!-- Overlay to close dropdown when clicking outside -->
-<div 
-  class="dropdown-overlay" 
-  [class.show]="isUserMenuOpen"
-  (click)="isUserMenuOpen = false">
+<div
+  class="dropdown-overlay"
+  [class.show]="isUserMenuOpen || isLanguageMenuOpen"
+  (click)="isUserMenuOpen = false; isLanguageMenuOpen = false">
 </div>
