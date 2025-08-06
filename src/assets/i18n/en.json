@@ -110,7 +110,8 @@
     "ALL_MONTHS": "All Months",
     "ALL_YEARS": "All Years",
     "ALL_CATEGORIES": "All Categories",
-    "CLEAR_FILTERS": "Clear Filters"
+    "CLEAR_FILTERS": "Clear Filters",
+    "LOADING_DATA": "Loading expense data..."
   },
   "REPORTS": {
     "TITLE": "Financial Reports",
