@@ -26,12 +26,18 @@ export class IncomeComponent implements OnInit, OnDestroy {
   editingId: string | null = null;
   
   // Filter options
-  months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
+  get months(): string[] {
+    return this.translationService.getTranslatedMonths();
+  }
   years = [2023, 2024];
-  sources = ['Salary', 'Freelance', 'Investment', 'Business', 'Other'];
+  get sources(): string[] {
+    return [
+      this.translationService.instant('INCOME.SALARY'),
+      this.translationService.instant('INCOME.FREELANCE'),
+      this.translationService.instant('INCOME.INVESTMENTS'),
+      this.translationService.instant('INCOME.OTHER')
+    ];
+  }
   
   // Filter values
   selectedMonth = '';
