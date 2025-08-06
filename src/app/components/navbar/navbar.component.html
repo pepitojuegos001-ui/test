@@ -21,7 +21,7 @@
       mat-icon-button 
       class="navbar-icon-btn"
       (click)="onNotifications()"
-      [matTooltip]="'Notifications'"
+      [matTooltip]="'NAVBAR.NOTIFICATIONS' | translate"
       matTooltipPosition="below">
       <mat-icon [matBadge]="notifications" [matBadgeHidden]="notifications === 0" matBadgeColor="warn">
         notifications
