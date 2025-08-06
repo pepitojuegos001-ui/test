@@ -67,6 +67,7 @@
     "DESCRIPTION": "Description",
     "DATE": "Date",
     "CATEGORY": "Category",
+    "SOURCE": "Source",
     "ADD_INCOME": "Add Income",
     "EDIT_INCOME": "Edit Income",
     "DELETE_INCOME": "Delete Income",
@@ -74,7 +75,11 @@
     "FREELANCE": "Freelance",
     "INVESTMENTS": "Investments",
     "OTHER": "Other",
-    "ACTIONS": "Actions"
+    "ACTIONS": "Actions",
+    "ALL_MONTHS": "All Months",
+    "ALL_YEARS": "All Years",
+    "ALL_SOURCES": "All Sources",
+    "CLEAR_FILTERS": "Clear Filters"
   },
   "EXPENSES": {
     "TITLE": "Expense Management",
