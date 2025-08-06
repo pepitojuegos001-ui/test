@@ -49,6 +49,9 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Ensure language is properly loaded on route navigation
+    this.translationService.ensureLanguageLoaded();
+
     this.subscribeToData();
     this.setDefaultDate();
     this.loadCategories();
