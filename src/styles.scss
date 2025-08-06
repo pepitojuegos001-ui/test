@@ -48,6 +48,14 @@ body {
 .mat-sidenav {
   width: 280px;
   background: var(--surface-color);
+
+  @media (min-width: 1920px) {
+    width: clamp(280px, 20vw, 360px);
+  }
+
+  @media (min-width: 2560px) {
+    width: clamp(320px, 22vw, 400px);
+  }
 }
 
 .mat-toolbar {
@@ -309,6 +317,14 @@ body {
   width: 280px;
   background: var(--surface-color) !important;
   border-right: 1px solid var(--border-color);
+
+  @media (min-width: 1920px) {
+    width: clamp(280px, 20vw, 360px);
+  }
+
+  @media (min-width: 2560px) {
+    width: clamp(320px, 22vw, 400px);
+  }
 }
 
 /* Enhanced toolbar styles */
@@ -410,8 +426,13 @@ body {
 /* Enhanced responsive grid system */
 .grid-container {
   display: grid;
-  gap: 24px;
-  padding: 24px;
+  gap: clamp(16px, 3vw, 40px);
+  padding: clamp(16px, 3vw, 48px);
+
+  @media (min-width: 1920px) {
+    gap: clamp(32px, 4vw, 56px);
+    padding: clamp(32px, 4vw, 64px);
+  }
 
   @media (max-width: 768px) {
     gap: 16px;
@@ -446,6 +467,14 @@ body {
 
 .grid-4-cols {
   grid-template-columns: repeat(4, 1fr);
+
+  @media (min-width: 2560px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  @media (min-width: 1920px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 
   @media (max-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
