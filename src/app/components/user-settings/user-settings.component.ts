@@ -40,8 +40,13 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
     email: 'juan.perez@example.com',
     avatar: '',
     notificationsEnabled: true,
-    twoFactorEnabled: false
+    twoFactorEnabled: false,
+    selectedLanguage: 'en'
   };
+
+  // Language data
+  availableLanguages: Language[] = [];
+  currentLanguage = 'en';
   
   // Avatar upload
   selectedFile: File | null = null;
