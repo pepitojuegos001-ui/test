@@ -121,7 +121,8 @@ export class ChartService {
               label: (context) => {
                 const total = (context.dataset.data as number[]).reduce((a, b) => a + b, 0);
                 const percentage = ((context.parsed / total) * 100).toFixed(1);
-                return context.label + ': $' + context.parsed.toLocaleString() + ' (' + percentage + '%)';
+                const value = this.formatCurrency(context.parsed);
+                return context.label + ': ' + value + ' (' + percentage + '%)';
               }
             }
           }
