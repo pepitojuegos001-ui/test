@@ -51,8 +51,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.subscribeToData();
-    this.loadInitialData();
+    // Start with loading state
+    this.initializeWithLoading();
     this.subscribeToLanguageChanges();
 
     // Get current username
@@ -61,6 +61,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe(user => {
         this.username = user?.username || '';
       });
+  }
+
+  private initializeWithLoading(): void {
+    this.isLoading = true;
+
+    // Simulate 5-second loading delay
+    timer(5000).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.isLoading = false;
+      this.subscribeToData();
+      this.loadInitialData();
+    });
   }
 
   private subscribeToLanguageChanges(): void {
