@@ -58,7 +58,9 @@
     "EXPENSE_CATEGORIES": "Expense Categories",
     "RECENT_TRANSACTIONS": "Recent Transactions",
     "MONTHLY_COMPARISON_SUBTITLE": "Last 6 months from {{period}}",
-    "CATEGORY_BREAKDOWN_SUBTITLE": "Category breakdown for {{period}}"
+    "CATEGORY_BREAKDOWN_SUBTITLE": "Category breakdown for {{period}}",
+    "LOADING_DATA": "Loading financial data...",
+    "LOADING_CHARTS": "Loading charts..."
   },
   "INCOME": {
     "TITLE": "Income Management",
