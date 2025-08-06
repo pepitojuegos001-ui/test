@@ -31,15 +31,11 @@ export class TranslationService {
   }
 
   private initializeTranslation(): void {
-    // Set default language
+    // Always set English as default language
     this.translateService.setDefaultLang('en');
-    
-    // Load saved language or detect browser language
-    const savedLanguage = this.getSavedLanguage();
-    const browserLanguage = this.getBrowserLanguage();
-    const languageToUse = savedLanguage || browserLanguage || 'en';
-    
-    this.setLanguage(languageToUse);
+
+    // Start with English - user preference will be loaded after login
+    this.setLanguage('en');
   }
 
   private getSavedLanguage(): string | null {
