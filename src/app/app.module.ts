@@ -59,7 +59,7 @@ import { TranslationService } from './services/translation.service';
 
 // Translation loader factory function
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new (TranslateHttpLoader as any)(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
