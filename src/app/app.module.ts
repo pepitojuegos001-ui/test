@@ -98,7 +98,8 @@ import { ChartService } from './services/chart.service';
     MatBadgeModule,
     MatDividerModule,
     MatTabsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCheckboxModule
   ],
   providers: [
     FinancialDataService,
