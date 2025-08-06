@@ -41,6 +41,18 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.updateDateTime();
     this.setupResponsiveLayout();
+    this.initializeLanguageSettings();
+  }
+
+  private initializeLanguageSettings(): void {
+    // Initialize translation service for current user if authenticated
+    this.authService.currentUser$.pipe(take(1)).subscribe(user => {
+      if (user?.isAuthenticated) {
+        this.translationService.initializeForCurrentUser(user.username);
+      } else {
+        this.translationService.initializeForCurrentUser();
+      }
+    });
   }
 
   private setupResponsiveLayout(): void {
