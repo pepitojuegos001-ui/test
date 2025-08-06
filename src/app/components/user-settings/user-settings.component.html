@@ -148,7 +148,7 @@
               </div>
               
               <div class="preference-item">
-                <mat-slide-toggle 
+                <mat-slide-toggle
                   formControlName="twoFactorEnabled"
                   color="primary">
                   Two-Factor Authentication
@@ -156,6 +156,30 @@
                 <span class="preference-description">
                   Add an extra layer of security to your account
                 </span>
+              </div>
+
+              <div class="preference-item language-preference">
+                <div class="language-selector">
+                  <h4 class="language-title">
+                    <mat-icon>language</mat-icon>
+                    Language
+                  </h4>
+                  <mat-form-field appearance="outline" class="language-field">
+                    <mat-label>Select Language</mat-label>
+                    <mat-select formControlName="selectedLanguage">
+                      <mat-option *ngFor="let language of availableLanguages" [value]="language.code">
+                        <div class="language-option">
+                          <span class="language-flag">{{ language.flag }}</span>
+                          <span class="language-name">{{ language.name }}</span>
+                        </div>
+                      </mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>translate</mat-icon>
+                  </mat-form-field>
+                  <span class="preference-description">
+                    Choose your preferred language for the application interface
+                  </span>
+                </div>
               </div>
             </div>
 
