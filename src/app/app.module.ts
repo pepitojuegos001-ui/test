@@ -58,15 +58,9 @@ import { AuthService } from './services/auth.service';
 import { TranslationService } from './services/translation.service';
 import { I18nConfigService } from './services/i18n-config.service';
 
-// Translation loader factory function
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  // Use try-catch to handle different ngx-translate versions
-  try {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-  } catch (error) {
-    // For v17+ without constructor parameters
-    return new TranslateHttpLoader(http);
-  }
+// Translation loader factory function for v17
+export function HttpLoaderFactory(): TranslateHttpLoader {
+  return new TranslateHttpLoader();
 }
 
 @NgModule({
