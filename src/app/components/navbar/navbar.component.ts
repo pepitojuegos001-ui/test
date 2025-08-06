@@ -82,8 +82,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onLogout(): void {
     this.isUserMenuOpen = false;
-    // TODO: Implement logout logic
-    console.log('Logout clicked');
+    this.authService.logout();
   }
 
   onNotifications(): void {
