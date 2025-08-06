@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserSettingsComponent } from '../user-settings/user-settings.component';
 import { AuthService } from '../../services/auth.service';
+import { TranslationService, Language } from '../../services/translation.service';
 
 /**
  * NavbarComponent - Enhanced top navigation bar
