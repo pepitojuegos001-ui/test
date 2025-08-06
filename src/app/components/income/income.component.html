@@ -148,7 +148,7 @@
 
             <!-- Notes Column -->
             <ng-container matColumnDef="notes">
-              <th mat-header-cell *matHeaderCellDef>Notes</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'INCOME.NOTES' | translate }}</th>
               <td mat-cell *matCellDef="let entry">{{ entry.notes || '-' }}</td>
             </ng-container>
 
