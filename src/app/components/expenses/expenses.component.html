@@ -150,25 +150,25 @@
 
             <!-- Category Column -->
             <ng-container matColumnDef="category">
-              <th mat-header-cell *matHeaderCellDef>Category</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'EXPENSES.CATEGORY' | translate }}</th>
               <td mat-cell *matCellDef="let entry">{{ entry.category }}</td>
             </ng-container>
 
             <!-- Notes Column -->
             <ng-container matColumnDef="notes">
-              <th mat-header-cell *matHeaderCellDef>Notes</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'EXPENSES.NOTES' | translate }}</th>
               <td mat-cell *matCellDef="let entry">{{ entry.notes || '-' }}</td>
             </ng-container>
 
             <!-- Actions Column -->
             <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'EXPENSES.ACTIONS' | translate }}</th>
               <td mat-cell *matCellDef="let entry" class="actions-cell">
                 <div class="action-buttons">
-                  <button mat-icon-button color="primary" (click)="onEdit(entry)" matTooltip="Edit">
+                  <button mat-icon-button color="primary" (click)="onEdit(entry)" [matTooltip]="'COMMON.EDIT' | translate">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  <button mat-icon-button color="warn" (click)="onDelete(entry)" matTooltip="Delete">
+                  <button mat-icon-button color="warn" (click)="onDelete(entry)" [matTooltip]="'COMMON.DELETE' | translate">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
