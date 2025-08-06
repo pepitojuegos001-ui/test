@@ -128,7 +128,11 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     AuthService,
     TranslationService,
     I18nConfigService,
-    DatePipe
+    DatePipe,
+    ...provideTranslateHttpLoader({
+      prefix: './assets/i18n/',
+      suffix: '.json'
+    })
   ],
   bootstrap: [AppComponent]
 })
