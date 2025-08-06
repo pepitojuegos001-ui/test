@@ -28,10 +28,9 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   editingId: string | null = null;
   
   // Filter options
-  months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
+  get months(): string[] {
+    return this.translationService.getTranslatedMonths();
+  }
   years = [2023, 2024];
   
   // Filter values
