@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { Subject, takeUntil, combineLatest } from 'rxjs';
+import { Subject, takeUntil, combineLatest, timer } from 'rxjs';
 import { FinancialDataService, IncomeEntry, ExpenseEntry } from '../../services/financial-data.service';
 import { ExportService } from '../../services/export.service';
 import { TranslationService } from '../../services/translation.service';
