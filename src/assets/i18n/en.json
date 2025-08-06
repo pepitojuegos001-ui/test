@@ -142,7 +142,8 @@
     "AMOUNT": "Amount",
     "NOTES": "Notes",
     "NO_DATA_MESSAGE": "Click \"Generate Report\" to view results",
-    "NO_RESULTS_FILTERS": "No transactions found for the selected criteria"
+    "NO_RESULTS_FILTERS": "No transactions found for the selected criteria",
+    "LOADING_DATA": "Loading report data..."
   },
   "USER_SETTINGS": {
     "TITLE": "User Settings",
