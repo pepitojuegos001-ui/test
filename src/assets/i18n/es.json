@@ -142,7 +142,8 @@
     "AMOUNT": "Cantidad",
     "NOTES": "Notas",
     "NO_DATA_MESSAGE": "Haz clic en \"Generar Reporte\" para ver resultados",
-    "NO_RESULTS_FILTERS": "No se encontraron transacciones para los criterios seleccionados"
+    "NO_RESULTS_FILTERS": "No se encontraron transacciones para los criterios seleccionados",
+    "LOADING_DATA": "Cargando datos del reporte..."
   },
   "USER_SETTINGS": {
     "TITLE": "Configuración de Usuario",
