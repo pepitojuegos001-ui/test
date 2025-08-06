@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { FinancialDataService, ExpenseEntry } from '../../services/financial-data.service';
 import { ExportService } from '../../services/export.service';
+import { TranslationService } from '../../services/translation.service';
 import { AddCategoryDialogComponent } from './add-category-dialog.component';
 
 @Component({
