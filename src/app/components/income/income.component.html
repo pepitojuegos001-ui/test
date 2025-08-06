@@ -88,9 +88,9 @@
         <!-- Filters -->
         <div class="table-filters">
           <mat-form-field appearance="outline">
-            <mat-label>Filter by Month</mat-label>
+            <mat-label>{{ 'DASHBOARD.MONTH' | translate }}</mat-label>
             <mat-select [(value)]="selectedMonth" (selectionChange)="onFilterChange()">
-              <mat-option value="">All Months</mat-option>
+              <mat-option value="">{{ 'INCOME.ALL_MONTHS' | translate }}</mat-option>
               <mat-option *ngFor="let month of months; let i = index" [value]="i">
                 {{ month }}
               </mat-option>
@@ -98,9 +98,9 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Filter by Year</mat-label>
+            <mat-label>{{ 'DASHBOARD.YEAR' | translate }}</mat-label>
             <mat-select [(value)]="selectedYear" (selectionChange)="onFilterChange()">
-              <mat-option value="">All Years</mat-option>
+              <mat-option value="">{{ 'INCOME.ALL_YEARS' | translate }}</mat-option>
               <mat-option *ngFor="let year of years" [value]="year">
                 {{ year }}
               </mat-option>
@@ -108,9 +108,9 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Filter by Source</mat-label>
+            <mat-label>{{ 'INCOME.SOURCE' | translate }}</mat-label>
             <mat-select [(value)]="selectedSource" (selectionChange)="onFilterChange()">
-              <mat-option value="">All Sources</mat-option>
+              <mat-option value="">{{ 'INCOME.ALL_SOURCES' | translate }}</mat-option>
               <mat-option *ngFor="let source of sources" [value]="source">
                 {{ source }}
               </mat-option>
@@ -119,7 +119,7 @@
 
           <button mat-button (click)="clearFilters()">
             <mat-icon>clear</mat-icon>
-            Clear Filters
+            {{ 'INCOME.CLEAR_FILTERS' | translate }}
           </button>
         </div>
 
