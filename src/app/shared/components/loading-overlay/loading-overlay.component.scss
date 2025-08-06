@@ -1,0 +1,121 @@
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.loading-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.loading-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-width: 200px;
+  text-align: center;
+  
+  // Smooth animation
+  animation: slideInScale 0.3s ease-out;
+}
+
+.loading-message {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #424242;
+  letter-spacing: 0.025em;
+  line-height: 1.4;
+  max-width: 250px;
+  
+  // Animation for text changes
+  transition: opacity 0.2s ease-in-out;
+}
+
+// Animations
+@keyframes slideInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// Dark theme support
+.dark-theme .loading-content {
+  background: rgba(48, 48, 48, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .loading-message {
+  color: #e0e0e0;
+}
+
+// Responsive design
+@media (max-width: 480px) {
+  .loading-content {
+    padding: 1.5rem;
+    margin: 1rem;
+    min-width: 160px;
+  }
+  
+  .loading-message {
+    font-size: 0.9rem;
+    max-width: 200px;
+  }
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  .loading-content {
+    animation: none;
+  }
+  
+  .loading-message {
+    transition: none;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .loading-backdrop {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .loading-content {
+    background: rgba(255, 255, 255, 1);
+    border: 2px solid #000;
+  }
+  
+  .loading-message {
+    color: #000;
+    font-weight: 600;
+  }
+}
