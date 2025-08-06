@@ -56,9 +56,17 @@ body {
 }
 
 .mat-card {
-  border-radius: 16px;
+  border-radius: clamp(12px, 1.5vw, 24px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid var(--border-color);
+
+  @media (min-width: 1920px) {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (min-width: 2560px) {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
@@ -70,13 +78,22 @@ body {
 }
 
 .summary-card {
-  padding: 24px;
+  padding: clamp(16px, 3vw, 32px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: clamp(120px, 15vw, 180px);
+
+  @media (min-width: 1920px) {
+    min-height: clamp(160px, 18vw, 220px);
+  }
 }
 
 .summary-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(clamp(-3px, -0.8vw, -6px));
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  @media (min-width: 1920px) {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .income-card {
@@ -92,14 +109,14 @@ body {
 }
 
 .icon-container {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: clamp(40px, 6vw, 64px);
+  height: clamp(40px, 6vw, 64px);
+  border-radius: clamp(8px, 1.2vw, 16px);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 16px;
-  font-size: 24px;
+  margin-right: clamp(12px, 2vw, 24px);
+  font-size: clamp(20px, 3vw, 32px);
 }
 
 .icon-income {
@@ -118,16 +135,17 @@ body {
 }
 
 .value-amount {
-  font-size: 1.75rem;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 600;
   color: var(--text-primary);
+  line-height: 1.2;
 }
 
 .trend-indicator {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 0.75rem;
+  gap: clamp(3px, 0.5vw, 8px);
+  font-size: clamp(0.7rem, 1.1vw, 0.9rem);
   font-weight: 500;
 }
 
@@ -212,41 +230,61 @@ body {
 
 /* Enhanced Material Design card overrides */
 .mat-card.summary-card {
-  padding: 24px !important;
+  padding: clamp(16px, 3vw, 32px) !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: clamp(120px, 15vw, 180px);
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(clamp(-3px, -0.8vw, -6px));
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+    @media (min-width: 1920px) {
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    min-height: clamp(160px, 18vw, 220px);
   }
 }
 
 /* Enhanced button styles */
 .mat-raised-button, .mat-flat-button {
-  border-radius: 8px;
+  border-radius: clamp(6px, 1vw, 12px);
   font-weight: 500;
   text-transform: none;
+  padding: clamp(8px, 1.5vw, 16px) clamp(16px, 2.5vw, 24px);
+  font-size: clamp(0.875rem, 1.3vw, 1.125rem);
+  min-height: clamp(36px, 5vw, 48px);
 }
 
 .mat-icon-button {
   &.btn-icon {
-    min-width: 40px;
-    width: 40px;
-    height: 40px;
+    min-width: clamp(36px, 5vw, 48px);
+    width: clamp(36px, 5vw, 48px);
+    height: clamp(36px, 5vw, 48px);
     border-radius: 50%;
+
+    .mat-icon {
+      font-size: clamp(18px, 2.5vw, 24px);
+      width: clamp(18px, 2.5vw, 24px);
+      height: clamp(18px, 2.5vw, 24px);
+    }
   }
 }
 
 /* Enhanced table styles */
 .mat-table {
   background: transparent;
+  border-radius: clamp(8px, 1vw, 16px);
 
   .mat-header-cell {
     color: var(--text-secondary);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    font-size: 0.875rem;
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
+    padding: clamp(12px, 2vw, 20px);
   }
 
   .mat-row {
@@ -257,6 +295,8 @@ body {
 
   .mat-cell {
     color: var(--text-primary);
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
+    padding: clamp(12px, 2vw, 20px);
   }
 }
 
@@ -276,9 +316,23 @@ body {
   background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%) !important;
   color: white !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  height: clamp(56px, 8vw, 72px);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
 
   .mat-icon-button {
     color: white;
+    width: clamp(40px, 6vw, 52px);
+    height: clamp(40px, 6vw, 52px);
+
+    .mat-icon {
+      font-size: clamp(20px, 3vw, 28px);
+      width: clamp(20px, 3vw, 28px);
+      height: clamp(20px, 3vw, 28px);
+    }
+  }
+
+  .mat-toolbar-row {
+    height: clamp(56px, 8vw, 72px);
   }
 }
 
@@ -290,8 +344,12 @@ body {
 
 /* Enhanced dialog styles */
 .mat-dialog-container {
-  border-radius: 16px !important;
-  padding: 28px !important;
+  border-radius: clamp(12px, 2vw, 24px) !important;
+  padding: clamp(20px, 4vw, 40px) !important;
+
+  @media (min-width: 1920px) {
+    min-width: 600px;
+  }
 }
 
 /* Utility classes */
