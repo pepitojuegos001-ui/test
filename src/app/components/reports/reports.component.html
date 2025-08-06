@@ -46,16 +46,16 @@
         <div class="filter-actions">
           <button mat-raised-button color="primary" (click)="generateReport()">
             <mat-icon>search</mat-icon>
-            Generate Report
+            {{ 'REPORTS.GENERATE_REPORT' | translate }}
           </button>
-          <button mat-raised-button color="accent" (click)="exportToExcel()" 
+          <button mat-raised-button color="accent" (click)="exportToExcel()"
                   [disabled]="filteredData.length === 0">
             <mat-icon>download</mat-icon>
-            Export to Excel
+            {{ 'REPORTS.EXPORT_TO_EXCEL' | translate }}
           </button>
           <button mat-button (click)="clearFilters()" [disabled]="!hasFiltersApplied">
             <mat-icon>clear</mat-icon>
-            Clear Filters
+            {{ 'REPORTS.CLEAR_FILTERS' | translate }}
           </button>
         </div>
       </form>
