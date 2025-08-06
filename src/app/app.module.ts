@@ -131,8 +131,8 @@ import { I18nConfigService } from './services/i18n-config.service';
     ExportService,
     ChartService,
     AuthService,
-    // TranslationService,
-    // I18nConfigService,
+    TranslationService,
+    I18nConfigService,
     DatePipe
   ],
   bootstrap: [AppComponent]
