@@ -58,7 +58,9 @@
     "EXPENSE_CATEGORIES": "Categorías de Gastos",
     "RECENT_TRANSACTIONS": "Transacciones Recientes",
     "MONTHLY_COMPARISON_SUBTITLE": "Últimos 6 meses desde {{period}}",
-    "CATEGORY_BREAKDOWN_SUBTITLE": "Desglose por categoría para {{period}}"
+    "CATEGORY_BREAKDOWN_SUBTITLE": "Desglose por categoría para {{period}}",
+    "LOADING_DATA": "Cargando datos financieros...",
+    "LOADING_CHARTS": "Cargando gráficos..."
   },
   "INCOME": {
     "TITLE": "Gestión de Ingresos",
