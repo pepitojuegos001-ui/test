@@ -42,12 +42,16 @@ export class ReportsComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private financialDataService: FinancialDataService,
-    private exportService: ExportService
+    private exportService: ExportService,
+    private translationService: TranslationService
   ) {
     this.filtersForm = this.createForm();
   }
 
   ngOnInit(): void {
+    // Ensure language is properly loaded on route navigation
+    this.translationService.ensureLanguageLoaded();
+
     this.subscribeToData();
     this.loadCategories();
   }
