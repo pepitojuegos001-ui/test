@@ -59,20 +59,20 @@ import { TranslationService } from './services/translation.service';
 import { I18nConfigService } from './services/i18n-config.service';
 
 // Translation loader factory function with compatibility handling
-export function HttpLoaderFactory(http: HttpClient) {
-  try {
-    // Try with parameters for older versions
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-  } catch (error) {
-    // Fallback: try without parameters for v17+
-    try {
-      return new TranslateHttpLoader(http);
-    } catch (fallbackError) {
-      // Last resort: create minimal loader
-      return new TranslateHttpLoader();
-    }
-  }
-}
+// export function HttpLoaderFactory(http: HttpClient) {
+//   try {
+//     // Try with parameters for older versions
+//     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+//   } catch (error) {
+//     // Fallback: try without parameters for v17+
+//     try {
+//       return new TranslateHttpLoader(http);
+//     } catch (fallbackError) {
+//       // Last resort: create minimal loader
+//       return new TranslateHttpLoader();
+//     }
+//   }
+// }
 
 @NgModule({
   declarations: [
