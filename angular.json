@@ -80,10 +80,7 @@
             "liveReload": true,
             "hmr": false,
             "poll": 1000,
-            "disableHostCheck": true,
-            "watchOptions": {
-              "ignored": ["**/node_modules/**", "**/dist/**"]
-            }
+            "disableHostCheck": true
           },
           "configurations": {
             "production": {
