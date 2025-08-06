@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { Subject, takeUntil, combineLatest } from 'rxjs';
 import { FinancialDataService, DateFilter, Transaction } from '../../services/financial-data.service';
 import { ChartService } from '../../services/chart.service';
+import { AuthService } from '../../services/auth.service';
 import { Chart } from 'chart.js';
 
 @Component({
