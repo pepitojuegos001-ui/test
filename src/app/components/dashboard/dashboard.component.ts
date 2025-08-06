@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { Subject, takeUntil, combineLatest } from 'rxjs';
+import { Subject, takeUntil, combineLatest, timer } from 'rxjs';
 import { FinancialDataService, DateFilter, Transaction } from '../../services/financial-data.service';
 import { ChartService } from '../../services/chart.service';
 import { AuthService } from '../../services/auth.service';
