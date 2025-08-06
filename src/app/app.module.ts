@@ -58,7 +58,7 @@ import { AuthService } from './services/auth.service';
 import { TranslationService } from './services/translation.service';
 
 // Translation loader factory function
-export function HttpLoaderFactory(http: HttpClient) {
+export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
