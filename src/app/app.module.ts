@@ -56,6 +56,7 @@ import { ExportService } from './services/export.service';
 import { ChartService } from './services/chart.service';
 import { AuthService } from './services/auth.service';
 import { TranslationService } from './services/translation.service';
+import { I18nConfigService } from './services/i18n-config.service';
 
 // Translation loader factory function
 export function createTranslateLoader(http: HttpClient) {
