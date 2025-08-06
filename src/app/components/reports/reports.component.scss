@@ -1,18 +1,28 @@
 .reports-container {
-  @extend .container-fluid;
-  @extend .typography-responsive;
-  @extend .spacing-responsive;
-
+  width: 100%;
+  margin: 0 auto;
   padding: clamp(16px, 3vw, 48px);
+
+  @media (min-width: 1440px) {
+    padding: 0 5%;
+  }
+
+  @media (min-width: 1920px) {
+    padding: 0 8%;
+  }
+
+  @media (min-width: 2560px) {
+    padding: 0 10%;
+  }
 }
 
 .page-header {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: clamp(24px, 3vw, 48px);
 
   h1 {
     font-size: clamp(1.5rem, 3.5vw, 3rem);
     font-weight: 500;
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: clamp(4px, 0.5vw, 8px);
     color: var(--text-primary);
     line-height: 1.2;
   }
@@ -25,58 +35,81 @@
   }
 
   @media (min-width: 1920px) {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: clamp(32px, 4vw, 64px);
   }
 }
 
 .filters-card,
 .summary-card,
 .results-card {
-  @extend .card-responsive;
-  margin-bottom: var(--spacing-md);
+  border-radius: clamp(8px, 1vw, 20px);
+  padding: clamp(16px, 2.5vw, 32px);
+  min-height: clamp(120px, 15vw, 180px);
+  margin-bottom: clamp(16px, 2vw, 32px);
+
+  @media (min-width: 1440px) {
+    min-height: 120px;
+  }
 
   @media (min-width: 1920px) {
-    margin-bottom: var(--spacing-lg);
+    min-height: clamp(160px, 18vw, 220px);
+    margin-bottom: clamp(24px, 3vw, 48px);
+  }
+
+  @media (min-width: 2560px) {
+    min-height: 160px;
   }
 }
 
 .filters-grid {
-  @extend .grid-responsive;
-  @extend .form-responsive;
+  display: grid;
+  gap: clamp(16px, 2vw, 32px);
   grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 20vw, 250px), 1fr));
-  margin-bottom: var(--spacing-md);
+  margin-bottom: clamp(16px, 2vw, 32px);
 
   mat-form-field {
     width: 100%;
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
+
+    .mat-form-field-label {
+      font-size: clamp(0.875rem, 1.2vw, 1rem);
+    }
+
+    .mat-input-element {
+      font-size: clamp(0.875rem, 1.2vw, 1rem);
+      padding: clamp(8px, 1vw, 14px) clamp(12px, 1.5vw, 16px);
+    }
   }
 
   @media (min-width: 1920px) {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: clamp(24px, 3vw, 48px);
   }
 }
 
 .filter-actions {
-  @extend .button-responsive;
   display: flex;
-  gap: var(--spacing-sm);
+  gap: clamp(8px, 1vw, 16px);
   flex-wrap: wrap;
 
   button {
     display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
+    gap: clamp(4px, 0.5vw, 8px);
     padding: clamp(10px, 1.5vw, 16px) clamp(16px, 2.5vw, 24px);
     font-size: clamp(0.875rem, 1.3vw, 1.125rem);
+    border-radius: clamp(6px, 1vw, 12px);
+    min-height: clamp(36px, 5vw, 48px);
   }
 
   @media (min-width: 1920px) {
-    gap: var(--spacing-md);
+    gap: clamp(16px, 2vw, 32px);
   }
 }
 
 .stats-grid {
-  @extend .grid-responsive;
+  display: grid;
+  gap: clamp(16px, 2vw, 32px);
   grid-template-columns: repeat(auto-fit, minmax(clamp(160px, 18vw, 220px), 1fr));
 
   @media (min-width: 1920px) {
@@ -89,11 +122,25 @@
 }
 
 .stat-item {
-  @extend .card-responsive;
+  border-radius: clamp(8px, 1vw, 20px);
+  padding: clamp(16px, 2.5vw, 32px);
+  min-height: clamp(120px, 15vw, 180px);
   text-align: center;
   background: var(--background-light);
   border: 1px solid var(--border-color);
   transition: transform 0.2s ease;
+
+  @media (min-width: 1440px) {
+    min-height: 120px;
+  }
+
+  @media (min-width: 1920px) {
+    min-height: clamp(160px, 18vw, 220px);
+  }
+
+  @media (min-width: 2560px) {
+    min-height: 160px;
+  }
 
   &:hover {
     transform: translateY(clamp(-2px, -0.5vw, -4px));
@@ -138,9 +185,22 @@
 }
 
 .table-container {
-  @extend .table-responsive;
   width: 100%;
   overflow-x: auto;
+
+  .mat-table {
+    font-size: clamp(0.875rem, 1.1vw, 1rem);
+    border-radius: clamp(8px, 1vw, 16px);
+
+    .mat-header-cell {
+      font-size: clamp(0.75rem, 1vw, 0.875rem);
+      padding: clamp(12px, 2vw, 20px);
+    }
+
+    .mat-cell {
+      padding: clamp(12px, 2vw, 20px);
+    }
+  }
 
   @media (min-width: 1920px) {
     border-radius: clamp(8px, 1vw, 16px);
