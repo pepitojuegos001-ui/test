@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     .pipe(
       map(user => user?.isAuthenticated || false),
       shareReplay()
-    ); // Test webpack stability
+    );
 
   constructor(
     private breakpointObserver: BreakpointObserver,
