@@ -128,13 +128,13 @@
           <table mat-table [dataSource]="dataSource" class="income-table">
             <!-- Date Column -->
             <ng-container matColumnDef="date">
-              <th mat-header-cell *matHeaderCellDef>Date</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'INCOME.DATE' | translate }}</th>
               <td mat-cell *matCellDef="let entry">{{ entry.date | date:'shortDate' }}</td>
             </ng-container>
 
             <!-- Amount Column -->
             <ng-container matColumnDef="amount">
-              <th mat-header-cell *matHeaderCellDef>Amount</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'INCOME.AMOUNT' | translate }}</th>
               <td mat-cell *matCellDef="let entry" class="amount-cell income">
                 {{ formatCurrency(entry.amount) }}
               </td>
@@ -142,7 +142,7 @@
 
             <!-- Source Column -->
             <ng-container matColumnDef="source">
-              <th mat-header-cell *matHeaderCellDef>Source</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'INCOME.CATEGORY' | translate }}</th>
               <td mat-cell *matCellDef="let entry">{{ entry.source }}</td>
             </ng-container>
 
