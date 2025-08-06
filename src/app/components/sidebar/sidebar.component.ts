@@ -19,10 +19,10 @@ export class SidebarComponent {
   @Output() navigationOccurred = new EventEmitter<void>();
 
   navItems: NavItem[] = [
-    { path: '/dashboard', icon: 'dashboard', label: 'Dashboard' },
-    { path: '/income', icon: 'trending_up', label: 'Income' },
-    { path: '/expenses', icon: 'trending_down', label: 'Expenses' },
-    { path: '/reports', icon: 'assessment', label: 'Reports' }
+    { path: '/dashboard', icon: 'dashboard', label: 'SIDEBAR.DASHBOARD' },
+    { path: '/income', icon: 'trending_up', label: 'SIDEBAR.INCOME' },
+    { path: '/expenses', icon: 'trending_down', label: 'SIDEBAR.EXPENSES' },
+    { path: '/reports', icon: 'assessment', label: 'SIDEBAR.REPORTS' }
   ];
 
   constructor(private router: Router) { }
