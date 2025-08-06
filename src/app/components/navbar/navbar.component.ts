@@ -1,6 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { UserSettingsComponent } from '../user-settings/user-settings.component';
+import { AuthService } from '../../services/auth.service';
 
 /**
  * NavbarComponent - Enhanced top navigation bar
