@@ -1,0 +1,109 @@
+<div class="login-container">
+  <div class="login-background">
+    <div class="background-shapes"></div>
+  </div>
+  
+  <div class="login-content">
+    <mat-card class="login-card">
+      <mat-card-header class="login-header">
+        <div class="header-content">
+          <div class="logo-container">
+            <mat-icon class="logo-icon">account_balance_wallet</mat-icon>
+          </div>
+          <div class="header-text">
+            <mat-card-title class="login-title">Financial Dashboard</mat-card-title>
+            <mat-card-subtitle class="login-subtitle">Sign in to your account</mat-card-subtitle>
+          </div>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content class="login-form-container">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+          
+          <!-- Username Field -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input 
+              matInput 
+              formControlName="username"
+              placeholder="Username"
+              autocomplete="username"
+              [class.error]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-error *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+              {{ getUsernameErrorMessage() }}
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Password Field -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input 
+              matInput 
+              [type]="hidePassword ? 'password' : 'text'"
+              formControlName="password"
+              placeholder="Password"
+              autocomplete="current-password"
+              [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <button 
+              type="button"
+              mat-icon-button 
+              matSuffix 
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="'Toggle password visibility'"
+              [attr.aria-pressed]="!hidePassword">
+              <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+              {{ getPasswordErrorMessage() }}
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Remember Me Checkbox -->
+          <div class="remember-me-container">
+            <mat-checkbox formControlName="rememberMe" color="primary">
+              Remember me
+            </mat-checkbox>
+          </div>
+
+          <!-- Login Error Message -->
+          <div *ngIf="loginError" class="error-message">
+            <mat-icon class="error-icon">error</mat-icon>
+            <span>{{ loginError }}</span>
+          </div>
+
+          <!-- Login Button -->
+          <button 
+            type="submit"
+            mat-raised-button 
+            color="primary"
+            class="login-button full-width"
+            [disabled]="isLoading">
+            <mat-spinner *ngIf="isLoading" diameter="20" class="button-spinner"></mat-spinner>
+            <mat-icon *ngIf="!isLoading">login</mat-icon>
+            <span class="button-text">{{ isLoading ? 'Signing in...' : 'Sign In' }}</span>
+          </button>
+        </form>
+
+        <!-- Demo Credentials Info -->
+        <div class="demo-info">
+          <mat-divider></mat-divider>
+          <div class="demo-credentials">
+            <h4>Demo Credentials</h4>
+            <div class="credential-item">
+              <strong>Username:</strong> juan
+            </div>
+            <div class="credential-item">
+              <strong>Password:</strong> 123456789
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Footer -->
+    <div class="login-footer">
+      <p>&copy; 2024 Financial Dashboard. All rights reserved.</p>
+    </div>
+  </div>
+</div>
