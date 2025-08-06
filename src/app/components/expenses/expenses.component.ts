@@ -190,7 +190,9 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   }
 
   get formTitle(): string {
-    return this.isEditing ? 'Edit Expense Entry' : 'Add New Expense';
+    return this.isEditing ?
+      this.translationService.instant('EXPENSES.EDIT_EXPENSE') :
+      this.translationService.instant('EXPENSES.ADD_EXPENSE');
   }
 
   get submitButtonText(): string {
