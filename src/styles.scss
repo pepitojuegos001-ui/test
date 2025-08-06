@@ -1,5 +1,8 @@
 /* Global Styles */
 
+// Import shared loading styles
+@import 'styles/loading.scss';
+
 :root {
   --primary-blue: #2196F3;
   --primary-blue-light: #64B5F6;
