@@ -23,9 +23,10 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   allExpenseEntries: ExpenseEntry[] = [];
   filteredEntries: ExpenseEntry[] = [];
   allCategories: string[] = [];
-  
+
   isEditing = false;
   editingId: string | null = null;
+  isLoading = true;
   
   // Filter options
   get months(): string[] {
