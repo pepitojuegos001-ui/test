@@ -89,6 +89,7 @@
     "DESCRIPTION": "Description",
     "DATE": "Date",
     "CATEGORY": "Category",
+    "NOTES": "Notes",
     "ADD_EXPENSE": "Add Expense",
     "EDIT_EXPENSE": "Edit Expense",
     "DELETE_EXPENSE": "Delete Expense",
