@@ -124,6 +124,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ExportService,
     ChartService,
     AuthService,
+    TranslationService,
     DatePipe
   ],
   bootstrap: [AppComponent]
