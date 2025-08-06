@@ -1,4 +1,5 @@
 <!-- Authenticated Layout -->
+<!-- Debug: isAuthenticated = {{ isAuthenticated$ | async }} -->
 <div *ngIf="isAuthenticated$ | async; else loginLayout">
   <!-- Top Navbar -->
   <app-navbar (sidebarToggle)="onSidebarToggle()"></app-navbar>
