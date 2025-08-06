@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 export interface User {
   username: string;
   isAuthenticated: boolean;
+  preferredLanguage?: string;
 }
 
 @Injectable({
