@@ -1,0 +1,13 @@
+<div class="loading-overlay" *ngIf="isLoading$ | async" @fadeInOut>
+  <div class="loading-backdrop"></div>
+  <div class="loading-content">
+    <mat-spinner 
+      diameter="60" 
+      strokeWidth="4"
+      color="primary">
+    </mat-spinner>
+    <div class="loading-message" *ngIf="loadingMessage$ | async as message">
+      {{ message || ('LOADING.DEFAULT_MESSAGE' | translate) }}
+    </div>
+  </div>
+</div>
