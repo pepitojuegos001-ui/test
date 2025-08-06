@@ -202,6 +202,23 @@
     "NOVEMBER": "Noviembre",
     "DECEMBER": "Diciembre"
   },
+  "LOADING": {
+    "DEFAULT_MESSAGE": "Cargando...",
+    "AUTHENTICATION": "Autenticando usuario...",
+    "LOGGING_IN": "Iniciando sesión en tu cuenta...",
+    "LOADING_DASHBOARD": "Cargando datos del panel...",
+    "APPLYING_FILTERS": "Aplicando filtros...",
+    "SAVING_INCOME": "Guardando registro de ingreso...",
+    "UPDATING_INCOME": "Actualizando registro de ingreso...",
+    "DELETING_INCOME": "Eliminando registro de ingreso...",
+    "SAVING_EXPENSE": "Guardando registro de gasto...",
+    "UPDATING_EXPENSE": "Actualizando registro de gasto...",
+    "DELETING_EXPENSE": "Eliminando registro de gasto...",
+    "GENERATING_REPORT": "Generando reporte financiero...",
+    "SEARCHING_REPORTS": "Buscando datos del reporte...",
+    "PROCESSING_REQUEST": "Procesando tu solicitud...",
+    "PLEASE_WAIT": "Por favor espera mientras procesamos tu solicitud"
+  },
   "VALIDATION": {
     "REQUIRED": "Este campo es requerido",
     "EMAIL_INVALID": "Por favor ingresa un correo electrónico válido",
