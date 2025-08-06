@@ -1,18 +1,28 @@
 .expenses-container {
-  @extend .container-fluid;
-  @extend .typography-responsive;
-  @extend .spacing-responsive;
-
+  width: 100%;
+  margin: 0 auto;
   padding: clamp(16px, 3vw, 48px);
+
+  @media (min-width: 1440px) {
+    padding: 0 5%;
+  }
+
+  @media (min-width: 1920px) {
+    padding: 0 8%;
+  }
+
+  @media (min-width: 2560px) {
+    padding: 0 10%;
+  }
 }
 
 .page-header {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: clamp(24px, 3vw, 48px);
 
   h1 {
     font-size: clamp(1.5rem, 3.5vw, 3rem);
     font-weight: 500;
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: clamp(4px, 0.5vw, 8px);
     color: var(--text-primary);
     line-height: 1.2;
   }
@@ -25,17 +35,18 @@
   }
 
   @media (min-width: 1920px) {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: clamp(32px, 4vw, 64px);
   }
 }
 
 .crud-layout {
-  @extend .grid-responsive;
+  display: grid;
+  gap: clamp(16px, 2vw, 32px);
   grid-template-columns: 1fr 2fr;
 
   @media (min-width: 1920px) {
     grid-template-columns: 1fr 2.5fr;
-    gap: var(--spacing-xl);
+    gap: clamp(32px, 4vw, 64px);
   }
 
   @media (min-width: 2560px) {
@@ -44,8 +55,22 @@
 }
 
 .form-card {
-  @extend .card-responsive;
+  border-radius: clamp(8px, 1vw, 20px);
+  padding: clamp(16px, 2.5vw, 32px);
+  min-height: clamp(120px, 15vw, 180px);
   height: fit-content;
+
+  @media (min-width: 1440px) {
+    min-height: 120px;
+  }
+
+  @media (min-width: 1920px) {
+    min-height: clamp(160px, 18vw, 220px);
+  }
+
+  @media (min-width: 2560px) {
+    min-height: 160px;
+  }
 
   .mat-card-content {
     padding-top: clamp(12px, 2vw, 24px) !important;
@@ -85,7 +110,7 @@
 .category-input-group {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: var(--spacing-sm);
+  gap: clamp(8px, 1vw, 16px);
   align-items: end;
 
   .category-select {
@@ -93,7 +118,6 @@
   }
 
   .add-category-btn {
-    @extend .icon-responsive;
     grid-column: 2;
     margin-bottom: 0.25rem;
     width: clamp(36px, 5vw, 48px);
@@ -113,7 +137,7 @@
   }
 
   @media (min-width: 1920px) {
-    gap: var(--spacing-md);
+    gap: clamp(16px, 2vw, 32px);
   }
 }
 
