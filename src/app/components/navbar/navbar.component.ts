@@ -52,6 +52,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe(user => {
         this.username = user?.username || '';
       });
+
+    // Initialize language data
+    this.availableLanguages = this.translationService.getAvailableLanguages();
+    this.translationService.currentLanguage$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(language => {
+        this.currentLanguage = language;
+      });
   }
 
   ngOnDestroy(): void {
