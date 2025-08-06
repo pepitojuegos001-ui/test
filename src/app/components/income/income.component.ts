@@ -6,6 +6,7 @@ import { Subject, takeUntil, timer } from 'rxjs';
 import { FinancialDataService, IncomeEntry } from '../../services/financial-data.service';
 import { ExportService } from '../../services/export.service';
 import { TranslationService } from '../../services/translation.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-income',
@@ -50,7 +51,8 @@ export class IncomeComponent implements OnInit, OnDestroy {
     private financialDataService: FinancialDataService,
     private exportService: ExportService,
     private dialog: MatDialog,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private loadingService: LoadingService
   ) {
     this.incomeForm = this.createForm();
   }
@@ -65,15 +67,16 @@ export class IncomeComponent implements OnInit, OnDestroy {
 
   private initializeWithLoading(): void {
     this.isLoading = true;
+    const loadingMessage = this.translationService.translate('INCOME.LOADING_DATA');
 
-    // Simulate 5-second loading delay
-    timer(5000).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.isLoading = false;
-      this.subscribeToData();
-      this.setDefaultDate();
-    });
+    // Show global loading overlay with income loading message
+    this.loadingService.showWithDelay(loadingMessage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.isLoading = false;
+        this.subscribeToData();
+        this.setDefaultDate();
+      });
   }
 
   ngOnDestroy(): void {
@@ -107,14 +110,25 @@ export class IncomeComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.incomeForm.valid) {
       const formValue = this.incomeForm.value;
-      
+      let loadingMessage: string;
+
       if (this.isEditing && this.editingId) {
-        this.financialDataService.updateIncomeEntry(this.editingId, formValue);
+        loadingMessage = this.translationService.translate('LOADING.UPDATING_INCOME');
+        this.loadingService.showWithDelay(loadingMessage)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(() => {
+            this.financialDataService.updateIncomeEntry(this.editingId!, formValue);
+            this.resetForm();
+          });
       } else {
-        this.financialDataService.addIncomeEntry(formValue);
+        loadingMessage = this.translationService.translate('LOADING.SAVING_INCOME');
+        this.loadingService.showWithDelay(loadingMessage)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(() => {
+            this.financialDataService.addIncomeEntry(formValue);
+            this.resetForm();
+          });
       }
-      
-      this.resetForm();
     }
   }
 
@@ -133,7 +147,12 @@ export class IncomeComponent implements OnInit, OnDestroy {
   onDelete(entry: IncomeEntry): void {
     const confirmMessage = this.translationService.instant('INCOME.DELETE_INCOME') + '?';
     if (confirm(confirmMessage)) {
-      this.financialDataService.deleteIncomeEntry(entry.id);
+      const loadingMessage = this.translationService.translate('LOADING.DELETING_INCOME');
+      this.loadingService.showWithDelay(loadingMessage)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          this.financialDataService.deleteIncomeEntry(entry.id);
+        });
     }
   }
 
@@ -170,7 +189,12 @@ export class IncomeComponent implements OnInit, OnDestroy {
   }
 
   onFilterChange(): void {
-    this.applyFilters();
+    const loadingMessage = this.translationService.translate('LOADING.APPLYING_FILTERS');
+    this.loadingService.showWithDelay(loadingMessage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.applyFilters();
+      });
   }
 
   clearFilters(): void {
