@@ -15,21 +15,21 @@
         <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
           <div class="form-row">
             <mat-form-field appearance="outline">
-              <mat-label>Date</mat-label>
+              <mat-label>{{ 'EXPENSES.DATE' | translate }}</mat-label>
               <input matInput type="date" formControlName="date">
               <mat-error *ngIf="expenseForm.get('date')?.hasError('required')">
-                Date is required
+                {{ 'VALIDATION.REQUIRED' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="form-row">
             <mat-form-field appearance="outline">
-              <mat-label>Amount</mat-label>
+              <mat-label>{{ 'EXPENSES.AMOUNT' | translate }}</mat-label>
               <input matInput type="number" step="0.01" min="0" formControlName="amount" placeholder="0.00">
               <span matPrefix>$</span>
               <mat-error *ngIf="expenseForm.get('amount')?.hasError('required')">
-                Amount is required
+                {{ 'VALIDATION.REQUIRED' | translate }}
               </mat-error>
               <mat-error *ngIf="expenseForm.get('amount')?.hasError('min')">
                 Amount must be greater than 0
@@ -40,19 +40,19 @@
           <div class="form-row">
             <div class="category-input-group">
               <mat-form-field appearance="outline" class="category-select">
-                <mat-label>Category</mat-label>
+                <mat-label>{{ 'EXPENSES.CATEGORY' | translate }}</mat-label>
                 <mat-select formControlName="category">
                   <mat-option *ngFor="let category of allCategories" [value]="category">
                     {{ category }}
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="expenseForm.get('category')?.hasError('required')">
-                  Category is required
+                  {{ 'VALIDATION.REQUIRED' | translate }}
                 </mat-error>
               </mat-form-field>
-              <button type="button" mat-mini-fab color="primary" 
-                      (click)="openAddCategoryDialog()" 
-                      matTooltip="Add custom category"
+              <button type="button" mat-mini-fab color="primary"
+                      (click)="openAddCategoryDialog()"
+                      [matTooltip]="'EXPENSES.ADD_CATEGORY' | translate"
                       class="add-category-btn">
                 <mat-icon>add</mat-icon>
               </button>
