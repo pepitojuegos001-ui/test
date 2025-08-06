@@ -1,37 +1,54 @@
 .expenses-container {
-  padding: 24px;
-  max-width: 1400px;
-  margin: 0 auto;
+  @extend .container-fluid;
+  @extend .typography-responsive;
+  @extend .spacing-responsive;
+
+  padding: clamp(16px, 3vw, 48px);
 }
 
 .page-header {
-  margin-bottom: 32px;
-  
+  margin-bottom: var(--spacing-lg);
+
   h1 {
-    font-size: 1.75rem;
+    font-size: clamp(1.5rem, 3.5vw, 3rem);
     font-weight: 500;
-    margin-bottom: 8px;
+    margin-bottom: var(--spacing-xs);
     color: var(--text-primary);
+    line-height: 1.2;
   }
-  
+
   p {
     color: var(--text-secondary);
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 1.5vw, 1.25rem);
     margin: 0;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 1920px) {
+    margin-bottom: var(--spacing-xl);
   }
 }
 
 .crud-layout {
-  display: grid;
+  @extend .grid-responsive;
   grid-template-columns: 1fr 2fr;
-  gap: 24px;
+
+  @media (min-width: 1920px) {
+    grid-template-columns: 1fr 2.5fr;
+    gap: var(--spacing-xl);
+  }
+
+  @media (min-width: 2560px) {
+    grid-template-columns: 1fr 3fr;
+  }
 }
 
 .form-card {
+  @extend .card-responsive;
   height: fit-content;
-  
+
   .mat-card-content {
-    padding-top: 16px !important;
+    padding-top: clamp(12px, 2vw, 24px) !important;
   }
 }
 
@@ -68,7 +85,7 @@
 .category-input-group {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 16px;
+  gap: var(--spacing-sm);
   align-items: end;
 
   .category-select {
@@ -76,10 +93,11 @@
   }
 
   .add-category-btn {
+    @extend .icon-responsive;
     grid-column: 2;
-    margin-bottom: 0.25rem; // Fine-tune vertical alignment with form field
-    width: 40px;
-    height: 40px;
+    margin-bottom: 0.25rem;
+    width: clamp(36px, 5vw, 48px);
+    height: clamp(36px, 5vw, 48px);
     transition: all 0.2s ease;
 
     &:hover {
@@ -88,10 +106,14 @@
     }
 
     .mat-icon {
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
+      font-size: clamp(18px, 2.5vw, 24px);
+      width: clamp(18px, 2.5vw, 24px);
+      height: clamp(18px, 2.5vw, 24px);
     }
+  }
+
+  @media (min-width: 1920px) {
+    gap: var(--spacing-md);
   }
 }
 
