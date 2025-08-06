@@ -3,6 +3,9 @@
 // Import shared loading styles
 @import 'styles/loading.scss';
 
+// Import enhanced responsive utilities
+@import 'styles/responsive-enhanced.scss';
+
 :root {
   --primary-blue: #2196F3;
   --primary-blue-light: #64B5F6;
