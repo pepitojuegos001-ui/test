@@ -85,7 +85,7 @@
   </div>
 
   <!-- Charts Section -->
-  <div class="charts-grid">
+  <div class="charts-grid" *ngIf="!isLoading">
     <!-- Bar Chart -->
     <mat-card class="chart-card">
       <mat-card-header>
@@ -108,6 +108,26 @@
       <mat-card-content>
         <div class="chart-container pie-chart">
           <canvas #pieChart></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Loading Spinner for Charts -->
+  <div class="charts-loading-grid" *ngIf="isLoading">
+    <mat-card class="chart-loading-card">
+      <mat-card-content>
+        <div class="chart-loading-content">
+          <mat-spinner diameter="40"></mat-spinner>
+          <h4>{{ 'DASHBOARD.LOADING_CHARTS' | translate }}</h4>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="chart-loading-card">
+      <mat-card-content>
+        <div class="chart-loading-content">
+          <mat-spinner diameter="40"></mat-spinner>
+          <h4>{{ 'DASHBOARD.LOADING_CHARTS' | translate }}</h4>
         </div>
       </mat-card-content>
     </mat-card>
