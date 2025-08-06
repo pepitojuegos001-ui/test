@@ -12,6 +12,7 @@ interface UserProfile {
   avatar: string;
   notificationsEnabled: boolean;
   twoFactorEnabled: boolean;
+  selectedLanguage: string;
 }
 
 interface PasswordChangeData {
