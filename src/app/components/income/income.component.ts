@@ -67,7 +67,7 @@ export class IncomeComponent implements OnInit, OnDestroy {
 
   private initializeWithLoading(): void {
     this.isLoading = true;
-    const loadingMessage = this.translationService.translate('INCOME.LOADING_DATA');
+    const loadingMessage = this.translationService.instant('INCOME.LOADING_DATA');
 
     // Show global loading overlay with income loading message
     this.loadingService.showWithDelay(loadingMessage)
@@ -113,7 +113,7 @@ export class IncomeComponent implements OnInit, OnDestroy {
       let loadingMessage: string;
 
       if (this.isEditing && this.editingId) {
-        loadingMessage = this.translationService.translate('LOADING.UPDATING_INCOME');
+        loadingMessage = this.translationService.instant('LOADING.UPDATING_INCOME');
         this.loadingService.showWithDelay(loadingMessage)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
@@ -121,7 +121,7 @@ export class IncomeComponent implements OnInit, OnDestroy {
             this.resetForm();
           });
       } else {
-        loadingMessage = this.translationService.translate('LOADING.SAVING_INCOME');
+        loadingMessage = this.translationService.instant('LOADING.SAVING_INCOME');
         this.loadingService.showWithDelay(loadingMessage)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
@@ -147,7 +147,7 @@ export class IncomeComponent implements OnInit, OnDestroy {
   onDelete(entry: IncomeEntry): void {
     const confirmMessage = this.translationService.instant('INCOME.DELETE_INCOME') + '?';
     if (confirm(confirmMessage)) {
-      const loadingMessage = this.translationService.translate('LOADING.DELETING_INCOME');
+      const loadingMessage = this.translationService.instant('LOADING.DELETING_INCOME');
       this.loadingService.showWithDelay(loadingMessage)
         .pipe(takeUntil(this.destroy$))
         .subscribe(() => {
@@ -189,7 +189,7 @@ export class IncomeComponent implements OnInit, OnDestroy {
   }
 
   onFilterChange(): void {
-    const loadingMessage = this.translationService.translate('LOADING.APPLYING_FILTERS');
+    const loadingMessage = this.translationService.instant('LOADING.APPLYING_FILTERS');
     this.loadingService.showWithDelay(loadingMessage)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
