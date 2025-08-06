@@ -29,14 +29,15 @@ export class ReportsComponent implements OnInit, OnDestroy {
   allIncomeEntries: IncomeEntry[] = [];
   allExpenseEntries: ExpenseEntry[] = [];
   filteredData: ReportEntry[] = [];
-  
+  isLoading = true;
+
   summaryStats = {
     totalIncome: 0,
     totalExpenses: 0,
     netBalance: 0,
     transactionCount: 0
   };
-  
+
   allCategories: string[] = [];
 
   constructor(
