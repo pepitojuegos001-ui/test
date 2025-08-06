@@ -91,6 +91,7 @@
     "DATE": "Fecha",
     "CATEGORY": "Categoría",
     "NOTES": "Notas",
+    "NOTES_PLACEHOLDER": "Notas adicionales (opcional)",
     "ADD_EXPENSE": "Agregar Gasto",
     "EDIT_EXPENSE": "Editar Gasto",
     "DELETE_EXPENSE": "Eliminar Gasto",
