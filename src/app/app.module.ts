@@ -63,7 +63,8 @@ import { ChartService } from './services/chart.service';
     NavbarComponent,
     SummaryCardComponent,
     AddCategoryDialogComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
