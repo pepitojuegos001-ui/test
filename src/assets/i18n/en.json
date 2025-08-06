@@ -187,6 +187,7 @@
     "EMAIL_INVALID": "Please enter a valid email address",
     "MIN_LENGTH": "Minimum length is {{min}} characters",
     "MAX_LENGTH": "Maximum length is {{max}} characters",
-    "PASSWORDS_NOT_MATCH": "Passwords do not match"
+    "PASSWORDS_NOT_MATCH": "Passwords do not match",
+    "AMOUNT_POSITIVE": "Amount must be greater than 0"
   }
 }
