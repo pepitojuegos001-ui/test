@@ -20,8 +20,6 @@ export class AuthService {
   private readonly AUTH_KEY = 'financial_dashboard_auth';
 
   constructor(private router: Router) {
-    // Clear any existing auth data for fresh start
-    this.clearAllAuthData();
     // Check if user was previously authenticated
     this.checkStoredAuth();
   }
