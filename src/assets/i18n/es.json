@@ -68,6 +68,7 @@
     "DATE": "Fecha",
     "CATEGORY": "Categoría",
     "SOURCE": "Fuente",
+    "NOTES": "Notas",
     "ADD_INCOME": "Agregar Ingreso",
     "EDIT_INCOME": "Editar Ingreso",
     "DELETE_INCOME": "Eliminar Ingreso",
