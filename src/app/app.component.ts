@@ -13,7 +13,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   @ViewChild('drawer', { static: false }) drawer!: MatSidenav;
 
-  title = 'Financial Dashboard'; // Webpack test
+  title = 'Financial Dashboard';
   isSidebarCollapsed = this.loadSidebarState();
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
