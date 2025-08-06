@@ -89,6 +89,7 @@
     "DESCRIPTION": "Descripción",
     "DATE": "Fecha",
     "CATEGORY": "Categoría",
+    "NOTES": "Notas",
     "ADD_EXPENSE": "Agregar Gasto",
     "EDIT_EXPENSE": "Editar Gasto",
     "DELETE_EXPENSE": "Eliminar Gasto",
@@ -138,7 +139,7 @@
     "NO_RESULTS_FILTERS": "No se encontraron transacciones para los criterios seleccionados"
   },
   "USER_SETTINGS": {
-    "TITLE": "Configuración de Usuario",
+    "TITLE": "Configuraci��n de Usuario",
     "PROFILE": "Perfil",
     "SECURITY": "Seguridad",
     "PROFILE_PICTURE": "Foto de Perfil",
