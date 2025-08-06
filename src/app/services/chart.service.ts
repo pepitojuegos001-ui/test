@@ -59,7 +59,8 @@ export class ChartService {
           tooltip: {
             callbacks: {
               label: (context) => {
-                return context.dataset.label + ': $' + context.parsed.y.toLocaleString();
+                const value = this.formatCurrency(context.parsed.y);
+                return context.dataset.label + ': ' + value;
               }
             }
           }
