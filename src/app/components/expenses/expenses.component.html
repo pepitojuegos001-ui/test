@@ -96,9 +96,9 @@
         <!-- Filters -->
         <div class="table-filters">
           <mat-form-field appearance="outline">
-            <mat-label>Filter by Month</mat-label>
+            <mat-label>{{ 'DASHBOARD.MONTH' | translate }}</mat-label>
             <mat-select [(value)]="selectedMonth" (selectionChange)="onFilterChange()">
-              <mat-option value="">All Months</mat-option>
+              <mat-option value="">{{ 'EXPENSES.ALL_MONTHS' | translate }}</mat-option>
               <mat-option *ngFor="let month of months; let i = index" [value]="i">
                 {{ month }}
               </mat-option>
@@ -106,9 +106,9 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Filter by Year</mat-label>
+            <mat-label>{{ 'DASHBOARD.YEAR' | translate }}</mat-label>
             <mat-select [(value)]="selectedYear" (selectionChange)="onFilterChange()">
-              <mat-option value="">All Years</mat-option>
+              <mat-option value="">{{ 'EXPENSES.ALL_YEARS' | translate }}</mat-option>
               <mat-option *ngFor="let year of years" [value]="year">
                 {{ year }}
               </mat-option>
@@ -116,9 +116,9 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Filter by Category</mat-label>
+            <mat-label>{{ 'EXPENSES.CATEGORY' | translate }}</mat-label>
             <mat-select [(value)]="selectedCategory" (selectionChange)="onFilterChange()">
-              <mat-option value="">All Categories</mat-option>
+              <mat-option value="">{{ 'EXPENSES.ALL_CATEGORIES' | translate }}</mat-option>
               <mat-option *ngFor="let category of allCategories" [value]="category">
                 {{ category }}
               </mat-option>
@@ -127,7 +127,7 @@
 
           <button mat-button (click)="clearFilters()">
             <mat-icon>clear</mat-icon>
-            Clear Filters
+            {{ 'EXPENSES.CLEAR_FILTERS' | translate }}
           </button>
         </div>
 
