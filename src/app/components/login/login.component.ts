@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
 import { TranslationService } from '../../services/translation.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -46,31 +48,35 @@ export class LoginComponent implements OnInit {
     this.loginError = '';
 
     const { username, password, rememberMe } = this.loginForm.value;
+    const loadingMessage = this.translationService.translate('LOADING.LOGGING_IN');
 
-    this.authService.login(username, password, rememberMe).subscribe({
-      next: (success) => {
-        this.isLoading = false;
-        
-        if (success) {
-          this.showSuccess('Login successful! Welcome back.');
-          
-          // Check for return URL or default to dashboard
-          const returnUrl = localStorage.getItem('returnUrl') || '/dashboard';
-          localStorage.removeItem('returnUrl');
-          
-          this.router.navigate([returnUrl]);
-        } else {
-          this.loginError = 'Invalid username or password. Please try again.';
-          this.showError('Invalid credentials. Please check your username and password.');
+    // Show global loading overlay with authentication message
+    this.loadingService.withDelayedLoading(() => {
+      this.authService.login(username, password, rememberMe).subscribe({
+        next: (success) => {
+          this.isLoading = false;
+
+          if (success) {
+            this.showSuccess('Login successful! Welcome back.');
+
+            // Check for return URL or default to dashboard
+            const returnUrl = localStorage.getItem('returnUrl') || '/dashboard';
+            localStorage.removeItem('returnUrl');
+
+            this.router.navigate([returnUrl]);
+          } else {
+            this.loginError = 'Invalid username or password. Please try again.';
+            this.showError('Invalid credentials. Please check your username and password.');
+          }
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.loginError = 'An error occurred during login. Please try again.';
+          this.showError('Login failed. Please try again.');
+          console.error('Login error:', error);
         }
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.loginError = 'An error occurred during login. Please try again.';
-        this.showError('Login failed. Please try again.');
-        console.error('Login error:', error);
-      }
-    });
+      });
+    }, loadingMessage).subscribe();
   }
 
   private markFormGroupTouched(): void {
