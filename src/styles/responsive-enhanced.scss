@@ -315,23 +315,50 @@ $breakpoints: (
 /* ===== MEDIA QUERY MIXINS (SCSS only) ===== */
 /* These would be used in SCSS files for custom breakpoints */
 
-/*
-@mixin respond-to($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
-      @content;
-    }
+/* ===== UTILITY CLASSES FOR QUICK RESPONSIVE ADJUSTMENTS ===== */
+.responsive-hide-sm {
+  @media (max-width: 768px) {
+    display: none !important;
   }
 }
 
-Usage example:
-.my-component {
-  @include respond-to('xl') {
-    // Styles for 2K screens
-  }
-  
-  @include respond-to('xxl') {
-    // Styles for 4K screens
+.responsive-hide-lg {
+  @media (min-width: 1440px) {
+    display: none !important;
   }
 }
-*/
+
+.responsive-show-lg {
+  display: none;
+  @media (min-width: 1440px) {
+    display: block !important;
+  }
+}
+
+/* ===== ASPECT RATIO UTILITIES ===== */
+.aspect-ratio-responsive {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    padding-top: 56.25%; // 16:9 ratio
+  }
+
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &.aspect-4-3::before {
+    padding-top: 75%; // 4:3 ratio
+  }
+
+  &.aspect-1-1::before {
+    padding-top: 100%; // 1:1 ratio
+  }
+}
