@@ -67,6 +67,7 @@
     "DESCRIPTION": "Descripción",
     "DATE": "Fecha",
     "CATEGORY": "Categoría",
+    "SOURCE": "Fuente",
     "ADD_INCOME": "Agregar Ingreso",
     "EDIT_INCOME": "Editar Ingreso",
     "DELETE_INCOME": "Eliminar Ingreso",
@@ -74,7 +75,11 @@
     "FREELANCE": "Freelance",
     "INVESTMENTS": "Inversiones",
     "OTHER": "Otro",
-    "ACTIONS": "Acciones"
+    "ACTIONS": "Acciones",
+    "ALL_MONTHS": "Todos los Meses",
+    "ALL_YEARS": "Todos los Años",
+    "ALL_SOURCES": "Todas las Fuentes",
+    "CLEAR_FILTERS": "Limpiar Filtros"
   },
   "EXPENSES": {
     "TITLE": "Gestión de Gastos",
