@@ -205,4 +205,29 @@ export class TranslationService {
       console.warn('Could not clear user language preferences:', error);
     }
   }
+
+  /**
+   * Force reload current language settings
+   * Useful when switching routes or after component initialization
+   */
+  reloadCurrentLanguage(): void {
+    const currentLang = this.getCurrentLanguage();
+    this.translateService.use(currentLang);
+  }
+
+  /**
+   * Initialize language settings after app bootstrap
+   * This can be called from app component to ensure proper loading
+   */
+  initializeForCurrentUser(username?: string): void {
+    if (username) {
+      this.loadUserLanguagePreference(username);
+    } else {
+      // Load general language preference
+      const savedLanguage = this.getSavedLanguage();
+      if (savedLanguage && this.isLanguageSupported(savedLanguage)) {
+        this.setLanguage(savedLanguage);
+      }
+    }
+  }
 }
