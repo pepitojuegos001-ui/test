@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslationService, Language } from '../../services/translation.service';
+import { AuthService } from '../../services/auth.service';
 
 interface UserProfile {
   fullName: string;
