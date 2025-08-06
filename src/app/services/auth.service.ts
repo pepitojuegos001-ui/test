@@ -97,11 +97,16 @@ export class AuthService {
   logout(): void {
     // Clear user data
     this.currentUserSubject.next(null);
-    
+
     // Clear stored authentication
     localStorage.removeItem(this.AUTH_KEY);
     sessionStorage.removeItem(this.AUTH_KEY);
-    
+
+    // Reset language to default English
+    if (this.translationService) {
+      this.translationService.resetToDefaultLanguage();
+    }
+
     // Redirect to login
     this.router.navigate(['/login']);
   }
