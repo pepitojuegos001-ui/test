@@ -38,6 +38,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private authService: AuthService
   ) {}
 
+  ngOnInit(): void {
+    // Subscribe to current user changes
+    this.authService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.username = user?.username || '';
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   onSidebarToggle(): void {
     this.sidebarToggle.emit();
   }
