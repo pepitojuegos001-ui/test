@@ -31,11 +31,11 @@ export class AppComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private authService: AuthService
-    // private translationService: TranslationService
+    private authService: AuthService,
+    private translationService: TranslationService
   ) {
     // Connect services to avoid circular dependency
-    // this.authService.setTranslationService(this.translationService);
+    this.authService.setTranslationService(this.translationService);
   }
 
   ngOnInit(): void {
