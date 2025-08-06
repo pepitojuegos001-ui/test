@@ -3,6 +3,7 @@ import { Subject, takeUntil, combineLatest } from 'rxjs';
 import { FinancialDataService, DateFilter, Transaction } from '../../services/financial-data.service';
 import { ChartService } from '../../services/chart.service';
 import { AuthService } from '../../services/auth.service';
+import { TranslationService } from '../../services/translation.service';
 import { Chart } from 'chart.js';
 
 @Component({
