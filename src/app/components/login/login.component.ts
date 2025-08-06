@@ -35,11 +35,19 @@ export class LoginComponent implements OnInit {
   }
 
   private initializeForm(): void {
+    console.log('LoginComponent: Initializing form...');
+    if (!this.fb) {
+      console.error('LoginComponent: FormBuilder not available');
+      return;
+    }
+
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       rememberMe: [false]
     });
+
+    console.log('LoginComponent: Form created:', this.loginForm);
   }
 
   onSubmit(): void {
