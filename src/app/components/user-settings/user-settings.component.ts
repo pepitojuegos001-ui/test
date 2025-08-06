@@ -95,11 +95,28 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
   }
 
   private loadUserData(): void {
-    // Simulate loading user data
+    // Get current language from translation service
+    this.currentUser.selectedLanguage = this.translationService.getCurrentLanguage();
+
+    // Update form with user data
     this.profileForm.patchValue(this.currentUser);
     if (this.currentUser.avatar) {
       this.imagePreview = this.currentUser.avatar;
     }
+  }
+
+  private initializeLanguageData(): void {
+    // Get available languages
+    this.availableLanguages = this.translationService.getAvailableLanguages();
+
+    // Subscribe to current language changes
+    this.translationService.currentLanguage$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(language => {
+        this.currentLanguage = language;
+        this.currentUser.selectedLanguage = language;
+        this.profileForm.patchValue({ selectedLanguage: language });
+      });
   }
 
   // Custom validators
