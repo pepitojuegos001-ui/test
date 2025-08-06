@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { FinancialDataService, IncomeEntry } from '../../services/financial-data.service';
 import { ExportService } from '../../services/export.service';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-income',
