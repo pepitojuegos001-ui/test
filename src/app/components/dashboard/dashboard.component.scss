@@ -20,11 +20,27 @@
     margin-bottom: 8px;
     color: var(--text-primary);
   }
-  
+
   p {
     color: var(--text-secondary);
     font-size: 1rem;
     margin: 0;
+
+    &.welcome-message {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #4caf50;
+      font-weight: 500;
+      margin-bottom: 4px;
+
+      .welcome-icon {
+        font-size: 1.2rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        color: #ff9800;
+      }
+    }
   }
 }
 
