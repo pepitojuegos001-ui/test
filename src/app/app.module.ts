@@ -126,6 +126,7 @@ export function createTranslateLoader(http: HttpClient) {
     ChartService,
     AuthService,
     TranslationService,
+    I18nConfigService,
     DatePipe
   ],
   bootstrap: [AppComponent]
