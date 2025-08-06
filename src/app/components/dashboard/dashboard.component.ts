@@ -35,10 +35,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     balance: 0
   };
 
-  months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
+  get months(): string[] {
+    return this.translationService.getTranslatedMonths();
+  }
 
   years = [2023, 2024];
   username = '';
