@@ -169,7 +169,9 @@ export class IncomeComponent implements OnInit, OnDestroy {
   }
 
   get formTitle(): string {
-    return this.isEditing ? 'Edit Income Entry' : 'Add New Income';
+    return this.isEditing ?
+      this.translationService.instant('INCOME.EDIT_INCOME') :
+      this.translationService.instant('INCOME.ADD_INCOME');
   }
 
   get submitButtonText(): string {
