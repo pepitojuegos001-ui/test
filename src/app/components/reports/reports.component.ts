@@ -61,7 +61,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   private initializeWithLoading(): void {
     this.isLoading = true;
-    const loadingMessage = this.translationService.translate('REPORTS.LOADING_DATA');
+    const loadingMessage = this.translationService.instant('REPORTS.LOADING_DATA');
 
     // Show global loading overlay with reports loading message
     this.loadingService.showWithDelay(loadingMessage)
@@ -108,7 +108,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   generateReport(): void {
-    const loadingMessage = this.translationService.translate('LOADING.GENERATING_REPORT');
+    const loadingMessage = this.translationService.instant('LOADING.GENERATING_REPORT');
 
     this.loadingService.showWithDelay(loadingMessage)
       .pipe(takeUntil(this.destroy$))
