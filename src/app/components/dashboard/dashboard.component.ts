@@ -165,6 +165,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.chartService.destroyChart(this.pieChart);
   }
 
+  private updateChartLabels(): void {
+    if (this.barChart) {
+      this.chartService.updateChartLabels(this.barChart);
+    }
+    // Note: Pie chart doesn't need label updates as it uses category names
+  }
+
   onMonthChanged(month: number): void {
     this.currentFilter.month = month;
     this.financialDataService.setDateFilter(this.currentFilter);
