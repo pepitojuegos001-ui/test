@@ -49,6 +49,7 @@ import { LoginComponent } from './components/login/login.component';
 
 // Shared Components
 import { SummaryCardComponent } from './shared/components/summary-card/summary-card.component';
+import { LoadingOverlayComponent } from './shared/components/loading-overlay/loading-overlay.component';
 
 // Services
 import { FinancialDataService } from './services/financial-data.service';
@@ -57,6 +58,7 @@ import { ChartService } from './services/chart.service';
 import { AuthService } from './services/auth.service';
 import { TranslationService } from './services/translation.service';
 import { I18nConfigService } from './services/i18n-config.service';
+import { LoadingService } from './services/loading.service';
 
 // Translation loader factory function for v17
 export function HttpLoaderFactory(): TranslateHttpLoader {
@@ -73,6 +75,7 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     SidebarComponent,
     NavbarComponent,
     SummaryCardComponent,
+    LoadingOverlayComponent,
     AddCategoryDialogComponent,
     UserSettingsComponent,
     LoginComponent
@@ -128,6 +131,7 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     AuthService,
     TranslationService,
     I18nConfigService,
+    LoadingService,
     DatePipe,
     ...provideTranslateHttpLoader({
       prefix: './assets/i18n/',
