@@ -106,6 +106,7 @@ import { AuthService } from './services/auth.service';
     FinancialDataService,
     ExportService,
     ChartService,
+    AuthService,
     DatePipe
   ],
   bootstrap: [AppComponent]
