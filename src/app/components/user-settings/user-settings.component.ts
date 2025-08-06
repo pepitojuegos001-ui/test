@@ -205,15 +205,22 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
     // Simulate API call
     setTimeout(() => {
       const formData = this.profileForm.value;
+      const previousLanguage = this.currentUser.selectedLanguage;
+
       this.currentUser = { ...this.currentUser, ...formData };
-      
+
       if (this.selectedFile) {
         // In a real app, you would upload the file to a server
         this.currentUser.avatar = this.imagePreview || '';
       }
-      
+
+      // Handle language change
+      if (formData.selectedLanguage !== previousLanguage) {
+        this.translationService.setLanguage(formData.selectedLanguage);
+      }
+
       this.isLoading = false;
-      this.showSuccess('Profile updated successfully!');
+      this.showSuccess(this.translationService.instant('USER_SETTINGS.PROFILE_UPDATED'));
     }, 1000);
   }
 
