@@ -65,30 +65,30 @@
   <!-- Summary Statistics -->
   <mat-card class="summary-card">
     <mat-card-header>
-      <mat-card-title>Summary Statistics</mat-card-title>
+      <mat-card-title>{{ 'REPORTS.SUMMARY_STATISTICS' | translate }}</mat-card-title>
     </mat-card-header>
-    
+
     <mat-card-content>
       <div class="stats-grid">
         <div class="stat-item income">
           <div class="stat-value">{{ formatCurrency(summaryStats.totalIncome) }}</div>
-          <div class="stat-label">Total Income</div>
+          <div class="stat-label">{{ 'REPORTS.TOTAL_INCOME' | translate }}</div>
         </div>
-        
+
         <div class="stat-item expense">
           <div class="stat-value">{{ formatCurrency(summaryStats.totalExpenses) }}</div>
-          <div class="stat-label">Total Expenses</div>
+          <div class="stat-label">{{ 'REPORTS.TOTAL_EXPENSES' | translate }}</div>
         </div>
-        
-        <div class="stat-item balance" [class.positive]="summaryStats.netBalance >= 0" 
+
+        <div class="stat-item balance" [class.positive]="summaryStats.netBalance >= 0"
                                      [class.negative]="summaryStats.netBalance < 0">
           <div class="stat-value">{{ formatCurrency(summaryStats.netBalance) }}</div>
-          <div class="stat-label">Net Balance</div>
+          <div class="stat-label">{{ 'REPORTS.NET_BALANCE' | translate }}</div>
         </div>
-        
+
         <div class="stat-item">
           <div class="stat-value">{{ summaryStats.transactionCount }}</div>
-          <div class="stat-label">Transactions</div>
+          <div class="stat-label">{{ 'REPORTS.TRANSACTIONS' | translate }}</div>
         </div>
       </div>
     </mat-card-content>
