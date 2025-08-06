@@ -4,6 +4,7 @@ import { FinancialDataService, DateFilter, Transaction } from '../../services/fi
 import { ChartService } from '../../services/chart.service';
 import { AuthService } from '../../services/auth.service';
 import { TranslationService } from '../../services/translation.service';
+import { LoadingService } from '../../services/loading.service';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -47,7 +48,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private financialDataService: FinancialDataService,
     private chartService: ChartService,
     private authService: AuthService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private loadingService: LoadingService
   ) { }
 
   ngOnInit(): void {
@@ -65,15 +67,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private initializeWithLoading(): void {
     this.isLoading = true;
+    const loadingMessage = this.translationService.translate('LOADING.LOADING_DASHBOARD');
 
-    // Simulate 5-second loading delay
-    timer(5000).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.isLoading = false;
-      this.subscribeToData();
-      this.loadInitialData();
-    });
+    // Show global loading overlay with dashboard loading message
+    this.loadingService.showWithDelay(loadingMessage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.isLoading = false;
+        this.subscribeToData();
+        this.loadInitialData();
+      });
   }
 
   private subscribeToLanguageChanges(): void {
@@ -189,13 +192,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onMonthChanged(month: number): void {
-    this.currentFilter.month = month;
-    this.financialDataService.setDateFilter(this.currentFilter);
+    const loadingMessage = this.translationService.translate('LOADING.APPLYING_FILTERS');
+
+    this.loadingService.showWithDelay(loadingMessage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.currentFilter.month = month;
+        this.financialDataService.setDateFilter(this.currentFilter);
+      });
   }
 
   onYearChanged(year: number): void {
-    this.currentFilter.year = year;
-    this.financialDataService.setDateFilter(this.currentFilter);
+    const loadingMessage = this.translationService.translate('LOADING.APPLYING_FILTERS');
+
+    this.loadingService.showWithDelay(loadingMessage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.currentFilter.year = year;
+        this.financialDataService.setDateFilter(this.currentFilter);
+      });
   }
 
   get selectedPeriod(): string {
