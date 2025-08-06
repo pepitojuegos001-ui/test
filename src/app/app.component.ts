@@ -36,6 +36,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.updateDateTime();
     this.setupResponsiveLayout();
+
+    // Debug authentication state
+    this.isAuthenticated$.subscribe(auth => {
+      console.log('Authentication status changed:', auth);
+    });
   }
 
   private setupResponsiveLayout(): void {
