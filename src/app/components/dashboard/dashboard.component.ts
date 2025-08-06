@@ -23,7 +23,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   currentFilter: DateFilter = { month: new Date().getMonth(), year: new Date().getFullYear() };
   currentTransactions: Transaction[] = [];
   previousTransactions: Transaction[] = [];
-  isLoading = true;
 
   summaryData = {
     income: 0,
