@@ -62,7 +62,8 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<UserSettingsComponent>,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private translationService: TranslationService
   ) {
     this.initializeForms();
   }
