@@ -31,10 +31,7 @@ export class AppComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService
-  ) {
-    // Temporarily force logout to test login screen
-    this.authService.clearAllAuthData();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.updateDateTime();
