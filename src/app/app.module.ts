@@ -58,23 +58,9 @@ import { AuthService } from './services/auth.service';
 import { TranslationService } from './services/translation.service';
 import { I18nConfigService } from './services/i18n-config.service';
 
-// Translation loader factory function - version safe
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  try {
-    // Try new v17+ constructor
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-  } catch (error) {
-    // Fallback for v17+ constructor without parameters
-    const loader = new TranslateHttpLoader(http);
-    // Set configuration if the method exists
-    if (typeof (loader as any).setConfig === 'function') {
-      (loader as any).setConfig({
-        prefix: './assets/i18n/',
-        suffix: '.json'
-      });
-    }
-    return loader;
-  }
+// Translation loader factory function for v17
+export function HttpLoaderFactory(): TranslateHttpLoader {
+  return new TranslateHttpLoader();
 }
 
 @NgModule({
