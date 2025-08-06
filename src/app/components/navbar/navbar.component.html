@@ -29,14 +29,42 @@
     </button>
 
     <!-- Chat/Feedback -->
-    <button 
-      mat-icon-button 
+    <button
+      mat-icon-button
       class="navbar-icon-btn"
       (click)="onChat()"
       [matTooltip]="'NAVBAR.CHAT_FEEDBACK' | translate"
       matTooltipPosition="below">
       <mat-icon>chat</mat-icon>
     </button>
+
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+      <button
+        mat-icon-button
+        class="navbar-icon-btn language-btn"
+        (click)="toggleLanguageMenu()"
+        [matTooltip]="'NAVBAR.LANGUAGE' | translate"
+        matTooltipPosition="below"
+        [attr.aria-expanded]="isLanguageMenuOpen">
+        <span class="language-flag">{{ getCurrentLanguageFlag() }}</span>
+      </button>
+
+      <!-- Language dropdown menu -->
+      <div class="language-dropdown" [class.show]="isLanguageMenuOpen">
+        <div class="dropdown-content">
+          <button
+            *ngFor="let language of availableLanguages"
+            mat-menu-item
+            class="dropdown-item language-item"
+            [class.active]="language.code === currentLanguage"
+            (click)="onLanguageChange(language.code)">
+            <span class="language-flag">{{ language.flag }}</span>
+            <span class="language-name">{{ language.name }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- Username and Avatar with dropdown -->
     <div class="user-section">
