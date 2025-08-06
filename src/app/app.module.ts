@@ -95,14 +95,9 @@ import { I18nConfigService } from './services/i18n-config.service';
     FormsModule,
     LayoutModule,
     HttpClientModule,
-    // TranslateModule.forRoot({
-    //   defaultLanguage: 'en',
-    //   loader: {
-    //     provide: TranslateLoader,
-    //     useFactory: HttpLoaderFactory,
-    //     deps: [HttpClient]
-    //   }
-    // }),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en'
+    }),
     AppRoutingModule,
     
     // Angular Material
