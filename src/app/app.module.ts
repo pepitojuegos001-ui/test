@@ -55,6 +55,7 @@ import { FinancialDataService } from './services/financial-data.service';
 import { ExportService } from './services/export.service';
 import { ChartService } from './services/chart.service';
 import { AuthService } from './services/auth.service';
+import { TranslationService } from './services/translation.service';
 
 @NgModule({
   declarations: [
