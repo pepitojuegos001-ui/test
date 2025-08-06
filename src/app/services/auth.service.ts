@@ -21,7 +21,8 @@ export class AuthService {
 
   constructor(private router: Router) {
     // Check if user was previously authenticated
-    this.checkStoredAuth();
+    // Temporarily disabled for debugging
+    // this.checkStoredAuth();
   }
 
   // Method to clear all auth data for debugging
