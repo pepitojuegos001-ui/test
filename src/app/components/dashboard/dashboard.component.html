@@ -3,6 +3,10 @@
   <div class="dashboard-header">
     <div class="header-content">
       <h1>Financial Dashboard</h1>
+      <p *ngIf="username" class="welcome-message">
+        <mat-icon class="welcome-icon">waving_hand</mat-icon>
+        Welcome back, {{ username | titlecase }}!
+      </p>
       <p>Track your monthly income, expenses, and financial trends</p>
     </div>
     
