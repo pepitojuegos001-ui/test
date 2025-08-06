@@ -22,7 +22,16 @@ export class AppComponent implements OnInit {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  isAuthenticated$: Observable<boolean> = this.authService.currentUser$
+    .pipe(
+      map(user => user?.isAuthenticated || false),
+      shareReplay()
+    );
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.updateDateTime();
