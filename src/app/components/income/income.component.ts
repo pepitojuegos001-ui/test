@@ -14,16 +14,17 @@ import { TranslationService } from '../../services/translation.service';
 })
 export class IncomeComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
-  
+
   incomeForm: FormGroup;
   dataSource = new MatTableDataSource<IncomeEntry>();
   displayedColumns: string[] = ['date', 'amount', 'source', 'notes', 'actions'];
-  
+
   allIncomeEntries: IncomeEntry[] = [];
   filteredEntries: IncomeEntry[] = [];
-  
+
   isEditing = false;
   editingId: string | null = null;
+  isLoading = true;
   
   // Filter options
   get months(): string[] {
