@@ -15,7 +15,7 @@
       <mat-card-content>
         <div class="date-filters">
           <mat-form-field appearance="outline">
-            <mat-label>Month</mat-label>
+            <mat-label>{{ 'DASHBOARD.MONTH' | translate }}</mat-label>
             <mat-select [value]="currentFilter.month" (selectionChange)="onMonthChanged($event.value)">
               <mat-option *ngFor="let month of months; let i = index" [value]="i">
                 {{ month }}
