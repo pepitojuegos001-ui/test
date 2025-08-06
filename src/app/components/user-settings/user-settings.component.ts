@@ -83,7 +83,8 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
       fullName: [this.currentUser.fullName, [Validators.required, Validators.minLength(2)]],
       email: [this.currentUser.email, [Validators.required, Validators.email]],
       notificationsEnabled: [this.currentUser.notificationsEnabled],
-      twoFactorEnabled: [this.currentUser.twoFactorEnabled]
+      twoFactorEnabled: [this.currentUser.twoFactorEnabled],
+      selectedLanguage: [this.currentUser.selectedLanguage, [Validators.required]]
     });
 
     this.passwordForm = this.fb.group({
