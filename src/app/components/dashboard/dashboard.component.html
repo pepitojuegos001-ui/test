@@ -76,8 +76,8 @@
     <!-- Bar Chart -->
     <mat-card class="chart-card">
       <mat-card-header>
-        <mat-card-title>Monthly Comparison</mat-card-title>
-        <mat-card-subtitle>Income vs Expenses - Last 6 months from {{ selectedPeriod }}</mat-card-subtitle>
+        <mat-card-title>{{ 'DASHBOARD.INCOME_VS_EXPENSES' | translate }}</mat-card-title>
+        <mat-card-subtitle>{{ 'DASHBOARD.MONTHLY_COMPARISON_SUBTITLE' | translate: {period: selectedPeriod} }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <div class="chart-container">
