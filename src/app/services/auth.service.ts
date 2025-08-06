@@ -31,6 +31,11 @@ export class AuthService {
     sessionStorage.removeItem(this.AUTH_KEY);
   }
 
+  // Force logout for testing
+  forceLogout(): void {
+    this.logout();
+  }
+
   private checkStoredAuth(): void {
     const storedAuth = localStorage.getItem(this.AUTH_KEY);
     if (storedAuth) {
