@@ -6,7 +6,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader, provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Angular Material Modules
 import { MatSidenavModule } from '@angular/material/sidenav';
