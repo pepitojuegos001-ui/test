@@ -59,8 +59,8 @@ import { TranslationService } from './services/translation.service';
 import { I18nConfigService } from './services/i18n-config.service';
 
 // Translation loader factory function
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
