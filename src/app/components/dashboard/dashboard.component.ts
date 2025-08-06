@@ -40,10 +40,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ];
 
   years = [2023, 2024];
+  username = '';
 
   constructor(
     private financialDataService: FinancialDataService,
-    private chartService: ChartService
+    private chartService: ChartService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
