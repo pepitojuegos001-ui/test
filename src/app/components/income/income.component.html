@@ -29,32 +29,32 @@
               <input matInput type="number" step="0.01" min="0" formControlName="amount" placeholder="0.00">
               <span matPrefix>$</span>
               <mat-error *ngIf="incomeForm.get('amount')?.hasError('required')">
-                Amount is required
+                {{ 'VALIDATION.REQUIRED' | translate }}
               </mat-error>
               <mat-error *ngIf="incomeForm.get('amount')?.hasError('min')">
-                Amount must be greater than 0
+                {{ 'VALIDATION.AMOUNT_POSITIVE' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="form-row">
             <mat-form-field appearance="outline">
-              <mat-label>Source</mat-label>
+              <mat-label>{{ 'INCOME.SOURCE' | translate }}</mat-label>
               <mat-select formControlName="source">
                 <mat-option *ngFor="let source of sources" [value]="source">
                   {{ source }}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="incomeForm.get('source')?.hasError('required')">
-                Source is required
+                {{ 'VALIDATION.REQUIRED' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="form-row">
             <mat-form-field appearance="outline">
-              <mat-label>Notes</mat-label>
-              <textarea matInput formControlName="notes" placeholder="Additional notes (optional)" rows="3"></textarea>
+              <mat-label>{{ 'INCOME.NOTES' | translate }}</mat-label>
+              <textarea matInput formControlName="notes" [placeholder]="'INCOME.NOTES_PLACEHOLDER' | translate" rows="3"></textarea>
             </mat-form-field>
           </div>
 
@@ -65,7 +65,7 @@
             </button>
             <button mat-button type="button" (click)="resetForm()">
               <mat-icon>clear</mat-icon>
-              Clear
+              {{ 'COMMON.CANCEL' | translate }}
             </button>
           </div>
         </form>
