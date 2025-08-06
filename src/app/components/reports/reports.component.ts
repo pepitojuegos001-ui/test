@@ -30,7 +30,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
   allIncomeEntries: IncomeEntry[] = [];
   allExpenseEntries: ExpenseEntry[] = [];
   filteredData: ReportEntry[] = [];
-  isLoading = true;
 
   summaryStats = {
     totalIncome: 0,
@@ -60,14 +59,12 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   private initializeWithLoading(): void {
-    this.isLoading = true;
     const loadingMessage = this.translationService.instant('REPORTS.LOADING_DATA');
 
     // Show global loading overlay with reports loading message
     this.loadingService.showWithDelay(loadingMessage)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.isLoading = false;
         this.subscribeToData();
         this.loadCategories();
       });
