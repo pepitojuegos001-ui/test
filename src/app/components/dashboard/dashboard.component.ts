@@ -66,8 +66,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.translationService.currentLanguage$
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        // Update chart labels when language changes
-        this.updateChartLabels();
+        // Recreate charts with updated language and formatting
+        setTimeout(() => {
+          this.updateCharts();
+        }, 100); // Small delay to ensure translations are loaded
       });
   }
 
