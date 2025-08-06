@@ -46,7 +46,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private financialDataService: FinancialDataService,
     private chartService: ChartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private translationService: TranslationService
   ) { }
 
   ngOnInit(): void {
