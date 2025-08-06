@@ -114,7 +114,8 @@ export class IncomeComponent implements OnInit, OnDestroy {
   }
 
   onDelete(entry: IncomeEntry): void {
-    if (confirm('Are you sure you want to delete this income entry?')) {
+    const confirmMessage = this.translationService.instant('INCOME.DELETE_INCOME') + '?';
+    if (confirm(confirmMessage)) {
       this.financialDataService.deleteIncomeEntry(entry.id);
     }
   }
