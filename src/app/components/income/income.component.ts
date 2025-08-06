@@ -25,7 +25,6 @@ export class IncomeComponent implements OnInit, OnDestroy {
 
   isEditing = false;
   editingId: string | null = null;
-  isLoading = true;
   
   // Filter options
   get months(): string[] {
@@ -66,14 +65,12 @@ export class IncomeComponent implements OnInit, OnDestroy {
   }
 
   private initializeWithLoading(): void {
-    this.isLoading = true;
     const loadingMessage = this.translationService.instant('INCOME.LOADING_DATA');
 
     // Show global loading overlay with income loading message
     this.loadingService.showWithDelay(loadingMessage)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.isLoading = false;
         this.subscribeToData();
         this.setDefaultDate();
       });
