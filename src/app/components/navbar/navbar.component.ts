@@ -34,9 +34,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isUserMenuOpen = false;
   notifications = 3; // Sample notification count
 
+  // Language properties
+  currentLanguage = 'en';
+  availableLanguages: Language[] = [];
+  isLanguageMenuOpen = false;
+
   constructor(
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
