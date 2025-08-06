@@ -187,6 +187,7 @@
     "EMAIL_INVALID": "Por favor, insira um endereço de email válido",
     "MIN_LENGTH": "O comprimento mínimo é {{min}} caracteres",
     "MAX_LENGTH": "O comprimento máximo é {{max}} caracteres",
-    "PASSWORDS_NOT_MATCH": "As senhas não coincidem"
+    "PASSWORDS_NOT_MATCH": "As senhas não coincidem",
+    "AMOUNT_POSITIVE": "A quantia deve ser maior que 0"
   }
 }
