@@ -69,6 +69,7 @@
     "CATEGORY": "Category",
     "SOURCE": "Source",
     "NOTES": "Notes",
+    "NOTES_PLACEHOLDER": "Additional notes (optional)",
     "ADD_INCOME": "Add Income",
     "EDIT_INCOME": "Edit Income",
     "DELETE_INCOME": "Delete Income",
