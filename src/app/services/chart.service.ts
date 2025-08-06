@@ -167,4 +167,17 @@ export class ChartService {
   getTranslatedMonthLabels(): string[] {
     return this.translationService.getTranslatedMonths();
   }
+
+  /**
+   * Format currency values for charts
+   */
+  private formatCurrency(value: number): string {
+    // Use user's locale for currency formatting
+    return new Intl.NumberFormat(this.translationService.getCurrentLanguage(), {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(value);
+  }
 }
