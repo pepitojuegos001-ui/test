@@ -4,6 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Angular Material Modules
 import { MatSidenavModule } from '@angular/material/sidenav';
