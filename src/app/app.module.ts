@@ -89,7 +89,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
-        useFactory: createTranslateLoader,
+        useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
     }),
