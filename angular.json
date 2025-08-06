@@ -79,8 +79,9 @@
             ],
             "liveReload": true,
             "hmr": false,
-            "poll": 1000,
-            "disableHostCheck": true
+            "poll": 2000,
+            "disableHostCheck": true,
+            "verbose": false
           },
           "configurations": {
             "production": {
