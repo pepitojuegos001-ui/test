@@ -25,17 +25,14 @@ export class I18nConfigService {
   }
 
   private configureTranslationOptions(): void {
-    // Configure missing translation handler
-    this.translateService.onMissingTranslation.subscribe(event => {
-      console.warn(`Missing translation for key: ${event.key} in language: ${event.lang}`);
-      
-      // Return fallback text
-      return event.key;
+    // Handle translation changes
+    this.translateService.onLangChange.subscribe(event => {
+      console.log(`Language changed to: ${event.lang}`);
     });
 
-    // Handle translation load errors
-    this.translateService.onTranslationChange.subscribe(event => {
-      console.log(`Language changed to: ${event.lang}`);
+    // Handle default language changes
+    this.translateService.onDefaultLangChange.subscribe(event => {
+      console.log(`Default language changed to: ${event.lang}`);
     });
   }
 
