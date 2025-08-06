@@ -124,4 +124,78 @@ export class TranslationService {
       this.instant('MONTHS.DECEMBER')
     ];
   }
+
+  // Methods for user-specific language management
+
+  /**
+   * Load user's preferred language after authentication
+   * This should be called after successful login
+   */
+  loadUserLanguagePreference(username: string): void {
+    const userLanguageKey = `${this.USER_LANGUAGE_KEY}_${username}`;
+    const userLanguage = this.getUserLanguagePreference(userLanguageKey);
+
+    if (userLanguage && this.isLanguageSupported(userLanguage)) {
+      this.setLanguage(userLanguage);
+    }
+  }
+
+  /**
+   * Save user's language preference
+   * This will be associated with their username
+   */
+  saveUserLanguagePreference(username: string, languageCode: string): void {
+    if (this.isLanguageSupported(languageCode)) {
+      const userLanguageKey = `${this.USER_LANGUAGE_KEY}_${username}`;
+      try {
+        localStorage.setItem(userLanguageKey, languageCode);
+        this.setLanguage(languageCode);
+      } catch (error) {
+        console.warn('Could not save user language preference:', error);
+      }
+    }
+  }
+
+  /**
+   * Get user's saved language preference
+   */
+  private getUserLanguagePreference(userLanguageKey: string): string | null {
+    try {
+      return localStorage.getItem(userLanguageKey);
+    } catch (error) {
+      console.warn('Could not read user language preference:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Reset to default language (English)
+   * This should be called on logout
+   */
+  resetToDefaultLanguage(): void {
+    this.setLanguage('en');
+  }
+
+  /**
+   * Clear user-specific language preferences
+   * This can be called on logout to clean up
+   */
+  clearUserLanguagePreferences(username?: string): void {
+    try {
+      if (username) {
+        const userLanguageKey = `${this.USER_LANGUAGE_KEY}_${username}`;
+        localStorage.removeItem(userLanguageKey);
+      } else {
+        // Clear all user language preferences
+        const keys = Object.keys(localStorage);
+        keys.forEach(key => {
+          if (key.startsWith(this.USER_LANGUAGE_KEY)) {
+            localStorage.removeItem(key);
+          }
+        });
+      }
+    } catch (error) {
+      console.warn('Could not clear user language preferences:', error);
+    }
+  }
 }
