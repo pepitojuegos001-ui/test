@@ -90,7 +90,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: []
+        deps: [HttpClient]
       }
     }),
     AppRoutingModule,
