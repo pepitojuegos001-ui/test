@@ -99,7 +99,11 @@
     "HEALTHCARE": "Healthcare",
     "UTILITIES": "Utilities",
     "OTHER": "Other",
-    "ACTIONS": "Actions"
+    "ACTIONS": "Actions",
+    "ALL_MONTHS": "All Months",
+    "ALL_YEARS": "All Years",
+    "ALL_CATEGORIES": "All Categories",
+    "CLEAR_FILTERS": "Clear Filters"
   },
   "REPORTS": {
     "TITLE": "Financial Reports",
