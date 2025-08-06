@@ -51,6 +51,7 @@ import { SummaryCardComponent } from './shared/components/summary-card/summary-c
 import { FinancialDataService } from './services/financial-data.service';
 import { ExportService } from './services/export.service';
 import { ChartService } from './services/chart.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
