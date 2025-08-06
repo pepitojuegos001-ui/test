@@ -25,14 +25,18 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
   @Output() sidebarToggle = new EventEmitter<void>();
 
-  username = 'Juan';
+  private destroy$ = new Subject<void>();
+  username = '';
   isUserMenuOpen = false;
   notifications = 3; // Sample notification count
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private authService: AuthService
+  ) {}
 
   onSidebarToggle(): void {
     this.sidebarToggle.emit();
