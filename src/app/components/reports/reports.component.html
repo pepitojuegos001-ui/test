@@ -14,28 +14,28 @@
       <form [formGroup]="filtersForm">
         <div class="filters-grid">
           <mat-form-field appearance="outline">
-            <mat-label>Start Date</mat-label>
+            <mat-label>{{ 'REPORTS.START_DATE' | translate }}</mat-label>
             <input matInput type="date" formControlName="startDate">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>End Date</mat-label>
+            <mat-label>{{ 'REPORTS.END_DATE' | translate }}</mat-label>
             <input matInput type="date" formControlName="endDate">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Type</mat-label>
+            <mat-label>{{ 'REPORTS.TYPE' | translate }}</mat-label>
             <mat-select formControlName="type">
-              <mat-option value="all">All Transactions</mat-option>
-              <mat-option value="income">Income Only</mat-option>
-              <mat-option value="expense">Expenses Only</mat-option>
+              <mat-option value="all">{{ 'REPORTS.ALL_TRANSACTIONS' | translate }}</mat-option>
+              <mat-option value="income">{{ 'REPORTS.INCOME_ONLY' | translate }}</mat-option>
+              <mat-option value="expense">{{ 'REPORTS.EXPENSES_ONLY' | translate }}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Category</mat-label>
+            <mat-label>{{ 'REPORTS.CATEGORY' | translate }}</mat-label>
             <mat-select formControlName="category">
-              <mat-option value="all">All Categories</mat-option>
+              <mat-option value="all">{{ 'REPORTS.ALL_CATEGORIES' | translate }}</mat-option>
               <mat-option *ngFor="let category of allCategories" [value]="category">
                 {{ category }}
               </mat-option>
