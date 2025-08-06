@@ -80,6 +80,11 @@ export class AuthService {
             sessionStorage.setItem(this.AUTH_KEY, JSON.stringify(user));
           }
 
+          // Load user's language preference after successful login
+          if (this.translationService) {
+            this.translationService.loadUserLanguagePreference(username);
+          }
+
           observer.next(true);
         } else {
           observer.next(false);
