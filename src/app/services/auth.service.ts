@@ -19,10 +19,16 @@ export class AuthService {
   private readonly VALID_USERNAME = 'juan';
   private readonly VALID_PASSWORD = '123456789';
   private readonly AUTH_KEY = 'financial_dashboard_auth';
+  private translationService: any; // Will be injected later to avoid circular dependency
 
   constructor(private router: Router) {
     // Check if user was previously authenticated
     this.checkStoredAuth();
+  }
+
+  // Set translation service after both services are initialized
+  setTranslationService(translationService: any): void {
+    this.translationService = translationService;
   }
 
   // Method to clear all auth data for debugging
