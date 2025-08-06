@@ -25,7 +25,13 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initializeForm();
+    console.log('LoginComponent: ngOnInit called');
+    try {
+      this.initializeForm();
+      console.log('LoginComponent: Form initialized successfully');
+    } catch (error) {
+      console.error('LoginComponent: Error initializing form:', error);
+    }
   }
 
   private initializeForm(): void {
