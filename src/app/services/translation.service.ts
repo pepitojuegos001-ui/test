@@ -230,4 +230,21 @@ export class TranslationService {
       }
     }
   }
+
+  /**
+   * Ensure language is properly set on route navigation
+   * This method should be called by components to ensure translation state
+   */
+  ensureLanguageLoaded(): void {
+    const currentLang = this.getCurrentLanguage();
+    const savedLang = this.getSavedLanguage();
+
+    // If there's a mismatch, reload the saved language
+    if (savedLang && savedLang !== currentLang && this.isLanguageSupported(savedLang)) {
+      this.setLanguage(savedLang);
+    }
+
+    // Force reload current language to ensure translations are applied
+    this.translateService.use(currentLang);
+  }
 }
