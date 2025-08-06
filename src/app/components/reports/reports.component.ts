@@ -5,6 +5,7 @@ import { Subject, takeUntil, combineLatest, timer } from 'rxjs';
 import { FinancialDataService, IncomeEntry, ExpenseEntry } from '../../services/financial-data.service';
 import { ExportService } from '../../services/export.service';
 import { TranslationService } from '../../services/translation.service';
+import { LoadingService } from '../../services/loading.service';
 
 interface ReportEntry {
   date: string;
@@ -44,7 +45,8 @@ export class ReportsComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private financialDataService: FinancialDataService,
     private exportService: ExportService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private loadingService: LoadingService
   ) {
     this.filtersForm = this.createForm();
   }
@@ -59,15 +61,16 @@ export class ReportsComponent implements OnInit, OnDestroy {
 
   private initializeWithLoading(): void {
     this.isLoading = true;
+    const loadingMessage = this.translationService.translate('REPORTS.LOADING_DATA');
 
-    // Simulate 5-second loading delay
-    timer(5000).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.isLoading = false;
-      this.subscribeToData();
-      this.loadCategories();
-    });
+    // Show global loading overlay with reports loading message
+    this.loadingService.showWithDelay(loadingMessage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.isLoading = false;
+        this.subscribeToData();
+        this.loadCategories();
+      });
   }
 
   ngOnDestroy(): void {
@@ -105,64 +108,70 @@ export class ReportsComponent implements OnInit, OnDestroy {
   }
 
   generateReport(): void {
-    const filters = this.filtersForm.value;
-    let combinedData: ReportEntry[] = [];
+    const loadingMessage = this.translationService.translate('LOADING.GENERATING_REPORT');
 
-    // Combine income and expense data
-    const incomeData: ReportEntry[] = this.allIncomeEntries.map(entry => ({
-      date: entry.date,
-      type: 'Income' as const,
-      category: entry.source,
-      amount: entry.amount,
-      notes: entry.notes || ''
-    }));
+    this.loadingService.showWithDelay(loadingMessage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        const filters = this.filtersForm.value;
+        let combinedData: ReportEntry[] = [];
 
-    const expenseData: ReportEntry[] = this.allExpenseEntries.map(entry => ({
-      date: entry.date,
-      type: 'Expense' as const,
-      category: entry.category,
-      amount: entry.amount,
-      notes: entry.notes || ''
-    }));
+        // Combine income and expense data
+        const incomeData: ReportEntry[] = this.allIncomeEntries.map(entry => ({
+          date: entry.date,
+          type: 'Income' as const,
+          category: entry.source,
+          amount: entry.amount,
+          notes: entry.notes || ''
+        }));
 
-    combinedData = [...incomeData, ...expenseData];
+        const expenseData: ReportEntry[] = this.allExpenseEntries.map(entry => ({
+          date: entry.date,
+          type: 'Expense' as const,
+          category: entry.category,
+          amount: entry.amount,
+          notes: entry.notes || ''
+        }));
 
-    // Apply filters
-    this.filteredData = combinedData.filter(item => {
-      // Date range filter
-      if (filters.startDate && item.date < filters.startDate) {
-        return false;
-      }
-      if (filters.endDate && item.date > filters.endDate) {
-        return false;
-      }
+        combinedData = [...incomeData, ...expenseData];
 
-      // Type filter
-      if (filters.type !== 'all') {
-        if (filters.type === 'income' && item.type !== 'Income') {
-          return false;
-        }
-        if (filters.type === 'expense' && item.type !== 'Expense') {
-          return false;
-        }
-      }
+        // Apply filters
+        this.filteredData = combinedData.filter(item => {
+          // Date range filter
+          if (filters.startDate && item.date < filters.startDate) {
+            return false;
+          }
+          if (filters.endDate && item.date > filters.endDate) {
+            return false;
+          }
 
-      // Category filter
-      if (filters.category !== 'all' && item.category !== filters.category) {
-        return false;
-      }
+          // Type filter
+          if (filters.type !== 'all') {
+            if (filters.type === 'income' && item.type !== 'Income') {
+              return false;
+            }
+            if (filters.type === 'expense' && item.type !== 'Expense') {
+              return false;
+            }
+          }
 
-      return true;
-    });
+          // Category filter
+          if (filters.category !== 'all' && item.category !== filters.category) {
+            return false;
+          }
 
-    // Sort by date (newest first)
-    this.filteredData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+          return true;
+        });
 
-    // Update table
-    this.dataSource.data = this.filteredData;
+        // Sort by date (newest first)
+        this.filteredData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-    // Calculate summary statistics
-    this.calculateSummaryStats();
+        // Update table
+        this.dataSource.data = this.filteredData;
+
+        // Calculate summary statistics
+        this.calculateSummaryStats();
+      });
   }
 
   private calculateSummaryStats(): void {
