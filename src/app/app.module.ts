@@ -5,7 +5,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader, provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Angular Material Modules
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -57,21 +58,10 @@ import { AuthService } from './services/auth.service';
 import { TranslationService } from './services/translation.service';
 import { I18nConfigService } from './services/i18n-config.service';
 
-// Translation loader factory function with compatibility handling
-// export function HttpLoaderFactory(http: HttpClient) {
-//   try {
-//     // Try with parameters for older versions
-//     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-//   } catch (error) {
-//     // Fallback: try without parameters for v17+
-//     try {
-//       return new TranslateHttpLoader(http);
-//     } catch (fallbackError) {
-//       // Last resort: create minimal loader
-//       return new TranslateHttpLoader();
-//     }
-//   }
-// }
+// Translation loader factory function for v17
+export function HttpLoaderFactory(): TranslateHttpLoader {
+  return new TranslateHttpLoader();
+}
 
 @NgModule({
   declarations: [
@@ -96,7 +86,12 @@ import { I18nConfigService } from './services/i18n-config.service';
     LayoutModule,
     HttpClientModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'en'
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: []
+      }
     }),
     AppRoutingModule,
     
@@ -133,7 +128,11 @@ import { I18nConfigService } from './services/i18n-config.service';
     AuthService,
     TranslationService,
     I18nConfigService,
-    DatePipe
+    DatePipe,
+    ...provideTranslateHttpLoader({
+      prefix: './assets/i18n/',
+      suffix: '.json'
+    })
   ],
   bootstrap: [AppComponent]
 })
