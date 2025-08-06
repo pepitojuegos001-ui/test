@@ -110,7 +110,8 @@
     "ALL_MONTHS": "Todos los Meses",
     "ALL_YEARS": "Todos los Años",
     "ALL_CATEGORIES": "Todas las Categorías",
-    "CLEAR_FILTERS": "Limpiar Filtros"
+    "CLEAR_FILTERS": "Limpiar Filtros",
+    "LOADING_DATA": "Cargando datos de gastos..."
   },
   "REPORTS": {
     "TITLE": "Reportes Financieros",
