@@ -42,7 +42,7 @@
   </div>
 
   <!-- Summary Cards -->
-  <div class="summary-cards-grid" *ngIf="!isLoading">
+  <div class="summary-cards-grid">
     <app-summary-card
       [title]="'DASHBOARD.INCOME' | translate"
       [value]="summaryData.income"
@@ -71,21 +71,9 @@
     </app-summary-card>
   </div>
 
-  <!-- Loading Spinner for Summary Cards -->
-  <div class="loading-container" *ngIf="isLoading">
-    <mat-card class="loading-card">
-      <mat-card-content>
-        <div class="loading-content">
-          <mat-spinner diameter="50"></mat-spinner>
-          <h3>{{ 'COMMON.LOADING' | translate }}</h3>
-          <p>{{ 'DASHBOARD.LOADING_DATA' | translate }}</p>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
 
   <!-- Charts Section -->
-  <div class="charts-grid" *ngIf="!isLoading">
+  <div class="charts-grid">
     <!-- Bar Chart -->
     <mat-card class="chart-card">
       <mat-card-header>
@@ -113,23 +101,4 @@
     </mat-card>
   </div>
 
-  <!-- Loading Spinner for Charts -->
-  <div class="charts-loading-grid" *ngIf="isLoading">
-    <mat-card class="chart-loading-card">
-      <mat-card-content>
-        <div class="chart-loading-content">
-          <mat-spinner diameter="40"></mat-spinner>
-          <h4>{{ 'DASHBOARD.LOADING_CHARTS' | translate }}</h4>
-        </div>
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="chart-loading-card">
-      <mat-card-content>
-        <div class="chart-loading-content">
-          <mat-spinner diameter="40"></mat-spinner>
-          <h4>{{ 'DASHBOARD.LOADING_CHARTS' | translate }}</h4>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
 </div>
