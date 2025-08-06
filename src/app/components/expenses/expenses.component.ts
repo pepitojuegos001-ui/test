@@ -119,7 +119,8 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   }
 
   onDelete(entry: ExpenseEntry): void {
-    if (confirm('Are you sure you want to delete this expense entry?')) {
+    const confirmMessage = this.translationService.instant('EXPENSES.DELETE_EXPENSE') + '?';
+    if (confirm(confirmMessage)) {
       this.financialDataService.deleteExpenseEntry(entry.id);
     }
   }
