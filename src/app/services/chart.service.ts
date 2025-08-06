@@ -147,4 +147,22 @@ export class ChartService {
       chart.destroy();
     }
   }
+
+  /**
+   * Update chart dataset labels when language changes
+   */
+  updateChartLabels(chart: Chart): void {
+    if (chart.data.datasets.length >= 2) {
+      chart.data.datasets[0].label = this.translationService.instant('DASHBOARD.INCOME');
+      chart.data.datasets[1].label = this.translationService.instant('DASHBOARD.EXPENSES');
+      chart.update();
+    }
+  }
+
+  /**
+   * Get translated month labels for charts
+   */
+  getTranslatedMonthLabels(): string[] {
+    return this.translationService.getTranslatedMonths();
+  }
 }
