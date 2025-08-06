@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private initializeWithLoading(): void {
     this.isLoading = true;
-    const loadingMessage = this.translationService.translate('LOADING.LOADING_DASHBOARD');
+    const loadingMessage = this.translationService.instant('LOADING.LOADING_DASHBOARD');
 
     // Show global loading overlay with dashboard loading message
     this.loadingService.showWithDelay(loadingMessage)
@@ -192,7 +192,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onMonthChanged(month: number): void {
-    const loadingMessage = this.translationService.translate('LOADING.APPLYING_FILTERS');
+    const loadingMessage = this.translationService.instant('LOADING.APPLYING_FILTERS');
 
     this.loadingService.showWithDelay(loadingMessage)
       .pipe(takeUntil(this.destroy$))
@@ -203,7 +203,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onYearChanged(year: number): void {
-    const loadingMessage = this.translationService.translate('LOADING.APPLYING_FILTERS');
+    const loadingMessage = this.translationService.instant('LOADING.APPLYING_FILTERS');
 
     this.loadingService.showWithDelay(loadingMessage)
       .pipe(takeUntil(this.destroy$))
