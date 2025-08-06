@@ -24,6 +24,13 @@ export class AuthService {
     this.checkStoredAuth();
   }
 
+  // Method to clear all auth data for debugging
+  clearAllAuthData(): void {
+    this.currentUserSubject.next(null);
+    localStorage.removeItem(this.AUTH_KEY);
+    sessionStorage.removeItem(this.AUTH_KEY);
+  }
+
   private checkStoredAuth(): void {
     const storedAuth = localStorage.getItem(this.AUTH_KEY);
     if (storedAuth) {
