@@ -28,7 +28,7 @@ export class ChartService {
         labels: labels,
         datasets: [
           {
-            label: 'Income',
+            label: this.translationService.instant('DASHBOARD.INCOME'),
             data: incomeData,
             backgroundColor: 'rgba(76, 175, 80, 0.8)',
             borderColor: '#4CAF50',
@@ -36,7 +36,7 @@ export class ChartService {
             borderRadius: 6
           },
           {
-            label: 'Expenses',
+            label: this.translationService.instant('DASHBOARD.EXPENSES'),
             data: expenseData,
             backgroundColor: 'rgba(244, 67, 54, 0.8)',
             borderColor: '#F44336',
