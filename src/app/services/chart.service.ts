@@ -73,7 +73,7 @@ export class ChartService {
             beginAtZero: true,
             ticks: {
               callback: (value) => {
-                return '$' + (value as number).toLocaleString();
+                return this.formatCurrency(value as number);
               }
             }
           }
