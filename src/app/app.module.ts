@@ -85,15 +85,19 @@ export function createTranslateLoader(http: HttpClient) {
     FormsModule,
     LayoutModule,
     HttpClientModule,
-    AppRoutingModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
         deps: [HttpClient]
+      },
+      missingTranslationHandler: {
+        provide: 'TRANSLATE_MISSING_TRANSLATION_HANDLER',
+        useValue: undefined
       }
     }),
+    AppRoutingModule,
     
     // Angular Material
     MatSidenavModule,
