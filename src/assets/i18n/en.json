@@ -83,7 +83,8 @@
     "ALL_MONTHS": "All Months",
     "ALL_YEARS": "All Years",
     "ALL_SOURCES": "All Sources",
-    "CLEAR_FILTERS": "Clear Filters"
+    "CLEAR_FILTERS": "Clear Filters",
+    "LOADING_DATA": "Loading income data..."
   },
   "EXPENSES": {
     "TITLE": "Expense Management",
