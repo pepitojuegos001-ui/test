@@ -16,7 +16,7 @@
     class="nav-item"
     [class.active]="isActive(item.path)"
     [class.collapsed]="isCollapsed"
-    [matTooltip]="isCollapsed ? item.label : ''"
+    [matTooltip]="isCollapsed ? (item.label | translate) : ''"
     [matTooltipPosition]="'right'"
     [matTooltipDisabled]="!isCollapsed"
     *ngFor="let item of navItems"
