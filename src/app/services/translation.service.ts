@@ -34,8 +34,15 @@ export class TranslationService {
     // Always set English as default language
     this.translateService.setDefaultLang('en');
 
-    // Start with English - user preference will be loaded after login
-    this.setLanguage('en');
+    // Try to load saved language preference immediately
+    const savedLanguage = this.getSavedLanguage();
+    if (savedLanguage && this.isLanguageSupported(savedLanguage)) {
+      this.setLanguage(savedLanguage);
+    } else {
+      // Fallback to browser language or English
+      const browserLanguage = this.getBrowserLanguage();
+      this.setLanguage(browserLanguage);
+    }
   }
 
   private getSavedLanguage(): string | null {
