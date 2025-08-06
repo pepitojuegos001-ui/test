@@ -91,10 +91,6 @@ export function createTranslateLoader(http: HttpClient) {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
         deps: [HttpClient]
-      },
-      missingTranslationHandler: {
-        provide: 'TRANSLATE_MISSING_TRANSLATION_HANDLER',
-        useValue: undefined
       }
     }),
     AppRoutingModule,
