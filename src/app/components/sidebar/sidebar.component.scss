@@ -145,8 +145,8 @@
 
     &:hover {
       transform: scale(1.05);
-      background: rgba(33, 150, 243, 0.08);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      background: var(--sidebar-hover);
+      box-shadow: var(--shadow-medium);
     }
 
     &.active {
