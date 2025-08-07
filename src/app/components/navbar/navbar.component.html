@@ -17,10 +17,17 @@
 
   <!-- Right side: Notifications, Chat, Username, Avatar -->
   <div class="navbar-right">
-    <!-- theme -->
-    <button mat-icon-button (click)="toggleTheme()">
-      <mat-icon>
-        {{ themeService.isDarkMode() ? "light_mode" : "dark_mode" }}
+    <!-- Theme Toggle -->
+    <button
+      mat-icon-button
+      class="navbar-icon-btn theme-toggle-btn"
+      (click)="toggleTheme()"
+      [matTooltip]="getThemeTooltip()"
+      matTooltipPosition="below"
+      [attr.aria-label]="getThemeTooltip()"
+    >
+      <mat-icon [class.theme-transition]="true">
+        {{ getCurrentThemeIcon() }}
       </mat-icon>
     </button>
 
