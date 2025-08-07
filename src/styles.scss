@@ -253,8 +253,9 @@ html,
 body {
   height: 100%;
   font-family: "Roboto", sans-serif;
-  background-color: var(--background-color);
+  background-color: var(--background-primary);
   color: var(--text-primary);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
 }
 
 body {
