@@ -620,20 +620,21 @@ body {
 
 /* Enhanced toolbar styles */
 .mat-toolbar {
-  background: linear-gradient(
-    135deg,
-    var(--primary-blue) 0%,
-    var(--primary-blue-dark) 100%
-  ) !important;
-  color: white !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: var(--nav-background) !important;
+  color: var(--nav-text) !important;
+  box-shadow: var(--shadow-medium);
   height: clamp(56px, 8vw, 72px);
   font-size: clamp(1rem, 1.5vw, 1.25rem);
+  transition: background-color var(--transition-normal);
 
   .mat-icon-button {
-    color: white;
+    color: var(--nav-text) !important;
     width: clamp(40px, 6vw, 52px);
     height: clamp(40px, 6vw, 52px);
+
+    &:hover {
+      background-color: var(--nav-hover) !important;
+    }
 
     .mat-icon {
       font-size: clamp(20px, 3vw, 28px);
