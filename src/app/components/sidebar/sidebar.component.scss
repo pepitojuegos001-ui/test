@@ -52,7 +52,7 @@
   padding: clamp(3px, 0.6vw, 6px);
 
   &:hover {
-    background: rgba(33, 150, 243, 0.08);
+    background: var(--sidebar-hover);
     transform: scale(1.1);
   }
 }
