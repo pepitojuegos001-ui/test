@@ -13,7 +13,8 @@
     "WARNING": "Warning",
     "CONFIRM": "Confirm",
     "YES": "Yes",
-    "NO": "No"
+    "NO": "No",
+    "TOGGLE_VISIBILITY": "Toggle password visibility"
   },
   "AUTH": {
     "LOGIN": "Sign In",
@@ -171,6 +172,9 @@
     "NEW_PASSWORD": "New Password",
     "CONFIRM_PASSWORD": "Confirm New Password",
     "PASSWORD_CHANGED": "Password changed successfully!",
+    "PASSWORD_STRENGTH": "Password Strength",
+    "CURRENT_PASSWORD_INCORRECT": "Current password is incorrect",
+    "UPDATING": "Updating...",
     "PASSWORD_REQUIREMENTS": "Password Requirements:",
     "MIN_8_CHARS": "At least 8 characters",
     "ONE_UPPERCASE": "One uppercase letter",
