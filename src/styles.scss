@@ -228,6 +228,32 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+// Global Material component theme enforcement
+.mat-drawer-backdrop {
+  background-color: var(--background-overlay) !important;
+}
+
+.mat-drawer-container {
+  background-color: var(--background-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.mat-drawer {
+  background-color: var(--sidebar-background) !important;
+  color: var(--sidebar-text) !important;
+  border-color: var(--sidebar-border) !important;
+}
+
+.mat-drawer-content {
+  background-color: var(--background-secondary) !important;
+}
+
+// Ensure page content uses theme backgrounds
+app-root {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+}
+
 /* Custom Material Design overrides */
 .mat-sidenav-container {
   background-color: var(--background-secondary) !important;
