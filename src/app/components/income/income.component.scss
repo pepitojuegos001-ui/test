@@ -167,8 +167,10 @@
   align-items: end;
   margin-bottom: clamp(16px, 2vw, 32px);
   padding: clamp(12px, 2vw, 24px);
-  background: var(--background-light);
-  border-radius: clamp(6px, 1vw, 12px);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-light);
 
   mat-form-field {
     min-width: clamp(120px, 15vw, 160px);
