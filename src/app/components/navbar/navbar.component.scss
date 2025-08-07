@@ -267,9 +267,9 @@
         height: 16px;
         object-fit: cover;
         border-radius: 3px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-        background: #fff;
-        border: 1px solid #e0e0e0;
+        box-shadow: var(--shadow-light);
+        background: var(--surface-primary);
+        border: 1px solid var(--border-primary);
         margin-right: 6px;
       }
 
