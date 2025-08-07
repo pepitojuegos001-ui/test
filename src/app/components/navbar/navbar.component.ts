@@ -49,6 +49,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   availableLanguages: Language[] = [];
   isLanguageMenuOpen = false;
 
+  // Theme properties
+  currentTheme: Theme = "light";
+  isDarkMode = false;
+
   constructor(
     private dialog: MatDialog,
     private authService: AuthService,
