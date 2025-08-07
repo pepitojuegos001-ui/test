@@ -21,7 +21,7 @@
 
 .sidebar-header {
   padding: clamp(16px, 3vw, 28px);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--sidebar-border);
   min-height: clamp(72px, 10vw, 100px);
   display: flex;
   align-items: center;
