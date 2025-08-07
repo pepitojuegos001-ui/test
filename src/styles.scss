@@ -137,81 +137,81 @@
 
 /* Dark Theme Variables */
 .dark-theme {
-  // Background colors
-  --background-primary: #121212;
-  --background-secondary: #1e1e1e;
+  // Background colors - Enhanced contrast
+  --background-primary: #0f0f0f;
+  --background-secondary: #1a1a1a;
   --background-tertiary: #2d2d2d;
-  --background-elevated: #1e1e1e;
-  --background-overlay: rgba(255, 255, 255, 0.1);
+  --background-elevated: #242424;
+  --background-overlay: rgba(255, 255, 255, 0.15);
 
-  // Surface colors
+  // Surface colors - Better differentiation
   --surface-primary: #1e1e1e;
-  --surface-secondary: #2d2d2d;
-  --surface-tertiary: #383838;
-  --surface-hover: #2d2d2d;
-  --surface-selected: #1a237e;
-  --surface-disabled: #383838;
+  --surface-secondary: #2a2a2a;
+  --surface-tertiary: #3a3a3a;
+  --surface-hover: #333333;
+  --surface-selected: #1e3a8a;
+  --surface-disabled: #404040;
 
-  // Text colors
-  --text-primary: #ffffff;
-  --text-secondary: #b3b3b3;
-  --text-tertiary: #8a8a8a;
-  --text-disabled: #616161;
-  --text-inverse: #121212;
+  // Text colors - Improved contrast ratios
+  --text-primary: #f5f5f5;
+  --text-secondary: #c7c7c7;
+  --text-tertiary: #9a9a9a;
+  --text-disabled: #6b6b6b;
+  --text-inverse: #0f0f0f;
   --text-on-primary: #ffffff;
   --text-on-secondary: #ffffff;
-  --text-on-surface: #ffffff;
+  --text-on-surface: #f5f5f5;
 
-  // Border colors
-  --border-primary: #383838;
-  --border-secondary: #2d2d2d;
-  --border-hover: #4a4a4a;
-  --border-focus: var(--brand-primary-light);
-  --border-error: var(--status-error);
-  --border-success: var(--status-success);
+  // Border colors - More visible borders
+  --border-primary: #444444;
+  --border-secondary: #333333;
+  --border-hover: #555555;
+  --border-focus: #60a5fa;
+  --border-error: #ef4444;
+  --border-success: #22c55e;
 
-  // Interactive colors
-  --interactive-primary: var(--brand-primary-light);
-  --interactive-primary-hover: var(--brand-primary);
-  --interactive-secondary: var(--brand-secondary);
-  --interactive-secondary-hover: var(--brand-secondary-light);
+  // Interactive colors - Better visibility
+  --interactive-primary: #60a5fa;
+  --interactive-primary-hover: #3b82f6;
+  --interactive-secondary: #22c55e;
+  --interactive-secondary-hover: #16a34a;
 
-  // Form colors
-  --input-background: #2d2d2d;
-  --input-border: #383838;
-  --input-border-focus: var(--brand-primary-light);
-  --input-text: #ffffff;
-  --input-placeholder: #8a8a8a;
+  // Form colors - Enhanced contrast
+  --input-background: #2a2a2a;
+  --input-border: #444444;
+  --input-border-focus: #60a5fa;
+  --input-text: #f5f5f5;
+  --input-placeholder: #9a9a9a;
 
   // Navigation colors
-  --nav-background: #1a1a1a;
+  --nav-background: #111111;
   --nav-text: #ffffff;
-  --nav-hover: rgba(255, 255, 255, 0.1);
+  --nav-hover: rgba(255, 255, 255, 0.15);
 
   // Sidebar colors
-  --sidebar-background: #1e1e1e;
-  --sidebar-text: #ffffff;
-  --sidebar-hover: #2d2d2d;
-  --sidebar-selected: #1a237e;
-  --sidebar-border: #383838;
+  --sidebar-background: #1a1a1a;
+  --sidebar-text: #f5f5f5;
+  --sidebar-hover: #333333;
+  --sidebar-selected: #1e3a8a;
+  --sidebar-border: #444444;
 
-  // Card colors
+  // Card colors - Better visibility
   --card-background: #1e1e1e;
-  --card-border: #383838;
-  --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --card-border: #444444;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 
-  // Table colors
-  --table-header: #2d2d2d;
+  // Table colors - Enhanced readability
+  --table-header: #2a2a2a;
   --table-row-even: #1e1e1e;
-  --table-row-odd: #252525;
-  --table-row-hover: #2d2d2d;
-  --table-border: #383838;
+  --table-row-odd: #242424;
+  --table-row-hover: #333333;
+  --table-border: #444444;
 
   // Icon colors
-  --icon-primary: #b3b3b3;
-  --icon-secondary: #8a8a8a;
-  --icon-active: var(--brand-primary-light);
-  --icon-inverse: #121212;
+  --icon-primary: #c7c7c7;
+  --icon-secondary: #9a9a9a;
+  --icon-active: #60a5fa;
+  --icon-inverse: #0f0f0f;
 }
 
 html,
