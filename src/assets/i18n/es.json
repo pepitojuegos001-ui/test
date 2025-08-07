@@ -13,7 +13,8 @@
     "WARNING": "Advertencia",
     "CONFIRM": "Confirmar",
     "YES": "Sí",
-    "NO": "No"
+    "NO": "No",
+    "TOGGLE_VISIBILITY": "Alternar visibilidad de contraseña"
   },
   "AUTH": {
     "LOGIN": "Iniciar Sesión",
@@ -171,6 +172,9 @@
     "NEW_PASSWORD": "Nueva Contraseña",
     "CONFIRM_PASSWORD": "Confirmar Nueva Contraseña",
     "PASSWORD_CHANGED": "¡Contraseña cambiada exitosamente!",
+    "PASSWORD_STRENGTH": "Fortaleza de Contraseña",
+    "CURRENT_PASSWORD_INCORRECT": "La contraseña actual es incorrecta",
+    "UPDATING": "Actualizando...",
     "PASSWORD_REQUIREMENTS": "Requisitos de Contraseña:",
     "MIN_8_CHARS": "Al menos 8 caracteres",
     "ONE_UPPERCASE": "Una letra mayúscula",
