@@ -381,15 +381,15 @@ body {
 }
 
 .income-card {
-  border-left: 4px solid var(--success-color);
+  border-left: 4px solid var(--status-success);
 }
 
 .expense-card {
-  border-left: 4px solid var(--error-color);
+  border-left: 4px solid var(--status-error);
 }
 
 .balance-card {
-  border-left: 4px solid var(--primary-blue);
+  border-left: 4px solid var(--brand-primary);
 }
 
 .icon-container {
