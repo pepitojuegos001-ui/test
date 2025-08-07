@@ -269,7 +269,8 @@
   .current-period {
     justify-content: center;
     padding: 8px;
-    background: var(--background-light);
-    border-radius: 8px;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-md);
   }
 }
