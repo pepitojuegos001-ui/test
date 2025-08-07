@@ -246,10 +246,7 @@
 // CSS Variables (if not already defined in global styles)
 :host {
   --border-color: #e0e0e0;
-  --primary-blue: #2196f3;
-  --text-primary: #212121;
-  --text-secondary: #757575;
-  --background-light: #f5f5f5;
+  // These variables are now defined globally in styles.scss
 }
 
 .nav-item.collapsed:hover {
