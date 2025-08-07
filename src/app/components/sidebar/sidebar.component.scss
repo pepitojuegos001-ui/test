@@ -100,8 +100,8 @@
   }
 
   &.active {
-    background: rgba(33, 150, 243, 0.1);
-    color: var(--primary-blue);
+    background: var(--sidebar-selected);
+    color: var(--brand-primary);
     border-right: 3px solid var(--primary-blue);
 
     &::before {
