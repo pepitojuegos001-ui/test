@@ -92,7 +92,7 @@
 }
 
 .username {
-  color: white;
+  color: var(--nav-text);
   font-weight: 500;
   font-size: clamp(0.875rem, 1.3vw, 1.125rem);
   display: none; // Hidden on mobile
