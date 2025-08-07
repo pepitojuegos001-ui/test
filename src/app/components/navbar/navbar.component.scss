@@ -30,8 +30,12 @@
 .navbar-title {
   font-size: clamp(1.125rem, 2vw, 1.75rem);
   font-weight: 500;
-  color: white;
+  color: var(--nav-text);
   line-height: 1.2;
+
+  @media (max-width: 480px) {
+    display: none; // Hide title on very small screens
+  }
 }
 
 .navbar-spacer {
