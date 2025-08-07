@@ -455,11 +455,12 @@ body {
 
 /* Chart containers */
 .chart-container {
-  background: var(--surface-color);
-  border-radius: 16px;
+  background: var(--card-background);
+  border-radius: var(--border-radius-xl);
   padding: 28px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-border);
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
 }
 
 .chart-canvas-container {
