@@ -958,15 +958,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background-light);
+  background: var(--background-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--border-primary);
   border-radius: 3px;
+  transition: background-color var(--transition-fast);
 
   &:hover {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--border-hover);
   }
 }
 
