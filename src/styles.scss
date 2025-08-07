@@ -405,17 +405,17 @@ body {
 
 .icon-income {
   background: rgba(76, 175, 80, 0.1);
-  color: var(--success-color);
+  color: var(--status-success);
 }
 
 .icon-expense {
   background: rgba(244, 67, 54, 0.1);
-  color: var(--error-color);
+  color: var(--status-error);
 }
 
 .icon-balance {
   background: rgba(33, 150, 243, 0.1);
-  color: var(--primary-blue);
+  color: var(--brand-primary);
 }
 
 .value-amount {
