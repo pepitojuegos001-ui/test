@@ -113,7 +113,8 @@
 }
 
 .mat-sidenav-content {
-  background-color: var(--background-light);
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
 }
 
 // Ensure proper z-index layering
