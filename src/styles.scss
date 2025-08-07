@@ -265,12 +265,14 @@ body {
 
 /* Custom Material Design overrides */
 .mat-sidenav-container {
-  background-color: var(--background-light);
+  background-color: var(--background-secondary) !important;
 }
 
 .mat-sidenav {
   width: 280px;
-  background: var(--surface-color);
+  background: var(--sidebar-background) !important;
+  border-right: 1px solid var(--sidebar-border) !important;
+  color: var(--sidebar-text) !important;
 
   @media (min-width: 1920px) {
     width: clamp(280px, 20vw, 360px);
