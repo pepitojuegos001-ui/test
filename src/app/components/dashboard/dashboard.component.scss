@@ -54,7 +54,7 @@
       display: flex;
       align-items: center;
       gap: var(--spacing-xs);
-      color: #4caf50;
+      color: var(--status-success);
       font-weight: 500;
       margin-bottom: var(--spacing-xs);
 
@@ -62,7 +62,7 @@
         font-size: clamp(1.2rem, 2vw, 1.8rem);
         width: clamp(1.2rem, 2vw, 1.8rem);
         height: clamp(1.2rem, 2vw, 1.8rem);
-        color: #ff9800;
+        color: var(--status-warning);
       }
     }
   }
