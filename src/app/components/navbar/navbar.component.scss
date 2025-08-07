@@ -45,19 +45,38 @@
 }
 
 .navbar-icon-btn {
-  color: white;
+  color: var(--nav-text) !important;
   width: clamp(40px, 6vw, 52px);
   height: clamp(40px, 6vw, 52px);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
 
   .mat-icon {
     font-size: clamp(20px, 3vw, 28px);
     width: clamp(20px, 3vw, 28px);
     height: clamp(20px, 3vw, 28px);
+    transition: color var(--transition-fast);
   }
 
   &:hover {
-    background: rgba(33, 150, 243, 0.08);
-    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.08);
+    background: var(--nav-hover) !important;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Theme toggle specific styles
+.theme-toggle-btn {
+  .mat-icon {
+    &.theme-transition {
+      transition: transform var(--transition-normal), color var(--transition-normal);
+    }
+
+    &:hover {
+      transform: rotate(180deg);
+    }
   }
 }
 
