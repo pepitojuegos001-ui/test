@@ -33,7 +33,8 @@ export class AppComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private themeService: ThemeService
   ) {
     // Connect services to avoid circular dependency
     this.authService.setTranslationService(this.translationService);
@@ -43,6 +44,14 @@ export class AppComponent implements OnInit {
     this.updateDateTime();
     this.setupResponsiveLayout();
     this.initializeLanguageSettings();
+    this.initializeTheme();
+  }
+
+  private initializeTheme(): void {
+    // Theme service automatically initializes the theme from localStorage
+    // or system preference in its constructor, so we just need to ensure
+    // it's injected and can listen to system changes
+    this.themeService.listenToSystemChanges();
   }
 
   private initializeLanguageSettings(): void {
