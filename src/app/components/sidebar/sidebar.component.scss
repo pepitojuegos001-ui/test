@@ -244,10 +244,7 @@
 }
 
 // CSS Variables (if not already defined in global styles)
-:host {
-  --border-color: #e0e0e0;
-  // These variables are now defined globally in styles.scss
-}
+// All CSS variables are now defined globally in styles.scss
 
 .nav-item.collapsed:hover {
   background: var(--sidebar-hover);
