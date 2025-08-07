@@ -121,7 +121,7 @@
 
 // Backdrop for mobile overlay
 .mat-sidenav-backdrop {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--background-overlay);
 }
 
 // Login Layout
