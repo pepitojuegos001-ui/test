@@ -6,43 +6,8 @@
 // Import enhanced responsive utilities
 @import "styles/responsive-enhanced.scss";
 
-// Import Angular Material theme
-@use '@angular/material' as mat;
-
-// Define custom Angular Material themes
-@include mat.core();
-
-// Light theme palette
-$light-primary: mat.define-palette(mat.$blue-palette, 500, 100, 900);
-$light-accent: mat.define-palette(mat.$green-palette, 500, 100, 900);
-$light-warn: mat.define-palette(mat.$red-palette, 500, 100, 900);
-$light-theme: mat.define-light-theme((
-  color: (
-    primary: $light-primary,
-    accent: $light-accent,
-    warn: $light-warn,
-  ),
-));
-
-// Dark theme palette
-$dark-primary: mat.define-palette(mat.$blue-palette, 400, 100, 900);
-$dark-accent: mat.define-palette(mat.$green-palette, 400, 100, 900);
-$dark-warn: mat.define-palette(mat.$red-palette, 400, 100, 900);
-$dark-theme: mat.define-dark-theme((
-  color: (
-    primary: $dark-primary,
-    accent: $dark-accent,
-    warn: $dark-warn,
-  ),
-));
-
-// Default theme
-@include mat.all-component-themes($light-theme);
-
-// Dark theme overrides
-.dark-theme {
-  @include mat.all-component-colors($dark-theme);
-}
+// Import Angular Material theme configuration
+@import "styles/material-theme.scss";
 
 // Global CSS variables - Base colors that don't change
 :root {
