@@ -14,7 +14,7 @@ import {
   TranslationService,
   Language,
 } from "../../services/translation.service";
-import { ThemeService } from "src/app/services/theme.service";
+import { ThemeService, Theme } from "src/app/services/theme.service";
 
 /**
  * NavbarComponent - Enhanced top navigation bar
