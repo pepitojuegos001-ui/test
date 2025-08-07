@@ -84,6 +84,21 @@
     width: 100%;
 
     &.mat-form-field-appearance-outline {
+      // Enhanced outline styling
+      .mat-form-field-outline {
+        color: var(--input-border) !important;
+        border-width: 2px;
+      }
+
+      &.mat-focused .mat-form-field-outline-thick {
+        color: var(--input-border-focus) !important;
+        border-width: 2px;
+      }
+
+      &:not(.mat-form-field-disabled):hover .mat-form-field-outline {
+        color: var(--border-hover) !important;
+      }
+
       .mat-form-field-prefix {
         color: var(--text-secondary);
         font-weight: 500;
@@ -98,10 +113,35 @@
       .mat-input-element {
         margin-left: 0;
         padding-left: 0;
+        color: var(--input-text) !important;
+        background-color: var(--input-background);
+
+        &::placeholder {
+          color: var(--input-placeholder) !important;
+        }
       }
 
       .mat-form-field-infix {
         padding-left: 0;
+        background-color: var(--input-background);
+        border-radius: var(--border-radius-sm);
+      }
+
+      .mat-form-field-label {
+        color: var(--text-secondary) !important;
+        font-weight: 500;
+      }
+
+      &.mat-focused .mat-form-field-label {
+        color: var(--input-border-focus) !important;
+      }
+
+      // Textarea specific styling
+      textarea.mat-input-element {
+        background-color: var(--input-background);
+        color: var(--input-text) !important;
+        resize: vertical;
+        min-height: 80px;
       }
     }
   }
