@@ -434,19 +434,19 @@ body {
 }
 
 .trend-positive {
-  color: var(--success-color);
+  color: var(--status-success);
 }
 
 .trend-negative {
-  color: var(--error-color);
+  color: var(--status-error);
 }
 
 .text-success {
-  color: var(--success-color);
+  color: var(--status-success);
 }
 
 .text-error {
-  color: var(--error-color);
+  color: var(--status-error);
 }
 
 .text-center {
