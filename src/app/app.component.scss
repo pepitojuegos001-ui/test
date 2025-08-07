@@ -82,9 +82,9 @@
 @media (max-width: 768px) {
   .sidenav {
     width: 280px !important;
-    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-heavy);
   }
-  
+
   .main-layout {
     margin-top: 56px; // Smaller navbar on mobile
     height: calc(100vh - 56px);
