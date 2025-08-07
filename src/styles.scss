@@ -563,11 +563,14 @@ body {
 
 /* Enhanced table styles */
 .mat-table {
-  background: transparent;
+  background: var(--table-row-even) !important;
   border-radius: clamp(8px, 1vw, 16px);
+  border: 1px solid var(--table-border);
 
   .mat-header-cell {
-    color: var(--text-secondary);
+    background: var(--table-header) !important;
+    color: var(--text-secondary) !important;
+    border-bottom: 1px solid var(--table-border) !important;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -576,13 +579,20 @@ body {
   }
 
   .mat-row {
+    background: var(--table-row-even) !important;
+    border-bottom: 1px solid var(--table-border) !important;
+
+    &:nth-child(odd) {
+      background: var(--table-row-odd) !important;
+    }
+
     &:hover {
-      background: var(--background-light);
+      background: var(--table-row-hover) !important;
     }
   }
 
   .mat-cell {
-    color: var(--text-primary);
+    color: var(--text-primary) !important;
     font-size: clamp(0.875rem, 1.2vw, 1rem);
     padding: clamp(12px, 2vw, 20px);
   }
