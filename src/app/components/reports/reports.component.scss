@@ -248,34 +248,58 @@
 
 .results-table {
   width: 100%;
-  
+
   .type-badge {
-    padding: 4px 8px;
-    border-radius: 12px;
+    padding: 6px 12px;
+    border-radius: var(--border-radius-lg);
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
-    
-    &.income {
-      background: rgba(76, 175, 80, 0.1);
-      color: var(--success-color);
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all var(--transition-fast);
+
+    &::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
     }
-    
+
+    &.income {
+      background: rgba(76, 175, 80, 0.15);
+      color: var(--status-success);
+      border: 1px solid rgba(76, 175, 80, 0.3);
+
+      &::before {
+        background: var(--status-success);
+      }
+    }
+
     &.expense {
-      background: rgba(244, 67, 54, 0.1);
-      color: var(--error-color);
+      background: rgba(244, 67, 54, 0.15);
+      color: var(--status-error);
+      border: 1px solid rgba(244, 67, 54, 0.3);
+
+      &::before {
+        background: var(--status-error);
+      }
     }
   }
-  
+
   .amount-cell {
     font-weight: 600;
-    
+    font-size: 1rem;
+
     &.income {
-      color: var(--success-color);
+      color: var(--status-success);
     }
-    
+
     &.expense {
-      color: var(--error-color);
+      color: var(--status-error);
     }
   }
 }
