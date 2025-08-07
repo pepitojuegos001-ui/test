@@ -12,12 +12,13 @@
 }
 
 .sidenav {
-  background: #ffffff;
-  border-right: 1px solid #e0e0e0;
-  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background: var(--sidebar-background);
+  border-right: 1px solid var(--sidebar-border);
+  box-shadow: 2px 0 4px var(--shadow-light);
+  transition: all var(--transition-normal);
   z-index: 99;
   overflow: hidden;
+  color: var(--sidebar-text);
 
   // Scale sidebar width for large displays
   @media (min-width: 1920px) {
