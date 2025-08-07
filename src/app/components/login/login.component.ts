@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isLoading = false;
   hidePassword = true;
   loginError = '';
+  private destroy$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
