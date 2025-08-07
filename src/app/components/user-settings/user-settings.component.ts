@@ -241,28 +241,28 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
     }
 
     this.isLoading = true;
-    
-    // Simulate password change API call
-    setTimeout(() => {
-      const passwordData = this.passwordForm.value as PasswordChangeData;
-      
-      // In a real app, verify current password with backend
-      if (this.verifyCurrentPassword(passwordData.currentPassword)) {
-        this.passwordForm.reset();
-        this.isLoading = false;
-        this.showSuccess('Password changed successfully!');
-      } else {
-        this.isLoading = false;
-        this.passwordForm.get('currentPassword')?.setErrors({ incorrect: true });
-        this.showError('Current password is incorrect.');
-      }
-    }, 1000);
-  }
+    const passwordData = this.passwordForm.value as PasswordChangeData;
 
-  private verifyCurrentPassword(password: string): boolean {
-    // Simulate password verification
-    // In a real app, this would make an API call
-    return password === 'currentPassword123'; // Mock validation
+    // Use secure AuthService method
+    this.authService.changePassword(passwordData.currentPassword, passwordData.newPassword)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (success) => {
+          this.isLoading = false;
+          if (success) {
+            this.passwordForm.reset();
+            this.showSuccess(this.translationService.instant('USER_SETTINGS.PASSWORD_CHANGED'));
+          } else {
+            this.passwordForm.get('currentPassword')?.setErrors({ incorrect: true });
+            this.showError(this.translationService.instant('USER_SETTINGS.CURRENT_PASSWORD_INCORRECT'));
+          }
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.showError(this.translationService.instant('USER_SETTINGS.PASSWORD_CHANGE_FAILED'));
+          console.error('Password change error:', error);
+        }
+      });
   }
 
   // UI helper methods
