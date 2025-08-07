@@ -304,6 +304,37 @@
 
 .expenses-table {
   width: 100%;
+  background: var(--table-row-even) !important;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--table-border);
+
+  .mat-header-cell {
+    background: var(--table-header) !important;
+    color: var(--text-secondary) !important;
+    border-bottom: 1px solid var(--table-border) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .mat-row {
+    background: var(--table-row-even) !important;
+    border-bottom: 1px solid var(--table-border) !important;
+    transition: background-color var(--transition-fast);
+
+    &:nth-child(odd) {
+      background: var(--table-row-odd) !important;
+    }
+
+    &:hover {
+      background: var(--table-row-hover) !important;
+    }
+  }
+
+  .mat-cell {
+    color: var(--text-primary) !important;
+    border-bottom-color: var(--table-border) !important;
+  }
 
   .mat-column-actions {
     width: 120px;
@@ -326,9 +357,10 @@
 
   .amount-cell {
     font-weight: 600;
+    font-size: 1.05rem;
 
     &.expense {
-      color: var(--error-color);
+      color: var(--status-error);
     }
   }
 
@@ -339,11 +371,23 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
 
     &:hover {
       transform: scale(1.1);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: var(--shadow-medium);
+      background-color: var(--surface-hover) !important;
+    }
+
+    &[color="primary"]:hover {
+      border-color: var(--interactive-primary);
+      color: var(--interactive-primary) !important;
+    }
+
+    &[color="warn"]:hover {
+      border-color: var(--status-error);
+      color: var(--status-error) !important;
     }
 
     .mat-icon {
