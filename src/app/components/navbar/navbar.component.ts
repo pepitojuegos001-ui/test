@@ -80,6 +80,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe((language) => {
         this.currentLanguage = language;
       });
+
+    // Subscribe to theme changes
+    this.themeService.currentTheme$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((theme) => {
+        this.currentTheme = theme;
+        this.isDarkMode = theme === "dark";
+      });
+
+    // Initialize system theme change listener
+    this.themeService.listenToSystemChanges();
   }
 
   ngOnDestroy(): void {
