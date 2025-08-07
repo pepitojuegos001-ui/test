@@ -60,31 +60,35 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     // Show global loading overlay with authentication message
     this.loadingService.withDelayedLoading(() => {
-      this.authService.login(username, password, rememberMe).subscribe({
-        next: (success) => {
-          this.isLoading = false;
+      this.authService.login(username, password, rememberMe)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (success) => {
+            this.isLoading = false;
 
-          if (success) {
-            this.showSuccess('Login successful! Welcome back.');
+            if (success) {
+              this.showSuccess('Login successful! Welcome back.');
 
-            // Check for return URL or default to dashboard
-            const returnUrl = localStorage.getItem('returnUrl') || '/dashboard';
-            localStorage.removeItem('returnUrl');
+              // Check for return URL or default to dashboard
+              const returnUrl = localStorage.getItem('returnUrl') || '/dashboard';
+              localStorage.removeItem('returnUrl');
 
-            this.router.navigate([returnUrl]);
-          } else {
-            this.loginError = 'Invalid username or password. Please try again.';
-            this.showError('Invalid credentials. Please check your username and password.');
+              this.router.navigate([returnUrl]);
+            } else {
+              this.loginError = 'Invalid username or password. Please try again.';
+              this.showError('Invalid credentials. Please check your username and password.');
+            }
+          },
+          error: (error) => {
+            this.isLoading = false;
+            this.loginError = 'An error occurred during login. Please try again.';
+            this.showError('Login failed. Please try again.');
+            console.error('Login error:', error);
           }
-        },
-        error: (error) => {
-          this.isLoading = false;
-          this.loginError = 'An error occurred during login. Please try again.';
-          this.showError('Login failed. Please try again.');
-          console.error('Login error:', error);
-        }
-      });
-    }, loadingMessage).subscribe();
+        });
+    }, loadingMessage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   }
 
   private markFormGroupTouched(): void {
