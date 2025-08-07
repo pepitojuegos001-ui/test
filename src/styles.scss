@@ -477,17 +477,17 @@ body {
 
 /* Enhanced form styles for Angular Material */
 .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  color: var(--primary-blue) !important;
+  color: var(--input-border-focus) !important;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: var(--border-color) !important;
+  color: var(--input-border) !important;
 }
 
 .mat-form-field-appearance-outline:not(.mat-form-field-disabled)
   .mat-form-field-flex:hover
   .mat-form-field-outline {
-  color: var(--primary-blue-light) !important;
+  color: var(--border-hover) !important;
 }
 
 /* Enhanced matPrefix styling */
