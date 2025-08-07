@@ -173,29 +173,87 @@
 
 .table-filters {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: clamp(16px, 2vw, 32px);
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(clamp(140px, 18vw, 180px), 1fr)
-  );
+  grid-template-columns: repeat(auto-fit, minmax(clamp(140px, 18vw, 180px), 1fr));
+  gap: clamp(16px, 2vw, 24px);
   align-items: flex-end;
   margin-bottom: 24px;
-  padding: 16px;
-  background: var(--background-light);
-  border-radius: 8px;
+  padding: clamp(16px, 2vw, 24px);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-light);
+  transition: all var(--transition-normal);
 
   mat-form-field {
     min-width: 120px;
+
+    // Enhanced form field styling for better visibility
+    .mat-form-field-outline {
+      color: var(--input-border) !important;
+    }
+
+    &.mat-focused .mat-form-field-outline-thick {
+      color: var(--input-border-focus) !important;
+    }
+
+    .mat-form-field-label {
+      color: var(--text-secondary) !important;
+      font-weight: 500;
+    }
+
+    &.mat-focused .mat-form-field-label {
+      color: var(--input-border-focus) !important;
+    }
+
+    .mat-select-value {
+      color: var(--input-text) !important;
+    }
+
+    .mat-select-placeholder {
+      color: var(--input-placeholder) !important;
+    }
+
+    .mat-select-arrow {
+      color: var(--text-secondary) !important;
+    }
+
+    &.mat-focused .mat-select-arrow {
+      color: var(--input-border-focus) !important;
+    }
+
+    // Input field background
+    .mat-form-field-infix {
+      background-color: var(--input-background);
+      border-radius: var(--border-radius-sm);
+    }
   }
 
   button {
-    height: 40px;
-    display: end;
+    height: 44px;
+    padding: 8px 16px;
+    border-radius: var(--border-radius-md);
+    background: var(--surface-hover);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    margin-bottom: 24px;
+    display: flex;
     align-items: center;
-    // gap: 4px;
-    margin-bottom: 28px;
-    padding-bottom: 6px;
+    gap: 6px;
+    transition: all var(--transition-fast);
+    font-weight: 500;
+
+    &:hover {
+      background: var(--interactive-primary);
+      color: var(--text-on-primary);
+      border-color: var(--interactive-primary);
+      transform: translateY(-1px);
+    }
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
   }
 }
 
