@@ -105,7 +105,7 @@
     border-right: 3px solid var(--primary-blue);
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       top: 0;
@@ -117,23 +117,30 @@
   }
 
   &.collapsed {
-    padding: clamp(10px, 1.5vw, 16px);
-    justify-content: center;
-    border-radius: clamp(6px, 1vw, 12px);
-    margin: clamp(3px, 0.6vw, 6px);
-    width: clamp(44px, 6vw, 56px);
-    height: clamp(44px, 6vw, 56px);
+    padding: 0 !important;
+    margin: 8px 0 !important;
+    width: 48px !important;
+    height: 48px !important;
     display: flex;
     align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: transparent;
+    transition: background 0.2s, box-shadow 0.2s;
 
     .nav-icon {
-      margin-right: 0;
-      font-size: clamp(20px, 3vw, 28px);
-      width: clamp(20px, 3vw, 28px);
-      height: clamp(20px, 3vw, 28px);
+      margin: 0 !important;
+      font-size: 28px !important;
+      width: 28px !important;
+      height: 28px !important;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: var(--primary-blue);
+    }
+
+    .nav-text {
+      display: none !important;
     }
 
     &:hover {
@@ -188,29 +195,37 @@
 // Enhanced animations for smooth transitions
 .nav-item .nav-text,
 .logo-text {
-  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 // Staggered animation for navigation items
 .nav-item {
   animation-delay: var(--nav-delay, 0ms);
 
-  &:nth-child(1) { --nav-delay: 0ms; }
-  &:nth-child(2) { --nav-delay: 50ms; }
-  &:nth-child(3) { --nav-delay: 100ms; }
-  &:nth-child(4) { --nav-delay: 150ms; }
+  &:nth-child(1) {
+    --nav-delay: 0ms;
+  }
+  &:nth-child(2) {
+    --nav-delay: 50ms;
+  }
+  &:nth-child(3) {
+    --nav-delay: 100ms;
+  }
+  &:nth-child(4) {
+    --nav-delay: 150ms;
+  }
 }
 
 // Responsive design
 @media (max-width: 768px) {
   .sidebar-header {
     padding: 16px;
-    
+
     &.collapsed {
       padding: 16px 8px;
     }
   }
-  
+
   .nav-item {
     padding: 16px 20px;
 
@@ -235,4 +250,9 @@
   --text-primary: #212121;
   --text-secondary: #757575;
   --background-light: #f5f5f5;
+}
+
+.nav-item.collapsed:hover {
+  background: rgba(33, 150, 243, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }

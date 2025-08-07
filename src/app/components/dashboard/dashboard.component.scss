@@ -16,9 +16,9 @@
   }
 }
 
-
 .dashboard-header {
-  margin-bottom: var(--spacing-lg);
+  // margin-bottom: var(--spacing-lg);
+  margin-bottom: clamp(32px, 5vw, 64px);
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -26,7 +26,12 @@
   gap: var(--spacing-md);
 
   @media (min-width: 1920px) {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: clamp(32px, 5vw, 64px);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
   }
 }
 
@@ -119,11 +124,12 @@
   font-size: clamp(1rem, 1.8vw, 1.5rem);
   font-weight: 600;
   color: var(--primary-blue);
+  margin-bottom: 25px;
 
   mat-icon {
     font-size: clamp(20px, 2.5vw, 32px);
     width: clamp(20px, 2.5vw, 32px);
-    height: clamp(20px, 2.5vw, 32px);
+    height: clamp(25px, 2.5vw, 32px);
   }
 }
 
@@ -196,7 +202,8 @@
   }
 
   .mat-card-content {
-    padding: 0 clamp(12px, 2vw, 24px) clamp(12px, 2vw, 24px) clamp(12px, 2vw, 24px) !important;
+    padding: 0 clamp(12px, 2vw, 24px) clamp(12px, 2vw, 24px)
+      clamp(12px, 2vw, 24px) !important;
   }
 }
 
@@ -233,25 +240,25 @@
   .dashboard-container {
     padding: 16px;
   }
-  
+
   .dashboard-header {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .date-filter-card {
     min-width: auto;
   }
-  
+
   .date-filters {
     flex-direction: column;
     align-items: stretch;
-    
+
     mat-form-field {
       min-width: auto;
     }
   }
-  
+
   .summary-cards-grid {
     grid-template-columns: 1fr;
     gap: 16px;

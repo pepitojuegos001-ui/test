@@ -1,14 +1,15 @@
 <mat-toolbar color="primary" class="navbar">
   <!-- Left side: Menu toggle and title -->
   <div class="navbar-left">
-    <button 
-      mat-icon-button 
+    <button
+      mat-icon-button
       class="sidebar-toggle"
       (click)="onSidebarToggle()"
-      aria-label="Toggle sidebar">
+      aria-label="Toggle sidebar"
+    >
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="navbar-title">{{ 'NAVBAR.TITLE' | translate }}</span>
+    <span class="navbar-title">{{ "NAVBAR.TITLE" | translate }}</span>
   </div>
 
   <!-- Spacer to push right content to the end -->
@@ -16,16 +17,23 @@
 
   <!-- Right side: Notifications, Chat, Username, Avatar -->
   <div class="navbar-right">
+    <!-- theme -->
+    <button mat-icon-button (click)="toggleTheme()">
+      <mat-icon>
+        {{ themeService.isDarkMode() ? "light_mode" : "dark_mode" }}
+      </mat-icon>
+    </button>
+
     <!-- Notifications -->
-    <button 
-      mat-icon-button 
-      class="navbar-icon-btn"
+    <button
+      mat-icon-button
+      class="navbar-icon-btn notification-btn"
       (click)="onNotifications()"
       [matTooltip]="'NAVBAR.NOTIFICATIONS' | translate"
-      matTooltipPosition="below">
-      <mat-icon [matBadge]="notifications" [matBadgeHidden]="notifications === 0" matBadgeColor="warn">
-        notifications
-      </mat-icon>
+      matTooltipPosition="below"
+    >
+      <mat-icon>notifications</mat-icon>
+      <span class="notification-badge">{{ notifications }}</span>
     </button>
 
     <!-- Chat/Feedback -->
@@ -34,7 +42,8 @@
       class="navbar-icon-btn"
       (click)="onChat()"
       [matTooltip]="'NAVBAR.CHAT_FEEDBACK' | translate"
-      matTooltipPosition="below">
+      matTooltipPosition="below"
+    >
       <mat-icon>chat</mat-icon>
     </button>
 
@@ -46,8 +55,15 @@
         (click)="toggleLanguageMenu()"
         [matTooltip]="'NAVBAR.LANGUAGE' | translate"
         matTooltipPosition="below"
-        [attr.aria-expanded]="isLanguageMenuOpen">
-        <span class="language-flag">{{ getCurrentLanguageFlag() }}</span>
+        [attr.aria-expanded]="isLanguageMenuOpen"
+      >
+        <img
+          class="language-flag"
+          [src]="getCurrentLanguageFlag()"
+          alt="flag"
+          width="24"
+          height="16"
+        />
       </button>
 
       <!-- Language dropdown menu -->
@@ -58,8 +74,15 @@
             mat-menu-item
             class="dropdown-item language-item"
             [class.active]="language.code === currentLanguage"
-            (click)="onLanguageChange(language.code)">
-            <span class="language-flag">{{ language.flag }}</span>
+            (click)="onLanguageChange(language.code)"
+          >
+            <img
+              class="language-flag"
+              [src]="language.flag"
+              alt="{{ language.code }} flag"
+              width="24"
+              height="16"
+            />
             <span class="language-name">{{ language.name }}</span>
           </button>
         </div>
@@ -70,32 +93,35 @@
     <div class="user-section">
       <span class="username">{{ username }}</span>
       <div class="user-menu-container">
-        <button 
-          mat-icon-button 
+        <button
+          mat-icon-button
           class="user-avatar"
           (click)="toggleUserMenu()"
           [attr.aria-expanded]="isUserMenuOpen"
-          aria-label="User menu">
+          aria-label="User menu"
+        >
           <mat-icon class="avatar-icon">account_circle</mat-icon>
         </button>
-        
+
         <!-- User dropdown menu -->
         <div class="user-dropdown" [class.show]="isUserMenuOpen">
           <div class="dropdown-content">
             <button
               mat-menu-item
               class="dropdown-item"
-              (click)="onConfiguration()">
+              (click)="onConfiguration()"
+            >
               <mat-icon>settings</mat-icon>
-              <span>{{ 'NAVBAR.CONFIGURATION' | translate }}</span>
+              <span>{{ "NAVBAR.CONFIGURATION" | translate }}</span>
             </button>
             <mat-divider></mat-divider>
             <button
               mat-menu-item
               class="dropdown-item logout"
-              (click)="onLogout()">
+              (click)="onLogout()"
+            >
               <mat-icon>logout</mat-icon>
-              <span>{{ 'NAVBAR.LOGOUT' | translate }}</span>
+              <span>{{ "NAVBAR.LOGOUT" | translate }}</span>
             </button>
           </div>
         </div>
@@ -108,5 +134,5 @@
 <div
   class="dropdown-overlay"
   [class.show]="isUserMenuOpen || isLanguageMenuOpen"
-  (click)="isUserMenuOpen = false; isLanguageMenuOpen = false">
-</div>
+  (click)="isUserMenuOpen = false; isLanguageMenuOpen = false"
+></div>

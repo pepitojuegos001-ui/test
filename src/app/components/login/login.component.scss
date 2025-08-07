@@ -21,15 +21,15 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  
+
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
   }
-  
+
   &::before {
     width: 300px;
     height: 300px;
@@ -37,7 +37,7 @@
     right: -150px;
     animation: float 6s ease-in-out infinite;
   }
-  
+
   &::after {
     width: 200px;
     height: 200px;
@@ -48,7 +48,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -78,13 +79,13 @@
   color: white;
   padding: 32px 32px 24px;
   margin-bottom: 0;
-  
+
   .header-content {
     display: flex;
     align-items: center;
     gap: 16px;
   }
-  
+
   .logo-container {
     display: flex;
     align-items: center;
@@ -93,7 +94,7 @@
     height: 60px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    
+
     .logo-icon {
       font-size: 2rem;
       width: 2rem;
@@ -101,18 +102,18 @@
       color: white;
     }
   }
-  
+
   .header-text {
     flex: 1;
   }
-  
+
   .login-title {
     margin: 0;
     font-size: 1.5rem;
     font-weight: 600;
     color: white;
   }
-  
+
   .login-subtitle {
     margin: 4px 0 0 0;
     color: rgba(255, 255, 255, 0.9);
@@ -138,15 +139,15 @@
   &.full-width {
     width: 100%;
   }
-  
+
   .mat-mdc-form-field-outline {
     color: rgba(0, 0, 0, 0.12);
   }
-  
+
   &.mat-focused .mat-mdc-form-field-outline-thick {
     color: #667eea;
   }
-  
+
   .mat-mdc-form-field-error {
     color: #f44336;
   }
@@ -154,12 +155,12 @@
 
 .remember-me-container {
   margin: -8px 0;
-  
+
   .mat-mdc-checkbox {
     .mat-mdc-checkbox-frame {
       border-color: rgba(0, 0, 0, 0.54);
     }
-    
+
     &.mat-mdc-checkbox-checked .mat-mdc-checkbox-background {
       background-color: #667eea;
     }
@@ -177,7 +178,7 @@
   color: #d32f2f;
   font-size: 0.9rem;
   margin: -8px 0;
-  
+
   .error-icon {
     font-size: 1.2rem;
     width: 1.2rem;
@@ -186,6 +187,7 @@
 }
 
 .login-button {
+  position: relative;
   height: 48px;
   font-size: 1rem;
   font-weight: 500;
@@ -195,36 +197,40 @@
   justify-content: center;
   gap: 8px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  
+
   &:disabled {
     background: #ccc !important;
     color: #666 !important;
   }
-  
+
   .button-spinner {
-    margin-right: 8px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
   }
-  
-  .button-text {
-    display: flex;
-    align-items: center;
+
+  .button-text,
+  mat-icon {
+    opacity: 0.5;
   }
 }
 
 .demo-info {
   margin-top: 32px;
-  
+
   .mat-mdc-divider {
     margin-bottom: 20px;
   }
-  
+
   .demo-credentials {
     text-align: center;
     padding: 16px;
     background: #f8f9fa;
     border-radius: 8px;
     border: 1px solid #e9ecef;
-    
+
     h4 {
       margin: 0 0 12px 0;
       color: #495057;
@@ -233,12 +239,12 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    
+
     .credential-item {
       margin: 8px 0;
       font-size: 0.9rem;
       color: #6c757d;
-      
+
       strong {
         color: #495057;
       }
@@ -249,7 +255,7 @@
 .login-footer {
   text-align: center;
   margin-top: 24px;
-  
+
   p {
     color: rgba(255, 255, 255, 0.8);
     font-size: 0.85rem;
@@ -262,47 +268,47 @@
   .login-container {
     padding: 20px 16px;
   }
-  
+
   .login-content {
     max-width: 100%;
     margin: 0;
   }
-  
+
   .login-header {
     padding: 24px 24px 20px;
-    
+
     .header-content {
       gap: 12px;
     }
-    
+
     .logo-container {
       width: 50px;
       height: 50px;
-      
+
       .logo-icon {
         font-size: 1.5rem;
         width: 1.5rem;
         height: 1.5rem;
       }
     }
-    
+
     .login-title {
       font-size: 1.25rem;
     }
-    
+
     .login-subtitle {
       font-size: 0.9rem;
     }
   }
-  
+
   .login-form-container {
     padding: 24px;
   }
-  
+
   .login-form {
     gap: 20px;
   }
-  
+
   .background-shapes {
     &::before {
       width: 200px;
@@ -310,7 +316,7 @@
       top: -100px;
       right: -100px;
     }
-    
+
     &::after {
       width: 150px;
       height: 150px;
@@ -328,7 +334,7 @@
       gap: 16px;
     }
   }
-  
+
   .login-form-container {
     padding: 20px;
   }
@@ -340,12 +346,12 @@
     background: white;
     border: 2px solid #000;
   }
-  
+
   .login-header {
     background: #000;
     color: #fff;
   }
-  
+
   .error-message {
     background: #fff;
     border: 2px solid #f44336;

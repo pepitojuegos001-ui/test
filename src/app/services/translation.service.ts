@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { BehaviorSubject, Observable } from "rxjs";
 
 export interface Language {
   code: string;
@@ -9,21 +9,21 @@ export interface Language {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class TranslationService {
-  private currentLanguageSubject = new BehaviorSubject<string>('en');
+  private currentLanguageSubject = new BehaviorSubject<string>("en");
   public currentLanguage$ = this.currentLanguageSubject.asObservable();
 
-  private readonly LANGUAGE_KEY = 'financial_dashboard_language';
-  private readonly USER_LANGUAGE_KEY = 'financial_dashboard_user_language';
+  private readonly LANGUAGE_KEY = "financial_dashboard_language";
+  private readonly USER_LANGUAGE_KEY = "financial_dashboard_user_language";
 
   private readonly availableLanguages: Language[] = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'pt', name: 'Português', flag: '🇵🇹' },
-    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' }
+    { code: "en", name: "English", flag: "assets/images/flags/us.png" },
+    { code: "es", name: "Español", flag: "assets/images/flags/ar.png" },
+    { code: "pt", name: "Português", flag: "assets/images/flags/pt.png" },
+    { code: "it", name: "Italiano", flag: "assets/images/flags/it.png" },
+    { code: "fr", name: "Français", flag: "assets/images/flags/fr.png" },
   ];
 
   constructor(private translateService: TranslateService) {
@@ -32,7 +32,7 @@ export class TranslationService {
 
   private initializeTranslation(): void {
     // Always set English as default language
-    this.translateService.setDefaultLang('en');
+    this.translateService.setDefaultLang("en");
 
     // Try to load saved language preference immediately
     const savedLanguage = this.getSavedLanguage();
@@ -49,18 +49,21 @@ export class TranslationService {
     try {
       return localStorage.getItem(this.LANGUAGE_KEY);
     } catch (error) {
-      console.warn('Could not read language preference from localStorage:', error);
+      console.warn(
+        "Could not read language preference from localStorage:",
+        error
+      );
       return null;
     }
   }
 
   private getBrowserLanguage(): string {
-    const browserLang = this.translateService.getBrowserLang() || 'en';
+    const browserLang = this.translateService.getBrowserLang() || "en";
     // Check if the browser language is supported
-    const supportedLang = this.availableLanguages.find(lang => 
+    const supportedLang = this.availableLanguages.find((lang) =>
       browserLang.toLowerCase().includes(lang.code)
     );
-    return supportedLang ? supportedLang.code : 'en';
+    return supportedLang ? supportedLang.code : "en";
   }
 
   setLanguage(languageCode: string): void {
@@ -69,20 +72,25 @@ export class TranslationService {
       this.currentLanguageSubject.next(languageCode);
       this.saveLanguagePreference(languageCode);
     } else {
-      console.warn(`Language '${languageCode}' is not supported. Falling back to English.`);
-      this.setLanguage('en');
+      console.warn(
+        `Language '${languageCode}' is not supported. Falling back to English.`
+      );
+      this.setLanguage("en");
     }
   }
 
   private isLanguageSupported(languageCode: string): boolean {
-    return this.availableLanguages.some(lang => lang.code === languageCode);
+    return this.availableLanguages.some((lang) => lang.code === languageCode);
   }
 
   private saveLanguagePreference(languageCode: string): void {
     try {
       localStorage.setItem(this.LANGUAGE_KEY, languageCode);
     } catch (error) {
-      console.warn('Could not save language preference to localStorage:', error);
+      console.warn(
+        "Could not save language preference to localStorage:",
+        error
+      );
     }
   }
 
@@ -95,13 +103,17 @@ export class TranslationService {
   }
 
   getLanguageName(languageCode: string): string {
-    const language = this.availableLanguages.find(lang => lang.code === languageCode);
+    const language = this.availableLanguages.find(
+      (lang) => lang.code === languageCode
+    );
     return language ? language.name : languageCode;
   }
 
   getLanguageFlag(languageCode: string): string {
-    const language = this.availableLanguages.find(lang => lang.code === languageCode);
-    return language ? language.flag : '🌐';
+    const language = this.availableLanguages.find(
+      (lang) => lang.code === languageCode
+    );
+    return language ? language.flag : "🌐";
   }
 
   // Convenience method to get translation
@@ -117,18 +129,18 @@ export class TranslationService {
   // Method to get translated months array
   getTranslatedMonths(): string[] {
     return [
-      this.instant('MONTHS.JANUARY'),
-      this.instant('MONTHS.FEBRUARY'),
-      this.instant('MONTHS.MARCH'),
-      this.instant('MONTHS.APRIL'),
-      this.instant('MONTHS.MAY'),
-      this.instant('MONTHS.JUNE'),
-      this.instant('MONTHS.JULY'),
-      this.instant('MONTHS.AUGUST'),
-      this.instant('MONTHS.SEPTEMBER'),
-      this.instant('MONTHS.OCTOBER'),
-      this.instant('MONTHS.NOVEMBER'),
-      this.instant('MONTHS.DECEMBER')
+      this.instant("MONTHS.JANUARY"),
+      this.instant("MONTHS.FEBRUARY"),
+      this.instant("MONTHS.MARCH"),
+      this.instant("MONTHS.APRIL"),
+      this.instant("MONTHS.MAY"),
+      this.instant("MONTHS.JUNE"),
+      this.instant("MONTHS.JULY"),
+      this.instant("MONTHS.AUGUST"),
+      this.instant("MONTHS.SEPTEMBER"),
+      this.instant("MONTHS.OCTOBER"),
+      this.instant("MONTHS.NOVEMBER"),
+      this.instant("MONTHS.DECEMBER"),
     ];
   }
 
@@ -158,7 +170,7 @@ export class TranslationService {
         localStorage.setItem(userLanguageKey, languageCode);
         this.setLanguage(languageCode);
       } catch (error) {
-        console.warn('Could not save user language preference:', error);
+        console.warn("Could not save user language preference:", error);
       }
     }
   }
@@ -170,7 +182,7 @@ export class TranslationService {
     try {
       return localStorage.getItem(userLanguageKey);
     } catch (error) {
-      console.warn('Could not read user language preference:', error);
+      console.warn("Could not read user language preference:", error);
       return null;
     }
   }
@@ -180,7 +192,7 @@ export class TranslationService {
    * This should be called on logout
    */
   resetToDefaultLanguage(): void {
-    this.setLanguage('en');
+    this.setLanguage("en");
   }
 
   /**
@@ -195,14 +207,14 @@ export class TranslationService {
       } else {
         // Clear all user language preferences
         const keys = Object.keys(localStorage);
-        keys.forEach(key => {
+        keys.forEach((key) => {
           if (key.startsWith(this.USER_LANGUAGE_KEY)) {
             localStorage.removeItem(key);
           }
         });
       }
     } catch (error) {
-      console.warn('Could not clear user language preferences:', error);
+      console.warn("Could not clear user language preferences:", error);
     }
   }
 
@@ -240,7 +252,11 @@ export class TranslationService {
     const savedLang = this.getSavedLanguage();
 
     // If there's a mismatch, reload the saved language
-    if (savedLang && savedLang !== currentLang && this.isLanguageSupported(savedLang)) {
+    if (
+      savedLang &&
+      savedLang !== currentLang &&
+      this.isLanguageSupported(savedLang)
+    ) {
       this.setLanguage(savedLang);
     }
 

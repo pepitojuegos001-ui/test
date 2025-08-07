@@ -10,6 +10,7 @@
       <mat-sidenav
         #drawer
         class="sidenav"
+        [class.collapsed]="(isHandset$ | async) ? false : isSidebarCollapsed"
         [style.width]="(isHandset$ | async) ? '280px' : sidebarWidth"
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
