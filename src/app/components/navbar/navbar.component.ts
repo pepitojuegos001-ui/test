@@ -131,8 +131,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 
-  toggleTheme() {
+  toggleTheme(): void {
     this.themeService.toggleTheme();
+    // Optional: Add subtle feedback or analytics tracking here
+    console.log(`Theme switched to: ${this.themeService.getCurrentTheme()}`);
+  }
+
+  getCurrentThemeIcon(): string {
+    return this.isDarkMode ? "light_mode" : "dark_mode";
+  }
+
+  getThemeTooltip(): string {
+    return this.isDarkMode ? "Switch to light mode" : "Switch to dark mode";
   }
 
   toggleLanguageMenu(): void {
