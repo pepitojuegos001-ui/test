@@ -270,9 +270,10 @@
     }
 
     &.income {
-      background: rgba(76, 175, 80, 0.15);
+      background-color: var(--surface-secondary);
       color: var(--status-success);
-      border: 1px solid rgba(76, 175, 80, 0.3);
+      border: 1px solid var(--status-success);
+      box-shadow: inset 0 0 0 1px rgba(76, 175, 80, 0.1);
 
       &::before {
         background: var(--status-success);
@@ -280,9 +281,10 @@
     }
 
     &.expense {
-      background: rgba(244, 67, 54, 0.15);
+      background-color: var(--surface-secondary);
       color: var(--status-error);
-      border: 1px solid rgba(244, 67, 54, 0.3);
+      border: 1px solid var(--status-error);
+      box-shadow: inset 0 0 0 1px rgba(244, 67, 54, 0.1);
 
       &::before {
         background: var(--status-error);
