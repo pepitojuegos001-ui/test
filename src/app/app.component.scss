@@ -42,8 +42,9 @@
 }
 
 .main-content-container {
-  background-color: #f5f5f5;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: var(--background-secondary);
+  transition: all var(--transition-normal);
+  color: var(--text-primary);
 
   // When sidebar is collapsed on desktop, adjust content area
   &.sidebar-collapsed {
