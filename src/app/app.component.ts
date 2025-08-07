@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { map, shareReplay, take } from "rxjs/operators";
 import { AuthService } from "./services/auth.service";
 import { TranslationService } from "./services/translation.service";
+import { ThemeService } from "./services/theme.service";
 
 @Component({
   selector: "app-root",
