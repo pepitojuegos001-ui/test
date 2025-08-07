@@ -332,11 +332,33 @@ body {
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: var(--border-color);
+  color: var(--input-border) !important;
 }
 
 .mat-form-field.mat-focused .mat-form-field-outline-thick {
-  color: var(--primary-blue);
+  color: var(--input-border-focus) !important;
+}
+
+.mat-form-field {
+  .mat-form-field-infix {
+    background-color: var(--input-background);
+  }
+
+  .mat-input-element {
+    color: var(--input-text) !important;
+
+    &::placeholder {
+      color: var(--input-placeholder) !important;
+    }
+  }
+
+  .mat-form-field-label {
+    color: var(--text-secondary) !important;
+  }
+
+  &.mat-focused .mat-form-field-label {
+    color: var(--input-border-focus) !important;
+  }
 }
 
 .summary-card {
