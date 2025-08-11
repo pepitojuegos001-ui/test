@@ -14,6 +14,7 @@ interface UserProfile {
   notificationsEnabled: boolean;
   twoFactorEnabled: boolean;
   selectedLanguage: string;
+  selectedCurrency?: string;
 }
 
 interface PasswordChangeData {
