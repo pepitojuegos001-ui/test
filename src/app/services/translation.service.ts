@@ -86,7 +86,7 @@ export class TranslationService {
         // Triggering currency update for new language
         this.currencyService.updateCurrencyForLanguage(languageCode);
       } else {
-        console.warn('Currency service not available when setting language');
+        // Currency service not yet initialized
       }
     } else {
       console.warn(
