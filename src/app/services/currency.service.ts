@@ -115,8 +115,7 @@ export class CurrencyService {
     this.currentCurrencySubject.next(mappedCurrency);
     this.saveLanguageCurrency(mappedCurrency);
 
-    // Log for debugging
-    console.log(`Language changed to ${languageCode}, currency updated to ${mappedCurrency}, user override: ${this.userSelectedCurrencySubject.value}`);
+    // Note: Language-currency sync completed
   }
 
   /**
