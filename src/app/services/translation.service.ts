@@ -26,8 +26,16 @@ export class TranslationService {
     { code: "fr", name: "Français", flag: "assets/images/flags/fr.png" },
   ];
 
+  // Currency service will be injected after construction to avoid circular dependency
+  private currencyService?: any;
+
   constructor(private translateService: TranslateService) {
     this.initializeTranslation();
+  }
+
+  // Method to set currency service (called from app initialization)
+  setCurrencyService(currencyService: any): void {
+    this.currencyService = currencyService;
   }
 
   private initializeTranslation(): void {
