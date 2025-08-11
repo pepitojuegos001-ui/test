@@ -108,12 +108,13 @@ export class CurrencyService {
    */
   updateCurrencyForLanguage(languageCode: string): void {
     const mappedCurrency = this.languageCurrencyMap[languageCode] || 'USD';
-    
-    // Only update if user hasn't manually selected a currency
-    if (!this.userSelectedCurrencySubject.value) {
-      this.currentCurrencySubject.next(mappedCurrency);
-      this.saveLanguageCurrency(mappedCurrency);
-    }
+
+    // Always update the language-based currency
+    this.currentCurrencySubject.next(mappedCurrency);
+    this.saveLanguageCurrency(mappedCurrency);
+
+    // Log for debugging
+    console.log(`Language changed to ${languageCode}, currency updated to ${mappedCurrency}, user override: ${this.userSelectedCurrencySubject.value}`);
   }
 
   /**
