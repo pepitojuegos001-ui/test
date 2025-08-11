@@ -90,6 +90,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
   }
 
+  private subscribeToCurrencyChanges(): void {
+    this.currencyService.effectiveCurrency$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        // Recreate charts when currency changes to update formatting
+        setTimeout(() => {
+          this.updateCharts();
+        }, 100); // Small delay to ensure currency formatting is updated
+      });
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
