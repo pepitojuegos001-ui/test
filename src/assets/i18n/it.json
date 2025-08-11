@@ -15,6 +15,31 @@
     "YES": "Sì",
     "NO": "No"
   },
+  "CURRENCY": {
+    "PREFERRED_CURRENCY": "Valuta Preferita",
+    "SELECT_CURRENCY": "Seleziona valuta",
+    "AUTO_BASED_ON_LANGUAGE": "Automatico (basato sulla lingua)",
+    "CURRENTLY": "Attualmente",
+    "AUTO_HINT": "La valuta è impostata automaticamente in base alla tua preferenza linguistica",
+    "MANUAL_HINT": "Hai selezionato manualmente una valuta personalizzata",
+    "PREVIEW": "Anteprima",
+    "INCOME_EXAMPLE": "Esempio di entrata",
+    "EXPENSE_EXAMPLE": "Esempio di spesa",
+    "RESET_TO_AUTO": "Reimposta su automatico",
+    "AUTO_FROM_LANGUAGE": "automatico dalla lingua",
+    "NAMES": {
+      "USD": "Dollaro Americano",
+      "ARS": "Peso Argentino",
+      "BRL": "Real Brasiliano",
+      "EUR": "Euro"
+    },
+    "SYMBOLS": {
+      "USD": "$",
+      "ARS": "$",
+      "BRL": "R$",
+      "EUR": "€"
+    }
+  },
   "AUTH": {
     "LOGIN": "Accedi",
     "LOGOUT": "Disconnetti",
