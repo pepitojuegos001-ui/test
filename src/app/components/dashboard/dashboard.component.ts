@@ -49,7 +49,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private chartService: ChartService,
     private authService: AuthService,
     private translationService: TranslationService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private currencyService: CurrencyService
   ) { }
 
   ngOnInit(): void {
