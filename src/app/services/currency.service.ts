@@ -148,24 +148,73 @@ export class CurrencyService {
   }
 
   /**
-   * Get currency by code
+   * Get currency by code with translated name
    */
   getCurrency(code: string): Currency | undefined {
-    return this.availableCurrencies.find(currency => currency.code === code);
+    const baseCurrency = this.baseCurrencies.find(currency => currency.code === code);
+    if (!baseCurrency) return undefined;
+
+    return {
+      code: baseCurrency.code,
+      name: this.getTranslatedCurrencyName(baseCurrency.code),
+      symbol: this.getTranslatedCurrencySymbol(baseCurrency.code),
+      locale: baseCurrency.locale,
+      flag: baseCurrency.flag
+    };
   }
 
   /**
-   * Get all available currencies
+   * Get all available currencies with translated names
    */
   getAvailableCurrencies(): Currency[] {
-    return [...this.availableCurrencies];
+    return this.baseCurrencies.map(baseCurrency => ({
+      code: baseCurrency.code,
+      name: this.getTranslatedCurrencyName(baseCurrency.code),
+      symbol: this.getTranslatedCurrencySymbol(baseCurrency.code),
+      locale: baseCurrency.locale,
+      flag: baseCurrency.flag
+    }));
   }
 
   /**
    * Check if currency is supported
    */
   isCurrencySupported(code: string): boolean {
-    return this.availableCurrencies.some(currency => currency.code === code);
+    return this.baseCurrencies.some(currency => currency.code === code);
+  }
+
+  /**
+   * Get translated currency name
+   */
+  private getTranslatedCurrencyName(code: string): string {
+    if (this.translationService) {
+      return this.translationService.instant(`CURRENCY.NAMES.${code}`);
+    }
+    // Fallback to English names
+    const fallbackNames: Record<string, string> = {
+      'USD': 'US Dollar',
+      'ARS': 'Argentine Peso',
+      'BRL': 'Brazilian Real',
+      'EUR': 'Euro'
+    };
+    return fallbackNames[code] || code;
+  }
+
+  /**
+   * Get translated currency symbol
+   */
+  private getTranslatedCurrencySymbol(code: string): string {
+    if (this.translationService) {
+      return this.translationService.instant(`CURRENCY.SYMBOLS.${code}`);
+    }
+    // Fallback to default symbols
+    const fallbackSymbols: Record<string, string> = {
+      'USD': '$',
+      'ARS': '$',
+      'BRL': 'R$',
+      'EUR': '€'
+    };
+    return fallbackSymbols[code] || code;
   }
 
   /**
