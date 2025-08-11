@@ -296,7 +296,7 @@ export class CurrencyService {
    * Force refresh of currency settings (useful for troubleshooting sync issues)
    */
   refreshCurrencySettings(username?: string): void {
-    console.log('Forcing currency settings refresh');
+    // Forcing currency settings refresh
 
     if (username) {
       this.loadUserCurrencyPreference(username);
