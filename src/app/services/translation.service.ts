@@ -76,13 +76,17 @@ export class TranslationService {
 
   setLanguage(languageCode: string): void {
     if (this.isLanguageSupported(languageCode)) {
+      console.log(`Setting language to: ${languageCode}`);
       this.translateService.use(languageCode);
       this.currentLanguageSubject.next(languageCode);
       this.saveLanguagePreference(languageCode);
 
       // Update currency based on language change
       if (this.currencyService) {
+        console.log(`Triggering currency update for language: ${languageCode}`);
         this.currencyService.updateCurrencyForLanguage(languageCode);
+      } else {
+        console.warn('Currency service not available when setting language');
       }
     } else {
       console.warn(
