@@ -65,6 +65,7 @@ export class AppComponent implements OnInit {
     this.authService.currentUser$.pipe(take(1)).subscribe((user) => {
       if (user?.isAuthenticated) {
         this.translationService.initializeForCurrentUser(user.username);
+        this.currencyService.loadUserCurrencyPreference(user.username);
       } else {
         this.translationService.initializeForCurrentUser();
       }
