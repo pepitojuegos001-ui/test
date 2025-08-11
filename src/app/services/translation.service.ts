@@ -79,6 +79,11 @@ export class TranslationService {
       this.translateService.use(languageCode);
       this.currentLanguageSubject.next(languageCode);
       this.saveLanguagePreference(languageCode);
+
+      // Update currency based on language change
+      if (this.currencyService) {
+        this.currencyService.updateCurrencyForLanguage(languageCode);
+      }
     } else {
       console.warn(
         `Language '${languageCode}' is not supported. Falling back to English.`
