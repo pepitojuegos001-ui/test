@@ -177,7 +177,7 @@
                 {{ "INCOME.AMOUNT" | translate }}
               </th>
               <td mat-cell *matCellDef="let entry" class="amount-cell income">
-                {{ formatCurrency(entry.amount) }}
+                {{ entry.amount | appCurrency }}
               </td>
             </ng-container>
 
