@@ -63,6 +63,7 @@ import { AuthService } from './services/auth.service';
 import { TranslationService } from './services/translation.service';
 import { I18nConfigService } from './services/i18n-config.service';
 import { LoadingService } from './services/loading.service';
+import { CurrencyService } from './services/currency.service';
 
 // Translation loader factory function for v17
 export function HttpLoaderFactory(): TranslateHttpLoader {
