@@ -130,6 +130,26 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
       });
   }
 
+  private initializeCurrencyData(): void {
+    // Get available currencies
+    this.availableCurrencies = this.currencyService.getAvailableCurrencies();
+
+    // Subscribe to effective currency changes
+    this.currencyService.effectiveCurrency$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(currency => {
+        this.currentCurrency = currency;
+        this.currentUser.selectedCurrency = currency.code;
+      });
+
+    // Subscribe to user currency selection status
+    this.currencyService.userSelectedCurrency$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(userCurrency => {
+        this.hasUserSelectedCurrency = userCurrency !== null;
+      });
+  }
+
   // Custom validators
   private strongPasswordValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.value;
