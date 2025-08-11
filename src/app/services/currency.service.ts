@@ -316,7 +316,7 @@ export class CurrencyService {
     const userCurrencyKey = `${this.USER_CURRENCY_KEY}_${username}`;
     const userCurrency = this.getUserCurrencyPreference(userCurrencyKey);
 
-    console.log(`Loading user currency preference for ${username}: ${userCurrency}`);
+    // Loading user currency preference
 
     if (userCurrency && this.isCurrencySupported(userCurrency)) {
       this.userSelectedCurrencySubject.next(userCurrency);
