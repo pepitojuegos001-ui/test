@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // Start with loading state
     this.initializeWithLoading();
     this.subscribeToLanguageChanges();
+    this.subscribeToCurrencyChanges();
 
     // Get current username
     this.authService.currentUser$
