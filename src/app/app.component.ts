@@ -36,10 +36,14 @@ export class AppComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
     private translationService: TranslationService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private currencyService: CurrencyService,
+    private financialDataService: FinancialDataService
   ) {
-    // Connect services to avoid circular dependency
+    // Connect services to avoid circular dependencies
     this.authService.setTranslationService(this.translationService);
+    this.translationService.setCurrencyService(this.currencyService);
+    this.financialDataService.setCurrencyService(this.currencyService);
   }
 
   ngOnInit(): void {
