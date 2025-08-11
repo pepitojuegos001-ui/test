@@ -72,7 +72,8 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<UserSettingsComponent>,
     private snackBar: MatSnackBar,
     private translationService: TranslationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private currencyService: CurrencyService
   ) {
     this.initializeForms();
   }
