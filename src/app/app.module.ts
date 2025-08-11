@@ -46,6 +46,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddCategoryDialogComponent } from './components/expenses/add-category-dialog.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { LoginComponent } from './components/login/login.component';
+import { CurrencySelectorComponent } from './components/currency-selector/currency-selector.component';
+
+// Pipes
+import { AppCurrencyPipe } from './pipes/currency.pipe';
 
 // Shared Components
 import { SummaryCardComponent } from './shared/components/summary-card/summary-card.component';
