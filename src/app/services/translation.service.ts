@@ -183,8 +183,9 @@ export class TranslationService {
         localStorage.setItem(userLanguageKey, languageCode);
         this.setLanguage(languageCode);
 
-        // Load user's currency preference for the new language
+        // Update currency based on the new language and load user's currency preference
         if (this.currencyService) {
+          this.currencyService.updateCurrencyForLanguage(languageCode);
           this.currencyService.loadUserCurrencyPreference(username);
         }
       } catch (error) {
