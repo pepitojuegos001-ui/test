@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
     // Connect services to avoid circular dependencies
     this.authService.setTranslationService(this.translationService);
     this.translationService.setCurrencyService(this.currencyService);
+    this.currencyService.setTranslationService(this.translationService);
     this.financialDataService.setCurrencyService(this.currencyService);
   }
 
