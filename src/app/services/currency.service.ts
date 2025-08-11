@@ -191,7 +191,11 @@ export class CurrencyService {
    */
   private getTranslatedCurrencyName(code: string): string {
     if (this.translationService) {
-      return this.translationService.instant(`CURRENCY.NAMES.${code}`);
+      const translated = this.translationService.instant(`CURRENCY.NAMES.${code}`);
+      // Check if translation actually worked (if it returns the key, translation failed)
+      if (translated && !translated.startsWith('CURRENCY.NAMES.')) {
+        return translated;
+      }
     }
     // Fallback to English names
     const fallbackNames: Record<string, string> = {
