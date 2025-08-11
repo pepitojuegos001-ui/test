@@ -84,6 +84,11 @@ export class CurrencyService {
     this.initializeCurrency();
   }
 
+  // Method to set translation service (called from app initialization)
+  setTranslationService(translationService: TranslationService): void {
+    this.translationService = translationService;
+  }
+
   private initializeCurrency(): void {
     // Load user preference first
     const userCurrency = this.getUserSelectedCurrency();
