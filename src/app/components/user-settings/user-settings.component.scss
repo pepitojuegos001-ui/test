@@ -207,10 +207,10 @@
     margin: 0 0 16px 0;
     font-size: 1rem;
     font-weight: 500;
-    color: #333;
+    color: var(--text-primary);
 
     mat-icon {
-      color: #667eea;
+      color: var(--interactive-primary);
       font-size: 1.2rem;
       width: 1.2rem;
       height: 1.2rem;
@@ -225,6 +225,66 @@
   .preference-description {
     margin-left: 0;
     margin-top: 12px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+}
+
+// Currency selector styles
+.currency-selector-container {
+  .currency-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 16px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+
+    mat-icon {
+      color: var(--interactive-primary);
+      font-size: 1.2rem;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+
+  .preference-description {
+    margin-left: 0;
+    margin-top: 12px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .current-currency-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-md);
+
+    .info-icon {
+      color: var(--icon-primary);
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .info-text {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+
+      strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+    }
   }
 }
 
