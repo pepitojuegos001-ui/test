@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Chart, ChartConfiguration, ChartData, ChartType, registerables } from 'chart.js';
 import { TranslationService } from './translation.service';
+import { CurrencyService } from './currency.service';
 
 Chart.register(...registerables);
 
@@ -9,7 +10,10 @@ Chart.register(...registerables);
 })
 export class ChartService {
 
-  constructor(private translationService: TranslationService) { }
+  constructor(
+    private translationService: TranslationService,
+    private currencyService: CurrencyService
+  ) { }
 
   createBarChart(
     canvas: HTMLCanvasElement,
