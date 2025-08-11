@@ -37,7 +37,7 @@
       "USD": "$",
       "ARS": "$",
       "BRL": "R$",
-      "EUR": "€"
+      "EUR": "��"
     }
   },
   "AUTH": {
@@ -158,6 +158,10 @@
     "NEW_PASSWORD": "Nouveau Mot de Passe",
     "CONFIRM_PASSWORD": "Confirmer le Nouveau Mot de Passe",
     "PASSWORD_CHANGED": "Mot de passe changé avec succès !",
+    "PASSWORD_STRENGTH": "Force du Mot de Passe",
+    "CURRENT_PASSWORD_INCORRECT": "Le mot de passe actuel est incorrect",
+    "PASSWORD_CHANGE_FAILED": "Échec du changement de mot de passe. Veuillez réessayer.",
+    "UPDATING": "Mise à jour...",
     "PASSWORD_REQUIREMENTS": "Exigences du Mot de Passe :",
     "MIN_8_CHARS": "Au moins 8 caractères",
     "ONE_UPPERCASE": "Une lettre majuscule",
