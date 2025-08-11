@@ -1,0 +1,328 @@
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
+import { map, distinctUntilChanged } from 'rxjs/operators';
+
+export interface Currency {
+  code: string;
+  name: string;
+  symbol: string;
+  locale: string;
+  flag: string;
+}
+
+export interface CurrencyFormattingOptions {
+  minimumFractionDigits?: number;
+  maximumFractionDigits?: number;
+  showSymbol?: boolean;
+  useGrouping?: boolean;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CurrencyService {
+  private readonly CURRENCY_KEY = 'financial_dashboard_currency';
+  private readonly USER_CURRENCY_KEY = 'financial_dashboard_user_currency';
+
+  // Language to Currency mapping
+  private readonly languageCurrencyMap: Record<string, string> = {
+    'en': 'USD', // English → US Dollar
+    'es': 'ARS', // Spanish → Argentine Peso
+    'pt': 'BRL', // Portuguese → Brazilian Real
+    'it': 'EUR', // Italian → Euro
+    'fr': 'EUR'  // French → Euro
+  };
+
+  // Available currencies
+  private readonly availableCurrencies: Currency[] = [
+    {
+      code: 'USD',
+      name: 'US Dollar',
+      symbol: '$',
+      locale: 'en-US',
+      flag: 'assets/images/flags/us.png'
+    },
+    {
+      code: 'ARS',
+      name: 'Argentine Peso',
+      symbol: '$',
+      locale: 'es-AR',
+      flag: 'assets/images/flags/ar.png'
+    },
+    {
+      code: 'BRL',
+      name: 'Brazilian Real',
+      symbol: 'R$',
+      locale: 'pt-BR',
+      flag: 'assets/images/flags/br.png'
+    },
+    {
+      code: 'EUR',
+      name: 'Euro',
+      symbol: '€',
+      locale: 'en-GB',
+      flag: 'assets/images/flags/eu.png'
+    }
+  ];
+
+  // Reactive streams
+  private currentCurrencySubject = new BehaviorSubject<string>('USD');
+  private userSelectedCurrencySubject = new BehaviorSubject<string | null>(null);
+
+  public currentCurrency$ = this.currentCurrencySubject.asObservable();
+  public userSelectedCurrency$ = this.userSelectedCurrencySubject.asObservable();
+
+  // Combined stream that provides the effective currency
+  public effectiveCurrency$: Observable<Currency> = combineLatest([
+    this.currentCurrency$,
+    this.userSelectedCurrency$
+  ]).pipe(
+    map(([languageCurrency, userCurrency]) => {
+      const effectiveCode = userCurrency || languageCurrency;
+      return this.getCurrency(effectiveCode) || this.getCurrency('USD')!;
+    }),
+    distinctUntilChanged((prev, curr) => prev.code === curr.code)
+  );
+
+  constructor() {
+    this.initializeCurrency();
+  }
+
+  private initializeCurrency(): void {
+    // Load user preference first
+    const userCurrency = this.getUserSelectedCurrency();
+    if (userCurrency && this.isCurrencySupported(userCurrency)) {
+      this.userSelectedCurrencySubject.next(userCurrency);
+    }
+
+    // Load or set default language-based currency
+    const savedLanguageCurrency = this.getSavedLanguageCurrency();
+    const defaultCurrency = savedLanguageCurrency || 'USD';
+    this.currentCurrencySubject.next(defaultCurrency);
+  }
+
+  /**
+   * Update currency based on language change
+   * This method should be called when language changes
+   */
+  updateCurrencyForLanguage(languageCode: string): void {
+    const mappedCurrency = this.languageCurrencyMap[languageCode] || 'USD';
+    
+    // Only update if user hasn't manually selected a currency
+    if (!this.userSelectedCurrencySubject.value) {
+      this.currentCurrencySubject.next(mappedCurrency);
+      this.saveLanguageCurrency(mappedCurrency);
+    }
+  }
+
+  /**
+   * Set user-selected currency (overrides language-based currency)
+   */
+  setUserCurrency(currencyCode: string, username?: string): void {
+    if (!this.isCurrencySupported(currencyCode)) {
+      console.warn(`Currency '${currencyCode}' is not supported`);
+      return;
+    }
+
+    this.userSelectedCurrencySubject.next(currencyCode);
+    this.saveUserCurrency(currencyCode, username);
+  }
+
+  /**
+   * Clear user-selected currency (revert to language-based)
+   */
+  clearUserCurrency(username?: string): void {
+    this.userSelectedCurrencySubject.next(null);
+    this.removeUserCurrency(username);
+  }
+
+  /**
+   * Get current effective currency
+   */
+  getCurrentCurrency(): Currency {
+    const userCurrency = this.userSelectedCurrencySubject.value;
+    const languageCurrency = this.currentCurrencySubject.value;
+    const effectiveCode = userCurrency || languageCurrency;
+    return this.getCurrency(effectiveCode) || this.getCurrency('USD')!;
+  }
+
+  /**
+   * Get currency by code
+   */
+  getCurrency(code: string): Currency | undefined {
+    return this.availableCurrencies.find(currency => currency.code === code);
+  }
+
+  /**
+   * Get all available currencies
+   */
+  getAvailableCurrencies(): Currency[] {
+    return [...this.availableCurrencies];
+  }
+
+  /**
+   * Check if currency is supported
+   */
+  isCurrencySupported(code: string): boolean {
+    return this.availableCurrencies.some(currency => currency.code === code);
+  }
+
+  /**
+   * Format amount with current currency
+   */
+  formatAmount(
+    amount: number, 
+    options: CurrencyFormattingOptions = {}
+  ): string {
+    const currency = this.getCurrentCurrency();
+    return this.formatAmountWithCurrency(amount, currency, options);
+  }
+
+  /**
+   * Format amount with specific currency
+   */
+  formatAmountWithCurrency(
+    amount: number, 
+    currency: Currency, 
+    options: CurrencyFormattingOptions = {}
+  ): string {
+    const defaultOptions = {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+      showSymbol: true,
+      useGrouping: true
+    };
+
+    const finalOptions = { ...defaultOptions, ...options };
+
+    try {
+      const formatter = new Intl.NumberFormat(currency.locale, {
+        style: 'currency',
+        currency: currency.code,
+        minimumFractionDigits: finalOptions.minimumFractionDigits,
+        maximumFractionDigits: finalOptions.maximumFractionDigits,
+        useGrouping: finalOptions.useGrouping
+      });
+
+      return formatter.format(Math.abs(amount));
+    } catch (error) {
+      console.warn(`Failed to format currency ${currency.code}:`, error);
+      // Fallback formatting
+      const symbol = finalOptions.showSymbol ? currency.symbol : '';
+      const formatted = Math.abs(amount).toLocaleString(undefined, {
+        minimumFractionDigits: finalOptions.minimumFractionDigits,
+        maximumFractionDigits: finalOptions.maximumFractionDigits,
+        useGrouping: finalOptions.useGrouping
+      });
+      return `${symbol}${formatted}`;
+    }
+  }
+
+  /**
+   * Get default currency for language
+   */
+  getDefaultCurrencyForLanguage(languageCode: string): string {
+    return this.languageCurrencyMap[languageCode] || 'USD';
+  }
+
+  /**
+   * Check if user has manually selected currency
+   */
+  hasUserSelectedCurrency(): boolean {
+    return this.userSelectedCurrencySubject.value !== null;
+  }
+
+  /**
+   * Load user's currency preference after authentication
+   */
+  loadUserCurrencyPreference(username: string): void {
+    const userCurrencyKey = `${this.USER_CURRENCY_KEY}_${username}`;
+    const userCurrency = this.getUserCurrencyPreference(userCurrencyKey);
+
+    if (userCurrency && this.isCurrencySupported(userCurrency)) {
+      this.userSelectedCurrencySubject.next(userCurrency);
+    }
+  }
+
+  /**
+   * Clear user-specific currency preferences
+   */
+  clearUserCurrencyPreferences(username?: string): void {
+    try {
+      if (username) {
+        const userCurrencyKey = `${this.USER_CURRENCY_KEY}_${username}`;
+        localStorage.removeItem(userCurrencyKey);
+      } else {
+        // Clear all user currency preferences
+        const keys = Object.keys(localStorage);
+        keys.forEach((key) => {
+          if (key.startsWith(this.USER_CURRENCY_KEY)) {
+            localStorage.removeItem(key);
+          }
+        });
+      }
+      this.userSelectedCurrencySubject.next(null);
+    } catch (error) {
+      console.warn('Could not clear user currency preferences:', error);
+    }
+  }
+
+  // Private helper methods
+
+  private getSavedLanguageCurrency(): string | null {
+    try {
+      return localStorage.getItem(this.CURRENCY_KEY);
+    } catch (error) {
+      console.warn('Could not read currency preference from localStorage:', error);
+      return null;
+    }
+  }
+
+  private saveLanguageCurrency(currencyCode: string): void {
+    try {
+      localStorage.setItem(this.CURRENCY_KEY, currencyCode);
+    } catch (error) {
+      console.warn('Could not save currency preference to localStorage:', error);
+    }
+  }
+
+  private getUserSelectedCurrency(): string | null {
+    try {
+      return localStorage.getItem(`${this.USER_CURRENCY_KEY}_default`);
+    } catch (error) {
+      console.warn('Could not read user currency preference:', error);
+      return null;
+    }
+  }
+
+  private saveUserCurrency(currencyCode: string, username?: string): void {
+    try {
+      const key = username 
+        ? `${this.USER_CURRENCY_KEY}_${username}`
+        : `${this.USER_CURRENCY_KEY}_default`;
+      localStorage.setItem(key, currencyCode);
+    } catch (error) {
+      console.warn('Could not save user currency preference:', error);
+    }
+  }
+
+  private removeUserCurrency(username?: string): void {
+    try {
+      const key = username 
+        ? `${this.USER_CURRENCY_KEY}_${username}`
+        : `${this.USER_CURRENCY_KEY}_default`;
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.warn('Could not remove user currency preference:', error);
+    }
+  }
+
+  private getUserCurrencyPreference(userCurrencyKey: string): string | null {
+    try {
+      return localStorage.getItem(userCurrencyKey);
+    } catch (error) {
+      console.warn('Could not read user currency preference:', error);
+      return null;
+    }
+  }
+}
