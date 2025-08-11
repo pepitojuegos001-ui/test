@@ -50,7 +50,12 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
   // Language data
   availableLanguages: Language[] = [];
   currentLanguage = 'en';
-  
+
+  // Currency data
+  availableCurrencies: Currency[] = [];
+  currentCurrency?: Currency;
+  hasUserSelectedCurrency = false;
+
   // Avatar upload
   selectedFile: File | null = null;
   imagePreview: string | null = null;
