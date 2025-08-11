@@ -34,37 +34,32 @@ export class CurrencyService {
     'fr': 'EUR'  // French → Euro
   };
 
-  // Available currencies
-  private readonly availableCurrencies: Currency[] = [
+  // Base currency data (names will be translated)
+  private readonly baseCurrencies = [
     {
       code: 'USD',
-      name: 'US Dollar',
-      symbol: '$',
       locale: 'en-US',
       flag: 'assets/images/flags/us.png'
     },
     {
       code: 'ARS',
-      name: 'Argentine Peso',
-      symbol: '$',
       locale: 'es-AR',
       flag: 'assets/images/flags/ar.png'
     },
     {
       code: 'BRL',
-      name: 'Brazilian Real',
-      symbol: 'R$',
       locale: 'pt-BR',
       flag: 'assets/images/flags/br.png'
     },
     {
       code: 'EUR',
-      name: 'Euro',
-      symbol: '€',
       locale: 'en-GB',
       flag: 'assets/images/flags/eu.png'
     }
   ];
+
+  // Translation service will be injected after construction to avoid circular dependency
+  private translationService?: TranslationService;
 
   // Reactive streams
   private currentCurrencySubject = new BehaviorSubject<string>('USD');
