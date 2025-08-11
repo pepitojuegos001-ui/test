@@ -212,7 +212,11 @@ export class CurrencyService {
    */
   private getTranslatedCurrencySymbol(code: string): string {
     if (this.translationService) {
-      return this.translationService.instant(`CURRENCY.SYMBOLS.${code}`);
+      const translated = this.translationService.instant(`CURRENCY.SYMBOLS.${code}`);
+      // Check if translation actually worked
+      if (translated && !translated.startsWith('CURRENCY.SYMBOLS.')) {
+        return translated;
+      }
     }
     // Fallback to default symbols
     const fallbackSymbols: Record<string, string> = {
