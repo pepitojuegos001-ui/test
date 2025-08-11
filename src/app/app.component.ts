@@ -6,6 +6,8 @@ import { map, shareReplay, take } from "rxjs/operators";
 import { AuthService } from "./services/auth.service";
 import { TranslationService } from "./services/translation.service";
 import { ThemeService } from "./services/theme.service";
+import { CurrencyService } from "./services/currency.service";
+import { FinancialDataService } from "./services/financial-data.service";
 
 @Component({
   selector: "app-root",
