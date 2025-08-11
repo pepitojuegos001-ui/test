@@ -81,6 +81,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadUserData();
     this.initializeLanguageData();
+    this.initializeCurrencyData();
   }
 
   ngOnDestroy(): void {
