@@ -181,6 +181,34 @@
                   </span>
                 </div>
               </div>
+
+              <!-- Currency Preference -->
+              <div class="preference-item currency-preference">
+                <div class="currency-selector-container">
+                  <h4 class="currency-title">
+                    <mat-icon>account_balance</mat-icon>
+                    {{ 'USER_SETTINGS.CURRENCY' | translate }}
+                  </h4>
+
+                  <app-currency-selector
+                    [previewAmount]="1500"
+                    (currencyChanged)="onCurrencyChanged($event)">
+                  </app-currency-selector>
+
+                  <span class="preference-description">
+                    {{ 'USER_SETTINGS.CURRENCY_DESC' | translate }}
+                  </span>
+
+                  <!-- Current currency display -->
+                  <div class="current-currency-info" *ngIf="currentCurrency">
+                    <mat-icon class="info-icon">info</mat-icon>
+                    <span class="info-text">
+                      {{ 'USER_SETTINGS.CURRENT_CURRENCY' | translate }}:
+                      <strong>{{ getCurrentCurrencyDisplayName() }}</strong>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!-- Form Actions -->
