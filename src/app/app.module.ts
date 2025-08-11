@@ -83,7 +83,9 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     LoadingOverlayComponent,
     AddCategoryDialogComponent,
     UserSettingsComponent,
-    LoginComponent
+    LoginComponent,
+    CurrencySelectorComponent,
+    AppCurrencyPipe
   ],
   imports: [
     BrowserModule,
