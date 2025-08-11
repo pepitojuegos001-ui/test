@@ -16,6 +16,31 @@
     "NO": "No",
     "TOGGLE_VISIBILITY": "Alternar visibilidad de contraseña"
   },
+  "CURRENCY": {
+    "PREFERRED_CURRENCY": "Moneda Preferida",
+    "SELECT_CURRENCY": "Seleccionar moneda",
+    "AUTO_BASED_ON_LANGUAGE": "Automático (basado en idioma)",
+    "CURRENTLY": "Actualmente",
+    "AUTO_HINT": "La moneda se establece automáticamente según tu preferencia de idioma",
+    "MANUAL_HINT": "Has seleccionado manualmente una moneda personalizada",
+    "PREVIEW": "Vista previa",
+    "INCOME_EXAMPLE": "Ejemplo de ingreso",
+    "EXPENSE_EXAMPLE": "Ejemplo de gasto",
+    "RESET_TO_AUTO": "Restablecer a automático",
+    "AUTO_FROM_LANGUAGE": "automático desde idioma",
+    "NAMES": {
+      "USD": "Dólar Estadounidense",
+      "ARS": "Peso Argentino",
+      "BRL": "Real Brasileño",
+      "EUR": "Euro"
+    },
+    "SYMBOLS": {
+      "USD": "$",
+      "ARS": "$",
+      "BRL": "R$",
+      "EUR": "€"
+    }
+  },
   "AUTH": {
     "LOGIN": "Iniciar Sesión",
     "LOGOUT": "Cerrar Sesión",
