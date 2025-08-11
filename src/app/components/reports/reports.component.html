@@ -134,7 +134,7 @@
             <td mat-cell *matCellDef="let entry"
                 class="amount-cell"
                 [class]="entry.type.toLowerCase()">
-              {{ entry.type === 'Income' ? '+' : '-' }}{{ formatCurrency(entry.amount) }}
+              {{ entry.type === 'Income' ? '+' : '-' }}{{ entry.amount | appCurrency }}
             </td>
           </ng-container>
 
