@@ -182,6 +182,11 @@ export class TranslationService {
       try {
         localStorage.setItem(userLanguageKey, languageCode);
         this.setLanguage(languageCode);
+
+        // Load user's currency preference for the new language
+        if (this.currencyService) {
+          this.currencyService.loadUserCurrencyPreference(username);
+        }
       } catch (error) {
         console.warn("Could not save user language preference:", error);
       }
