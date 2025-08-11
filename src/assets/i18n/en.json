@@ -27,7 +27,19 @@
     "INCOME_EXAMPLE": "Income example",
     "EXPENSE_EXAMPLE": "Expense example",
     "RESET_TO_AUTO": "Reset to automatic",
-    "AUTO_FROM_LANGUAGE": "automatic from language"
+    "AUTO_FROM_LANGUAGE": "automatic from language",
+    "NAMES": {
+      "USD": "US Dollar",
+      "ARS": "Argentine Peso",
+      "BRL": "Brazilian Real",
+      "EUR": "Euro"
+    },
+    "SYMBOLS": {
+      "USD": "$",
+      "ARS": "$",
+      "BRL": "R$",
+      "EUR": "€"
+    }
   },
   "AUTH": {
     "LOGIN": "Sign In",
