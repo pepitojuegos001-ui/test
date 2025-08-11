@@ -83,7 +83,7 @@ export class TranslationService {
 
       // Update currency based on language change
       if (this.currencyService) {
-        console.log(`Triggering currency update for language: ${languageCode}`);
+        // Triggering currency update for new language
         this.currencyService.updateCurrencyForLanguage(languageCode);
       } else {
         console.warn('Currency service not available when setting language');
