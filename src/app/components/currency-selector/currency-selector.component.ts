@@ -145,6 +145,8 @@ export class CurrencySelectorComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(language => {
         this.currentLanguage = language;
+        // Refresh available currencies to get updated translated names
+        this.availableCurrencies = this.currencyService.getAvailableCurrencies();
       });
   }
 
