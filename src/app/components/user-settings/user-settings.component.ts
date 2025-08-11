@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslationService, Language } from '../../services/translation.service';
 import { AuthService } from '../../services/auth.service';
+import { CurrencyService, Currency } from '../../services/currency.service';
 
 interface UserProfile {
   fullName: string;
