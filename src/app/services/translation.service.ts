@@ -76,7 +76,7 @@ export class TranslationService {
 
   setLanguage(languageCode: string): void {
     if (this.isLanguageSupported(languageCode)) {
-      console.log(`Setting language to: ${languageCode}`);
+      // Setting new language
       this.translateService.use(languageCode);
       this.currentLanguageSubject.next(languageCode);
       this.saveLanguagePreference(languageCode);
