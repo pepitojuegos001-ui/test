@@ -75,7 +75,9 @@ export class CurrencyService {
   ]).pipe(
     map(([languageCurrency, userCurrency]) => {
       const effectiveCode = userCurrency || languageCurrency;
-      return this.getCurrency(effectiveCode) || this.getCurrency('USD')!;
+      const currency = this.getCurrency(effectiveCode) || this.getCurrency('USD')!;
+      console.log(`Effective currency calculated: ${currency.code} (language: ${languageCurrency}, user: ${userCurrency})`);
+      return currency;
     }),
     distinctUntilChanged((prev, curr) => prev.code === curr.code)
   );
