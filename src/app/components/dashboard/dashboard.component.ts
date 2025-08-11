@@ -5,6 +5,7 @@ import { ChartService } from '../../services/chart.service';
 import { AuthService } from '../../services/auth.service';
 import { TranslationService } from '../../services/translation.service';
 import { LoadingService } from '../../services/loading.service';
+import { CurrencyService } from '../../services/currency.service';
 import { Chart } from 'chart.js';
 
 @Component({
