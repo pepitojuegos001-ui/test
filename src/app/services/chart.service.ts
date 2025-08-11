@@ -173,15 +173,14 @@ export class ChartService {
   }
 
   /**
-   * Format currency values for charts
+   * Format currency values for charts using current currency
    */
   private formatCurrency(value: number): string {
-    // Use user's locale for currency formatting
-    return new Intl.NumberFormat(this.translationService.getCurrentLanguage(), {
-      style: 'currency',
-      currency: 'USD',
+    return this.currencyService.formatAmount(value, {
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(value);
+      maximumFractionDigits: 0,
+      showSymbol: true,
+      useGrouping: true
+    });
   }
 }
