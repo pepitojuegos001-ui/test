@@ -294,6 +294,23 @@ export class CurrencyService {
   }
 
   /**
+   * Force refresh of currency settings (useful for troubleshooting sync issues)
+   */
+  refreshCurrencySettings(username?: string): void {
+    console.log('Forcing currency settings refresh');
+
+    if (username) {
+      this.loadUserCurrencyPreference(username);
+    }
+
+    // Also refresh the language-based currency
+    if (this.translationService) {
+      const currentLanguage = this.translationService.getCurrentLanguage();
+      this.updateCurrencyForLanguage(currentLanguage);
+    }
+  }
+
+  /**
    * Load user's currency preference after authentication
    */
   loadUserCurrencyPreference(username: string): void {
