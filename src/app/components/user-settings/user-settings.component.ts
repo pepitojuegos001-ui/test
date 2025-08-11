@@ -379,4 +379,24 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
     // This would typically show a confirmation dialog
     console.log('Delete account clicked - implement confirmation dialog');
   }
+
+  onCurrencyChanged(currencyCode: string | null): void {
+    // Currency change is handled by the currency selector component
+    // and the currency service, but we can show a success message
+    const message = currencyCode
+      ? this.translationService.instant('USER_SETTINGS.CURRENCY_UPDATED')
+      : this.translationService.instant('USER_SETTINGS.CURRENCY_AUTO_ENABLED');
+
+    this.showSuccess(message);
+  }
+
+  getCurrentCurrencyDisplayName(): string {
+    if (!this.currentCurrency) return '';
+
+    if (this.hasUserSelectedCurrency) {
+      return `${this.currentCurrency.name} (${this.currentCurrency.code})`;
+    } else {
+      return `${this.currentCurrency.name} (${this.translationService.instant('CURRENCY.AUTO_FROM_LANGUAGE')})`;
+    }
+  }
 }
