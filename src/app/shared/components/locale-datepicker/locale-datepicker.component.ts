@@ -7,78 +7,8 @@ import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-locale-datepicker',
-  template: `
-    <mat-form-field [appearance]="appearance" class="locale-datepicker">
-      <mat-label>{{ label | translate }}</mat-label>
-      
-      <!-- Native date input for cross-browser compatibility -->
-      <input 
-        matInput 
-        type="date"
-        [value]="isoValue"
-        (input)="onDateInput($event)"
-        (blur)="onBlur()"
-        [disabled]="disabled"
-        [required]="required"
-        [min]="minDate"
-        [max]="maxDate"
-        [placeholder]="placeholder"
-        #dateInput>
-      
-      <!-- Display formatted date -->
-      <div class="formatted-date-display" *ngIf="displayValue && !dateInput.matches(':focus')">
-        {{ displayValue }}
-      </div>
-      
-      <mat-icon matSuffix>calendar_today</mat-icon>
-      
-      <!-- Error messages -->
-      <mat-error *ngIf="showError && errorMessage">
-        {{ errorMessage | translate }}
-      </mat-error>
-      
-      <!-- Helper text showing expected format -->
-      <mat-hint *ngIf="showFormatHint">
-        {{ 'DATE.FORMAT' | translate }}: {{ dateFormatPattern }}
-      </mat-hint>
-    </mat-form-field>
-  `,
-  styles: [`
-    .locale-datepicker {
-      width: 100%;
-    }
-    
-    .formatted-date-display {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      pointer-events: none;
-      color: rgba(0, 0, 0, 0.87);
-      background: white;
-      padding: 0 4px;
-      z-index: 1;
-    }
-    
-    :host-context(.dark-theme) .formatted-date-display {
-      background: #303030;
-      color: rgba(255, 255, 255, 0.87);
-    }
-    
-    input[type="date"]::-webkit-calendar-picker-indicator {
-      opacity: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 24px;
-      cursor: pointer;
-    }
-    
-    input[type="date"]:focus + .formatted-date-display {
-      display: none;
-    }
-  `],
+  templateUrl: './locale-datepicker.component.html',
+  styleUrls: ['./locale-datepicker.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
