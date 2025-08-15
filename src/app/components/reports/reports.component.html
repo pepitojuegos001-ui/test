@@ -16,15 +16,17 @@
     <mat-card-content>
       <form [formGroup]="filtersForm">
         <div class="filters-grid">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'REPORTS.START_DATE' | translate }}</mat-label>
-            <input matInput type="date" formControlName="startDate">
-          </mat-form-field>
+          <app-locale-datepicker
+            [label]="'REPORTS.START_DATE'"
+            formControlName="startDate"
+            [showFormatHint]="true">
+          </app-locale-datepicker>
 
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'REPORTS.END_DATE' | translate }}</mat-label>
-            <input matInput type="date" formControlName="endDate">
-          </mat-form-field>
+          <app-locale-datepicker
+            [label]="'REPORTS.END_DATE'"
+            formControlName="endDate"
+            [showFormatHint]="true">
+          </app-locale-datepicker>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'REPORTS.TYPE' | translate }}</mat-label>
