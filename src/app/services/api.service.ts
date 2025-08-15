@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, timer, of } from 'rxjs';
-import { catchError, retry, delay, switchMap, timeout } from 'rxjs/operators';
+import { catchError, retry, delay, map, timeout } from 'rxjs/operators';
 import { ApiConfigService } from './api-config.service';
-import { environment } from '../../environments/environment';
 
 export interface ApiRequestOptions {
   headers?: HttpHeaders | { [header: string]: string | string[] };
@@ -86,23 +85,23 @@ export class ApiService {
     const config = this.buildRequestConfig(options);
     
     // Create the HTTP request observable
-    let request$: Observable<ApiResponse<T>>;
+    let request$: Observable<any>;
     
     switch (method.toUpperCase()) {
       case 'GET':
-        request$ = this.http.get<ApiResponse<T>>(url, config);
+        request$ = this.http.get(url, config);
         break;
       case 'POST':
-        request$ = this.http.post<ApiResponse<T>>(url, body, config);
+        request$ = this.http.post(url, body, config);
         break;
       case 'PUT':
-        request$ = this.http.put<ApiResponse<T>>(url, body, config);
+        request$ = this.http.put(url, body, config);
         break;
       case 'DELETE':
-        request$ = this.http.delete<ApiResponse<T>>(url, config);
+        request$ = this.http.delete(url, config);
         break;
       case 'PATCH':
-        request$ = this.http.patch<ApiResponse<T>>(url, body, config);
+        request$ = this.http.patch(url, body, config);
         break;
       default:
         return throwError(() => new Error(`Unsupported HTTP method: ${method}`));
@@ -120,6 +119,19 @@ export class ApiService {
           console.warn(`API request failed (attempt ${retryCount}), retrying...`, error);
           return timer(apiConfig.retryDelay * retryCount);
         }
+      }),
+      map((response: any) => {
+        // If response is already in ApiResponse format, return as is
+        if (response && typeof response === 'object' && 'data' in response && 'success' in response) {
+          return response as ApiResponse<T>;
+        }
+        
+        // Otherwise, wrap the response in ApiResponse format
+        return {
+          data: response as T,
+          success: true,
+          timestamp: new Date().toISOString()
+        } as ApiResponse<T>;
       }),
       catchError((error: HttpErrorResponse) => {
         console.error('API request failed after retries:', error);
@@ -140,7 +152,7 @@ export class ApiService {
    */
   private buildRequestConfig(options?: ApiRequestOptions): any {
     let headers = this.defaultHeaders;
-
+    
     if (options?.headers) {
       if (options.headers instanceof HttpHeaders) {
         headers = options.headers;
@@ -236,7 +248,7 @@ export class ApiService {
       retryAttempts: 1,
       enableMockFallback: false
     }).pipe(
-      switchMap(() => of(true)),
+      map(() => true),
       catchError(() => of(false))
     );
   }
