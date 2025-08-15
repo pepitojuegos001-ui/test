@@ -88,7 +88,7 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     UserSettingsComponent,
     LoginComponent,
     CurrencySelectorComponent,
-    // LocaleDatepickerComponent,
+    LocaleDatepickerComponent,
     AppCurrencyPipe,
     LocaleDatePipe
   ],
