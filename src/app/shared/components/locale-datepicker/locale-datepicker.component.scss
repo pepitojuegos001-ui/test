@@ -52,7 +52,8 @@
   // Hide browser date picker icon and use Material icon
   input[type="date"] {
     position: relative;
-    
+    cursor: pointer;
+
     &::-webkit-calendar-picker-indicator {
       opacity: 0;
       position: absolute;
@@ -62,6 +63,11 @@
       width: 24px;
       cursor: pointer;
       z-index: 3;
+    }
+
+    // Firefox specific
+    &::-moz-focus-inner {
+      border: 0;
     }
 
     &::-webkit-datetime-edit {
@@ -165,6 +171,29 @@
     font-size: 12px;
     opacity: 0.7;
     margin-top: 4px;
+    display: block;
+    line-height: 1.2;
+  }
+
+  // Calendar icon styling
+  .calendar-icon {
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover:not(.disabled) {
+      color: rgba(0, 0, 0, 0.87);
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.38;
+    }
+
+    :host-context(.dark-theme) & {
+      &:hover:not(.disabled) {
+        color: rgba(255, 255, 255, 0.87);
+      }
+    }
   }
 
   // High contrast mode support
