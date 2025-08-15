@@ -162,7 +162,7 @@
     "FULL_NAME": "Nome Completo",
     "EMAIL_ADDRESS": "Endereço de Email",
     "PREFERENCES": "Preferências",
-    "ENABLE_NOTIFICATIONS": "Habilitar Notificações",
+    "ENABLE_NOTIFICATIONS": "Habilitar Notifica��ões",
     "NOTIFICATIONS_DESC": "Receber notificações por email sobre atividade da conta",
     "TWO_FACTOR_AUTH": "Autenticação de Dois Fatores",
     "TWO_FACTOR_DESC": "Adicione uma camada extra de segurança à sua conta",
@@ -223,5 +223,11 @@
     "MAX_LENGTH": "O comprimento máximo é {{max}} caracteres",
     "PASSWORDS_NOT_MATCH": "As senhas não coincidem",
     "AMOUNT_POSITIVE": "A quantia deve ser maior que 0"
+  },
+  "DATE": {
+    "FORMAT": "Formato da data",
+    "INVALID": "Formato de data inválido",
+    "REQUIRED": "A data é obrigatória",
+    "SELECT_DATE": "Selecione uma data"
   }
 }
