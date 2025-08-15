@@ -189,7 +189,7 @@
                 {{ "EXPENSES.DATE" | translate }}
               </th>
               <td mat-cell *matCellDef="let entry">
-                {{ entry.date | localeDate : "medium" }}
+                {{ entry.date | date : "shortDate" }}
               </td>
             </ng-container>
 
