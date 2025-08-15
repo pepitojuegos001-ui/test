@@ -1,0 +1,131 @@
+<div class="datepicker-test-container">
+  <div class="page-header">
+    <h1>Locale Datepicker Testing</h1>
+    <p>Testing datepicker functionality across different locales and scenarios</p>
+  </div>
+
+  <!-- Language Selector -->
+  <mat-card class="language-card">
+    <mat-card-header>
+      <mat-card-title>Language & Locale Settings</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Select Language</mat-label>
+        <mat-select [(value)]="selectedLanguage" (selectionChange)="onLanguageChange()">
+          <mat-option *ngFor="let lang of availableLanguages" [value]="lang.code">
+            {{ lang.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p class="current-language">Current Language: {{ selectedLanguage | uppercase }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Datepicker Test Form -->
+  <mat-card class="test-form-card">
+    <mat-card-header>
+      <mat-card-title>Datepicker Test Cases</mat-card-title>
+      <mat-card-subtitle>Test different scenarios and validations</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="testForm" (ngSubmit)="onFormSubmit()">
+        
+        <!-- Single Date Selection -->
+        <div class="form-section">
+          <h3>Single Date Selection</h3>
+          <div class="form-row">
+            <app-locale-datepicker
+              [label]="'Test Single Date'"
+              formControlName="singleDate"
+              [required]="true"
+              [showError]="!!(testForm.get('singleDate')?.invalid && testForm.get('singleDate')?.touched)"
+              [errorMessage]="'DATE.REQUIRED'"
+              [showFormatHint]="true">
+            </app-locale-datepicker>
+          </div>
+        </div>
+
+        <!-- Date Range Selection -->
+        <div class="form-section">
+          <h3>Date Range Selection</h3>
+          <div class="form-row">
+            <app-locale-datepicker
+              [label]="'REPORTS.START_DATE'"
+              formControlName="startDate"
+              [showFormatHint]="true">
+            </app-locale-datepicker>
+          </div>
+          <div class="form-row">
+            <app-locale-datepicker
+              [label]="'REPORTS.END_DATE'"
+              formControlName="endDate"
+              [showFormatHint]="true">
+            </app-locale-datepicker>
+          </div>
+        </div>
+
+        <!-- Required Field Validation -->
+        <div class="form-section">
+          <h3>Required Field Validation</h3>
+          <div class="form-row">
+            <app-locale-datepicker
+              [label]="'Required Date Field'"
+              formControlName="requiredDate"
+              [required]="true"
+              [showError]="!!(testForm.get('requiredDate')?.invalid && testForm.get('requiredDate')?.touched)"
+              [errorMessage]="'DATE.REQUIRED'"
+              [showFormatHint]="true">
+            </app-locale-datepicker>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">
+            <mat-icon>check</mat-icon>
+            Test Submit
+          </button>
+          <button mat-button type="button" (click)="resetForm()">
+            <mat-icon>refresh</mat-icon>
+            Reset Form
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Form Data Display -->
+  <mat-card class="data-display-card">
+    <mat-card-header>
+      <mat-card-title>Current Form Data</mat-card-title>
+      <mat-card-subtitle>Real-time form values for debugging</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <pre class="form-data">{{ formData }}</pre>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Test Instructions -->
+  <mat-card class="instructions-card">
+    <mat-card-header>
+      <mat-card-title>Test Instructions</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ol>
+        <li><strong>Language Testing:</strong> Change language and verify date format updates</li>
+        <li><strong>Date Selection:</strong> Click calendar icon or input field to open date picker</li>
+        <li><strong>Locale Formats:</strong> 
+          <ul>
+            <li>English: MM/dd/yyyy (e.g., 08/15/2025)</li>
+            <li>Spanish/French/Italian/Portuguese: dd/MM/yyyy (e.g., 15/08/2025)</li>
+          </ul>
+        </li>
+        <li><strong>Validation:</strong> Submit form with empty required fields to test validation</li>
+        <li><strong>Responsiveness:</strong> Test on different screen sizes</li>
+        <li><strong>Keyboard Navigation:</strong> Use Tab key to navigate and Enter to select dates</li>
+      </ol>
+    </mat-card-content>
+  </mat-card>
+</div>
