@@ -7,6 +7,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
+import { DatepickerTestComponent } from './components/datepicker-test/datepicker-test.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'income', component: IncomeComponent, canActivate: [AuthGuard] },
   { path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard] },
   { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
+  { path: 'datepicker-test', component: DatepickerTestComponent },
   { path: '**', redirectTo: '/login' }
 ];
 

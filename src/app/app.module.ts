@@ -47,6 +47,7 @@ import { AddCategoryDialogComponent } from './components/expenses/add-category-d
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { LoginComponent } from './components/login/login.component';
 import { CurrencySelectorComponent } from './components/currency-selector/currency-selector.component';
+import { DatepickerTestComponent } from './components/datepicker-test/datepicker-test.component';
 
 // Pipes
 import { AppCurrencyPipe } from './pipes/currency.pipe';
@@ -88,6 +89,7 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     UserSettingsComponent,
     LoginComponent,
     CurrencySelectorComponent,
+    DatepickerTestComponent,
     LocaleDatepickerComponent,
     AppCurrencyPipe,
     LocaleDatePipe
