@@ -261,5 +261,11 @@
     "MAX_LENGTH": "La longitud máxima es {{max}} caracteres",
     "PASSWORDS_NOT_MATCH": "Las contraseñas no coinciden",
     "AMOUNT_POSITIVE": "La cantidad debe ser mayor que 0"
+  },
+  "DATE": {
+    "FORMAT": "Formato de fecha",
+    "INVALID": "Formato de fecha inválido",
+    "REQUIRED": "La fecha es obligatoria",
+    "SELECT_DATE": "Selecciona una fecha"
   }
 }
