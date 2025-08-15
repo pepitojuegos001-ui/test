@@ -141,18 +141,38 @@ export class LocaleDateService {
   }
 
   /**
-   * Format a date for form input (always yyyy-MM-dd)
+   * Format a date for form input (always yyyy-MM-dd) - timezone-safe
    */
   formatDateForInput(date: Date | string | number): string {
     if (!date) return '';
-    return formatDate(date, 'yyyy-MM-dd', 'en-US');
+
+    const dateObj = date instanceof Date ? date : new Date(date);
+    if (isNaN(dateObj.getTime())) return '';
+
+    // Use local date components to avoid timezone shifts
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 
   /**
-   * Parse a date string from form input
+   * Parse a date string from form input (timezone-safe)
+   * Handles yyyy-MM-dd format by creating local date to avoid timezone shifts
    */
   parseDateFromInput(dateString: string): Date | null {
     if (!dateString) return null;
+
+    // Handle ISO date format (yyyy-MM-dd) to avoid timezone conversion
+    if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      const [year, month, day] = dateString.split('-').map(Number);
+      // Create local date (not UTC) to preserve the exact date selected
+      const date = new Date(year, month - 1, day);
+      return isNaN(date.getTime()) ? null : date;
+    }
+
+    // Fallback for other formats
     const date = new Date(dateString);
     return isNaN(date.getTime()) ? null : date;
   }

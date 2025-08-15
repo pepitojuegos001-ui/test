@@ -143,11 +143,16 @@ export class LocaleDatepickerComponent implements ControlValueAccessor, OnInit, 
   writeValue(value: Date | string | null): void {
     if (value) {
       if (typeof value === 'string') {
-        this.value = new Date(value);
+        // Use the timezone-safe parsing method
+        this.value = this.localeDateService.parseDateFromInput(value);
       } else {
         this.value = value;
       }
-      this.isoValue = this.localeDateService.formatDateForInput(this.value);
+      if (this.value) {
+        this.isoValue = this.localeDateService.formatDateForInput(this.value);
+      } else {
+        this.isoValue = '';
+      }
     } else {
       this.value = null;
       this.isoValue = '';

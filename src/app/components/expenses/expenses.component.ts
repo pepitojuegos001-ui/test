@@ -77,8 +77,12 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   }
 
   private createForm(): FormGroup {
+    // Create today's date in local timezone to avoid shifts
+    const today = new Date();
+    const localDateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
     return this.fb.group({
-      date: [new Date().toISOString().split('T')[0], Validators.required],
+      date: [localDateString, Validators.required],
       amount: [null, [Validators.required, Validators.min(0.01)]],
       category: ['', Validators.required],
       notes: ['']
@@ -105,8 +109,10 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   }
 
   private setDefaultDate(): void {
-    const today = new Date().toISOString().split('T')[0];
-    this.expenseForm.patchValue({ date: today });
+    // Create today's date in local timezone to avoid shifts
+    const today = new Date();
+    const localDateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    this.expenseForm.patchValue({ date: localDateString });
   }
 
   onSubmit(): void {
