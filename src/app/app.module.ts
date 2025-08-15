@@ -144,7 +144,7 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     TranslationService,
     I18nConfigService,
     LoadingService,
-    LocaleDateService,
+    // LocaleDateService,
     DatePipe,
     ...provideTranslateHttpLoader({
       prefix: './assets/i18n/',
