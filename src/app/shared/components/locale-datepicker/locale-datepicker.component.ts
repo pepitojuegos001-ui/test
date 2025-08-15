@@ -92,12 +92,17 @@ export class LocaleDatepickerComponent implements ControlValueAccessor, OnInit, 
   onDateInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     const isoDateString = input.value;
-    
+
     this.isoValue = isoDateString;
-    
+
     if (isoDateString) {
       const date = this.localeDateService.parseDateFromInput(isoDateString);
-      this.setValue(date);
+      if (date && !isNaN(date.getTime())) {
+        this.setValue(date);
+      } else {
+        console.warn('Invalid date input:', isoDateString);
+        this.setValue(null);
+      }
     } else {
       this.setValue(null);
     }
@@ -114,8 +119,16 @@ export class LocaleDatepickerComponent implements ControlValueAccessor, OnInit, 
 
   focusInput(): void {
     if (this.dateInputRef && !this.disabled) {
-      this.dateInputRef.nativeElement.focus();
-      this.dateInputRef.nativeElement.showPicker?.();
+      try {
+        this.dateInputRef.nativeElement.focus();
+        // Use showPicker if available (modern browsers)
+        if (this.dateInputRef.nativeElement.showPicker) {
+          this.dateInputRef.nativeElement.showPicker();
+        }
+      } catch (error) {
+        // Fallback for browsers that don't support showPicker
+        console.warn('showPicker not supported:', error);
+      }
     }
   }
 
