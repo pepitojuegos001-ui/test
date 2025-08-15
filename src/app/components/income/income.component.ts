@@ -7,6 +7,7 @@ import { FinancialDataService, IncomeEntry } from '../../services/financial-data
 import { ExportService } from '../../services/export.service';
 import { TranslationService } from '../../services/translation.service';
 import { LoadingService } from '../../services/loading.service';
+import { LocaleDateService } from '../../services/locale-date.service';
 
 @Component({
   selector: 'app-income',
@@ -82,12 +83,8 @@ export class IncomeComponent implements OnInit, OnDestroy {
   }
 
   private createForm(): FormGroup {
-    // Create today's date in local timezone to avoid shifts
-    const today = new Date();
-    const localDateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-
     return this.fb.group({
-      date: [localDateString, Validators.required],
+      date: [LocaleDateService.createLocalDateString(), Validators.required],
       amount: [null, [Validators.required, Validators.min(0.01)]],
       source: ['', Validators.required],
       notes: ['']
@@ -104,10 +101,7 @@ export class IncomeComponent implements OnInit, OnDestroy {
   }
 
   private setDefaultDate(): void {
-    // Create today's date in local timezone to avoid shifts
-    const today = new Date();
-    const localDateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-    this.incomeForm.patchValue({ date: localDateString });
+    this.incomeForm.patchValue({ date: LocaleDateService.createLocalDateString() });
   }
 
   onSubmit(): void {
