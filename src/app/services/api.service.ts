@@ -90,19 +90,19 @@ export class ApiService {
     
     switch (method.toUpperCase()) {
       case 'GET':
-        request$ = this.http.get<ApiResponse<T>>(url, config);
+        request$ = this.http.get(url, config) as Observable<ApiResponse<T>>;
         break;
       case 'POST':
-        request$ = this.http.post<ApiResponse<T>>(url, body, config);
+        request$ = this.http.post(url, body, config) as Observable<ApiResponse<T>>;
         break;
       case 'PUT':
-        request$ = this.http.put<ApiResponse<T>>(url, body, config);
+        request$ = this.http.put(url, body, config) as Observable<ApiResponse<T>>;
         break;
       case 'DELETE':
-        request$ = this.http.delete<ApiResponse<T>>(url, config);
+        request$ = this.http.delete(url, config) as Observable<ApiResponse<T>>;
         break;
       case 'PATCH':
-        request$ = this.http.patch<ApiResponse<T>>(url, body, config);
+        request$ = this.http.patch(url, body, config) as Observable<ApiResponse<T>>;
         break;
       default:
         return throwError(() => new Error(`Unsupported HTTP method: ${method}`));
