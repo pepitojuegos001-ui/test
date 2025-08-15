@@ -32,6 +32,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,6 +49,7 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
 import { LoginComponent } from './components/login/login.component';
 import { CurrencySelectorComponent } from './components/currency-selector/currency-selector.component';
 import { DatepickerTestComponent } from './components/datepicker-test/datepicker-test.component';
+import { ApiStatusComponent } from './components/api-status/api-status.component';
 
 // Pipes
 import { AppCurrencyPipe } from './pipes/currency.pipe';
@@ -72,6 +74,7 @@ import { ApiService } from './services/api.service';
 import { ApiConfigService } from './services/api-config.service';
 import { FinancialDataApiService } from './services/financial-data-api.service';
 import { AuthApiService } from './services/auth-api.service';
+import { ApiOrchestratorService } from './services/api-orchestrator.service';
 
 // Translation loader factory function for v17
 export function HttpLoaderFactory(): TranslateHttpLoader {
@@ -94,6 +97,7 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     LoginComponent,
     CurrencySelectorComponent,
     DatepickerTestComponent,
+    ApiStatusComponent,
     LocaleDatepickerComponent,
     AppCurrencyPipe,
     LocaleDatePipe
@@ -140,7 +144,8 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     MatDividerModule,
     MatTabsModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatButtonToggleModule
   ],
   providers: [
     FinancialDataService,
@@ -155,6 +160,7 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     ApiConfigService,
     FinancialDataApiService,
     AuthApiService,
+    ApiOrchestratorService,
     DatePipe,
     ...provideTranslateHttpLoader({
       prefix: './assets/i18n/',
