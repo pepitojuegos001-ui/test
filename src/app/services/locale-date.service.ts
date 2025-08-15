@@ -323,13 +323,31 @@ export class LocaleDateService {
   getLocalizedShortDays(): string[] {
     const locale = this.getCurrentLocale();
     const days: string[] = [];
-    
+
     // Start from Sunday (0) to Saturday (6)
     for (let i = 0; i < 7; i++) {
       const date = new Date(2000, 0, 2 + i); // January 2, 2000 was a Sunday
       days.push(formatDate(date, 'EEE', locale));
     }
-    
+
     return days;
+  }
+
+  /**
+   * Create a timezone-safe local date string (yyyy-MM-dd)
+   * Use this instead of toISOString().split('T')[0] to avoid timezone shifts
+   */
+  static createLocalDateString(date: Date = new Date()): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  /**
+   * Get today's date as a timezone-safe string
+   */
+  getTodayString(): string {
+    return LocaleDateService.createLocalDateString();
   }
 }
