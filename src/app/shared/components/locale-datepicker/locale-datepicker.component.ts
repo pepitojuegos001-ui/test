@@ -103,8 +103,20 @@ export class LocaleDatepickerComponent implements ControlValueAccessor, OnInit, 
     }
   }
 
+  onFocus(): void {
+    this.isFocused = true;
+  }
+
   onBlur(): void {
+    this.isFocused = false;
     this.onTouched();
+  }
+
+  focusInput(): void {
+    if (this.dateInputRef && !this.disabled) {
+      this.dateInputRef.nativeElement.focus();
+      this.dateInputRef.nativeElement.showPicker?.();
+    }
   }
 
   private setValue(date: Date | null): void {
