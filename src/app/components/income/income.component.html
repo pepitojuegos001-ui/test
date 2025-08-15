@@ -18,7 +18,7 @@
               [label]="'INCOME.DATE'"
               formControlName="date"
               [required]="true"
-              [showError]="incomeForm.get('date')?.invalid && incomeForm.get('date')?.touched"
+              [showError]="!!(incomeForm.get('date')?.invalid && incomeForm.get('date')?.touched)"
               [errorMessage]="'VALIDATION.REQUIRED'"
               [showFormatHint]="true">
             </app-locale-datepicker>
