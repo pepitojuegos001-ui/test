@@ -247,8 +247,8 @@ export class CurrencyService {
     options: CurrencyFormattingOptions = {}
   ): string {
     const defaultOptions = {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
       showSymbol: true,
       useGrouping: true
     };
