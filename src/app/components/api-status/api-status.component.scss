@@ -1,0 +1,167 @@
+.api-status-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 400px;
+  
+  .status-card {
+    border-left: 4px solid #2196f3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+    &.error {
+      border-left-color: #f44336;
+    }
+    
+    &.warning {
+      border-left-color: #ff9800;
+    }
+  }
+
+  .status-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    mat-icon {
+      font-size: 20px;
+    }
+  }
+
+  .mode-selection {
+    margin-bottom: 20px;
+    
+    h4 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+    }
+    
+    .mode-toggle-group {
+      width: 100%;
+      
+      mat-button-toggle {
+        flex: 1;
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+    }
+  }
+
+  .health-status,
+  .api-config,
+  .active-services {
+    margin-bottom: 16px;
+    
+    h4 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+    }
+    
+    .health-details,
+    .config-details,
+    .service-list {
+      font-size: 12px;
+      line-height: 1.4;
+      
+      p {
+        margin: 4px 0;
+        
+        strong {
+          color: #333;
+        }
+      }
+    }
+    
+    .healthy {
+      color: #4caf50;
+      font-weight: 500;
+    }
+    
+    .unhealthy {
+      color: #f44336;
+      font-weight: 500;
+    }
+    
+    .enabled {
+      color: #4caf50;
+    }
+    
+    .disabled {
+      color: #ff9800;
+    }
+    
+    .error-message {
+      color: #f44336;
+      font-size: 11px;
+      word-break: break-word;
+    }
+  }
+
+  .health-check-btn {
+    font-size: 12px;
+    height: 32px;
+    margin-top: 8px;
+    
+    mat-icon {
+      font-size: 16px;
+      margin-right: 4px;
+    }
+  }
+
+  // Dark theme support
+  :host-context(.dark-theme) {
+    .status-card {
+      background-color: #424242;
+      color: #fff;
+    }
+    
+    h4 {
+      color: #ccc !important;
+    }
+    
+    .health-details,
+    .config-details,
+    .service-list {
+      strong {
+        color: #fff !important;
+      }
+    }
+  }
+
+  // Mobile responsiveness
+  @media (max-width: 768px) {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin: 16px;
+    max-width: none;
+    
+    .mode-toggle-group {
+      mat-button-toggle {
+        font-size: 10px;
+        padding: 6px 8px;
+      }
+    }
+  }
+
+  // Hide on very small screens
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+// Animation for status changes
+.status-card {
+  transition: border-left-color 0.3s ease;
+}
+
+.healthy,
+.unhealthy,
+.enabled,
+.disabled {
+  transition: color 0.3s ease;
+}

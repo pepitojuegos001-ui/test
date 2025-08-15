@@ -1,0 +1,78 @@
+<div class="api-status-widget" *ngIf="isVisible">
+  <mat-card class="status-card">
+    <mat-card-header>
+      <mat-card-title class="status-title">
+        <mat-icon [color]="getStatusColor()">{{ getStatusIcon() }}</mat-icon>
+        API Status
+      </mat-card-title>
+      <mat-card-subtitle>
+        Mode: {{ serviceStatus.mode?.toUpperCase() }} | 
+        {{ serviceStatus.health?.isHealthy ? 'Connected' : 'Disconnected' }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Service Mode Selection -->
+      <div class="mode-selection">
+        <h4>Service Mode:</h4>
+        <mat-button-toggle-group
+          [value]="serviceStatus.mode"
+          (change)="onModeChange($event.value)"
+          class="mode-toggle-group">
+          <mat-button-toggle 
+            *ngFor="let mode of availableModes" 
+            [value]="mode"
+            [color]="getServiceModeColor(mode)">
+            {{ mode.toUpperCase() }}
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+
+      <!-- Health Status -->
+      <div class="health-status" *ngIf="serviceStatus.health">
+        <h4>Health Check:</h4>
+        <div class="health-details">
+          <p><strong>Status:</strong> 
+            <span [class]="serviceStatus.health.isHealthy ? 'healthy' : 'unhealthy'">
+              {{ serviceStatus.health.isHealthy ? 'Healthy' : 'Unhealthy' }}
+            </span>
+          </p>
+          <p><strong>Last Checked:</strong> {{ serviceStatus.health.lastChecked | date:'medium' }}</p>
+          <p *ngIf="serviceStatus.health.responseTime">
+            <strong>Response Time:</strong> {{ serviceStatus.health.responseTime }}ms
+          </p>
+          <p *ngIf="serviceStatus.health.error" class="error-message">
+            <strong>Error:</strong> {{ serviceStatus.health.error }}
+          </p>
+        </div>
+        <button mat-stroked-button (click)="onHealthCheck()" class="health-check-btn">
+          <mat-icon>refresh</mat-icon>
+          Check Now
+        </button>
+      </div>
+
+      <!-- API Configuration -->
+      <div class="api-config" *ngIf="serviceStatus.api">
+        <h4>Configuration:</h4>
+        <div class="config-details">
+          <p><strong>Environment:</strong> {{ serviceStatus.api.environment }}</p>
+          <p><strong>Base URL:</strong> {{ serviceStatus.api.apiBaseUrl }}</p>
+          <p><strong>Mock Fallback:</strong> 
+            <span [class]="serviceStatus.api.mockFallbackEnabled ? 'enabled' : 'disabled'">
+              {{ serviceStatus.api.mockFallbackEnabled ? 'Enabled' : 'Disabled' }}
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Active Services -->
+      <div class="active-services" *ngIf="serviceStatus.services">
+        <h4>Active Services:</h4>
+        <div class="service-list">
+          <p><strong>Financial:</strong> {{ serviceStatus.services.financial }}</p>
+          <p><strong>Auth:</strong> {{ serviceStatus.services.auth }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
