@@ -90,19 +90,19 @@ export class ApiService {
     
     switch (method.toUpperCase()) {
       case 'GET':
-        request$ = this.http.get(url, config) as Observable<ApiResponse<T>>;
+        request$ = this.http.get<ApiResponse<T>>(url, config);
         break;
       case 'POST':
-        request$ = this.http.post(url, body, config) as Observable<ApiResponse<T>>;
+        request$ = this.http.post<ApiResponse<T>>(url, body, config);
         break;
       case 'PUT':
-        request$ = this.http.put(url, body, config) as Observable<ApiResponse<T>>;
+        request$ = this.http.put<ApiResponse<T>>(url, body, config);
         break;
       case 'DELETE':
-        request$ = this.http.delete(url, config) as Observable<ApiResponse<T>>;
+        request$ = this.http.delete<ApiResponse<T>>(url, config);
         break;
       case 'PATCH':
-        request$ = this.http.patch(url, body, config) as Observable<ApiResponse<T>>;
+        request$ = this.http.patch<ApiResponse<T>>(url, body, config);
         break;
       default:
         return throwError(() => new Error(`Unsupported HTTP method: ${method}`));
@@ -139,9 +139,15 @@ export class ApiService {
    * Build request configuration
    */
   private buildRequestConfig(options?: ApiRequestOptions): any {
-    const headers = options?.headers 
-      ? new HttpHeaders(options.headers).set('Content-Type', 'application/json')
-      : this.defaultHeaders;
+    let headers = this.defaultHeaders;
+
+    if (options?.headers) {
+      if (options.headers instanceof HttpHeaders) {
+        headers = options.headers;
+      } else {
+        headers = new HttpHeaders(options.headers);
+      }
+    }
 
     return {
       headers,
