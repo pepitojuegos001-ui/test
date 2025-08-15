@@ -148,7 +148,7 @@
     "AMOUNT": "Quantia",
     "NOTES": "Notas",
     "NO_DATA_MESSAGE": "Clique em \"Gerar Relatório\" para ver resultados",
-    "NO_RESULTS_FILTERS": "Nenhuma transação encontrada para os critérios selecionados"
+    "NO_RESULTS_FILTERS": "Nenhuma transaç��o encontrada para os critérios selecionados"
   },
   "USER_SETTINGS": {
     "TITLE": "Configurações do Usuário",
@@ -162,7 +162,7 @@
     "FULL_NAME": "Nome Completo",
     "EMAIL_ADDRESS": "Endereço de Email",
     "PREFERENCES": "Preferências",
-    "ENABLE_NOTIFICATIONS": "Habilitar Notifica��ões",
+    "ENABLE_NOTIFICATIONS": "Habilitar Notificações",
     "NOTIFICATIONS_DESC": "Receber notificações por email sobre atividade da conta",
     "TWO_FACTOR_AUTH": "Autenticação de Dois Fatores",
     "TWO_FACTOR_DESC": "Adicione uma camada extra de segurança à sua conta",
@@ -228,6 +228,9 @@
     "FORMAT": "Formato da data",
     "INVALID": "Formato de data inválido",
     "REQUIRED": "A data é obrigatória",
-    "SELECT_DATE": "Selecione uma data"
+    "SELECT_DATE": "Selecione uma data",
+    "CHOOSE_DATE": "Escolher data",
+    "CLEAR_DATE": "Limpar data",
+    "TODAY": "Hoje"
   }
 }

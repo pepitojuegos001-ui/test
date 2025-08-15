@@ -227,6 +227,9 @@
     "FORMAT": "Formato data",
     "INVALID": "Formato data non valido",
     "REQUIRED": "La data è obbligatoria",
-    "SELECT_DATE": "Seleziona una data"
+    "SELECT_DATE": "Seleziona una data",
+    "CHOOSE_DATE": "Scegli data",
+    "CLEAR_DATE": "Cancella data",
+    "TODAY": "Oggi"
   }
 }
