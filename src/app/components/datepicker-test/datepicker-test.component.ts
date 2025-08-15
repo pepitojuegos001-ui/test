@@ -32,6 +32,17 @@ export class DatepickerTestComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedLanguage = this.translationService.getCurrentLanguage();
+
+    // Set sample dates to demonstrate locale formatting
+    const today = new Date();
+    const startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+    this.testForm.patchValue({
+      singleDate: today,
+      startDate: startDate,
+      endDate: endDate
+    });
   }
 
   onLanguageChange(): void {
