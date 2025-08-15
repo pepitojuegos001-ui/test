@@ -57,10 +57,7 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": false,
-              "namedChunks": true,
-              "preserveSymlinks": false,
-              "commonChunk": false,
-              "aot": false
+              "namedChunks": false
             }
           },
           "defaultConfiguration": "production"
