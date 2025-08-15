@@ -266,6 +266,9 @@
     "FORMAT": "Date format",
     "INVALID": "Invalid date format",
     "REQUIRED": "Date is required",
-    "SELECT_DATE": "Select a date"
+    "SELECT_DATE": "Select a date",
+    "CHOOSE_DATE": "Choose date",
+    "CLEAR_DATE": "Clear date",
+    "TODAY": "Today"
   }
 }

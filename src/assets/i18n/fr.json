@@ -205,6 +205,9 @@
     "FORMAT": "Format de date",
     "INVALID": "Format de date invalide",
     "REQUIRED": "La date est obligatoire",
-    "SELECT_DATE": "Sélectionnez une date"
+    "SELECT_DATE": "Sélectionnez une date",
+    "CHOOSE_DATE": "Choisir la date",
+    "CLEAR_DATE": "Effacer la date",
+    "TODAY": "Aujourd'hui"
   }
 }

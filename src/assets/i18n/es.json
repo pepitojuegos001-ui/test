@@ -266,6 +266,9 @@
     "FORMAT": "Formato de fecha",
     "INVALID": "Formato de fecha inválido",
     "REQUIRED": "La fecha es obligatoria",
-    "SELECT_DATE": "Selecciona una fecha"
+    "SELECT_DATE": "Selecciona una fecha",
+    "CHOOSE_DATE": "Elegir fecha",
+    "CLEAR_DATE": "Limpiar fecha",
+    "TODAY": "Hoy"
   }
 }
