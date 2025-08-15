@@ -222,5 +222,11 @@
     "MIN_LENGTH": "La lunghezza minima è {{min}} caratteri",
     "MAX_LENGTH": "La lunghezza massima è {{max}} caratteri",
     "PASSWORDS_NOT_MATCH": "Le password non corrispondono"
+  },
+  "DATE": {
+    "FORMAT": "Formato data",
+    "INVALID": "Formato data non valido",
+    "REQUIRED": "La data è obbligatoria",
+    "SELECT_DATE": "Seleziona una data"
   }
 }
