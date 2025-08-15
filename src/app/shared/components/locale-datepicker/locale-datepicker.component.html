@@ -1,0 +1,49 @@
+<mat-form-field 
+  [appearance]="appearance" 
+  class="locale-datepicker"
+  [class.mat-focused]="isFocused">
+  
+  <mat-label>{{ label | translate }}</mat-label>
+  
+  <!-- Native date input for cross-browser compatibility -->
+  <input 
+    matInput 
+    type="date"
+    [value]="isoValue"
+    (input)="onDateInput($event)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    [disabled]="disabled"
+    [required]="required"
+    [min]="minDate"
+    [max]="maxDate"
+    [placeholder]="placeholder"
+    [attr.aria-label]="label | translate"
+    #dateInput>
+  
+  <!-- Display formatted date overlay -->
+  <div 
+    class="formatted-date-display" 
+    *ngIf="displayValue && !isFocused"
+    [class.input-focused]="isFocused">
+    {{ displayValue }}
+  </div>
+  
+  <!-- Material calendar icon -->
+  <mat-icon 
+    matSuffix 
+    (click)="focusInput()"
+    [attr.aria-label]="'DATE.SELECT_DATE' | translate">
+    calendar_today
+  </mat-icon>
+  
+  <!-- Error messages -->
+  <mat-error *ngIf="showError && errorMessage">
+    {{ errorMessage | translate }}
+  </mat-error>
+  
+  <!-- Helper text showing expected format -->
+  <mat-hint *ngIf="showFormatHint">
+    {{ 'DATE.FORMAT' | translate }}: {{ dateFormatPattern }}
+  </mat-hint>
+</mat-form-field>
