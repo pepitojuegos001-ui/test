@@ -261,5 +261,11 @@
     "MAX_LENGTH": "Maximum length is {{max}} characters",
     "PASSWORDS_NOT_MATCH": "Passwords do not match",
     "AMOUNT_POSITIVE": "Amount must be greater than 0"
+  },
+  "DATE": {
+    "FORMAT": "Date format",
+    "INVALID": "Invalid date format",
+    "REQUIRED": "Date is required",
+    "SELECT_DATE": "Select a date"
   }
 }
