@@ -50,7 +50,7 @@ import { CurrencySelectorComponent } from './components/currency-selector/curren
 
 // Pipes
 import { AppCurrencyPipe } from './pipes/currency.pipe';
-// import { LocaleDatePipe } from './pipes/locale-date.pipe';
+import { LocaleDatePipe } from './pipes/locale-date.pipe';
 
 // Shared Components
 import { SummaryCardComponent } from './shared/components/summary-card/summary-card.component';
