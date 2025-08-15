@@ -30,14 +30,17 @@ export class LocaleDatepickerComponent implements ControlValueAccessor, OnInit, 
   @Input() showFormatHint: boolean = false;
   
   @Output() dateChange = new EventEmitter<Date | null>();
-  
+
+  @ViewChild('dateInput', { static: false }) dateInputRef!: ElementRef<HTMLInputElement>;
+
   private destroy$ = new Subject<void>();
-  
+
   value: Date | null = null;
   isoValue: string = '';
   displayValue: string = '';
   dateFormatPattern: string = '';
-  
+  isFocused: boolean = false;
+
   private onChange = (value: Date | null) => {};
   private onTouched = () => {};
 
