@@ -15,6 +15,31 @@
     "YES": "Sì",
     "NO": "No"
   },
+  "CURRENCY": {
+    "PREFERRED_CURRENCY": "Valuta Preferita",
+    "SELECT_CURRENCY": "Seleziona valuta",
+    "AUTO_BASED_ON_LANGUAGE": "Automatico (basato sulla lingua)",
+    "CURRENTLY": "Attualmente",
+    "AUTO_HINT": "La valuta è impostata automaticamente in base alla tua preferenza linguistica",
+    "MANUAL_HINT": "Hai selezionato manualmente una valuta personalizzata",
+    "PREVIEW": "Anteprima",
+    "INCOME_EXAMPLE": "Esempio di entrata",
+    "EXPENSE_EXAMPLE": "Esempio di spesa",
+    "RESET_TO_AUTO": "Reimposta su automatico",
+    "AUTO_FROM_LANGUAGE": "automatico dalla lingua",
+    "NAMES": {
+      "USD": "Dollaro Americano",
+      "ARS": "Peso Argentino",
+      "BRL": "Real Brasiliano",
+      "EUR": "Euro"
+    },
+    "SYMBOLS": {
+      "USD": "$",
+      "ARS": "$",
+      "BRL": "R$",
+      "EUR": "€"
+    }
+  },
   "AUTH": {
     "LOGIN": "Accedi",
     "LOGOUT": "Disconnetti",
@@ -143,6 +168,11 @@
     "TWO_FACTOR_DESC": "Aggiungi un ulteriore livello di sicurezza al tuo account",
     "LANGUAGE": "Lingua",
     "LANGUAGE_DESC": "Scegli la tua lingua preferita",
+    "CURRENCY": "Valuta",
+    "CURRENCY_DESC": "Scegli la tua valuta preferita per visualizzare gli importi",
+    "CURRENT_CURRENCY": "Valuta attuale",
+    "CURRENCY_UPDATED": "Preferenza valuta aggiornata con successo!",
+    "CURRENCY_AUTO_ENABLED": "Selezione automatica valuta abilitata!",
     "SAVE_CHANGES": "Salva Modifiche",
     "SAVING": "Salvataggio...",
     "PROFILE_UPDATED": "Profilo aggiornato con successo!",
@@ -151,6 +181,10 @@
     "NEW_PASSWORD": "Nuova Password",
     "CONFIRM_PASSWORD": "Conferma Nuova Password",
     "PASSWORD_CHANGED": "Password cambiata con successo!",
+    "PASSWORD_STRENGTH": "Forza Password",
+    "CURRENT_PASSWORD_INCORRECT": "La password attuale non è corretta",
+    "PASSWORD_CHANGE_FAILED": "Impossibile cambiare la password. Riprova.",
+    "UPDATING": "Aggiornamento...",
     "PASSWORD_REQUIREMENTS": "Requisiti Password:",
     "MIN_8_CHARS": "Almeno 8 caratteri",
     "ONE_UPPERCASE": "Una lettera maiuscola",

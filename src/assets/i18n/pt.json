@@ -15,6 +15,31 @@
     "YES": "Sim",
     "NO": "Não"
   },
+  "CURRENCY": {
+    "PREFERRED_CURRENCY": "Moeda Preferida",
+    "SELECT_CURRENCY": "Selecionar moeda",
+    "AUTO_BASED_ON_LANGUAGE": "Automático (baseado no idioma)",
+    "CURRENTLY": "Atualmente",
+    "AUTO_HINT": "A moeda é definida automaticamente com base na sua preferência de idioma",
+    "MANUAL_HINT": "Você selecionou manualmente uma moeda personalizada",
+    "PREVIEW": "Visualização",
+    "INCOME_EXAMPLE": "Exemplo de receita",
+    "EXPENSE_EXAMPLE": "Exemplo de despesa",
+    "RESET_TO_AUTO": "Redefinir para automático",
+    "AUTO_FROM_LANGUAGE": "automático do idioma",
+    "NAMES": {
+      "USD": "Dólar Americano",
+      "ARS": "Peso Argentino",
+      "BRL": "Real Brasileiro",
+      "EUR": "Euro"
+    },
+    "SYMBOLS": {
+      "USD": "$",
+      "ARS": "$",
+      "BRL": "R$",
+      "EUR": "€"
+    }
+  },
   "AUTH": {
     "LOGIN": "Entrar",
     "LOGOUT": "Sair",
@@ -143,6 +168,11 @@
     "TWO_FACTOR_DESC": "Adicione uma camada extra de segurança à sua conta",
     "LANGUAGE": "Idioma",
     "LANGUAGE_DESC": "Escolha seu idioma preferido",
+    "CURRENCY": "Moeda",
+    "CURRENCY_DESC": "Escolha sua moeda preferida para exibir valores",
+    "CURRENT_CURRENCY": "Moeda atual",
+    "CURRENCY_UPDATED": "Preferência de moeda atualizada com sucesso!",
+    "CURRENCY_AUTO_ENABLED": "Seleção automática de moeda habilitada!",
     "SAVE_CHANGES": "Salvar Alterações",
     "SAVING": "Salvando...",
     "PROFILE_UPDATED": "Perfil atualizado com sucesso!",
@@ -151,6 +181,10 @@
     "NEW_PASSWORD": "Nova Senha",
     "CONFIRM_PASSWORD": "Confirmar Nova Senha",
     "PASSWORD_CHANGED": "Senha alterada com sucesso!",
+    "PASSWORD_STRENGTH": "Força da Senha",
+    "CURRENT_PASSWORD_INCORRECT": "A senha atual está incorreta",
+    "PASSWORD_CHANGE_FAILED": "Falha ao alterar a senha. Tente novamente.",
+    "UPDATING": "Atualizando...",
     "PASSWORD_REQUIREMENTS": "Requisitos da Senha:",
     "MIN_8_CHARS": "Pelo menos 8 caracteres",
     "ONE_UPPERCASE": "Uma letra maiúscula",

@@ -1,10 +1,20 @@
-import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { UserSettingsComponent } from '../user-settings/user-settings.component';
-import { AuthService } from '../../services/auth.service';
-import { TranslationService, Language } from '../../services/translation.service';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  OnInit,
+  OnDestroy,
+} from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { UserSettingsComponent } from "../user-settings/user-settings.component";
+import { AuthService } from "../../services/auth.service";
+import {
+  TranslationService,
+  Language,
+} from "../../services/translation.service";
+import { ThemeService, Theme } from "src/app/services/theme.service";
 
 /**
  * NavbarComponent - Enhanced top navigation bar
@@ -22,35 +32,40 @@ import { TranslationService, Language } from '../../services/translation.service
  * <app-navbar (sidebarToggle)="onSidebarToggle()"></app-navbar>
  */
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   @Output() sidebarToggle = new EventEmitter<void>();
 
   private destroy$ = new Subject<void>();
-  username = '';
+  username = "";
   isUserMenuOpen = false;
   notifications = 3; // Sample notification count
 
   // Language properties
-  currentLanguage = 'en';
+  currentLanguage = "en";
   availableLanguages: Language[] = [];
   isLanguageMenuOpen = false;
+
+  // Theme properties
+  currentTheme: Theme = "light";
+  isDarkMode = false;
 
   constructor(
     private dialog: MatDialog,
     private authService: AuthService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    public themeService: ThemeService // Injecting ThemeService for theme management
   ) {}
 
   ngOnInit(): void {
     // Subscribe to current user changes
     this.authService.currentUser$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(user => {
-        this.username = user?.username || '';
+      .subscribe((user) => {
+        this.username = user?.username || "";
 
         // Load user's language preference when user logs in
         if (user && user.isAuthenticated && user.username) {
@@ -62,9 +77,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.availableLanguages = this.translationService.getAvailableLanguages();
     this.translationService.currentLanguage$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(language => {
+      .subscribe((language) => {
         this.currentLanguage = language;
       });
+
+    // Subscribe to theme changes
+    this.themeService.currentTheme$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((theme) => {
+        this.currentTheme = theme;
+        this.isDarkMode = theme === "dark";
+      });
+
+    // Initialize system theme change listener
+    this.themeService.listenToSystemChanges();
   }
 
   ngOnDestroy(): void {
@@ -84,18 +110,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isUserMenuOpen = false;
 
     const dialogRef = this.dialog.open(UserSettingsComponent, {
-      width: '650px',
-      maxWidth: '95vw',
-      maxHeight: '90vh',
-      panelClass: 'user-settings-dialog',
+      width: "650px",
+      maxWidth: "95vw",
+      maxHeight: "90vh",
+      panelClass: "user-settings-dialog",
       disableClose: false,
       autoFocus: true,
-      restoreFocus: true
+      restoreFocus: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('Settings updated:', result);
+        console.log("Settings updated:", result);
       }
     });
   }
@@ -103,6 +129,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
   onLogout(): void {
     this.isUserMenuOpen = false;
     this.authService.logout();
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+    // Optional: Add subtle feedback or analytics tracking here
+    console.log(`Theme switched to: ${this.themeService.getCurrentTheme()}`);
+  }
+
+  getCurrentThemeIcon(): string {
+    return this.isDarkMode ? "light_mode" : "dark_mode";
+  }
+
+  getThemeTooltip(): string {
+    return this.isDarkMode ? "Switch to light mode" : "Switch to dark mode";
   }
 
   toggleLanguageMenu(): void {
@@ -120,11 +160,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onNotifications(): void {
     // TODO: Implement notifications logic
-    console.log('Notifications clicked');
+    console.log("Notifications clicked");
   }
 
   onChat(): void {
     // TODO: Implement chat/feedback logic
-    console.log('Chat/Feedback clicked');
+    console.log("Chat/Feedback clicked");
   }
 }

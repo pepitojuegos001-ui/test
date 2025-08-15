@@ -1,0 +1,381 @@
+// Angular Material Theme Configuration
+@use '@angular/material' as mat;
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+// Light theme palettes
+$light-primary: mat.define-palette(mat.$blue-palette, 500, 100, 900);
+$light-accent: mat.define-palette(mat.$green-palette, 500, A200, A700);
+$light-warn: mat.define-palette(mat.$red-palette, 500, 300, 800);
+
+// Dark theme palettes  
+$dark-primary: mat.define-palette(mat.$blue-palette, 400, 200, 700);
+$dark-accent: mat.define-palette(mat.$green-palette, 400, A100, A400);
+$dark-warn: mat.define-palette(mat.$red-palette, 400, 300, 700);
+
+// Create the theme objects
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $light-primary,
+    accent: $light-accent,
+    warn: $light-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include mat.core();
+
+// Apply the light theme by default
+@include mat.all-component-themes($light-theme);
+
+// Apply dark theme when the dark-theme class is present
+.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+
+  // Enhanced Material component overrides for dark theme
+  .mat-dialog-container {
+    background: var(--surface-primary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-heavy);
+  }
+
+  .mat-snack-bar-container {
+    background: var(--surface-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-primary);
+  }
+
+  .mat-menu-panel {
+    background: var(--surface-primary) !important;
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-heavy);
+
+    .mat-menu-item {
+      color: var(--text-primary) !important;
+      transition: background-color var(--transition-fast);
+
+      &:hover, &:focus {
+        background: var(--surface-hover) !important;
+      }
+
+      &.mat-menu-item-highlighted {
+        background: var(--surface-selected) !important;
+      }
+
+      .mat-icon {
+        color: var(--icon-primary) !important;
+      }
+    }
+  }
+
+  .mat-select-panel {
+    background: var(--surface-primary) !important;
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-heavy);
+
+    .mat-option {
+      color: var(--text-primary) !important;
+      transition: background-color var(--transition-fast);
+
+      &:hover, &:focus {
+        background: var(--surface-hover) !important;
+      }
+
+      &.mat-selected {
+        background: var(--surface-selected) !important;
+        color: var(--text-on-primary) !important;
+      }
+
+      &.mat-option-highlighted {
+        background: var(--surface-hover) !important;
+      }
+    }
+  }
+
+  .mat-form-field {
+    &.mat-form-field-appearance-outline {
+      .mat-form-field-outline {
+        color: var(--input-border) !important;
+      }
+
+      .mat-form-field-outline-thick {
+        color: var(--input-border-focus) !important;
+      }
+
+      &:not(.mat-form-field-disabled):hover .mat-form-field-outline {
+        color: var(--border-hover) !important;
+      }
+    }
+
+    .mat-select-arrow {
+      color: var(--text-secondary) !important;
+    }
+
+    .mat-select-value {
+      color: var(--input-text) !important;
+    }
+
+    .mat-select-placeholder {
+      color: var(--input-placeholder) !important;
+    }
+
+    .mat-form-field-label {
+      color: var(--text-secondary) !important;
+    }
+
+    &.mat-focused .mat-form-field-label {
+      color: var(--input-border-focus) !important;
+    }
+
+    .mat-input-element {
+      color: var(--input-text) !important;
+      caret-color: var(--input-border-focus) !important;
+
+      &::placeholder {
+        color: var(--input-placeholder) !important;
+      }
+    }
+  }
+
+  .mat-checkbox {
+    .mat-checkbox-frame {
+      border-color: var(--border-primary) !important;
+    }
+
+    .mat-checkbox-label {
+      color: var(--text-primary) !important;
+    }
+
+    &.mat-checkbox-checked .mat-checkbox-background {
+      background-color: var(--interactive-primary) !important;
+    }
+  }
+
+  .mat-radio-button {
+    .mat-radio-outer-circle {
+      border-color: var(--border-primary) !important;
+    }
+
+    .mat-radio-label-content {
+      color: var(--text-primary) !important;
+    }
+
+    &.mat-radio-checked .mat-radio-inner-circle {
+      background-color: var(--interactive-primary) !important;
+    }
+  }
+
+  .mat-slide-toggle {
+    .mat-slide-toggle-track {
+      background-color: var(--border-primary) !important;
+    }
+
+    .mat-slide-toggle-label {
+      color: var(--text-primary) !important;
+    }
+
+    &.mat-checked .mat-slide-toggle-track {
+      background-color: var(--interactive-primary) !important;
+    }
+  }
+
+  .mat-expansion-panel {
+    background: var(--surface-primary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-primary);
+
+    .mat-expansion-panel-header {
+      color: var(--text-primary) !important;
+
+      &:hover, &:focus {
+        background: var(--surface-hover) !important;
+      }
+    }
+
+    .mat-expansion-panel-body {
+      background: var(--surface-primary) !important;
+    }
+  }
+
+  .mat-tab-group {
+    .mat-tab-label {
+      color: var(--text-secondary) !important;
+      transition: color var(--transition-fast);
+
+      &.mat-tab-label-active {
+        color: var(--interactive-primary) !important;
+      }
+
+      &:hover {
+        color: var(--text-primary) !important;
+      }
+    }
+
+    .mat-tab-body-content {
+      background: var(--surface-primary) !important;
+    }
+
+    .mat-ink-bar {
+      background-color: var(--interactive-primary) !important;
+    }
+  }
+
+  .mat-stepper {
+    background: var(--surface-primary) !important;
+
+    .mat-step-header {
+      color: var(--text-secondary) !important;
+
+      &.cdk-keyboard-focused, &.cdk-program-focused, &:hover {
+        background: var(--surface-hover) !important;
+      }
+
+      &.mat-step-header-selected {
+        color: var(--interactive-primary) !important;
+      }
+    }
+  }
+
+  .mat-tooltip {
+    background: var(--surface-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-primary);
+  }
+
+  .mat-paginator {
+    background: var(--surface-primary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-primary);
+
+    .mat-paginator-icon {
+      fill: var(--text-secondary) !important;
+    }
+
+    .mat-select-value {
+      color: var(--text-primary) !important;
+    }
+  }
+
+  .mat-sort-header-arrow {
+    color: var(--text-secondary) !important;
+  }
+
+  .mat-progress-bar {
+    .mat-progress-bar-background {
+      fill: var(--border-primary) !important;
+    }
+
+    .mat-progress-bar-buffer {
+      background-color: var(--border-primary) !important;
+    }
+
+    .mat-progress-bar-fill::after {
+      background-color: var(--interactive-primary) !important;
+    }
+  }
+
+  .mat-progress-spinner {
+    circle {
+      stroke: var(--interactive-primary) !important;
+    }
+  }
+
+  .mat-button-toggle-group {
+    border: 1px solid var(--border-primary) !important;
+
+    .mat-button-toggle {
+      color: var(--text-primary) !important;
+      background: var(--surface-primary) !important;
+      border-color: var(--border-primary) !important;
+
+      &.mat-button-toggle-checked {
+        background: var(--interactive-primary) !important;
+        color: var(--text-on-primary) !important;
+      }
+
+      &:hover {
+        background: var(--surface-hover) !important;
+      }
+    }
+  }
+}
+
+// Light theme specific overrides (if needed)
+.light-theme {
+  .mat-dialog-container {
+    background: var(--surface-primary);
+    color: var(--text-primary);
+  }
+  
+  .mat-snack-bar-container {
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+  }
+}
+
+// Additional Material Design component customizations
+.mat-button, .mat-raised-button, .mat-flat-button, .mat-stroked-button {
+  border-radius: var(--border-radius-md);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.mat-icon-button {
+  transition: background-color var(--transition-fast);
+}
+
+.mat-form-field {
+  .mat-form-field-outline {
+    border-radius: var(--border-radius-md);
+  }
+}
+
+.mat-card {
+  border-radius: var(--border-radius-lg);
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+
+.mat-dialog-container {
+  border-radius: var(--border-radius-xl);
+}
+
+.mat-menu-panel {
+  border-radius: var(--border-radius-md);
+}
+
+.mat-select-panel {
+  border-radius: var(--border-radius-md);
+}
+
+.mat-expansion-panel {
+  border-radius: var(--border-radius-md);
+}
+
+// Custom Material Design elevation overrides
+.mat-elevation-z1 {
+  box-shadow: var(--shadow-light);
+}
+
+.mat-elevation-z2 {
+  box-shadow: var(--shadow-medium);
+}
+
+.mat-elevation-z3 {
+  box-shadow: var(--shadow-heavy);
+}

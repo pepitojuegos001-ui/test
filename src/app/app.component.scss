@@ -12,12 +12,13 @@
 }
 
 .sidenav {
-  background: #ffffff;
-  border-right: 1px solid #e0e0e0;
-  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background: var(--sidebar-background);
+  border-right: 1px solid var(--sidebar-border);
+  box-shadow: 2px 0 4px var(--shadow-light);
+  transition: all var(--transition-normal);
   z-index: 99;
   overflow: hidden;
+  color: var(--sidebar-text);
 
   // Scale sidebar width for large displays
   @media (min-width: 1920px) {
@@ -41,8 +42,9 @@
 }
 
 .main-content-container {
-  background-color: #f5f5f5;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: var(--background-secondary);
+  transition: all var(--transition-normal);
+  color: var(--text-primary);
 
   // When sidebar is collapsed on desktop, adjust content area
   &.sidebar-collapsed {
@@ -53,7 +55,8 @@
 .main-content {
   padding: clamp(16px, 3vw, 48px);
   min-height: calc(100vh - 64px - 48px);
-  background-color: #f5f5f5;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
   overflow-y: auto;
 
   @media (min-width: 1920px) {
@@ -79,20 +82,17 @@
 @media (max-width: 768px) {
   .sidenav {
     width: 280px !important;
-    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-heavy);
   }
-  
+
   .main-layout {
     margin-top: 56px; // Smaller navbar on mobile
     height: calc(100vh - 56px);
   }
 }
 
-// CSS Variables for consistent theming
+// Component-specific variables for layout
 :host {
-  --background-light: #f5f5f5;
-  --border-color: #e0e0e0;
-  --shadow-light: rgba(0, 0, 0, 0.05);
   --navbar-height-desktop: 64px;
   --navbar-height-mobile: 56px;
   --sidebar-width-expanded: 280px;
@@ -110,7 +110,8 @@
 }
 
 .mat-sidenav-content {
-  background-color: var(--background-light);
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
 }
 
 // Ensure proper z-index layering
@@ -120,7 +121,7 @@
 
 // Backdrop for mobile overlay
 .mat-sidenav-backdrop {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--background-overlay);
 }
 
 // Login Layout

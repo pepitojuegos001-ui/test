@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-summary-card',
@@ -13,18 +12,6 @@ export class SummaryCardComponent {
   @Input() type: 'income' | 'expense' | 'balance' = 'balance';
   @Input() subtitle: string = '';
   @Input() trend?: number;
-
-  constructor(private translationService: TranslationService) {}
-
-  get formattedValue(): string {
-    const currentLang = this.translationService.getCurrentLanguage();
-    return new Intl.NumberFormat(currentLang, {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(Math.abs(this.value));
-  }
 
   get cardClass(): string {
     return `summary-card ${this.type}-card`;

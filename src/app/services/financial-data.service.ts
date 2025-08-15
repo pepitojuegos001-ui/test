@@ -309,8 +309,21 @@ export class FinancialDataService {
       .sort((a, b) => b.amount - a.amount);
   }
 
+  // Currency service will be injected to avoid circular dependency
+  private currencyService?: any;
+
+  // Method to set currency service (called from app initialization)
+  setCurrencyService(currencyService: any): void {
+    this.currencyService = currencyService;
+  }
+
   // Utility Functions
   formatCurrency(amount: number): string {
+    if (this.currencyService) {
+      return this.currencyService.formatAmount(amount);
+    }
+
+    // Fallback to USD formatting if currency service not available
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',

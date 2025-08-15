@@ -15,6 +15,31 @@
     "YES": "Oui",
     "NO": "Non"
   },
+  "CURRENCY": {
+    "PREFERRED_CURRENCY": "Devise Préférée",
+    "SELECT_CURRENCY": "Sélectionner une devise",
+    "AUTO_BASED_ON_LANGUAGE": "Automatique (basé sur la langue)",
+    "CURRENTLY": "Actuellement",
+    "AUTO_HINT": "La devise est définie automatiquement selon votre préférence linguistique",
+    "MANUAL_HINT": "Vous avez sélectionné manuellement une devise personnalisée",
+    "PREVIEW": "Aperçu",
+    "INCOME_EXAMPLE": "Exemple de revenu",
+    "EXPENSE_EXAMPLE": "Exemple de dépense",
+    "RESET_TO_AUTO": "Remettre en automatique",
+    "AUTO_FROM_LANGUAGE": "automatique depuis la langue",
+    "NAMES": {
+      "USD": "Dollar Américain",
+      "ARS": "Peso Argentin",
+      "BRL": "Real Brésilien",
+      "EUR": "Euro"
+    },
+    "SYMBOLS": {
+      "USD": "$",
+      "ARS": "$",
+      "BRL": "R$",
+      "EUR": "��"
+    }
+  },
   "AUTH": {
     "LOGIN": "Se connecter",
     "LOGOUT": "Se déconnecter",
@@ -120,6 +145,11 @@
     "TWO_FACTOR_DESC": "Ajouter une couche de sécurité supplémentaire à votre compte",
     "LANGUAGE": "Langue",
     "LANGUAGE_DESC": "Choisissez votre langue préférée",
+    "CURRENCY": "Devise",
+    "CURRENCY_DESC": "Choisissez votre devise préférée pour afficher les montants",
+    "CURRENT_CURRENCY": "Devise actuelle",
+    "CURRENCY_UPDATED": "Préférence de devise mise à jour avec succès !",
+    "CURRENCY_AUTO_ENABLED": "Sélection automatique de devise activée !",
     "SAVE_CHANGES": "Sauvegarder les Modifications",
     "SAVING": "Sauvegarde...",
     "PROFILE_UPDATED": "Profil mis à jour avec succès !",
@@ -128,6 +158,10 @@
     "NEW_PASSWORD": "Nouveau Mot de Passe",
     "CONFIRM_PASSWORD": "Confirmer le Nouveau Mot de Passe",
     "PASSWORD_CHANGED": "Mot de passe changé avec succès !",
+    "PASSWORD_STRENGTH": "Force du Mot de Passe",
+    "CURRENT_PASSWORD_INCORRECT": "Le mot de passe actuel est incorrect",
+    "PASSWORD_CHANGE_FAILED": "Échec du changement de mot de passe. Veuillez réessayer.",
+    "UPDATING": "Mise à jour...",
     "PASSWORD_REQUIREMENTS": "Exigences du Mot de Passe :",
     "MIN_8_CHARS": "Au moins 8 caractères",
     "ONE_UPPERCASE": "Une lettre majuscule",

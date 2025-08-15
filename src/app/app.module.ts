@@ -46,6 +46,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddCategoryDialogComponent } from './components/expenses/add-category-dialog.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { LoginComponent } from './components/login/login.component';
+import { CurrencySelectorComponent } from './components/currency-selector/currency-selector.component';
+
+// Pipes
+import { AppCurrencyPipe } from './pipes/currency.pipe';
 
 // Shared Components
 import { SummaryCardComponent } from './shared/components/summary-card/summary-card.component';
@@ -59,6 +63,7 @@ import { AuthService } from './services/auth.service';
 import { TranslationService } from './services/translation.service';
 import { I18nConfigService } from './services/i18n-config.service';
 import { LoadingService } from './services/loading.service';
+import { CurrencyService } from './services/currency.service';
 
 // Translation loader factory function for v17
 export function HttpLoaderFactory(): TranslateHttpLoader {
@@ -78,7 +83,9 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     LoadingOverlayComponent,
     AddCategoryDialogComponent,
     UserSettingsComponent,
-    LoginComponent
+    LoginComponent,
+    CurrencySelectorComponent,
+    AppCurrencyPipe
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,214 @@
+.theme-demo-card {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: var(--card-background) !important;
+  color: var(--text-on-surface) !important;
+  border: 1px solid var(--card-border);
+  transition: all var(--transition-normal);
+}
+
+.demo-title {
+  color: var(--text-primary) !important;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.demo-subtitle {
+  color: var(--text-secondary) !important;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.demo-text-primary {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.demo-text-secondary {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.demo-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  
+  .demo-button {
+    transition: all var(--transition-fast);
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.demo-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  
+  .demo-surface-card,
+  .demo-interactive-card {
+    padding: 1rem;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-primary);
+    transition: all var(--transition-normal);
+    
+    h4 {
+      color: var(--text-primary);
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+    }
+    
+    p {
+      color: var(--text-secondary);
+      margin: 0;
+      font-size: 0.9rem;
+      font-family: 'Courier New', monospace;
+    }
+  }
+  
+  .demo-surface-card {
+    background: var(--surface-primary);
+  }
+  
+  .demo-interactive-card {
+    background: var(--surface-secondary);
+    cursor: pointer;
+    
+    &:hover {
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+  }
+}
+
+.demo-form-field {
+  width: 100%;
+  
+  .mat-form-field-outline {
+    color: var(--input-border) !important;
+  }
+  
+  &.mat-focused .mat-form-field-outline-thick {
+    color: var(--input-border-focus) !important;
+  }
+  
+  .mat-input-element {
+    color: var(--input-text) !important;
+  }
+  
+  .mat-form-field-label {
+    color: var(--text-secondary) !important;
+  }
+  
+  &.mat-focused .mat-form-field-label {
+    color: var(--input-border-focus) !important;
+  }
+}
+
+.demo-status-indicators {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  
+  span {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-md);
+    font-weight: 500;
+    font-size: 0.9rem;
+    
+    &.status-success {
+      background: var(--surface-secondary);
+      color: var(--status-success);
+      border: 1px solid var(--status-success);
+      box-shadow: inset 0 0 0 1px rgba(76, 175, 80, 0.1);
+    }
+
+    &.status-warning {
+      background: var(--surface-secondary);
+      color: var(--status-warning);
+      border: 1px solid var(--status-warning);
+      box-shadow: inset 0 0 0 1px rgba(255, 152, 0, 0.1);
+    }
+
+    &.status-error {
+      background: var(--surface-secondary);
+      color: var(--status-error);
+      border: 1px solid var(--status-error);
+      box-shadow: inset 0 0 0 1px rgba(244, 67, 54, 0.1);
+    }
+  }
+}
+
+.demo-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  
+  button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--interactive-primary) !important;
+    transition: all var(--transition-fast);
+    
+    &:hover {
+      background: var(--surface-hover) !important;
+    }
+    
+    .mat-icon {
+      font-size: 1.2rem;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .theme-demo-card {
+    margin: 1rem;
+  }
+  
+  .demo-buttons {
+    .demo-button {
+      flex: 1;
+      min-width: calc(50% - 0.5rem);
+    }
+  }
+  
+  .demo-actions {
+    flex-direction: column;
+    
+    button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .demo-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .demo-buttons {
+    .demo-button {
+      flex: 1;
+      min-width: 100%;
+    }
+  }
+}

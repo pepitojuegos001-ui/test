@@ -126,9 +126,10 @@
   padding: clamp(16px, 2.5vw, 32px);
   min-height: clamp(120px, 15vw, 180px);
   text-align: center;
-  background: var(--background-light);
-  border: 1px solid var(--border-color);
-  transition: transform 0.2s ease;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  position: relative;
 
   @media (min-width: 1440px) {
     min-height: 120px;
@@ -144,25 +145,63 @@
 
   &:hover {
     transform: translateY(clamp(-2px, -0.5vw, -4px));
+    box-shadow: var(--shadow-medium);
   }
 
+  // Enhanced visual indicators with better contrast
   &.income {
-    border-left: clamp(3px, 0.8vw, 6px) solid var(--success-color);
+    border-left: clamp(4px, 0.8vw, 8px) solid var(--status-success);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 12px;
+      height: 12px;
+      background: var(--status-success);
+      border-radius: 50%;
+      opacity: 0.3;
+    }
   }
 
   &.expense {
-    border-left: clamp(3px, 0.8vw, 6px) solid var(--error-color);
+    border-left: clamp(4px, 0.8vw, 8px) solid var(--status-error);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 12px;
+      height: 12px;
+      background: var(--status-error);
+      border-radius: 50%;
+      opacity: 0.3;
+    }
   }
 
   &.balance {
-    border-left: clamp(3px, 0.8vw, 6px) solid var(--primary-blue);
+    border-left: clamp(4px, 0.8vw, 8px) solid var(--brand-primary);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 12px;
+      height: 12px;
+      background: var(--brand-primary);
+      border-radius: 50%;
+      opacity: 0.3;
+    }
 
     &.positive .stat-value {
-      color: var(--success-color);
+      color: var(--status-success);
     }
 
     &.negative .stat-value {
-      color: var(--error-color);
+      color: var(--status-error);
     }
   }
 }
@@ -209,34 +248,60 @@
 
 .results-table {
   width: 100%;
-  
+
   .type-badge {
-    padding: 4px 8px;
-    border-radius: 12px;
+    padding: 6px 12px;
+    border-radius: var(--border-radius-lg);
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
-    
-    &.income {
-      background: rgba(76, 175, 80, 0.1);
-      color: var(--success-color);
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all var(--transition-fast);
+
+    &::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
     }
-    
+
+    &.income {
+      background-color: var(--surface-secondary);
+      color: var(--status-success);
+      border: 1px solid var(--status-success);
+      box-shadow: inset 0 0 0 1px rgba(76, 175, 80, 0.1);
+
+      &::before {
+        background: var(--status-success);
+      }
+    }
+
     &.expense {
-      background: rgba(244, 67, 54, 0.1);
-      color: var(--error-color);
+      background-color: var(--surface-secondary);
+      color: var(--status-error);
+      border: 1px solid var(--status-error);
+      box-shadow: inset 0 0 0 1px rgba(244, 67, 54, 0.1);
+
+      &::before {
+        background: var(--status-error);
+      }
     }
   }
-  
+
   .amount-cell {
     font-weight: 600;
-    
+    font-size: 1rem;
+
     &.income {
-      color: var(--success-color);
+      color: var(--status-success);
     }
-    
+
     &.expense {
-      color: var(--error-color);
+      color: var(--status-error);
     }
   }
 }

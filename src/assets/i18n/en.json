@@ -16,6 +16,31 @@
     "NO": "No",
     "TOGGLE_VISIBILITY": "Toggle password visibility"
   },
+  "CURRENCY": {
+    "PREFERRED_CURRENCY": "Preferred Currency",
+    "SELECT_CURRENCY": "Select currency",
+    "AUTO_BASED_ON_LANGUAGE": "Automatic (based on language)",
+    "CURRENTLY": "Currently",
+    "AUTO_HINT": "Currency is automatically set based on your language preference",
+    "MANUAL_HINT": "You have manually selected a currency override",
+    "PREVIEW": "Preview",
+    "INCOME_EXAMPLE": "Income example",
+    "EXPENSE_EXAMPLE": "Expense example",
+    "RESET_TO_AUTO": "Reset to automatic",
+    "AUTO_FROM_LANGUAGE": "automatic from language",
+    "NAMES": {
+      "USD": "US Dollar",
+      "ARS": "Argentine Peso",
+      "BRL": "Brazilian Real",
+      "EUR": "Euro"
+    },
+    "SYMBOLS": {
+      "USD": "$",
+      "ARS": "$",
+      "BRL": "R$",
+      "EUR": "€"
+    }
+  },
   "AUTH": {
     "LOGIN": "Sign In",
     "LOGOUT": "Logout",
@@ -164,6 +189,11 @@
     "TWO_FACTOR_DESC": "Add an extra layer of security to your account",
     "LANGUAGE": "Language",
     "LANGUAGE_DESC": "Choose your preferred language",
+    "CURRENCY": "Currency",
+    "CURRENCY_DESC": "Choose your preferred currency for displaying amounts",
+    "CURRENT_CURRENCY": "Current currency",
+    "CURRENCY_UPDATED": "Currency preference updated successfully!",
+    "CURRENCY_AUTO_ENABLED": "Automatic currency selection enabled!",
     "SAVE_CHANGES": "Save Changes",
     "SAVING": "Saving...",
     "PROFILE_UPDATED": "Profile updated successfully!",

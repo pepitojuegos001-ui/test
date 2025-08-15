@@ -16,6 +16,31 @@
     "NO": "No",
     "TOGGLE_VISIBILITY": "Alternar visibilidad de contraseña"
   },
+  "CURRENCY": {
+    "PREFERRED_CURRENCY": "Moneda Preferida",
+    "SELECT_CURRENCY": "Seleccionar moneda",
+    "AUTO_BASED_ON_LANGUAGE": "Automático (basado en idioma)",
+    "CURRENTLY": "Actualmente",
+    "AUTO_HINT": "La moneda se establece automáticamente según tu preferencia de idioma",
+    "MANUAL_HINT": "Has seleccionado manualmente una moneda personalizada",
+    "PREVIEW": "Vista previa",
+    "INCOME_EXAMPLE": "Ejemplo de ingreso",
+    "EXPENSE_EXAMPLE": "Ejemplo de gasto",
+    "RESET_TO_AUTO": "Restablecer a automático",
+    "AUTO_FROM_LANGUAGE": "automático desde idioma",
+    "NAMES": {
+      "USD": "Dólar Estadounidense",
+      "ARS": "Peso Argentino",
+      "BRL": "Real Brasileño",
+      "EUR": "Euro"
+    },
+    "SYMBOLS": {
+      "USD": "$",
+      "ARS": "$",
+      "BRL": "R$",
+      "EUR": "€"
+    }
+  },
   "AUTH": {
     "LOGIN": "Iniciar Sesión",
     "LOGOUT": "Cerrar Sesión",
@@ -164,6 +189,11 @@
     "TWO_FACTOR_DESC": "Agrega una capa extra de seguridad a tu cuenta",
     "LANGUAGE": "Idioma",
     "LANGUAGE_DESC": "Elige tu idioma preferido",
+    "CURRENCY": "Moneda",
+    "CURRENCY_DESC": "Elige tu moneda preferida para mostrar los importes",
+    "CURRENT_CURRENCY": "Moneda actual",
+    "CURRENCY_UPDATED": "¡Preferencia de moneda actualizada exitosamente!",
+    "CURRENCY_AUTO_ENABLED": "��Selección automática de moneda habilitada!",
     "SAVE_CHANGES": "Guardar Cambios",
     "SAVING": "Guardando...",
     "PROFILE_UPDATED": "¡Perfil actualizado exitosamente!",
@@ -174,6 +204,7 @@
     "PASSWORD_CHANGED": "¡Contraseña cambiada exitosamente!",
     "PASSWORD_STRENGTH": "Fortaleza de Contraseña",
     "CURRENT_PASSWORD_INCORRECT": "La contraseña actual es incorrecta",
+    "PASSWORD_CHANGE_FAILED": "Error al cambiar la contraseña. Inténtalo de nuevo.",
     "UPDATING": "Actualizando...",
     "PASSWORD_REQUIREMENTS": "Requisitos de Contraseña:",
     "MIN_8_CHARS": "Al menos 8 caracteres",

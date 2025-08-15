@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslationService, Language } from '../../services/translation.service';
 import { AuthService } from '../../services/auth.service';
+import { CurrencyService, Currency } from '../../services/currency.service';
 
 interface UserProfile {
   fullName: string;
@@ -14,6 +15,7 @@ interface UserProfile {
   notificationsEnabled: boolean;
   twoFactorEnabled: boolean;
   selectedLanguage: string;
+  selectedCurrency?: string;
 }
 
 interface PasswordChangeData {
@@ -48,7 +50,12 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
   // Language data
   availableLanguages: Language[] = [];
   currentLanguage = 'en';
-  
+
+  // Currency data
+  availableCurrencies: Currency[] = [];
+  currentCurrency?: Currency;
+  hasUserSelectedCurrency = false;
+
   // Avatar upload
   selectedFile: File | null = null;
   imagePreview: string | null = null;
@@ -65,7 +72,8 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<UserSettingsComponent>,
     private snackBar: MatSnackBar,
     private translationService: TranslationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private currencyService: CurrencyService
   ) {
     this.initializeForms();
   }
@@ -73,6 +81,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadUserData();
     this.initializeLanguageData();
+    this.initializeCurrencyData();
   }
 
   ngOnDestroy(): void {
@@ -118,6 +127,26 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
         this.currentLanguage = language;
         this.currentUser.selectedLanguage = language;
         this.profileForm.patchValue({ selectedLanguage: language });
+      });
+  }
+
+  private initializeCurrencyData(): void {
+    // Get available currencies
+    this.availableCurrencies = this.currencyService.getAvailableCurrencies();
+
+    // Subscribe to effective currency changes
+    this.currencyService.effectiveCurrency$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(currency => {
+        this.currentCurrency = currency;
+        this.currentUser.selectedCurrency = currency.code;
+      });
+
+    // Subscribe to user currency selection status
+    this.currencyService.userSelectedCurrency$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(userCurrency => {
+        this.hasUserSelectedCurrency = userCurrency !== null;
       });
   }
 
@@ -349,5 +378,25 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
   onDeleteAccount(): void {
     // This would typically show a confirmation dialog
     console.log('Delete account clicked - implement confirmation dialog');
+  }
+
+  onCurrencyChanged(currencyCode: string | null): void {
+    // Currency change is handled by the currency selector component
+    // and the currency service, but we can show a success message
+    const message = currencyCode
+      ? this.translationService.instant('USER_SETTINGS.CURRENCY_UPDATED')
+      : this.translationService.instant('USER_SETTINGS.CURRENCY_AUTO_ENABLED');
+
+    this.showSuccess(message);
+  }
+
+  getCurrentCurrencyDisplayName(): string {
+    if (!this.currentCurrency) return '';
+
+    if (this.hasUserSelectedCurrency) {
+      return `${this.currentCurrency.name} (${this.currentCurrency.code})`;
+    } else {
+      return `${this.currentCurrency.name} (${this.translationService.instant('CURRENCY.AUTO_FROM_LANGUAGE')})`;
+    }
   }
 }

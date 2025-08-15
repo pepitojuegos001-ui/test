@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Chart, ChartConfiguration, ChartData, ChartType, registerables } from 'chart.js';
 import { TranslationService } from './translation.service';
+import { CurrencyService } from './currency.service';
 
 Chart.register(...registerables);
 
@@ -9,7 +10,10 @@ Chart.register(...registerables);
 })
 export class ChartService {
 
-  constructor(private translationService: TranslationService) { }
+  constructor(
+    private translationService: TranslationService,
+    private currencyService: CurrencyService
+  ) { }
 
   createBarChart(
     canvas: HTMLCanvasElement,
@@ -169,15 +173,14 @@ export class ChartService {
   }
 
   /**
-   * Format currency values for charts
+   * Format currency values for charts using current currency
    */
   private formatCurrency(value: number): string {
-    // Use user's locale for currency formatting
-    return new Intl.NumberFormat(this.translationService.getCurrentLanguage(), {
-      style: 'currency',
-      currency: 'USD',
+    return this.currencyService.formatAmount(value, {
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(value);
+      maximumFractionDigits: 0,
+      showSymbol: true,
+      useGrouping: true
+    });
   }
 }

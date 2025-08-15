@@ -5,6 +5,7 @@ import { ChartService } from '../../services/chart.service';
 import { AuthService } from '../../services/auth.service';
 import { TranslationService } from '../../services/translation.service';
 import { LoadingService } from '../../services/loading.service';
+import { CurrencyService } from '../../services/currency.service';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -48,13 +49,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private chartService: ChartService,
     private authService: AuthService,
     private translationService: TranslationService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private currencyService: CurrencyService
   ) { }
 
   ngOnInit(): void {
     // Start with loading state
     this.initializeWithLoading();
     this.subscribeToLanguageChanges();
+    this.subscribeToCurrencyChanges();
 
     // Get current username
     this.authService.currentUser$
@@ -84,6 +87,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           this.updateCharts();
         }, 100); // Small delay to ensure translations are loaded
+      });
+  }
+
+  private subscribeToCurrencyChanges(): void {
+    this.currencyService.effectiveCurrency$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        // Recreate charts when currency changes to update formatting
+        setTimeout(() => {
+          this.updateCharts();
+        }, 100); // Small delay to ensure currency formatting is updated
       });
   }
 

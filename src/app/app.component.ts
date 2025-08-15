@@ -1,54 +1,72 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MatSidenav } from '@angular/material/sidenav';
-import { Observable } from 'rxjs';
-import { map, shareReplay, take } from 'rxjs/operators';
-import { AuthService } from './services/auth.service';
-import { TranslationService } from './services/translation.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { MatSidenav } from "@angular/material/sidenav";
+import { Observable } from "rxjs";
+import { map, shareReplay, take } from "rxjs/operators";
+import { AuthService } from "./services/auth.service";
+import { TranslationService } from "./services/translation.service";
+import { ThemeService } from "./services/theme.service";
+import { CurrencyService } from "./services/currency.service";
+import { FinancialDataService } from "./services/financial-data.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  @ViewChild('drawer', { static: false }) drawer!: MatSidenav;
+  @ViewChild("drawer", { static: false }) drawer!: MatSidenav;
 
-  title = 'Financial Dashboard';
+  title = "Financial Dashboard";
   isSidebarCollapsed = this.loadSidebarState();
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map((result) => result.matches),
       shareReplay()
     );
 
-  isAuthenticated$: Observable<boolean> = this.authService.currentUser$
-    .pipe(
-      map(user => user?.isAuthenticated || false),
-      shareReplay()
-    );
+  isAuthenticated$: Observable<boolean> = this.authService.currentUser$.pipe(
+    map((user) => user?.isAuthenticated || false),
+    shareReplay()
+  );
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private themeService: ThemeService,
+    private currencyService: CurrencyService,
+    private financialDataService: FinancialDataService
   ) {
-    // Connect services to avoid circular dependency
+    // Connect services to avoid circular dependencies
     this.authService.setTranslationService(this.translationService);
+    this.translationService.setCurrencyService(this.currencyService);
+    this.currencyService.setTranslationService(this.translationService);
+    this.financialDataService.setCurrencyService(this.currencyService);
   }
 
   ngOnInit(): void {
     this.updateDateTime();
     this.setupResponsiveLayout();
     this.initializeLanguageSettings();
+    this.initializeTheme();
+  }
+
+  private initializeTheme(): void {
+    // Theme service automatically initializes the theme from localStorage
+    // or system preference in its constructor, so we just need to ensure
+    // it's injected and can listen to system changes
+    this.themeService.listenToSystemChanges();
   }
 
   private initializeLanguageSettings(): void {
     // Initialize translation service for current user if authenticated
-    this.authService.currentUser$.pipe(take(1)).subscribe(user => {
+    this.authService.currentUser$.pipe(take(1)).subscribe((user) => {
       if (user?.isAuthenticated) {
         this.translationService.initializeForCurrentUser(user.username);
+        this.currencyService.loadUserCurrencyPreference(user.username);
       } else {
         this.translationService.initializeForCurrentUser();
       }
@@ -56,7 +74,7 @@ export class AppComponent implements OnInit {
   }
 
   private setupResponsiveLayout(): void {
-    this.isHandset$.subscribe(isHandset => {
+    this.isHandset$.subscribe((isHandset) => {
       if (isHandset) {
         this.isSidebarCollapsed = false; // Never collapse on mobile, just hide/show
       }
@@ -71,27 +89,27 @@ export class AppComponent implements OnInit {
   }
 
   onSidebarToggle(): void {
-    this.isHandset$.pipe(
-      take(1) // Take only one value and automatically unsubscribe
-    ).subscribe(isHandset => {
-      if (isHandset) {
-        // On mobile, toggle the drawer open/close
-        if (this.drawer) {
-          this.drawer.toggle();
+    this.isHandset$
+      .pipe(
+        take(1) // Take only one value and automatically unsubscribe
+      )
+      .subscribe((isHandset) => {
+        if (isHandset) {
+          // On mobile, toggle the drawer open/close
+          if (this.drawer) {
+            this.drawer.toggle();
+          }
+        } else {
+          // On desktop, toggle collapse state
+          this.isSidebarCollapsed = !this.isSidebarCollapsed;
+          this.saveSidebarState();
         }
-      } else {
-        // On desktop, toggle collapse state
-        this.isSidebarCollapsed = !this.isSidebarCollapsed;
-        this.saveSidebarState();
-      }
-    });
+      });
   }
 
   onNavigationCollapse(): void {
     // Auto-collapse sidebar when navigation occurs on desktop
-    this.isHandset$.pipe(
-      take(1)
-    ).subscribe(isHandset => {
+    this.isHandset$.pipe(take(1)).subscribe((isHandset) => {
       if (!isHandset) {
         // Only collapse on desktop
         this.isSidebarCollapsed = true;
@@ -102,30 +120,46 @@ export class AppComponent implements OnInit {
 
   private saveSidebarState(): void {
     try {
-      localStorage.setItem('financialDashboard_sidebarCollapsed', JSON.stringify(this.isSidebarCollapsed));
+      localStorage.setItem(
+        "financialDashboard_sidebarCollapsed",
+        JSON.stringify(this.isSidebarCollapsed)
+      );
     } catch (error) {
       // Handle localStorage errors (e.g., private browsing mode)
-      console.warn('Could not save sidebar state to localStorage:', error);
+      console.warn("Could not save sidebar state to localStorage:", error);
     }
   }
 
   private loadSidebarState(): boolean {
     try {
-      const saved = localStorage.getItem('financialDashboard_sidebarCollapsed');
+      const saved = localStorage.getItem("financialDashboard_sidebarCollapsed");
       return saved ? JSON.parse(saved) : false;
     } catch (error) {
       // Handle localStorage errors
-      console.warn('Could not load sidebar state from localStorage:', error);
+      console.warn("Could not load sidebar state from localStorage:", error);
       return false;
     }
   }
 
   get currentDateTime(): string {
     const now = new Date();
-    return now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    return (
+      now.toLocaleDateString() +
+      " " +
+      now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    );
   }
 
   get sidebarWidth(): string {
-    return this.isSidebarCollapsed ? '64px' : '280px';
+    if (this.isSidebarCollapsed) {
+      return "60px";
+    }
+    if (window.innerWidth >= 2560) {
+      return "320px";
+    }
+    if (window.innerWidth >= 1920) {
+      return "280px";
+    }
+    return "220px";
   }
 }

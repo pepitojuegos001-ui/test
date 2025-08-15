@@ -146,27 +146,31 @@
 .table-card {
   .mat-card-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    justify-content: space-between;
   }
-  
-  .header-actions button {
+
+  .header-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    margin-left: auto;
   }
 }
 
 .table-filters {
   display: grid;
   gap: clamp(16px, 2vw, 32px);
-  grid-template-columns: repeat(auto-fit, minmax(clamp(140px, 18vw, 180px), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(clamp(140px, 18vw, 180px), 1fr)
+  );
   align-items: end;
   margin-bottom: clamp(16px, 2vw, 32px);
   padding: clamp(12px, 2vw, 24px);
-  background: var(--background-light);
-  border-radius: clamp(6px, 1vw, 12px);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-light);
 
   mat-form-field {
     min-width: clamp(120px, 15vw, 160px);
@@ -189,6 +193,10 @@
     gap: clamp(4px, 0.5vw, 8px);
     font-size: clamp(0.8125rem, 1.2vw, 1rem);
     border-radius: clamp(6px, 1vw, 12px);
+    align-self: end;
+    margin-top: 0;
+    margin-bottom: 28px;
+    padding-bottom: 6px;
   }
 
   @media (min-width: 1920px) {
@@ -261,7 +269,7 @@
   justify-content: center;
   padding: 48px;
   color: var(--text-secondary);
-  
+
   mat-icon {
     font-size: 48px;
     width: 48px;
@@ -269,7 +277,7 @@
     margin-bottom: 16px;
     opacity: 0.5;
   }
-  
+
   p {
     font-size: 1rem;
     margin: 0;
@@ -287,21 +295,21 @@
   .income-container {
     padding: 16px;
   }
-  
+
   .table-filters {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  
+
   .form-actions {
     flex-direction: column;
-    
+
     button {
       width: 100%;
       justify-content: center;
     }
   }
-  
+
   .table-card .mat-card-header {
     flex-direction: column;
     align-items: stretch;

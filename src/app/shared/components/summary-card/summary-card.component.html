@@ -11,7 +11,7 @@
     </div>
     
     <div class="card-value">
-      <div class="value-amount">{{ formattedValue }}</div>
+      <div class="value-amount">{{ value | appCurrency }}</div>
       <div class="trend-indicator" [class]="trendClass" *ngIf="trend">
         <mat-icon>{{ trendIcon }}</mat-icon>
         <span>{{ trendText }}</span>

@@ -30,8 +30,12 @@
 .navbar-title {
   font-size: clamp(1.125rem, 2vw, 1.75rem);
   font-weight: 500;
-  color: white;
+  color: var(--nav-text);
   line-height: 1.2;
+
+  @media (max-width: 480px) {
+    display: none; // Hide title on very small screens
+  }
 }
 
 .navbar-spacer {
@@ -41,18 +45,42 @@
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: clamp(6px, 1vw, 16px);
+  gap: 16px;
 }
 
 .navbar-icon-btn {
-  color: white;
+  color: var(--nav-text) !important;
   width: clamp(40px, 6vw, 52px);
   height: clamp(40px, 6vw, 52px);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
 
   .mat-icon {
     font-size: clamp(20px, 3vw, 28px);
     width: clamp(20px, 3vw, 28px);
     height: clamp(20px, 3vw, 28px);
+    transition: color var(--transition-fast);
+  }
+
+  &:hover {
+    background: var(--nav-hover) !important;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Theme toggle specific styles
+.theme-toggle-btn {
+  .mat-icon {
+    &.theme-transition {
+      transition: transform var(--transition-normal), color var(--transition-normal);
+    }
+
+    &:hover {
+      transform: rotate(180deg);
+    }
   }
 }
 
@@ -64,7 +92,7 @@
 }
 
 .username {
-  color: white;
+  color: var(--nav-text);
   font-weight: 500;
   font-size: clamp(0.875rem, 1.3vw, 1.125rem);
   display: none; // Hidden on mobile
@@ -79,27 +107,26 @@
 }
 
 .user-avatar {
-  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #e3e7ee;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(36px, 5vw, 48px);
-  height: clamp(36px, 5vw, 48px);
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+  img,
+  .avatar-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
-  .avatar-icon {
-    font-size: clamp(24px, 3.5vw, 32px);
-    width: clamp(24px, 3.5vw, 32px);
-    height: clamp(24px, 3.5vw, 32px);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  &:hover {
+    background: rgba(33, 150, 243, 0.08);
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.08);
   }
 }
 
@@ -108,16 +135,17 @@
   top: 100%;
   right: 0;
   margin-top: 8px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-heavy);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
-  transition: all 0.2s ease-in-out;
+  transition: all var(--transition-fast);
   z-index: 1001;
   min-width: 180px;
-  
+
   &.show {
     opacity: 1;
     visibility: visible;
@@ -138,26 +166,26 @@
   border: none;
   background: none;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.87);
+  color: var(--text-primary);
   font-size: clamp(0.8125rem, 1.2vw, 1rem);
-  transition: background-color 0.2s;
+  transition: background-color var(--transition-fast);
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: var(--surface-hover);
   }
 
   .mat-icon {
     font-size: clamp(18px, 2.5vw, 24px);
     width: clamp(18px, 2.5vw, 24px);
     height: clamp(18px, 2.5vw, 24px);
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--text-secondary);
   }
 
   &.logout {
-    color: #f44336;
+    color: var(--status-error);
 
     .mat-icon {
-      color: #f44336;
+      color: var(--status-error);
     }
 
     &:hover {
@@ -176,7 +204,6 @@
   .language-btn {
     .language-flag {
       font-size: 1.2rem;
-      width: 20px;
       height: 20px;
       display: flex;
       align-items: center;
@@ -188,15 +215,16 @@
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-heavy);
     min-width: 160px;
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-8px);
-    transition: all 0.2s ease-in-out;
+    transition: all var(--transition-fast);
 
     &.show {
       opacity: 1;
@@ -218,15 +246,16 @@
       background: none;
       text-align: left;
       cursor: pointer;
-      transition: background-color 0.2s ease;
+      color: var(--text-primary);
+      transition: background-color var(--transition-fast);
 
       &:hover {
-        background-color: rgba(0, 0, 0, 0.04);
+        background-color: var(--surface-hover);
       }
 
       &.active {
-        background-color: rgba(103, 126, 234, 0.1);
-        color: #667eea;
+        background-color: var(--surface-selected);
+        color: var(--interactive-primary);
 
         .language-flag {
           transform: scale(1.1);
@@ -234,10 +263,14 @@
       }
 
       .language-flag {
-        font-size: 1.1rem;
-        width: 20px;
-        text-align: center;
-        transition: transform 0.2s ease;
+        width: 24px;
+        height: 16px;
+        object-fit: cover;
+        border-radius: 3px;
+        box-shadow: var(--shadow-light);
+        background: var(--surface-primary);
+        border: 1px solid var(--border-primary);
+        margin-right: 6px;
       }
 
       .language-name {
@@ -267,10 +300,41 @@
   opacity: 0;
   visibility: hidden;
   transition: all 0.2s ease-in-out;
-  
+
   &.show {
     opacity: 1;
     visibility: visible;
+  }
+}
+
+// Notification Button
+.notification-btn {
+  position: relative;
+
+  .notification-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    min-width: 18px;
+    height: 18px;
+    background: var(--status-error);
+    color: var(--text-inverse);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-light);
+    z-index: 2;
+    pointer-events: none;
+    animation: pulse 2s infinite;
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
   }
 }
 
@@ -279,15 +343,15 @@
   .navbar {
     padding: 0 8px;
   }
-  
+
   .navbar-title {
     font-size: 1.1rem;
   }
-  
+
   .navbar-right {
     gap: 4px;
   }
-  
+
   .user-section {
     gap: 8px;
   }

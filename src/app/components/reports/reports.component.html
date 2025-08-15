@@ -74,18 +74,18 @@
     <mat-card-content>
       <div class="stats-grid">
         <div class="stat-item income">
-          <div class="stat-value">{{ formatCurrency(summaryStats.totalIncome) }}</div>
+          <div class="stat-value">{{ summaryStats.totalIncome | appCurrency }}</div>
           <div class="stat-label">{{ 'REPORTS.TOTAL_INCOME' | translate }}</div>
         </div>
 
         <div class="stat-item expense">
-          <div class="stat-value">{{ formatCurrency(summaryStats.totalExpenses) }}</div>
+          <div class="stat-value">{{ summaryStats.totalExpenses | appCurrency }}</div>
           <div class="stat-label">{{ 'REPORTS.TOTAL_EXPENSES' | translate }}</div>
         </div>
 
         <div class="stat-item balance" [class.positive]="summaryStats.netBalance >= 0"
                                      [class.negative]="summaryStats.netBalance < 0">
-          <div class="stat-value">{{ formatCurrency(summaryStats.netBalance) }}</div>
+          <div class="stat-value">{{ summaryStats.netBalance | appCurrency }}</div>
           <div class="stat-label">{{ 'REPORTS.NET_BALANCE' | translate }}</div>
         </div>
 
@@ -134,7 +134,7 @@
             <td mat-cell *matCellDef="let entry"
                 class="amount-cell"
                 [class]="entry.type.toLowerCase()">
-              {{ entry.type === 'Income' ? '+' : '-' }}{{ formatCurrency(entry.amount) }}
+              {{ entry.type === 'Income' ? '+' : '-' }}{{ entry.amount | appCurrency }}
             </td>
           </ng-container>
 
