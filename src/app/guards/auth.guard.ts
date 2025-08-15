@@ -16,9 +16,6 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    // TEMPORARY: Bypass authentication for testing datepicker
-    return true;
-
     if (this.authService.isAuthenticated()) {
       return true;
     }
