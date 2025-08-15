@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError, timer, of } from 'rxjs';
 import { catchError, retry, delay, switchMap, timeout } from 'rxjs/operators';
 import { ApiConfigService } from './api-config.service';
@@ -152,7 +152,6 @@ export class ApiService {
     return {
       headers,
       params: options?.params,
-      observe: 'body' as const,
       responseType: 'json' as const
     };
   }
