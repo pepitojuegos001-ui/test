@@ -14,13 +14,14 @@
       <mat-card-content>
         <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
           <div class="form-row">
-            <mat-form-field appearance="outline">
-              <mat-label>{{ "EXPENSES.DATE" | translate }}</mat-label>
-              <input matInput type="date" formControlName="date" />
-              <mat-error *ngIf="expenseForm.get('date')?.hasError('required')">
-                {{ "VALIDATION.REQUIRED" | translate }}
-              </mat-error>
-            </mat-form-field>
+            <app-locale-datepicker
+              [label]="'EXPENSES.DATE'"
+              formControlName="date"
+              [required]="true"
+              [showError]="!!(expenseForm.get('date')?.invalid && expenseForm.get('date')?.touched)"
+              [errorMessage]="'VALIDATION.REQUIRED'"
+              [showFormatHint]="true">
+            </app-locale-datepicker>
           </div>
 
           <div class="form-row">
