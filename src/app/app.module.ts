@@ -68,6 +68,10 @@ import { I18nConfigService } from './services/i18n-config.service';
 import { LoadingService } from './services/loading.service';
 import { CurrencyService } from './services/currency.service';
 import { LocaleDateService } from './services/locale-date.service';
+import { ApiService } from './services/api.service';
+import { ApiConfigService } from './services/api-config.service';
+import { FinancialDataApiService } from './services/financial-data-api.service';
+import { AuthApiService } from './services/auth-api.service';
 
 // Translation loader factory function for v17
 export function HttpLoaderFactory(): TranslateHttpLoader {
@@ -147,6 +151,10 @@ export function HttpLoaderFactory(): TranslateHttpLoader {
     I18nConfigService,
     LoadingService,
     LocaleDateService,
+    ApiService,
+    ApiConfigService,
+    FinancialDataApiService,
+    AuthApiService,
     DatePipe,
     ...provideTranslateHttpLoader({
       prefix: './assets/i18n/',
