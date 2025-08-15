@@ -226,7 +226,7 @@ export class ApiService {
    * Check API health
    */
   checkApiHealth(): Observable<boolean> {
-    return this.get('health', {
+    return this.get<any>('health', {
       timeout: 5000,
       retryAttempts: 1,
       enableMockFallback: false

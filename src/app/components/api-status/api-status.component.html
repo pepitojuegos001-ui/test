@@ -19,10 +19,9 @@
           [value]="serviceStatus.mode"
           (change)="onModeChange($event.value)"
           class="mode-toggle-group">
-          <mat-button-toggle 
-            *ngFor="let mode of availableModes" 
-            [value]="mode"
-            [color]="getServiceModeColor(mode)">
+          <mat-button-toggle
+            *ngFor="let mode of availableModes"
+            [value]="mode">
             {{ mode.toUpperCase() }}
           </mat-button-toggle>
         </mat-button-toggle-group>
