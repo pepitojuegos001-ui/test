@@ -67,6 +67,60 @@
     border: 1px solid #e0e0e0;
   }
 
+  .validation-card {
+    .validation-info {
+      h4 {
+        color: #2e7d32;
+        margin: 16px 0 8px 0;
+
+        :host-context(.dark-theme) & {
+          color: #4caf50;
+        }
+      }
+
+      ul {
+        margin: 8px 0 16px 20px;
+
+        li {
+          margin-bottom: 8px;
+          color: #666;
+
+          :host-context(.dark-theme) & {
+            color: #ccc;
+          }
+        }
+      }
+
+      .test-status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px;
+        background: #e8f5e8;
+        border-radius: 8px;
+        border-left: 4px solid #4caf50;
+
+        .success-icon {
+          color: #4caf50;
+        }
+
+        span {
+          color: #2e7d32;
+          font-weight: 500;
+        }
+
+        :host-context(.dark-theme) & {
+          background: #1b4332;
+          border-left-color: #4caf50;
+
+          span {
+            color: #a5d6a7;
+          }
+        }
+      }
+    }
+  }
+
   .instructions-card {
     ol {
       padding-left: 20px;
