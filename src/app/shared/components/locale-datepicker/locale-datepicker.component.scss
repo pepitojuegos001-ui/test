@@ -1,0 +1,241 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.locale-datepicker {
+  width: 100%;
+  position: relative;
+
+  .mat-form-field-wrapper {
+    position: relative;
+  }
+
+  .formatted-date-display {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: rgba(0, 0, 0, 0.87);
+    background: transparent;
+    padding: 0 4px;
+    z-index: 2;
+    font-size: 16px;
+    line-height: 1.125;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    
+    // Hide when input is focused
+    &.input-focused {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  // Dark theme support
+  :host-context(.dark-theme) .formatted-date-display {
+    color: rgba(255, 255, 255, 0.87);
+  }
+
+  // Material theme integration
+  &.mat-form-field-appearance-outline .formatted-date-display {
+    left: 16px;
+  }
+
+  &.mat-form-field-appearance-fill .formatted-date-display {
+    left: 12px;
+    top: 44px;
+    transform: translateY(-50%);
+  }
+
+  // Hide browser date picker icon and use Material icon
+  input[type="date"] {
+    position: relative;
+    
+    &::-webkit-calendar-picker-indicator {
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 24px;
+      cursor: pointer;
+      z-index: 3;
+    }
+
+    &::-webkit-datetime-edit {
+      color: transparent;
+    }
+
+    &::-webkit-datetime-edit-text {
+      color: transparent;
+    }
+
+    &::-webkit-datetime-edit-month-field {
+      color: transparent;
+    }
+
+    &::-webkit-datetime-edit-day-field {
+      color: transparent;
+    }
+
+    &::-webkit-datetime-edit-year-field {
+      color: transparent;
+    }
+
+    // Show native text when focused
+    &:focus {
+      &::-webkit-datetime-edit,
+      &::-webkit-datetime-edit-text,
+      &::-webkit-datetime-edit-month-field,
+      &::-webkit-datetime-edit-day-field,
+      &::-webkit-datetime-edit-year-field {
+        color: rgba(0, 0, 0, 0.87);
+      }
+
+      :host-context(.dark-theme) & {
+        &::-webkit-datetime-edit,
+        &::-webkit-datetime-edit-text,
+        &::-webkit-datetime-edit-month-field,
+        &::-webkit-datetime-edit-day-field,
+        &::-webkit-datetime-edit-year-field {
+          color: rgba(255, 255, 255, 0.87);
+        }
+      }
+    }
+  }
+
+  // Firefox specific styles
+  input[type="date"]::-moz-placeholder {
+    color: transparent;
+  }
+
+  // Mobile optimizations
+  @media (max-width: 768px) {
+    .formatted-date-display {
+      font-size: 16px; // Prevent zoom on iOS
+    }
+  }
+
+  // Error state styling
+  &.mat-form-field-invalid {
+    .formatted-date-display {
+      color: #f44336;
+    }
+
+    :host-context(.dark-theme) .formatted-date-display {
+      color: #ff5722;
+    }
+  }
+
+  // Disabled state styling
+  &.mat-form-field-disabled {
+    .formatted-date-display {
+      color: rgba(0, 0, 0, 0.38);
+    }
+
+    :host-context(.dark-theme) .formatted-date-display {
+      color: rgba(255, 255, 255, 0.38);
+    }
+  }
+
+  // Focus indicator
+  &.mat-focused {
+    .formatted-date-display {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.15s ease, visibility 0.15s ease;
+    }
+  }
+
+  // Ensure proper Material Design alignment
+  .mat-form-field-suffix {
+    .mat-icon {
+      color: rgba(0, 0, 0, 0.54);
+      
+      :host-context(.dark-theme) & {
+        color: rgba(255, 255, 255, 0.54);
+      }
+    }
+  }
+
+  // Custom hint styling
+  .mat-hint {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+
+  // High contrast mode support
+  @media (prefers-contrast: high) {
+    .formatted-date-display {
+      color: #000;
+      font-weight: 500;
+    }
+
+    :host-context(.dark-theme) .formatted-date-display {
+      color: #fff;
+      font-weight: 500;
+    }
+  }
+
+  // Reduced motion support
+  @media (prefers-reduced-motion: reduce) {
+    .formatted-date-display {
+      transition: none;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+  .locale-datepicker {
+    .formatted-date-display {
+      left: 14px;
+      font-size: 16px;
+    }
+
+    &.mat-form-field-appearance-outline .formatted-date-display {
+      left: 18px;
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .locale-datepicker {
+    input[type="date"] {
+      &::-webkit-datetime-edit,
+      &::-webkit-datetime-edit-text,
+      &::-webkit-datetime-edit-month-field,
+      &::-webkit-datetime-edit-day-field,
+      &::-webkit-datetime-edit-year-field {
+        color: #000 !important;
+      }
+    }
+
+    .formatted-date-display {
+      display: none !important;
+    }
+  }
+}
+
+// RTL support for future implementation
+:host-context([dir="rtl"]) {
+  .locale-datepicker {
+    .formatted-date-display {
+      left: auto;
+      right: 12px;
+    }
+
+    &.mat-form-field-appearance-outline .formatted-date-display {
+      right: 16px;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      right: auto;
+      left: 0;
+    }
+  }
+}
